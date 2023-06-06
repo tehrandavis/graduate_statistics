@@ -117,7 +117,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script><link rel="stylesheet" href="../styles.css">
 </head>
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 
 <div id="quarto-search-results"></div>
@@ -133,25 +133,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
 <li class="nav-item">
-    <a class="nav-link" href="../index.qmd">
+    <a class="nav-link" href="https://tehrandav.is">
  <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../about.qmd">
- <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-courses" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Courses</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-courses">
-<li>
-    <a class="dropdown-item" href="../walkthroughs.html">
- <span class="dropdown-text">PSYC 7014</span></a>
-  </li>  
-        <li class="dropdown-header">Graduate Statistics 1</li>
-    </ul>
-</li>
 </ul>
 <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
@@ -164,12 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-      </div>
-    <div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -633,7 +612,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.1     ✔ readr     2.1.4
+✔ dplyr     1.1.2     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.0
 ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
 ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
@@ -755,35 +734,27 @@ Sphericity correction method: GG </code></pre>
 <span id="cb32-11"><a href="#cb32-11"></a></span>
 <span id="cb32-12"><a href="#cb32-12"></a><span class="co"># install and load "downloader" package, this assumes you </span></span>
 <span id="cb32-13"><a href="#cb32-13"></a><span class="co"># have "pacman" installed and loaded *see section above:</span></span>
-<span id="cb32-14"><a href="#cb32-14"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(downloader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-The downloaded binary packages are in
-    /var/folders/7k/6v7xmh35305_vjzy660s9_q40000gs/T//Rtmp9b7Tg4/downloaded_packages</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-downloader installed</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># get the url of the file you want to download and assign it </span></span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="co"># to an object ("dataURL"):</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a>dataURL <span class="ot">&lt;-</span> <span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab2-1.dat"</span></span>
-<span id="cb35-4"><a href="#cb35-4"></a></span>
-<span id="cb35-5"><a href="#cb35-5"></a><span class="co"># decide on what name you want to give the file. In this case I'm extracting</span></span>
-<span id="cb35-6"><a href="#cb35-6"></a><span class="co"># using the basename from the web url: Tab2-1.dat. In truth you </span></span>
-<span id="cb35-7"><a href="#cb35-7"></a><span class="co"># can name it whatever you want (see commented example)</span></span>
-<span id="cb35-8"><a href="#cb35-8"></a></span>
-<span id="cb35-9"><a href="#cb35-9"></a>filename <span class="ot">&lt;-</span> <span class="fu">basename</span>(dataURL)</span>
-<span id="cb35-10"><a href="#cb35-10"></a><span class="co">#filename &lt;- "you_can_name_it_what_you_like.txt"</span></span>
-<span id="cb35-11"><a href="#cb35-11"></a></span>
-<span id="cb35-12"><a href="#cb35-12"></a><span class="co"># download the file to your current R-project folder:</span></span>
-<span id="cb35-13"><a href="#cb35-13"></a><span class="fu">download</span>(<span class="at">url =</span> dataURL, filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-14"><a href="#cb32-14"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(downloader)</span>
+<span id="cb32-15"><a href="#cb32-15"></a></span>
+<span id="cb32-16"><a href="#cb32-16"></a><span class="co"># get the url of the file you want to download and assign it </span></span>
+<span id="cb32-17"><a href="#cb32-17"></a><span class="co"># to an object ("dataURL"):</span></span>
+<span id="cb32-18"><a href="#cb32-18"></a>dataURL <span class="ot">&lt;-</span> <span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab2-1.dat"</span></span>
+<span id="cb32-19"><a href="#cb32-19"></a></span>
+<span id="cb32-20"><a href="#cb32-20"></a><span class="co"># decide on what name you want to give the file. In this case I'm extracting</span></span>
+<span id="cb32-21"><a href="#cb32-21"></a><span class="co"># using the basename from the web url: Tab2-1.dat. In truth you </span></span>
+<span id="cb32-22"><a href="#cb32-22"></a><span class="co"># can name it whatever you want (see commented example)</span></span>
+<span id="cb32-23"><a href="#cb32-23"></a></span>
+<span id="cb32-24"><a href="#cb32-24"></a>filename <span class="ot">&lt;-</span> <span class="fu">basename</span>(dataURL)</span>
+<span id="cb32-25"><a href="#cb32-25"></a><span class="co">#filename &lt;- "you_can_name_it_what_you_like.txt"</span></span>
+<span id="cb32-26"><a href="#cb32-26"></a></span>
+<span id="cb32-27"><a href="#cb32-27"></a><span class="co"># download the file to your current R-project folder:</span></span>
+<span id="cb32-28"><a href="#cb32-28"></a><span class="fu">download</span>(<span class="at">url =</span> dataURL, filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Keep in mind that objects are just placeholders. So if I was so inclined I could have accomplished all of the above with just one line:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">download</span>(<span class="at">url =</span> <span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab2-1.dat"</span>, <span class="at">destfile=</span><span class="st">"Tab2-1.dat"</span>)</span>
-<span id="cb36-2"><a href="#cb36-2"></a></span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="co"># destfile is a parameter for naming what you download.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">download</span>(<span class="at">url =</span> <span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab2-1.dat"</span>, <span class="at">destfile=</span><span class="st">"Tab2-1.dat"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="co"># destfile is a parameter for naming what you download.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>From here I could just import the <code>Tab2-1.dat</code> file from my computer using the GUI method above.</p>
 
@@ -974,215 +945,215 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb37" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1"></a><span class="co">---</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="an">title:</span><span class="co"> "Leveling-up"</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a><span class="co">---</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a></span>
-<span id="cb37-5"><a href="#cb37-5"></a>From time to time, I'll wrap up these weekly wrap-ups (hah!) with a few Level-Ups. These are bits of info to provide a deeper understanding the week's concepts and/or how to perform some slightly more advanced programming in <span class="in">`R`</span>. Level-ups are optional, so don't get bogged down or freak out if you don't quite follow what's going on.</span>
-<span id="cb37-6"><a href="#cb37-6"></a></span>
-<span id="cb37-7"><a href="#cb37-7"></a>FWIW, you should only be thinking about going through these extra level-ups if and only if you have a comfortable mastery of the week's assigned material.</span>
-<span id="cb37-8"><a href="#cb37-8"></a></span>
-<span id="cb37-9"><a href="#cb37-9"></a>That said, I really recommend checking out this week's level-up below. It has three parts, with the end result being an easy way to install and load multiple packages in <span class="in">`R`</span> with a few lines of code.</span>
-<span id="cb37-10"><a href="#cb37-10"></a></span>
-<span id="cb37-11"><a href="#cb37-11"></a>It's not terribly complicated and you'll see the end result quite often this semester. If you'd rather not bother, then just go to the section **HERE'S THE CHEAT CODE!!!**. So without further delay, this week's level-up(s).</span>
-<span id="cb37-12"><a href="#cb37-12"></a></span>
-<span id="cb37-13"><a href="#cb37-13"></a><span class="fu">## Logical statements</span></span>
-<span id="cb37-14"><a href="#cb37-14"></a></span>
-<span id="cb37-15"><a href="#cb37-15"></a><span class="al">![](../images/spockLogicMeme.jpg)</span>{fig-align="center"}</span>
-<span id="cb37-16"><a href="#cb37-16"></a></span>
-<span id="cb37-17"><a href="#cb37-17"></a>We were introduced to logicals very briefly in this week's DataCamp assignments. Logicals are operations that may be applied to objects in <span class="in">`R`</span> that assess their relationship as a truth value. For example:</span>
-<span id="cb37-18"><a href="#cb37-18"></a></span>
-<span id="cb37-21"><a href="#cb37-21"></a><span class="in">```{r}</span></span>
-<span id="cb37-22"><a href="#cb37-22"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span><span class="sc">==</span><span class="dv">5</span></span>
-<span id="cb37-23"><a href="#cb37-23"></a><span class="in">```</span></span>
-<span id="cb37-24"><a href="#cb37-24"></a></span>
-<span id="cb37-25"><a href="#cb37-25"></a>The <span class="in">`==`</span> (double equal sign) may be understood as posing the question "is equal to?" For example typing <span class="in">`2+2==4`</span> in <span class="in">`R`</span> will return <span class="in">`TRUE`</span>. Logicals can be applied to string objects:</span>
-<span id="cb37-26"><a href="#cb37-26"></a></span>
-<span id="cb37-29"><a href="#cb37-29"></a><span class="in">```{r}</span></span>
-<span id="cb37-30"><a href="#cb37-30"></a><span class="st">"tehran"</span><span class="sc">==</span><span class="st">"tehran"</span></span>
-<span id="cb37-31"><a href="#cb37-31"></a><span class="st">"tehran"</span><span class="sc">==</span><span class="st">"davis"</span></span>
-<span id="cb37-32"><a href="#cb37-32"></a><span class="in">```</span></span>
-<span id="cb37-33"><a href="#cb37-33"></a></span>
-<span id="cb37-34"><a href="#cb37-34"></a>to vectors:</span>
-<span id="cb37-35"><a href="#cb37-35"></a></span>
-<span id="cb37-38"><a href="#cb37-38"></a><span class="in">```{r}</span></span>
-<span id="cb37-39"><a href="#cb37-39"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb37-40"><a href="#cb37-40"></a>y<span class="sc">==</span><span class="dv">3</span></span>
-<span id="cb37-41"><a href="#cb37-41"></a><span class="in">```</span></span>
-<span id="cb37-42"><a href="#cb37-42"></a></span>
-<span id="cb37-43"><a href="#cb37-43"></a>the third value, where the number 3 resides in vector <span class="in">`y`</span> is labelled <span class="in">`TRUE`</span>.</span>
-<span id="cb37-44"><a href="#cb37-44"></a></span>
-<span id="cb37-45"><a href="#cb37-45"></a>and can be used to compare assigned objects.</span>
-<span id="cb37-46"><a href="#cb37-46"></a></span>
-<span id="cb37-49"><a href="#cb37-49"></a><span class="in">```{r}</span></span>
-<span id="cb37-50"><a href="#cb37-50"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb37-51"><a href="#cb37-51"></a>y <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb37-52"><a href="#cb37-52"></a>x<span class="sc">==</span>y</span>
-<span id="cb37-53"><a href="#cb37-53"></a></span>
-<span id="cb37-54"><a href="#cb37-54"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb37-55"><a href="#cb37-55"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>)</span>
-<span id="cb37-56"><a href="#cb37-56"></a>a<span class="sc">==</span>b<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb37-57"><a href="#cb37-57"></a><span class="in">```</span></span>
-<span id="cb37-58"><a href="#cb37-58"></a></span>
-<span id="cb37-59"><a href="#cb37-59"></a>A list of logical operators in <span class="in">`R`</span> can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.statmethods.net/management/operators.html)</span>, including greater-than and less-than. Using logical operators can be a powerful tool in a programmer's repertoire. For example they can allow you to quickly highlight and select certain instances from large data sets. Below I'm highlighting numbers divisible by 5 in a list running from 1 to 50:</span>
-<span id="cb37-60"><a href="#cb37-60"></a></span>
-<span id="cb37-63"><a href="#cb37-63"></a><span class="in">```{r}</span></span>
-<span id="cb37-64"><a href="#cb37-64"></a>myList <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span></span>
-<span id="cb37-65"><a href="#cb37-65"></a>myList[myList <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="co"># index those numbers divisible by 5</span></span>
-<span id="cb37-66"><a href="#cb37-66"></a><span class="in">```</span></span>
-<span id="cb37-67"><a href="#cb37-67"></a></span>
-<span id="cb37-68"><a href="#cb37-68"></a>Here I'm telling <span class="in">`R`</span> to print a word based on whether <span class="in">`myNumber`</span> is greater than 5:</span>
-<span id="cb37-69"><a href="#cb37-69"></a></span>
-<span id="cb37-72"><a href="#cb37-72"></a><span class="in">```{r}</span></span>
-<span id="cb37-73"><a href="#cb37-73"></a>myNumber <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb37-74"><a href="#cb37-74"></a></span>
-<span id="cb37-75"><a href="#cb37-75"></a><span class="fu">ifelse</span>(<span class="at">test =</span> myNumber<span class="sc">&gt;</span><span class="dv">5</span>, <span class="at">yes =</span> <span class="st">"Yep, great than 5"</span>, <span class="at">no =</span> <span class="st">"Nunca, nada, NOPE!"</span>)</span>
-<span id="cb37-76"><a href="#cb37-76"></a><span class="in">```</span></span>
-<span id="cb37-77"><a href="#cb37-77"></a></span>
-<span id="cb37-78"><a href="#cb37-78"></a>Try re-running the code above in your own console, with a value greater than 5 assigned to <span class="in">`myNumber`</span>. There's a little more on <span class="in">`ifelse()`</span> below.</span>
-<span id="cb37-79"><a href="#cb37-79"></a></span>
-<span id="cb37-80"><a href="#cb37-80"></a><span class="fu">## Loading packages with `require()`</span></span>
-<span id="cb37-81"><a href="#cb37-81"></a></span>
-<span id="cb37-82"><a href="#cb37-82"></a>Given our brief intro to logicals; there is in fact an alternative to <span class="in">`library()`</span> for loading a previously installed package. We can use <span class="in">`require()`</span>:</span>
-<span id="cb37-83"><a href="#cb37-83"></a></span>
-<span id="cb37-86"><a href="#cb37-86"></a><span class="in">```{r}</span></span>
-<span id="cb37-87"><a href="#cb37-87"></a><span class="fu">require</span>(tidyverse)</span>
-<span id="cb37-88"><a href="#cb37-88"></a><span class="in">```</span></span>
-<span id="cb37-89"><a href="#cb37-89"></a></span>
-<span id="cb37-90"><a href="#cb37-90"></a><span class="in">`require()`</span> has the additional benfit of returning a <span class="in">`FALSE`</span> logical output if the requested package hasn't been installed on your computer. This is in contrast to <span class="in">`library()`</span> which just freaks out and reports an error (errors are bad as they can stop your execution). For example, let's save the output of the following actions to an object called <span class="in">`myVar`</span>.</span>
-<span id="cb37-91"><a href="#cb37-91"></a></span>
-<span id="cb37-92"><a href="#cb37-92"></a>For example running:</span>
-<span id="cb37-93"><a href="#cb37-93"></a></span>
-<span id="cb37-96"><a href="#cb37-96"></a><span class="in">```{r}</span></span>
-<span id="cb37-97"><a href="#cb37-97"></a><span class="co">#| eval: false</span></span>
-<span id="cb37-98"><a href="#cb37-98"></a></span>
-<span id="cb37-99"><a href="#cb37-99"></a>myVar <span class="ot">&lt;-</span> <span class="fu">library</span>(xkcd)</span>
-<span id="cb37-100"><a href="#cb37-100"></a>myVar</span>
-<span id="cb37-101"><a href="#cb37-101"></a><span class="in">```</span></span>
-<span id="cb37-102"><a href="#cb37-102"></a></span>
-<span id="cb37-103"><a href="#cb37-103"></a>versus</span>
-<span id="cb37-104"><a href="#cb37-104"></a></span>
-<span id="cb37-107"><a href="#cb37-107"></a><span class="in">```{r}</span></span>
-<span id="cb37-108"><a href="#cb37-108"></a><span class="co">#| eval: false</span></span>
-<span id="cb37-109"><a href="#cb37-109"></a></span>
-<span id="cb37-110"><a href="#cb37-110"></a>myVar <span class="ot">&lt;-</span> <span class="fu">require</span>(xkcd)</span>
-<span id="cb37-111"><a href="#cb37-111"></a>myVar</span>
-<span id="cb37-112"><a href="#cb37-112"></a><span class="in">```</span></span>
-<span id="cb37-113"><a href="#cb37-113"></a></span>
-<span id="cb37-114"><a href="#cb37-114"></a>In both cases <span class="in">`xkcd`</span> was not installed on your comp and an error was returned. However, with <span class="in">`library()`</span>, nothing was saved to <span class="in">`myVar`</span>, but <span class="in">`require()`</span> returned a <span class="in">`FALSE`</span> indicating that the requested package was not installed. Why do I bother to even bring this up?</span>
-<span id="cb37-115"><a href="#cb37-115"></a></span>
-<span id="cb37-116"><a href="#cb37-116"></a><span class="fu">## Installing and loading packages like a Pirate Ninja!</span></span>
-<span id="cb37-117"><a href="#cb37-117"></a></span>
-<span id="cb37-118"><a href="#cb37-118"></a>The central reason that we are using <span class="in">`R`</span> is to get in the practice of data transparency and replicability. Ultimately, for every analysis that you perform you should be able to provide me with the appropriate syntax in your notebook file and I should be able to re-run each of your analyses step by step on my own computer. One important consideration is that you may be using packages that I don't have installed and loaded on my computer and vice versa. To deal with this you would need to include two lines for every package:</span>
-<span id="cb37-119"><a href="#cb37-119"></a></span>
-<span id="cb37-120"><a href="#cb37-120"></a><span class="ss">1.  </span><span class="in">`install.packages("package")`</span></span>
-<span id="cb37-121"><a href="#cb37-121"></a><span class="ss">2.  </span><span class="in">`library(package)`</span></span>
-<span id="cb37-122"><a href="#cb37-122"></a></span>
-<span id="cb37-123"><a href="#cb37-123"></a>If you use a lot of packages, this can become very repetitive (imagine using 10 packages).</span>
-<span id="cb37-124"><a href="#cb37-124"></a></span>
-<span id="cb37-125"><a href="#cb37-125"></a>A much more efficient way of doing things is to take advantage of that <span class="in">`FALSE`</span> that <span class="in">`require()`</span> returns. But first we need to install a package called <span class="in">`pacman`</span>. Before we do this, input the next to lines seperately:</span>
-<span id="cb37-126"><a href="#cb37-126"></a></span>
-<span id="cb37-129"><a href="#cb37-129"></a><span class="in">```{r}</span></span>
-<span id="cb37-130"><a href="#cb37-130"></a><span class="fu">require</span>(pacman)</span>
-<span id="cb37-131"><a href="#cb37-131"></a><span class="sc">!</span><span class="fu">require</span>(pacman)</span>
-<span id="cb37-132"><a href="#cb37-132"></a><span class="in">```</span></span>
-<span id="cb37-133"><a href="#cb37-133"></a></span>
-<span id="cb37-134"><a href="#cb37-134"></a>Recall from above that <span class="in">`require()`</span> produces a <span class="in">`FALSE`</span> if the requested package is NOT installed on your computer. So, assuming that <span class="in">`pacman`</span> is not installed on your computer the first line will produce a <span class="in">`FALSE`</span> and the second will produce a <span class="in">`TRUE`</span>.</span>
-<span id="cb37-135"><a href="#cb37-135"></a></span>
-<span id="cb37-136"><a href="#cb37-136"></a>So what is that second line then? NEGATION.</span>
-<span id="cb37-137"><a href="#cb37-137"></a></span>
-<span id="cb37-138"><a href="#cb37-138"></a>Placing an exclamation point in fron of a statement essentially reads as "not true". For now just understand that using this syntax we can create a line of code that checks to see *if* `pacman` is installed on your computer, and if *not* it installs it:</span>
-<span id="cb37-139"><a href="#cb37-139"></a></span>
-<span id="cb37-142"><a href="#cb37-142"></a><span class="in">```{r}</span></span>
-<span id="cb37-143"><a href="#cb37-143"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) </span>
-<span id="cb37-144"><a href="#cb37-144"></a>    <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
-<span id="cb37-145"><a href="#cb37-145"></a><span class="in">```</span></span>
-<span id="cb37-146"><a href="#cb37-146"></a></span>
-<span id="cb37-147"><a href="#cb37-147"></a>The above code is a conditional if-statement. It literally reads:</span>
-<span id="cb37-148"><a href="#cb37-148"></a></span>
-<span id="cb37-149"><a href="#cb37-149"></a><span class="ss">1.  </span>Check to see if the statement <span class="in">`!require("pacman")`</span> is <span class="in">`TRUE`</span> (i.e., TRUE = <span class="in">`pacman`</span> is not installed on your computer).</span>
-<span id="cb37-150"><a href="#cb37-150"></a><span class="ss">2.  </span>If the above indeed returns a <span class="in">`TRUE`</span>, then run <span class="in">`install.packages("pacman")`</span>.</span>
-<span id="cb37-151"><a href="#cb37-151"></a></span>
-<span id="cb37-152"><a href="#cb37-152"></a>In theory you could run this line for every package, but that would be tedious as well and is not really a simpler solution. Fortunately <span class="in">`pacman`</span> contains a function that simplifies this for us, <span class="in">`pacman::p_load()`</span> function. To get a feel for what this function does run the following line:</span>
-<span id="cb37-153"><a href="#cb37-153"></a></span>
-<span id="cb37-156"><a href="#cb37-156"></a><span class="in">```{r}</span></span>
-<span id="cb37-157"><a href="#cb37-157"></a>? pacman<span class="sc">::</span><span class="fu">p_load</span>()</span>
-<span id="cb37-158"><a href="#cb37-158"></a><span class="in">```</span></span>
-<span id="cb37-159"><a href="#cb37-159"></a></span>
-<span id="cb37-160"><a href="#cb37-160"></a>The <span class="in">`?`</span> brings up an online help module for the named function. In this case the function is <span class="in">`p_load()`</span> from the <span class="in">`pacman`</span> package.</span>
-<span id="cb37-161"><a href="#cb37-161"></a></span>
-<span id="cb37-162"><a href="#cb37-162"></a>You'll see that <span class="in">`pacman::p_load()`</span> checks to see if a package is installed, if not it attempts to install the package from CRAN and/or any other repository. After that it loads all listed packages.</span>
-<span id="cb37-163"><a href="#cb37-163"></a></span>
-<span id="cb37-164"><a href="#cb37-164"></a>Let's try a few packages that you haven't installed but are going to be useful to us later when we do ANOVA. FWIW I usually have a code chunk at the top of every notebook that uses this template, swapping in the various packages that I intend to use.</span>
-<span id="cb37-165"><a href="#cb37-165"></a></span>
-<span id="cb37-166"><a href="#cb37-166"></a><span class="fu">## HERE'S THE CHEAT CODE!!!</span></span>
-<span id="cb37-167"><a href="#cb37-167"></a></span>
-<span id="cb37-170"><a href="#cb37-170"></a><span class="in">```{r}</span></span>
-<span id="cb37-171"><a href="#cb37-171"></a><span class="co"># 1. check to see if pacman is on your computer and if not, let's </span></span>
-<span id="cb37-172"><a href="#cb37-172"></a><span class="co"># install and load it:</span></span>
-<span id="cb37-173"><a href="#cb37-173"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
-<span id="cb37-174"><a href="#cb37-174"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb37-175"><a href="#cb37-175"></a></span>
-<span id="cb37-176"><a href="#cb37-176"></a><span class="co"># 2. install all other packages that we will be using:</span></span>
-<span id="cb37-177"><a href="#cb37-177"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(afex,lmerTest,plyr,car)</span>
-<span id="cb37-178"><a href="#cb37-178"></a><span class="in">```</span></span>
-<span id="cb37-179"><a href="#cb37-179"></a></span>
-<span id="cb37-180"><a href="#cb37-180"></a>This bit of code installed and loaded the <span class="in">`afex`</span>, <span class="in">`lmerTest`</span>, and <span class="in">`plyr`</span> packages. To test that everything worked, try:</span>
-<span id="cb37-181"><a href="#cb37-181"></a></span>
-<span id="cb37-184"><a href="#cb37-184"></a><span class="in">```{r}</span></span>
-<span id="cb37-185"><a href="#cb37-185"></a><span class="fu">data</span>(obk.long, <span class="at">package =</span> <span class="st">"afex"</span>)</span>
-<span id="cb37-186"><a href="#cb37-186"></a>afex<span class="sc">::</span><span class="fu">aov_ez</span>(<span class="st">"id"</span>, <span class="st">"value"</span>, obk.long, <span class="at">between =</span> <span class="fu">c</span>(<span class="st">"treatment"</span>, <span class="st">"gender"</span>),</span>
-<span id="cb37-187"><a href="#cb37-187"></a>             <span class="at">within =</span> <span class="fu">c</span>(<span class="st">"phase"</span>, <span class="st">"hour"</span>), <span class="at">observed =</span> <span class="st">"gender"</span>)</span>
-<span id="cb37-188"><a href="#cb37-188"></a><span class="in">```</span></span>
-<span id="cb37-189"><a href="#cb37-189"></a></span>
-<span id="cb37-190"><a href="#cb37-190"></a>Congrats! You've just run a 2x2 mixed effects ANOVA! We'll revisit what exactly is going on here in about 10 weeks.</span>
-<span id="cb37-191"><a href="#cb37-191"></a></span>
-<span id="cb37-192"><a href="#cb37-192"></a><span class="fu">## Downloading and saving data from the web</span></span>
-<span id="cb37-193"><a href="#cb37-193"></a></span>
-<span id="cb37-194"><a href="#cb37-194"></a>The example above just pulls data directly from a url, what if you want to download the data file directly onto your computer and load it from there?</span>
-<span id="cb37-195"><a href="#cb37-195"></a></span>
-<span id="cb37-196"><a href="#cb37-196"></a>Well, *there's a package for that*... <span class="in">`downloader`</span>. Let's install this package and download the data from above. Also, check out the additional notation in the code below:</span>
-<span id="cb37-197"><a href="#cb37-197"></a></span>
-<span id="cb37-200"><a href="#cb37-200"></a><span class="in">```{r}</span></span>
-<span id="cb37-201"><a href="#cb37-201"></a><span class="co"># within the R code sections, hashtags create comments, sections of code </span></span>
-<span id="cb37-202"><a href="#cb37-202"></a><span class="co"># that are not interpreted by the computer, but may serve to inform others </span></span>
-<span id="cb37-203"><a href="#cb37-203"></a><span class="co"># (and typically yourself later in life) about what exactly in the hell is</span></span>
-<span id="cb37-204"><a href="#cb37-204"></a><span class="co"># going on here. GET IN THE PRACTICE OF COMMENTING YOUR CODE. You'll thank</span></span>
-<span id="cb37-205"><a href="#cb37-205"></a><span class="co"># yourself later. I can't count how many times I've written code only </span></span>
-<span id="cb37-206"><a href="#cb37-206"></a><span class="co"># to come back to it months later wondering what in the hell I was </span></span>
-<span id="cb37-207"><a href="#cb37-207"></a><span class="co"># doing, thinking!!</span></span>
-<span id="cb37-208"><a href="#cb37-208"></a></span>
-<span id="cb37-209"><a href="#cb37-209"></a><span class="co"># Here I'm using comments to inform you step-by-step </span></span>
-<span id="cb37-210"><a href="#cb37-210"></a><span class="co"># what each line is doing:</span></span>
-<span id="cb37-211"><a href="#cb37-211"></a></span>
-<span id="cb37-212"><a href="#cb37-212"></a><span class="co"># install and load "downloader" package, this assumes you </span></span>
-<span id="cb37-213"><a href="#cb37-213"></a><span class="co"># have "pacman" installed and loaded *see section above:</span></span>
-<span id="cb37-214"><a href="#cb37-214"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(downloader)</span>
-<span id="cb37-215"><a href="#cb37-215"></a></span>
-<span id="cb37-216"><a href="#cb37-216"></a><span class="co"># get the url of the file you want to download and assign it </span></span>
-<span id="cb37-217"><a href="#cb37-217"></a><span class="co"># to an object ("dataURL"):</span></span>
-<span id="cb37-218"><a href="#cb37-218"></a>dataURL <span class="ot">&lt;-</span> <span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab2-1.dat"</span></span>
-<span id="cb37-219"><a href="#cb37-219"></a></span>
-<span id="cb37-220"><a href="#cb37-220"></a><span class="co"># decide on what name you want to give the file. In this case I'm extracting</span></span>
-<span id="cb37-221"><a href="#cb37-221"></a><span class="co"># using the basename from the web url: Tab2-1.dat. In truth you </span></span>
-<span id="cb37-222"><a href="#cb37-222"></a><span class="co"># can name it whatever you want (see commented example)</span></span>
-<span id="cb37-223"><a href="#cb37-223"></a></span>
-<span id="cb37-224"><a href="#cb37-224"></a>filename <span class="ot">&lt;-</span> <span class="fu">basename</span>(dataURL)</span>
-<span id="cb37-225"><a href="#cb37-225"></a><span class="co">#filename &lt;- "you_can_name_it_what_you_like.txt"</span></span>
-<span id="cb37-226"><a href="#cb37-226"></a></span>
-<span id="cb37-227"><a href="#cb37-227"></a><span class="co"># download the file to your current R-project folder:</span></span>
-<span id="cb37-228"><a href="#cb37-228"></a><span class="fu">download</span>(<span class="at">url =</span> dataURL, filename)</span>
-<span id="cb37-229"><a href="#cb37-229"></a><span class="in">```</span></span>
-<span id="cb37-230"><a href="#cb37-230"></a></span>
-<span id="cb37-231"><a href="#cb37-231"></a>Keep in mind that objects are just placeholders. So if I was so inclined I could have accomplished all of the above with just one line:</span>
-<span id="cb37-232"><a href="#cb37-232"></a></span>
-<span id="cb37-235"><a href="#cb37-235"></a><span class="in">```{r}</span></span>
-<span id="cb37-236"><a href="#cb37-236"></a><span class="fu">download</span>(<span class="at">url =</span> <span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab2-1.dat"</span>, <span class="at">destfile=</span><span class="st">"Tab2-1.dat"</span>)</span>
-<span id="cb37-237"><a href="#cb37-237"></a></span>
-<span id="cb37-238"><a href="#cb37-238"></a><span class="co"># destfile is a parameter for naming what you download.</span></span>
-<span id="cb37-239"><a href="#cb37-239"></a><span class="in">```</span></span>
-<span id="cb37-240"><a href="#cb37-240"></a></span>
-<span id="cb37-241"><a href="#cb37-241"></a>From here I could just import the <span class="in">`Tab2-1.dat`</span> file from my computer using the GUI method above.</span>
+<div class="sourceCode" id="cb34" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">---</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="an">title:</span><span class="co"> "Leveling-up"</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="co">---</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a>From time to time, I'll wrap up these weekly wrap-ups (hah!) with a few Level-Ups. These are bits of info to provide a deeper understanding the week's concepts and/or how to perform some slightly more advanced programming in <span class="in">`R`</span>. Level-ups are optional, so don't get bogged down or freak out if you don't quite follow what's going on.</span>
+<span id="cb34-6"><a href="#cb34-6"></a></span>
+<span id="cb34-7"><a href="#cb34-7"></a>FWIW, you should only be thinking about going through these extra level-ups if and only if you have a comfortable mastery of the week's assigned material.</span>
+<span id="cb34-8"><a href="#cb34-8"></a></span>
+<span id="cb34-9"><a href="#cb34-9"></a>That said, I really recommend checking out this week's level-up below. It has three parts, with the end result being an easy way to install and load multiple packages in <span class="in">`R`</span> with a few lines of code.</span>
+<span id="cb34-10"><a href="#cb34-10"></a></span>
+<span id="cb34-11"><a href="#cb34-11"></a>It's not terribly complicated and you'll see the end result quite often this semester. If you'd rather not bother, then just go to the section **HERE'S THE CHEAT CODE!!!**. So without further delay, this week's level-up(s).</span>
+<span id="cb34-12"><a href="#cb34-12"></a></span>
+<span id="cb34-13"><a href="#cb34-13"></a><span class="fu">## Logical statements</span></span>
+<span id="cb34-14"><a href="#cb34-14"></a></span>
+<span id="cb34-15"><a href="#cb34-15"></a><span class="al">![](../images/spockLogicMeme.jpg)</span>{fig-align="center"}</span>
+<span id="cb34-16"><a href="#cb34-16"></a></span>
+<span id="cb34-17"><a href="#cb34-17"></a>We were introduced to logicals very briefly in this week's DataCamp assignments. Logicals are operations that may be applied to objects in <span class="in">`R`</span> that assess their relationship as a truth value. For example:</span>
+<span id="cb34-18"><a href="#cb34-18"></a></span>
+<span id="cb34-21"><a href="#cb34-21"></a><span class="in">```{r}</span></span>
+<span id="cb34-22"><a href="#cb34-22"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span><span class="sc">==</span><span class="dv">5</span></span>
+<span id="cb34-23"><a href="#cb34-23"></a><span class="in">```</span></span>
+<span id="cb34-24"><a href="#cb34-24"></a></span>
+<span id="cb34-25"><a href="#cb34-25"></a>The <span class="in">`==`</span> (double equal sign) may be understood as posing the question "is equal to?" For example typing <span class="in">`2+2==4`</span> in <span class="in">`R`</span> will return <span class="in">`TRUE`</span>. Logicals can be applied to string objects:</span>
+<span id="cb34-26"><a href="#cb34-26"></a></span>
+<span id="cb34-29"><a href="#cb34-29"></a><span class="in">```{r}</span></span>
+<span id="cb34-30"><a href="#cb34-30"></a><span class="st">"tehran"</span><span class="sc">==</span><span class="st">"tehran"</span></span>
+<span id="cb34-31"><a href="#cb34-31"></a><span class="st">"tehran"</span><span class="sc">==</span><span class="st">"davis"</span></span>
+<span id="cb34-32"><a href="#cb34-32"></a><span class="in">```</span></span>
+<span id="cb34-33"><a href="#cb34-33"></a></span>
+<span id="cb34-34"><a href="#cb34-34"></a>to vectors:</span>
+<span id="cb34-35"><a href="#cb34-35"></a></span>
+<span id="cb34-38"><a href="#cb34-38"></a><span class="in">```{r}</span></span>
+<span id="cb34-39"><a href="#cb34-39"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb34-40"><a href="#cb34-40"></a>y<span class="sc">==</span><span class="dv">3</span></span>
+<span id="cb34-41"><a href="#cb34-41"></a><span class="in">```</span></span>
+<span id="cb34-42"><a href="#cb34-42"></a></span>
+<span id="cb34-43"><a href="#cb34-43"></a>the third value, where the number 3 resides in vector <span class="in">`y`</span> is labelled <span class="in">`TRUE`</span>.</span>
+<span id="cb34-44"><a href="#cb34-44"></a></span>
+<span id="cb34-45"><a href="#cb34-45"></a>and can be used to compare assigned objects.</span>
+<span id="cb34-46"><a href="#cb34-46"></a></span>
+<span id="cb34-49"><a href="#cb34-49"></a><span class="in">```{r}</span></span>
+<span id="cb34-50"><a href="#cb34-50"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb34-51"><a href="#cb34-51"></a>y <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb34-52"><a href="#cb34-52"></a>x<span class="sc">==</span>y</span>
+<span id="cb34-53"><a href="#cb34-53"></a></span>
+<span id="cb34-54"><a href="#cb34-54"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb34-55"><a href="#cb34-55"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>)</span>
+<span id="cb34-56"><a href="#cb34-56"></a>a<span class="sc">==</span>b<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb34-57"><a href="#cb34-57"></a><span class="in">```</span></span>
+<span id="cb34-58"><a href="#cb34-58"></a></span>
+<span id="cb34-59"><a href="#cb34-59"></a>A list of logical operators in <span class="in">`R`</span> can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.statmethods.net/management/operators.html)</span>, including greater-than and less-than. Using logical operators can be a powerful tool in a programmer's repertoire. For example they can allow you to quickly highlight and select certain instances from large data sets. Below I'm highlighting numbers divisible by 5 in a list running from 1 to 50:</span>
+<span id="cb34-60"><a href="#cb34-60"></a></span>
+<span id="cb34-63"><a href="#cb34-63"></a><span class="in">```{r}</span></span>
+<span id="cb34-64"><a href="#cb34-64"></a>myList <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span></span>
+<span id="cb34-65"><a href="#cb34-65"></a>myList[myList <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="co"># index those numbers divisible by 5</span></span>
+<span id="cb34-66"><a href="#cb34-66"></a><span class="in">```</span></span>
+<span id="cb34-67"><a href="#cb34-67"></a></span>
+<span id="cb34-68"><a href="#cb34-68"></a>Here I'm telling <span class="in">`R`</span> to print a word based on whether <span class="in">`myNumber`</span> is greater than 5:</span>
+<span id="cb34-69"><a href="#cb34-69"></a></span>
+<span id="cb34-72"><a href="#cb34-72"></a><span class="in">```{r}</span></span>
+<span id="cb34-73"><a href="#cb34-73"></a>myNumber <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb34-74"><a href="#cb34-74"></a></span>
+<span id="cb34-75"><a href="#cb34-75"></a><span class="fu">ifelse</span>(<span class="at">test =</span> myNumber<span class="sc">&gt;</span><span class="dv">5</span>, <span class="at">yes =</span> <span class="st">"Yep, great than 5"</span>, <span class="at">no =</span> <span class="st">"Nunca, nada, NOPE!"</span>)</span>
+<span id="cb34-76"><a href="#cb34-76"></a><span class="in">```</span></span>
+<span id="cb34-77"><a href="#cb34-77"></a></span>
+<span id="cb34-78"><a href="#cb34-78"></a>Try re-running the code above in your own console, with a value greater than 5 assigned to <span class="in">`myNumber`</span>. There's a little more on <span class="in">`ifelse()`</span> below.</span>
+<span id="cb34-79"><a href="#cb34-79"></a></span>
+<span id="cb34-80"><a href="#cb34-80"></a><span class="fu">## Loading packages with `require()`</span></span>
+<span id="cb34-81"><a href="#cb34-81"></a></span>
+<span id="cb34-82"><a href="#cb34-82"></a>Given our brief intro to logicals; there is in fact an alternative to <span class="in">`library()`</span> for loading a previously installed package. We can use <span class="in">`require()`</span>:</span>
+<span id="cb34-83"><a href="#cb34-83"></a></span>
+<span id="cb34-86"><a href="#cb34-86"></a><span class="in">```{r}</span></span>
+<span id="cb34-87"><a href="#cb34-87"></a><span class="fu">require</span>(tidyverse)</span>
+<span id="cb34-88"><a href="#cb34-88"></a><span class="in">```</span></span>
+<span id="cb34-89"><a href="#cb34-89"></a></span>
+<span id="cb34-90"><a href="#cb34-90"></a><span class="in">`require()`</span> has the additional benfit of returning a <span class="in">`FALSE`</span> logical output if the requested package hasn't been installed on your computer. This is in contrast to <span class="in">`library()`</span> which just freaks out and reports an error (errors are bad as they can stop your execution). For example, let's save the output of the following actions to an object called <span class="in">`myVar`</span>.</span>
+<span id="cb34-91"><a href="#cb34-91"></a></span>
+<span id="cb34-92"><a href="#cb34-92"></a>For example running:</span>
+<span id="cb34-93"><a href="#cb34-93"></a></span>
+<span id="cb34-96"><a href="#cb34-96"></a><span class="in">```{r}</span></span>
+<span id="cb34-97"><a href="#cb34-97"></a><span class="co">#| eval: false</span></span>
+<span id="cb34-98"><a href="#cb34-98"></a></span>
+<span id="cb34-99"><a href="#cb34-99"></a>myVar <span class="ot">&lt;-</span> <span class="fu">library</span>(xkcd)</span>
+<span id="cb34-100"><a href="#cb34-100"></a>myVar</span>
+<span id="cb34-101"><a href="#cb34-101"></a><span class="in">```</span></span>
+<span id="cb34-102"><a href="#cb34-102"></a></span>
+<span id="cb34-103"><a href="#cb34-103"></a>versus</span>
+<span id="cb34-104"><a href="#cb34-104"></a></span>
+<span id="cb34-107"><a href="#cb34-107"></a><span class="in">```{r}</span></span>
+<span id="cb34-108"><a href="#cb34-108"></a><span class="co">#| eval: false</span></span>
+<span id="cb34-109"><a href="#cb34-109"></a></span>
+<span id="cb34-110"><a href="#cb34-110"></a>myVar <span class="ot">&lt;-</span> <span class="fu">require</span>(xkcd)</span>
+<span id="cb34-111"><a href="#cb34-111"></a>myVar</span>
+<span id="cb34-112"><a href="#cb34-112"></a><span class="in">```</span></span>
+<span id="cb34-113"><a href="#cb34-113"></a></span>
+<span id="cb34-114"><a href="#cb34-114"></a>In both cases <span class="in">`xkcd`</span> was not installed on your comp and an error was returned. However, with <span class="in">`library()`</span>, nothing was saved to <span class="in">`myVar`</span>, but <span class="in">`require()`</span> returned a <span class="in">`FALSE`</span> indicating that the requested package was not installed. Why do I bother to even bring this up?</span>
+<span id="cb34-115"><a href="#cb34-115"></a></span>
+<span id="cb34-116"><a href="#cb34-116"></a><span class="fu">## Installing and loading packages like a Pirate Ninja!</span></span>
+<span id="cb34-117"><a href="#cb34-117"></a></span>
+<span id="cb34-118"><a href="#cb34-118"></a>The central reason that we are using <span class="in">`R`</span> is to get in the practice of data transparency and replicability. Ultimately, for every analysis that you perform you should be able to provide me with the appropriate syntax in your notebook file and I should be able to re-run each of your analyses step by step on my own computer. One important consideration is that you may be using packages that I don't have installed and loaded on my computer and vice versa. To deal with this you would need to include two lines for every package:</span>
+<span id="cb34-119"><a href="#cb34-119"></a></span>
+<span id="cb34-120"><a href="#cb34-120"></a><span class="ss">1.  </span><span class="in">`install.packages("package")`</span></span>
+<span id="cb34-121"><a href="#cb34-121"></a><span class="ss">2.  </span><span class="in">`library(package)`</span></span>
+<span id="cb34-122"><a href="#cb34-122"></a></span>
+<span id="cb34-123"><a href="#cb34-123"></a>If you use a lot of packages, this can become very repetitive (imagine using 10 packages).</span>
+<span id="cb34-124"><a href="#cb34-124"></a></span>
+<span id="cb34-125"><a href="#cb34-125"></a>A much more efficient way of doing things is to take advantage of that <span class="in">`FALSE`</span> that <span class="in">`require()`</span> returns. But first we need to install a package called <span class="in">`pacman`</span>. Before we do this, input the next to lines seperately:</span>
+<span id="cb34-126"><a href="#cb34-126"></a></span>
+<span id="cb34-129"><a href="#cb34-129"></a><span class="in">```{r}</span></span>
+<span id="cb34-130"><a href="#cb34-130"></a><span class="fu">require</span>(pacman)</span>
+<span id="cb34-131"><a href="#cb34-131"></a><span class="sc">!</span><span class="fu">require</span>(pacman)</span>
+<span id="cb34-132"><a href="#cb34-132"></a><span class="in">```</span></span>
+<span id="cb34-133"><a href="#cb34-133"></a></span>
+<span id="cb34-134"><a href="#cb34-134"></a>Recall from above that <span class="in">`require()`</span> produces a <span class="in">`FALSE`</span> if the requested package is NOT installed on your computer. So, assuming that <span class="in">`pacman`</span> is not installed on your computer the first line will produce a <span class="in">`FALSE`</span> and the second will produce a <span class="in">`TRUE`</span>.</span>
+<span id="cb34-135"><a href="#cb34-135"></a></span>
+<span id="cb34-136"><a href="#cb34-136"></a>So what is that second line then? NEGATION.</span>
+<span id="cb34-137"><a href="#cb34-137"></a></span>
+<span id="cb34-138"><a href="#cb34-138"></a>Placing an exclamation point in fron of a statement essentially reads as "not true". For now just understand that using this syntax we can create a line of code that checks to see *if* `pacman` is installed on your computer, and if *not* it installs it:</span>
+<span id="cb34-139"><a href="#cb34-139"></a></span>
+<span id="cb34-142"><a href="#cb34-142"></a><span class="in">```{r}</span></span>
+<span id="cb34-143"><a href="#cb34-143"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) </span>
+<span id="cb34-144"><a href="#cb34-144"></a>    <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb34-145"><a href="#cb34-145"></a><span class="in">```</span></span>
+<span id="cb34-146"><a href="#cb34-146"></a></span>
+<span id="cb34-147"><a href="#cb34-147"></a>The above code is a conditional if-statement. It literally reads:</span>
+<span id="cb34-148"><a href="#cb34-148"></a></span>
+<span id="cb34-149"><a href="#cb34-149"></a><span class="ss">1.  </span>Check to see if the statement <span class="in">`!require("pacman")`</span> is <span class="in">`TRUE`</span> (i.e., TRUE = <span class="in">`pacman`</span> is not installed on your computer).</span>
+<span id="cb34-150"><a href="#cb34-150"></a><span class="ss">2.  </span>If the above indeed returns a <span class="in">`TRUE`</span>, then run <span class="in">`install.packages("pacman")`</span>.</span>
+<span id="cb34-151"><a href="#cb34-151"></a></span>
+<span id="cb34-152"><a href="#cb34-152"></a>In theory you could run this line for every package, but that would be tedious as well and is not really a simpler solution. Fortunately <span class="in">`pacman`</span> contains a function that simplifies this for us, <span class="in">`pacman::p_load()`</span> function. To get a feel for what this function does run the following line:</span>
+<span id="cb34-153"><a href="#cb34-153"></a></span>
+<span id="cb34-156"><a href="#cb34-156"></a><span class="in">```{r}</span></span>
+<span id="cb34-157"><a href="#cb34-157"></a>? pacman<span class="sc">::</span><span class="fu">p_load</span>()</span>
+<span id="cb34-158"><a href="#cb34-158"></a><span class="in">```</span></span>
+<span id="cb34-159"><a href="#cb34-159"></a></span>
+<span id="cb34-160"><a href="#cb34-160"></a>The <span class="in">`?`</span> brings up an online help module for the named function. In this case the function is <span class="in">`p_load()`</span> from the <span class="in">`pacman`</span> package.</span>
+<span id="cb34-161"><a href="#cb34-161"></a></span>
+<span id="cb34-162"><a href="#cb34-162"></a>You'll see that <span class="in">`pacman::p_load()`</span> checks to see if a package is installed, if not it attempts to install the package from CRAN and/or any other repository. After that it loads all listed packages.</span>
+<span id="cb34-163"><a href="#cb34-163"></a></span>
+<span id="cb34-164"><a href="#cb34-164"></a>Let's try a few packages that you haven't installed but are going to be useful to us later when we do ANOVA. FWIW I usually have a code chunk at the top of every notebook that uses this template, swapping in the various packages that I intend to use.</span>
+<span id="cb34-165"><a href="#cb34-165"></a></span>
+<span id="cb34-166"><a href="#cb34-166"></a><span class="fu">## HERE'S THE CHEAT CODE!!!</span></span>
+<span id="cb34-167"><a href="#cb34-167"></a></span>
+<span id="cb34-170"><a href="#cb34-170"></a><span class="in">```{r}</span></span>
+<span id="cb34-171"><a href="#cb34-171"></a><span class="co"># 1. check to see if pacman is on your computer and if not, let's </span></span>
+<span id="cb34-172"><a href="#cb34-172"></a><span class="co"># install and load it:</span></span>
+<span id="cb34-173"><a href="#cb34-173"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb34-174"><a href="#cb34-174"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb34-175"><a href="#cb34-175"></a></span>
+<span id="cb34-176"><a href="#cb34-176"></a><span class="co"># 2. install all other packages that we will be using:</span></span>
+<span id="cb34-177"><a href="#cb34-177"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(afex,lmerTest,plyr,car)</span>
+<span id="cb34-178"><a href="#cb34-178"></a><span class="in">```</span></span>
+<span id="cb34-179"><a href="#cb34-179"></a></span>
+<span id="cb34-180"><a href="#cb34-180"></a>This bit of code installed and loaded the <span class="in">`afex`</span>, <span class="in">`lmerTest`</span>, and <span class="in">`plyr`</span> packages. To test that everything worked, try:</span>
+<span id="cb34-181"><a href="#cb34-181"></a></span>
+<span id="cb34-184"><a href="#cb34-184"></a><span class="in">```{r}</span></span>
+<span id="cb34-185"><a href="#cb34-185"></a><span class="fu">data</span>(obk.long, <span class="at">package =</span> <span class="st">"afex"</span>)</span>
+<span id="cb34-186"><a href="#cb34-186"></a>afex<span class="sc">::</span><span class="fu">aov_ez</span>(<span class="st">"id"</span>, <span class="st">"value"</span>, obk.long, <span class="at">between =</span> <span class="fu">c</span>(<span class="st">"treatment"</span>, <span class="st">"gender"</span>),</span>
+<span id="cb34-187"><a href="#cb34-187"></a>             <span class="at">within =</span> <span class="fu">c</span>(<span class="st">"phase"</span>, <span class="st">"hour"</span>), <span class="at">observed =</span> <span class="st">"gender"</span>)</span>
+<span id="cb34-188"><a href="#cb34-188"></a><span class="in">```</span></span>
+<span id="cb34-189"><a href="#cb34-189"></a></span>
+<span id="cb34-190"><a href="#cb34-190"></a>Congrats! You've just run a 2x2 mixed effects ANOVA! We'll revisit what exactly is going on here in about 10 weeks.</span>
+<span id="cb34-191"><a href="#cb34-191"></a></span>
+<span id="cb34-192"><a href="#cb34-192"></a><span class="fu">## Downloading and saving data from the web</span></span>
+<span id="cb34-193"><a href="#cb34-193"></a></span>
+<span id="cb34-194"><a href="#cb34-194"></a>The example above just pulls data directly from a url, what if you want to download the data file directly onto your computer and load it from there?</span>
+<span id="cb34-195"><a href="#cb34-195"></a></span>
+<span id="cb34-196"><a href="#cb34-196"></a>Well, *there's a package for that*... <span class="in">`downloader`</span>. Let's install this package and download the data from above. Also, check out the additional notation in the code below:</span>
+<span id="cb34-197"><a href="#cb34-197"></a></span>
+<span id="cb34-200"><a href="#cb34-200"></a><span class="in">```{r}</span></span>
+<span id="cb34-201"><a href="#cb34-201"></a><span class="co"># within the R code sections, hashtags create comments, sections of code </span></span>
+<span id="cb34-202"><a href="#cb34-202"></a><span class="co"># that are not interpreted by the computer, but may serve to inform others </span></span>
+<span id="cb34-203"><a href="#cb34-203"></a><span class="co"># (and typically yourself later in life) about what exactly in the hell is</span></span>
+<span id="cb34-204"><a href="#cb34-204"></a><span class="co"># going on here. GET IN THE PRACTICE OF COMMENTING YOUR CODE. You'll thank</span></span>
+<span id="cb34-205"><a href="#cb34-205"></a><span class="co"># yourself later. I can't count how many times I've written code only </span></span>
+<span id="cb34-206"><a href="#cb34-206"></a><span class="co"># to come back to it months later wondering what in the hell I was </span></span>
+<span id="cb34-207"><a href="#cb34-207"></a><span class="co"># doing, thinking!!</span></span>
+<span id="cb34-208"><a href="#cb34-208"></a></span>
+<span id="cb34-209"><a href="#cb34-209"></a><span class="co"># Here I'm using comments to inform you step-by-step </span></span>
+<span id="cb34-210"><a href="#cb34-210"></a><span class="co"># what each line is doing:</span></span>
+<span id="cb34-211"><a href="#cb34-211"></a></span>
+<span id="cb34-212"><a href="#cb34-212"></a><span class="co"># install and load "downloader" package, this assumes you </span></span>
+<span id="cb34-213"><a href="#cb34-213"></a><span class="co"># have "pacman" installed and loaded *see section above:</span></span>
+<span id="cb34-214"><a href="#cb34-214"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(downloader)</span>
+<span id="cb34-215"><a href="#cb34-215"></a></span>
+<span id="cb34-216"><a href="#cb34-216"></a><span class="co"># get the url of the file you want to download and assign it </span></span>
+<span id="cb34-217"><a href="#cb34-217"></a><span class="co"># to an object ("dataURL"):</span></span>
+<span id="cb34-218"><a href="#cb34-218"></a>dataURL <span class="ot">&lt;-</span> <span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab2-1.dat"</span></span>
+<span id="cb34-219"><a href="#cb34-219"></a></span>
+<span id="cb34-220"><a href="#cb34-220"></a><span class="co"># decide on what name you want to give the file. In this case I'm extracting</span></span>
+<span id="cb34-221"><a href="#cb34-221"></a><span class="co"># using the basename from the web url: Tab2-1.dat. In truth you </span></span>
+<span id="cb34-222"><a href="#cb34-222"></a><span class="co"># can name it whatever you want (see commented example)</span></span>
+<span id="cb34-223"><a href="#cb34-223"></a></span>
+<span id="cb34-224"><a href="#cb34-224"></a>filename <span class="ot">&lt;-</span> <span class="fu">basename</span>(dataURL)</span>
+<span id="cb34-225"><a href="#cb34-225"></a><span class="co">#filename &lt;- "you_can_name_it_what_you_like.txt"</span></span>
+<span id="cb34-226"><a href="#cb34-226"></a></span>
+<span id="cb34-227"><a href="#cb34-227"></a><span class="co"># download the file to your current R-project folder:</span></span>
+<span id="cb34-228"><a href="#cb34-228"></a><span class="fu">download</span>(<span class="at">url =</span> dataURL, filename)</span>
+<span id="cb34-229"><a href="#cb34-229"></a><span class="in">```</span></span>
+<span id="cb34-230"><a href="#cb34-230"></a></span>
+<span id="cb34-231"><a href="#cb34-231"></a>Keep in mind that objects are just placeholders. So if I was so inclined I could have accomplished all of the above with just one line:</span>
+<span id="cb34-232"><a href="#cb34-232"></a></span>
+<span id="cb34-235"><a href="#cb34-235"></a><span class="in">```{r}</span></span>
+<span id="cb34-236"><a href="#cb34-236"></a><span class="fu">download</span>(<span class="at">url =</span> <span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab2-1.dat"</span>, <span class="at">destfile=</span><span class="st">"Tab2-1.dat"</span>)</span>
+<span id="cb34-237"><a href="#cb34-237"></a></span>
+<span id="cb34-238"><a href="#cb34-238"></a><span class="co"># destfile is a parameter for naming what you download.</span></span>
+<span id="cb34-239"><a href="#cb34-239"></a><span class="in">```</span></span>
+<span id="cb34-240"><a href="#cb34-240"></a></span>
+<span id="cb34-241"><a href="#cb34-241"></a>From here I could just import the <span class="in">`Tab2-1.dat`</span> file from my computer using the GUI method above.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

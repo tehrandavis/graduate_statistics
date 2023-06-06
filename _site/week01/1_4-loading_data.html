@@ -558,18 +558,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># no need to ask if already loaded</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>alcohol_use_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/alcuseN6.csv"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+Rows: 18 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (3): id, Age, Alc.use
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
 <p>To see what’s going on with the additional calls in this line, run the following line to get help:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>? read_csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>? read_csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A document file should show up in your help tab, containing examples and describing what different arguments are doing. Search for <code>col_names</code> and try to figure out what’s going on.</p>
 </section><section id="looking-ahead" class="level2"><h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead…</h2>
 <p>This is probably a good place to stop for now. In the meantime try running the following 4 commands (assuming that you have imported alcohol_use_data) and think about what they are returning:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">class</span>(alcohol_use_data)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">names</span>(alcohol_use_data)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">head</span>(alcohol_use_data)</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">summary</span>(alcohol_use_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">class</span>(alcohol_use_data)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">names</span>(alcohol_use_data)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">head</span>(alcohol_use_data)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">summary</span>(alcohol_use_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -759,72 +780,78 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> "Loading in Data"</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">---</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="fu"># Loading in data</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a>Typically the file types that are used by beginners in <span class="in">`R`</span> are plain text and delimited. They may have the extension "txt", "csv", or "dat" for example. These may become more sophisticated you progress, for example you can load in proprietary types like SPSS and STATA, but for this course we will mostly use plain text files (although later in the course I will show you how to load in Excel files and SPSS files).</span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="fu">## Loading in local data using a GUI:</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a>As with loading packages, you can also load in a file containing data using the RStudio GUI. See <span class="co">[</span><span class="ot">this video</span><span class="co">](https://youtu.be/NqvxpK495iU)</span>.</span>
-<span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a>Again, this is only preferred if you are not sharing your analysis. If you are sharing your analysis (as in this class) you need to do the command line. Fortunately, RStudio creates the appropriate command-line for you to copy and paste. For example, loading one of your homework data sets can be accomplished by:</span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="in">```{r}</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb5-22"><a href="#cb5-22"></a>LexicalDescisionData <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"path/to/LexicalDescisionData.txt"</span>)</span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="in">```</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a>where <span class="in">`path/to/`</span> is the path to the folder containing the file <span class="in">`LexicalDescisionData.txt`</span>. For example, on my computer it might be: </span>
-<span id="cb5-26"><a href="#cb5-26"></a></span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="at">&gt;"/Users/tehrandav/Documents/psyc7014/LexicalDescisionData.txt"</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a></span>
-<span id="cb5-29"><a href="#cb5-29"></a>I've uploaded this file to OneDrive in the <span class="in">`walkthroughs and examples`</span> folder. Please feel free to download the file and follow along is you wish. Note that *if you do elect to load in via the GUI you need to be sure to copy the output to your Rmd source. Otherwise, I will not be able to run it on my computer*.</span>
-<span id="cb5-30"><a href="#cb5-30"></a></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="fu">## Importing data from the web</span></span>
-<span id="cb5-32"><a href="#cb5-32"></a></span>
-<span id="cb5-33"><a href="#cb5-33"></a>You might be saying to yourself, "but Tehran the entire reason you've got us learning <span class="in">`R`</span> is for transparency and openness with our data. How would I be able to share in my code a data file that resides on my hard drive?!?""</span>
-<span id="cb5-34"><a href="#cb5-34"></a></span>
-<span id="cb5-35"><a href="#cb5-35"></a>Correct, you can't, but you can upload it to the internet and someone can access it from an online repository. Personally, I like to use <span class="co">[</span><span class="ot">http://www.github.com</span><span class="co">](**Github**)</span>, but we'll save that for some advanced stuff later in the semester for those so inclined. Another alternative is to upload your entire folder to a project in <span class="co">[</span><span class="ot">http://www.rstudio.cloud</span><span class="co">](**RStudio.cloud**)</span>.</span>
-<span id="cb5-36"><a href="#cb5-36"></a></span>
-<span id="cb5-37"><a href="#cb5-37"></a>If the data is uploaded directly from the web, we can load it in using the <span class="in">`read_delim()`</span> function from above. This is some reaction time data taken from a website. Let's assign it to an object <span class="in">`RxData`</span></span>
-<span id="cb5-38"><a href="#cb5-38"></a></span>
-<span id="cb5-39"><a href="#cb5-39"></a></span>
-<span id="cb5-40"><a href="#cb5-40"></a></span>
-<span id="cb5-43"><a href="#cb5-43"></a><span class="in">```{r}</span></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="fu">library</span>(tidyverse) <span class="co"># no need to ask if already loaded</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a>alcohol_use_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/alcuseN6.csv"</span>, <span class="at">col_names =</span> T)</span>
-<span id="cb5-47"><a href="#cb5-47"></a></span>
-<span id="cb5-48"><a href="#cb5-48"></a><span class="in">```</span></span>
-<span id="cb5-49"><a href="#cb5-49"></a></span>
-<span id="cb5-50"><a href="#cb5-50"></a>To see what's going on with the additional calls in this line, run the following line to get help:</span>
-<span id="cb5-51"><a href="#cb5-51"></a></span>
-<span id="cb5-54"><a href="#cb5-54"></a><span class="in">```{r}</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-56"><a href="#cb5-56"></a>? read_csv</span>
-<span id="cb5-57"><a href="#cb5-57"></a><span class="in">```</span></span>
-<span id="cb5-58"><a href="#cb5-58"></a></span>
-<span id="cb5-59"><a href="#cb5-59"></a>A document file should show up in your help tab, containing examples and describing what different arguments are doing. Search for <span class="in">`col_names`</span> and try to figure out what's going on.</span>
-<span id="cb5-60"><a href="#cb5-60"></a></span>
-<span id="cb5-61"><a href="#cb5-61"></a><span class="fu">## Looking ahead...</span></span>
-<span id="cb5-62"><a href="#cb5-62"></a></span>
-<span id="cb5-63"><a href="#cb5-63"></a>This is probably a good place to stop for now. In the meantime try running the following 4 commands (assuming that you have imported alcohol_use_data) and think about what they are returning:</span>
-<span id="cb5-64"><a href="#cb5-64"></a></span>
-<span id="cb5-67"><a href="#cb5-67"></a><span class="in">```{r}</span></span>
-<span id="cb5-68"><a href="#cb5-68"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-69"><a href="#cb5-69"></a></span>
-<span id="cb5-70"><a href="#cb5-70"></a><span class="fu">class</span>(alcohol_use_data)</span>
-<span id="cb5-71"><a href="#cb5-71"></a><span class="fu">names</span>(alcohol_use_data)</span>
-<span id="cb5-72"><a href="#cb5-72"></a><span class="fu">head</span>(alcohol_use_data)</span>
-<span id="cb5-73"><a href="#cb5-73"></a><span class="fu">summary</span>(alcohol_use_data)</span>
-<span id="cb5-74"><a href="#cb5-74"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="an">title:</span><span class="co"> "Loading in Data"</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">---</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="fu"># Loading in data</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a>Typically the file types that are used by beginners in <span class="in">`R`</span> are plain text and delimited. They may have the extension "txt", "csv", or "dat" for example. These may become more sophisticated you progress, for example you can load in proprietary types like SPSS and STATA, but for this course we will mostly use plain text files (although later in the course I will show you how to load in Excel files and SPSS files).</span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="fu">## Loading in local data using a GUI:</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a>As with loading packages, you can also load in a file containing data using the RStudio GUI. See <span class="co">[</span><span class="ot">this video</span><span class="co">](https://youtu.be/NqvxpK495iU)</span>.</span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a>Again, this is only preferred if you are not sharing your analysis. If you are sharing your analysis (as in this class) you need to do the command line. Fortunately, RStudio creates the appropriate command-line for you to copy and paste. For example, loading one of your homework data sets can be accomplished by:</span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="in">```{r}</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#| eval: false</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-22"><a href="#cb6-22"></a>LexicalDescisionData <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"path/to/LexicalDescisionData.txt"</span>)</span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="in">```</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a>where <span class="in">`path/to/`</span> is the path to the folder containing the file <span class="in">`LexicalDescisionData.txt`</span>. For example, on my computer it might be: </span>
+<span id="cb6-26"><a href="#cb6-26"></a></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="at">&gt;"/Users/tehrandav/Documents/psyc7014/LexicalDescisionData.txt"</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a></span>
+<span id="cb6-29"><a href="#cb6-29"></a>I've uploaded this file to OneDrive in the <span class="in">`walkthroughs and examples`</span> folder. Please feel free to download the file and follow along is you wish. Note that *if you do elect to load in via the GUI you need to be sure to copy the output to your Rmd source. Otherwise, I will not be able to run it on my computer*.</span>
+<span id="cb6-30"><a href="#cb6-30"></a></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="fu">## Importing data from the web</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a></span>
+<span id="cb6-33"><a href="#cb6-33"></a>You might be saying to yourself, "but Tehran the entire reason you've got us learning <span class="in">`R`</span> is for transparency and openness with our data. How would I be able to share in my code a data file that resides on my hard drive?!?""</span>
+<span id="cb6-34"><a href="#cb6-34"></a></span>
+<span id="cb6-35"><a href="#cb6-35"></a>Correct, you can't, but you can upload it to the internet and someone can access it from an online repository. Personally, I like to use <span class="co">[</span><span class="ot">http://www.github.com</span><span class="co">](**Github**)</span>, but we'll save that for some advanced stuff later in the semester for those so inclined. Another alternative is to upload your entire folder to a project in <span class="co">[</span><span class="ot">http://www.rstudio.cloud</span><span class="co">](**RStudio.cloud**)</span>.</span>
+<span id="cb6-36"><a href="#cb6-36"></a></span>
+<span id="cb6-37"><a href="#cb6-37"></a>If the data is uploaded directly from the web, we can load it in using the <span class="in">`read_delim()`</span> function from above. This is some reaction time data taken from a website. Let's assign it to an object <span class="in">`RxData`</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a></span>
+<span id="cb6-39"><a href="#cb6-39"></a></span>
+<span id="cb6-40"><a href="#cb6-40"></a></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="in">```{r}</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#| eval: false</span></span>
+<span id="cb6-45"><a href="#cb6-45"></a><span class="fu">library</span>(tidyverse) <span class="co"># no need to ask if already loaded</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a>alcohol_use_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/alcuseN6.csv"</span>, <span class="at">col_names =</span> T)</span>
+<span id="cb6-47"><a href="#cb6-47"></a></span>
+<span id="cb6-48"><a href="#cb6-48"></a><span class="in">```</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="in">```{r}</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="co">#| echo: false</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="fu">library</span>(tidyverse) <span class="co"># no need to ask if already loaded</span></span>
+<span id="cb6-55"><a href="#cb6-55"></a>alcohol_use_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../practice_datasets/alcuseN6.csv"</span>, <span class="at">col_names =</span> T)</span>
+<span id="cb6-56"><a href="#cb6-56"></a><span class="in">```</span></span>
+<span id="cb6-57"><a href="#cb6-57"></a></span>
+<span id="cb6-58"><a href="#cb6-58"></a>To see what's going on with the additional calls in this line, run the following line to get help:</span>
+<span id="cb6-59"><a href="#cb6-59"></a></span>
+<span id="cb6-62"><a href="#cb6-62"></a><span class="in">```{r}</span></span>
+<span id="cb6-63"><a href="#cb6-63"></a><span class="co">#| eval: false</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a>? read_csv</span>
+<span id="cb6-65"><a href="#cb6-65"></a><span class="in">```</span></span>
+<span id="cb6-66"><a href="#cb6-66"></a></span>
+<span id="cb6-67"><a href="#cb6-67"></a>A document file should show up in your help tab, containing examples and describing what different arguments are doing. Search for <span class="in">`col_names`</span> and try to figure out what's going on.</span>
+<span id="cb6-68"><a href="#cb6-68"></a></span>
+<span id="cb6-69"><a href="#cb6-69"></a><span class="fu">## Looking ahead...</span></span>
+<span id="cb6-70"><a href="#cb6-70"></a></span>
+<span id="cb6-71"><a href="#cb6-71"></a>This is probably a good place to stop for now. In the meantime try running the following 4 commands (assuming that you have imported alcohol_use_data) and think about what they are returning:</span>
+<span id="cb6-72"><a href="#cb6-72"></a></span>
+<span id="cb6-75"><a href="#cb6-75"></a><span class="in">```{r}</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a><span class="co">#| eval: false</span></span>
+<span id="cb6-77"><a href="#cb6-77"></a></span>
+<span id="cb6-78"><a href="#cb6-78"></a><span class="fu">class</span>(alcohol_use_data)</span>
+<span id="cb6-79"><a href="#cb6-79"></a><span class="fu">names</span>(alcohol_use_data)</span>
+<span id="cb6-80"><a href="#cb6-80"></a><span class="fu">head</span>(alcohol_use_data)</span>
+<span id="cb6-81"><a href="#cb6-81"></a><span class="fu">summary</span>(alcohol_use_data)</span>
+<span id="cb6-82"><a href="#cb6-82"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

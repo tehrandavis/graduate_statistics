@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link active">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#example-1-a-22-anova" id="toc-example-1-a-22-anova" class="nav-link active" data-scroll-target="#example-1-a-22-anova">Example 1: a 2×2 ANOVA</a>
+  <ul class="collapse">
+<li><a href="#interaction-plots" id="toc-interaction-plots" class="nav-link" data-scroll-target="#interaction-plots">Interaction plots</a></li>
+  <li>
+<a href="#running-the-anova-lm-method" id="toc-running-the-anova-lm-method" class="nav-link" data-scroll-target="#running-the-anova-lm-method">Running the ANOVA <code>lm()</code> method</a>
+  <ul class="collapse">
+<li><a href="#checking-assumptions" id="toc-checking-assumptions" class="nav-link" data-scroll-target="#checking-assumptions">Checking assumptions</a></li>
+  </ul>
+</li>
+  <li><a href="#adressing-the-interaction" id="toc-adressing-the-interaction" class="nav-link" data-scroll-target="#adressing-the-interaction">Adressing the interaction</a></li>
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova">2 × 3 ANOVA</a></li>
+  <li><a href="#plotting-the-data-and-descriptive-stats" id="toc-plotting-the-data-and-descriptive-stats" class="nav-link" data-scroll-target="#plotting-the-data-and-descriptive-stats">Plotting the data and descriptive stats</a></li>
+  <li><a href="#the-omnibus-anova-and-assumption-tests" id="toc-the-omnibus-anova-and-assumption-tests" class="nav-link" data-scroll-target="#the-omnibus-anova-and-assumption-tests">the Omnibus ANOVA (and assumption tests)</a></li>
+  <li>
+<a href="#running-the-simple-effects-anova-in-6-steps" id="toc-running-the-simple-effects-anova-in-6-steps" class="nav-link" data-scroll-target="#running-the-simple-effects-anova-in-6-steps">Running the simple effects ANOVA in 6 steps:</a>
+  <ul class="collapse">
+<li><a href="#step-1-get-the-omnibus-anova" id="toc-step-1-get-the-omnibus-anova" class="nav-link" data-scroll-target="#step-1-get-the-omnibus-anova">step 1: get the omnibus ANOVA:</a></li>
+  <li><a href="#step-2-get-the-mserror-error-df-and-error-ss-from-omnibus-anova" id="toc-step-2-get-the-mserror-error-df-and-error-ss-from-omnibus-anova" class="nav-link" data-scroll-target="#step-2-get-the-mserror-error-df-and-error-ss-from-omnibus-anova">step 2: get the MSError, Error df, and Error SS from omnibus ANOVA</a></li>
+  <li><a href="#step-3-subset-your-data-accordingly" id="toc-step-3-subset-your-data-accordingly" class="nav-link" data-scroll-target="#step-3-subset-your-data-accordingly">step 3: subset your data accordingly</a></li>
+  <li><a href="#step-4-run-your-one-way-simple-effects-anovas" id="toc-step-4-run-your-one-way-simple-effects-anovas" class="nav-link" data-scroll-target="#step-4-run-your-one-way-simple-effects-anovas">step 4: run your One-way simple effects ANOVA(s)</a></li>
+  <li><a href="#step-5-get-the-treatment-ms-df-ss-and-f-value-from-your-simple-anova" id="toc-step-5-get-the-treatment-ms-df-ss-and-f-value-from-your-simple-anova" class="nav-link" data-scroll-target="#step-5-get-the-treatment-ms-df-ss-and-f-value-from-your-simple-anova">step 5: get the treatment MS, df, SS, and F-value from your simple ANOVA</a></li>
+  <li><a href="#step-6-make-our-corrections" id="toc-step-6-make-our-corrections" class="nav-link" data-scroll-target="#step-6-make-our-corrections">step 6: make our corrections</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#the-emmeans-way" id="toc-the-emmeans-way" class="nav-link" data-scroll-target="#the-emmeans-way">the emmeans() way</a>
+  <ul class="collapse">
+<li><a href="#the-simple-effects-anova" id="toc-the-simple-effects-anova" class="nav-link" data-scroll-target="#the-simple-effects-anova">the simple effects ANOVA</a></li>
+  <li><a href="#effects-size-partial-eta-sq-for-the-anova" id="toc-effects-size-partial-eta-sq-for-the-anova" class="nav-link" data-scroll-target="#effects-size-partial-eta-sq-for-the-anova">effects size (partial eta sq) for the ANOVA</a></li>
+  <li><a href="#post-hoc-analyses-on-the-simple-effects-anova" id="toc-post-hoc-analyses-on-the-simple-effects-anova" class="nav-link" data-scroll-target="#post-hoc-analyses-on-the-simple-effects-anova">post-hoc analyses on the simple effects ANOVA</a></li>
+  </ul>
+</li>
+  <li><a href="#interpreting-these-results" id="toc-interpreting-these-results" class="nav-link" data-scroll-target="#interpreting-these-results">Interpreting these results:</a></li>
+  <li><a href="#example-write-up" id="toc-example-write-up" class="nav-link" data-scroll-target="#example-write-up">Example write-up:</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>This walkthrough is a continuation of our focus on Factorial ANOVA. Here we’re asking the question “what to do if you have an interaction”. As we have discussed when running a factorial ANOVA, your first question should be “do I have an interaction”. If you do have an interaction then you need to examine that interaction in detail. How do we do this? Well, let’s think about what that interaction means. As an example, let’s revisit some of the data (or situations) from the previous walkthrough. We’ll also progressively ramp-up the complexity of our designs.</p>
+<p>This write-up requires the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, </span>
+<span id="cb1-2"><a href="#cb1-2"></a>               cowplot, </span>
+<span id="cb1-3"><a href="#cb1-3"></a>               Rmisc, </span>
+<span id="cb1-4"><a href="#cb1-4"></a>               emmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="example-1-a-22-anova" class="level1"><h1>Example 1: a 2×2 ANOVA</h1>
+<p>To start let’s look at the first example from last week’s walkthrough. To remind ourselves of the particulars, our example ANOVA comes from a study testing the effects of smoking on performance in different types of <em>putatively</em> (perhaps I’m showing my theoretical biases here) information processing tasks.</p>
+<p>There were 3 types of cognitive tasks:</p>
+<ul>
+<li><p><strong>1</strong> = a pattern recognition task where participants had to locate a target on a screen;</p></li>
+<li><p><strong>2</strong> = a cognitive task where participants had to read a passage and recall bits of information from that passage later;</p></li>
+<li><p><strong>3</strong> = participants performed a driving simulation.</p></li>
+</ul>
+<p>Additionally, 3 groups of smokers were recruited</p>
+<ul>
+<li><p><strong>1</strong> = those that were actively smoking prior to and during the experiment;</p></li>
+<li><p><strong>2 =</strong> those that were smokers, but did not smoke 3 hours prior to the experiment;</p></li>
+<li><p><strong>3 =</strong> non-smokers.</p></li>
+</ul>
+<p>As this is a between design, each participant only completed one of the cognitive tasks. For this first example we are going to drop the second levels of each IV (Cognitive and Delayed groups respectively).</p>
+<p>Let’s build the data frame (see previous walkthrough for more detail)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Sec13-5.dat"</span>, <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 135 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+dbl (4): Task, Smkgrp, score, covar
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dataset<span class="sc">$</span>PartID <span class="ot">&lt;-</span> <span class="fu">seq_along</span>(dataset<span class="sc">$</span>score)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>dataset<span class="sc">$</span>Task <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Task, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Pattern Recognition"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Cognitive"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Driving Simulation"</span>) </span>
+<span id="cb4-3"><a href="#cb4-3"></a>dataset<span class="sc">$</span>Smkgrp <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Smkgrp, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Nonsmoking"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Delayed"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Active"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a>dataset_2by2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(dataset, Smkgrp<span class="sc">!=</span><span class="st">"Delayed"</span> <span class="sc">&amp;</span> Task<span class="sc">!=</span><span class="st">"Cognitive"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>dataset_2by2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 60 × 5
+   Task                Smkgrp score covar PartID
+   &lt;fct&gt;               &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
+ 1 Pattern Recognition Active     9   107      1
+ 2 Pattern Recognition Active     8   133      2
+ 3 Pattern Recognition Active    12   123      3
+ 4 Pattern Recognition Active    10    94      4
+ 5 Pattern Recognition Active     7    83      5
+ 6 Pattern Recognition Active    10    86      6
+ 7 Pattern Recognition Active     9   112      7
+ 8 Pattern Recognition Active    11   117      8
+ 9 Pattern Recognition Active     8   130      9
+10 Pattern Recognition Active    10   111     10
+# ℹ 50 more rows</code></pre>
+</div>
+</div>
+<p>And let’s take a look at our cells to ensure that they have similar numbers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">summary</span>(dataset_2by2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Task           Smkgrp       score           covar       
+ Pattern Recognition:30   Nonsmoking:30   Min.   : 0.00   Min.   : 64.00  
+ Cognitive          : 0   Delayed   : 0   1st Qu.: 2.75   1st Qu.: 98.75  
+ Driving Simulation :30   Active    :30   Median : 8.00   Median :111.00  
+                                          Mean   : 7.90   Mean   :110.73  
+                                          3rd Qu.:11.00   3rd Qu.:123.00  
+                                          Max.   :22.00   Max.   :168.00  
+     PartID   
+ Min.   :  1  
+ 1st Qu.: 27  
+ Median : 68  
+ Mean   : 68  
+ 3rd Qu.:109  
+ Max.   :135  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>ez<span class="sc">::</span><span class="fu">ezDesign</span>(<span class="at">data =</span> dataset_2by2, </span>
+<span id="cb8-2"><a href="#cb8-2"></a>             <span class="at">x=</span>Task, <span class="co"># what do you want along the x-axis</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>             <span class="at">y=</span>Smkgrp, <span class="co"># what do you want along the y-axis</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>             <span class="at">row =</span> <span class="cn">NULL</span>, <span class="co"># are we doing any sub-divisions by row...</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>             <span class="at">col =</span> <span class="cn">NULL</span>) <span class="co"># or column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="11_1-interactions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="interaction-plots" class="level2"><h2 class="anchored" data-anchor-id="interaction-plots">Interaction plots</h2>
+<p>Interaction plots take into consideration the influence of each of the IVs on one another—in this case the mean and CI of each smoking group (Active v. Nonsmoking) as a function of Task (Driving Simulation v. Pattern Recognition). For example, a line plot might look like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># line plot</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>                                        <span class="at">y=</span>score,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>                                        <span class="at">group=</span>Task)) <span class="sc">+</span> <span class="co"># grouping the data by levels of Task</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>               <span class="at">fun.data =</span> <span class="st">"mean_cl_normal"</span>, </span>
+<span id="cb9-7"><a href="#cb9-7"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">5</span>)) <span class="sc">+</span> <span class="co"># dodging position so points do not overlap with one another</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb9-9"><a href="#cb9-9"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb9-10"><a href="#cb9-10"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">5</span>), </span>
+<span id="cb9-11"><a href="#cb9-11"></a>               <span class="fu">aes</span>(<span class="at">linetype=</span>Task)) <span class="sc">+</span> <span class="co"># each level of Task gets its own linetype</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="fu">theme_cowplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="11_1-interactions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="running-the-anova-lm-method" class="level2"><h2 class="anchored" data-anchor-id="running-the-anova-lm-method">Running the ANOVA <code>lm()</code> method</h2>
+<p>Now we can run the ANOVA using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> method. The new wrinkle from last week is that we are adding our interaction terms the formula equation the structural equation:</p>
+<p><span class="math display">\[y=IV_1+IV_2+(IV_1*IV_2)\]</span> where the first and second terms capture our main effects and the third is our interaction.</p>
+<p>Last week you only focused on the main effects so our model is what we would call <strong>additive</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp<span class="sc">+</span>Task,<span class="at">data =</span> dataset_2by2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This week we are including the interaction term. In <code>R</code> this formula now becomes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp <span class="sc">+</span> Task <span class="sc">+</span> Smkgrp<span class="sc">*</span>Task,<span class="at">data =</span> dataset_2by2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The operator <code>*</code> may be understood here as “crossed-by” or “interaction between”. Depending on your reference, you may also see <code>:</code> which means the same thing.</p>
+<p>Note that we can write this same equation in shorthand:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp<span class="sc">*</span>Task,<span class="at">data =</span> dataset_2by2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>where the <code>*</code> operator tells <code>R</code> to examine <strong>all</strong> related main effects and interactions. This is usually the best way to code this, as the long-form becomes unwieldy as we increase IVs and combinations of interactions. <strong><em>However, note that if you have planned comparisons you may elect to only specify certain main effects and interactions in long-form. This may become increasing important when you start to deal with more complex models. I think I’ll do a brief write up about this one day (before the end of the semester) by for now…</em></strong></p>
+<p>Before continuing, let’s compare the outputs of the <strong>additive model</strong> and the <strong>interaction</strong> <strong>model:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp <span class="sc">+</span> Task,<span class="at">data =</span> dataset_2by2) <span class="sc">%&gt;%</span> <span class="fu">anova</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: score
+          Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
+Smkgrp     1  248.07 248.067  10.187 0.002302 **
+Task       1  187.27 187.267   7.690 0.007491 **
+Residuals 57 1388.07  24.352                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp <span class="sc">*</span> Task,<span class="at">data =</span> dataset_2by2) <span class="sc">%&gt;%</span> <span class="fu">anova</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: score
+            Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
+Smkgrp       1  248.07 248.067 11.5687 0.001244 **
+Task         1  187.27 187.267  8.7333 0.004564 **
+Smkgrp:Task  1  187.27 187.267  8.7333 0.004564 **
+Residuals   56 1200.80  21.443                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Notice that adding the interaction terms does not affect our analysis of the main effects, both models have identical Mean Square and F values for the main effects. This is what we mean when we say that the tests within ANOVA are orthogonal to one another (independent of one another).</p>
+<p>Another thing to note here are that the apparent equal F-values in our <strong>Task</strong> effect and <strong>Interaction</strong> is due to rounding. This is simply an anomaly, and is not to be expected in most cases. Even here, they are different, but only nearly identical. <strong>As a thought experiment, can we think of why they are nearly identical in this case (Hint: can you see in the plot what might be causing the interaction)?</strong></p>
+<section id="checking-assumptions" class="level3"><h3 class="anchored" data-anchor-id="checking-assumptions">Checking assumptions</h3>
+<p>Okay let’s save our model and proceed to do the requisite assumptions checks:</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_model</span>(<span class="at">panel=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_normality</span>() <span class="co"># shapiro test from performance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: residuals appear as normally distributed (p = 0.074).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>aov_model <span class="sc">%&gt;%</span> car<span class="sc">::</span><span class="fu">leveneTest</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value   Pr(&gt;F)   
+group  3     6.1 0.001149 **
+      56                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>As in the last walkthrough we’ll ignore the issues with homogeneity. Let’s run our ANOVA:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>sjstats<span class="sc">::</span><span class="fu">anova_stats</span>(aov_model)[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term        | df |    sumsq |  meansq | statistic | p.value | etasq | partial.etasq
+-----------------------------------------------------------------------------------
+Smkgrp      |  1 |  248.067 | 248.067 |    11.569 |   0.001 | 0.136 |         0.171
+Task        |  1 |  187.267 | 187.267 |     8.733 |   0.005 | 0.103 |         0.135
+Smkgrp:Task |  1 |  187.267 | 187.267 |     8.733 |   0.005 | 0.103 |         0.135
+Residuals   | 56 | 1200.800 |  21.443 |           |         |       |              </code></pre>
+</div>
+</div>
+</section></section><section id="adressing-the-interaction" class="level2"><h2 class="anchored" data-anchor-id="adressing-the-interaction">Adressing the interaction</h2>
+<p>This model yields a Smoking group by task interaction! Looking at our interaction plot above, we shouldn’t have been too surprised by this. We see that for Non smokers, there is minimal difference between the two cognitive tasks, whereas with the smoking group, the scores of the Driving Simulation group were much lower than the Pattern recognition group. Another, equally valid way of interpreting the data is that while Pattern recognition scores were unaffected by smoking condition, Driving simulation scores were drastically decreased for smokers compared to non-smokers. While both interpretations are equally valid in the neutral sense, one may be more interesting to you the researcher (this is where your a priori hypotheses would come into play). Is it more interesting that Non smokers performed equivalently on both types of cognitive tasks while active smokes performed better on the pattern recognition task than the driving task <strong>OR</strong> is it more interesting that Pattern recognition scores where unaffected by smoking whereas driving simulation scores were?</p>
+<p>I bring this up, as while it may be appropriate to mention both trends, you typically only TEST for one or the other. Remember, there is a cost for every test that your run—you need to adjust for familywise error.</p>
+<p>In this case I’m going test the second variant, testing how performance on each cognitive task changes by virtue of smoking group. To run a post-hoc ANOVA. This can be accomplished sending our model to <code>joint_tests()</code>. So the model is saying take a look at how smoking group scores change <strong>on each level of task</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>aov_model <span class="sc">%&gt;%</span> emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(<span class="at">by =</span> <span class="st">"Task"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Task = Pattern Recognition:
+ model term df1 df2 F.ratio p.value
+ Smkgrp       1  56   0.099  0.7536
+
+Task = Driving Simulation:
+ model term df1 df2 F.ratio p.value
+ Smkgrp       1  56  20.203  &lt;.0001</code></pre>
+</div>
+</div>
+<p>Since smoking group only has 2 groups, I could stop here and report my obtained <span class="math inline">\(F\)</span> tests. If you prefer to report the pairwise <span class="math inline">\(t\)</span> test you can simply specify your pairwise comparisons for <code>Smkgrp</code>, <code>by</code> each level of <code>Task</code> using <code>emmeans()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>aov_model <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="at">spec =</span> <span class="st">"Smkgrp"</span>, <span class="at">by =</span> <span class="st">"Task"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">pairs</span>(<span class="at">adjust=</span><span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Task = Pattern Recognition:
+ contrast            estimate   SE df t.ratio p.value
+ Nonsmoking - Active    0.533 1.69 56   0.315  0.7536
+
+Task = Driving Simulation:
+ contrast            estimate   SE df t.ratio p.value
+ Nonsmoking - Active    7.600 1.69 56   4.495  &lt;.0001</code></pre>
+</div>
+</div>
+<p>The output above shows what we expect, that for Pattern recognition groups, scores are indifferent to whether participants are smokers or not, where with the Driving simulation groups, Nonsmokers performed much better.</p>
+</section><section id="anova" class="level2"><h2 class="anchored" data-anchor-id="anova">2 × 3 ANOVA</h2>
+<p>Things become slightly more complex when on of our factors has 3 or more levels. To see this let’s revisit the second example from the previous walkthrough:</p>
+<blockquote class="blockquote">
+<p>Background: Given the ease of access for new technologies and increasing enrollment demands, many university are advocating that departments switch over to E-courses, where students view an online, pre-recorded lecture on the course topic in lieu of sitting in a classroom in a live lecture. Given this push, a critical question remains regarding the impact of E-courses on student outcomes. More it may be the case that certain subject content more readily lends itself to E-course presentations than other subjects. To address this question we tested students performance on a test one week after participating in the related lecture. Lectures were either experienced via online (Computer) or in a live classroom (Standard). In addition, the lecture content varied in topic (Physical science, Social science, History)</p>
+</blockquote>
+<p>Here’s the data, where Score represents performance:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/factorial_AOV_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 36 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Lecture, Presentation
+dbl (2): subID, Score
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+</section><section id="plotting-the-data-and-descriptive-stats" class="level2"><h2 class="anchored" data-anchor-id="plotting-the-data-and-descriptive-stats">Plotting the data and descriptive stats</h2>
+<p>Here’s what our results look like. I’ll revisit the particulars on constructing this sort of plot in the next walkthrough. For now, all we are doing is extending the plotting methods that you have been using for the past few weeks. The important addition here is the addition of <code>group =</code> in the first line the <code>ggplot</code>.</p>
+<p>For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Lecture,</span>
+<span id="cb30-2"><a href="#cb30-2"></a>                                   <span class="at">y=</span>Score,</span>
+<span id="cb30-3"><a href="#cb30-3"></a>                                   <span class="at">group=</span>Presentation))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>indicates that we are:</p>
+<ul>
+<li><p>using the <code>dataset</code> data set</p></li>
+<li><p>putting first IV, <code>Lecture</code>, on the x-axis</p></li>
+<li><p>putting our dv, <code>Score</code> on the y-axis</p></li>
+<li><p>and grouping our data by our other IV, <code>Presentation</code></p></li>
+</ul>
+<p>This last bit is important as it makes clear that the resulting mean plots should be of the cell means related to <code>Lecture</code> x <code>Presentation</code>. Note that in the plot below, I am also adjusting the <code>shape</code> of the data points by <code>Presentation</code> (done in <code>stat_summary</code> .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(dataset,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Presentation)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,</span>
+<span id="cb31-3"><a href="#cb31-3"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb31-4"><a href="#cb31-4"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>), <span class="co"># dodge to prevent overlap</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a>               <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> <span class="co"># each level of presentation gets a shape</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun.y=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `fun.y` argument of `stat_summary()` is deprecated as of ggplot2 3.3.0.
+ℹ Please use the `fun` argument instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="11_1-interactions_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>And now getting the cell means and marginal means. Remember that analysis of the marginal means is what is tested in the main effects. The test for an interaction focuses on the cell means. Here we are using the <code>summarySE</code> function from the <code>Rmisc</code> package. I find it to be more efficient than <code><a href="https://rdrr.io/pkg/psych/man/describe.by.html">psych::describeBy()</a></code> and its useful next week when we do Repeated Measures ANOVA</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># cell means:</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">summarySE</span>(<span class="at">data =</span> dataset,<span class="at">measurevar =</span> <span class="st">"Score"</span>, <span class="at">groupvars =</span> <span class="fu">c</span>(<span class="st">"Presentation"</span>,<span class="st">"Lecture"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Presentation  Lecture N Score        sd       se        ci
+1     Computer  History 6    38  4.381780 1.788854  4.598397
+2     Computer Physical 6    46  6.985700 2.851900  7.331042
+3     Computer   Social 6    40  4.816638 1.966384  5.054751
+4     Standard  History 6    31 10.315038 4.211096 10.824968
+5     Standard Physical 6    34 11.009087 4.494441 11.553328
+6     Standard   Social 6    12  3.847077 1.570563  4.037260</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># marginal means</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">summarySE</span>(<span class="at">data =</span> dataset,<span class="at">measurevar =</span> <span class="st">"Score"</span>, <span class="at">groupvars =</span> <span class="st">"Lecture"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Lecture  N Score        sd       se       ci
+1  History 12  34.5  8.393721 2.423058 5.333116
+2 Physical 12  40.0 10.795622 3.116428 6.859211
+3   Social 12  26.0 15.201675 4.388345 9.658683</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">summarySE</span>(<span class="at">data =</span> dataset,<span class="at">measurevar =</span> <span class="st">"Score"</span>, <span class="at">groupvars =</span> <span class="st">"Presentation"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Presentation  N    Score        sd       se       ci
+1     Computer 18 41.33333  6.249706 1.473070 3.107906
+2     Standard 18 25.66667 13.105903 3.089091 6.517412</code></pre>
+</div>
+</div>
+</section><section id="the-omnibus-anova-and-assumption-tests" class="level2"><h2 class="anchored" data-anchor-id="the-omnibus-anova-and-assumption-tests">the Omnibus ANOVA (and assumption tests)</h2>
+<p>The very first ANOVA model that we build crosses all of our independent variables. This is the <strong>omnibus ANOVA</strong>. Let’s build this model and run our assumption checks</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation, dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I’m going to skip the assumption checks (bad professor!) and go straight to our results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>sjstats<span class="sc">::</span><span class="fu">anova_stats</span>(omnibus_aov)[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term                 | df | sumsq |   meansq | statistic | p.value | etasq | partial.etasq
+------------------------------------------------------------------------------------------
+Lecture              |  2 |  1194 |  597.000 |    10.737 |  &lt; .001 | 0.206 |         0.417
+Presentation         |  1 |  2209 | 2209.000 |    39.730 |  &lt; .001 | 0.381 |         0.570
+Lecture:Presentation |  2 |   722 |  361.000 |     6.493 |   0.005 | 0.125 |         0.302
+Residuals            | 30 |  1668 |   55.600 |           |         |       |              </code></pre>
+</div>
+</div>
+<p><strong>Looking at the ANOVA</strong>: Our ANOVA reveals two main effects and in interaction. Looking back at the plot (always, always plot before you think about doing any sort of follow-ups!!) it is fairly apparent what is happening—when moving from one lecture to the next, we see a much more dramatic decrease in score for the Social group in the <strong>Standard</strong> presentation group compared to the <strong>Computer</strong> presentation. That is, moving from left to right the pattern of change is different for the <strong>Standard</strong> group, compared to the <strong>Computer</strong> group. This is what our eyeball test is telling us—we need to confirm it with some stats! There are two ways to address this interaction, each involves sub-setting the data for further analysis.</p>
+<p>As mentioned above, when you have an interaction, you proceed by testing for differences between means for one condition, on <strong>each individual level of the other</strong>. For example, we can test for and effect of Lecture Type when the Presentation is Computer, and effect of Lecture Type when the Presentation is Standard. In this case you would run two separate simple effects ANOVAs, each taking a look at changes for each line in the plot above.</p>
+<p>–OR–</p>
+<p>You could check for difference between Presentations on each Lecture type. Here you would be comparing Computer v Standard in each of the Lecture conditions. This would involve running three ANOVAs each checking for the Presentation differences (circle v. triangle) present at History, Physical, and Social.</p>
+<p>Which you choose, ultimately depends on which narrative you are trying to convey in your data. Here it may make sense to do the former. That is eyeballing the data it looks like the means in the Computer presentation level are not as different from one another as the Standard presentation.</p>
+</section><section id="running-the-simple-effects-anova-in-6-steps" class="level2"><h2 class="anchored" data-anchor-id="running-the-simple-effects-anova-in-6-steps">Running the simple effects ANOVA in 6 steps:</h2>
+<p>Given that we have elected to take a look at Lecture on each level of Presentation, we would need to run 2 <strong>simple effects ANOVAs</strong>. This is because breaking the omnibus in this way still leaves in each subsequent analysis a comparison of the 3 levels of Lecture. Basically we are running 2 separate One-way ANOVAs:</p>
+<ol type="1">
+<li>the first looks at Scores~Lecture when Presentation = Computer</li>
+<li>the second looks at Scores~Lecture when Presentation = Standard</li>
+</ol>
+<p>There is, however, one major caveat. When you run the follow-up ANOVA <strong>you need to use the error terms from your omnibus ANOVA</strong>. <em>That is your simple effects ANOVA calls for the omnibus ANOVA errors: Sum of Squares, Mean Square Error, and denominator degrees of freedom.</em></p>
+<p><strong>What this means is that if you were to actually run this data as two distinct One-Way ANOVAs, the F-value (and subsequent p-values) that you get would be WRONG. For example simply running a <code>filter</code> and then ANOVA like this will not work:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># this is wrong... don't do this!!!</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">lm</span>(Score<span class="sc">~</span>Lecture, dataset <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Presentation<span class="sc">==</span><span class="st">"Computer"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a>  sjstats<span class="sc">::</span><span class="fu">anova_stats</span>() <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term      | df | sumsq |  meansq | statistic | p.value | etasq | partial.etasq
+------------------------------------------------------------------------------
+Lecture   |  2 |   208 | 104.000 |     3.421 |   0.060 | 0.313 |         0.313
+Residuals | 15 |   456 |  30.400 |           |         |       |              </code></pre>
+</div>
+</div>
+<p>A quick glance at the table above reveals the error. You’ll notice that the denominator df are 15 where in the omnibus ANOVA they were 30. Fixing this isn’t as simple as adjusting the denominator df and looking it up on the F-table. This involves a series of calculations that results in a different F-ratio as well. For the sake of clarity I’m going to show you how to do this “by hand” and then show you how you’ll never need to do it “by hand”</p>
+<p>There are several steps that need to be run for each simple effects ANOVA:</p>
+<section id="step-1-get-the-omnibus-anova" class="level3"><h3 class="anchored" data-anchor-id="step-1-get-the-omnibus-anova">step 1: get the omnibus ANOVA:</h3>
+<p>Assuming you haven’t already we need to run the omnibus ANOVA. Let’s get this again</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation, dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="step-2-get-the-mserror-error-df-and-error-ss-from-omnibus-anova" class="level3"><h3 class="anchored" data-anchor-id="step-2-get-the-mserror-error-df-and-error-ss-from-omnibus-anova">step 2: get the MSError, Error df, and Error SS from omnibus ANOVA</h3>
+<p>We can pull these values directly from the <code><a href="https://strengejacke.github.io/sjstats/reference/anova_stats.html">sjstats::anova_stats()</a></code> output. It easier to just save this output to an object first. We can then check its <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>omnibus_values <span class="ot">&lt;-</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>(omnibus_aov)</span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="fu">attributes</span>(omnibus_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$names
+ [1] "term"            "df"              "sumsq"           "meansq"         
+ [5] "statistic"       "p.value"         "etasq"           "partial.etasq"  
+ [9] "omegasq"         "partial.omegasq" "epsilonsq"       "cohens.f"       
+[13] "power"          
+
+$class
+[1] "sj_anova_stat" "data.frame"   
+
+$row.names
+[1] "Lecture"              "Presentation"         "Lecture:Presentation"
+[4] "...4"                </code></pre>
+</div>
+</div>
+<p>In the above list, we are interested in <code>sumsq</code> and <code>df</code>. We need to index each by number. In this case residuals are on the 4th line:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>omnibus_df <span class="ot">&lt;-</span> omnibus_values<span class="sc">$</span>df[<span class="dv">4</span>]</span>
+<span id="cb47-2"><a href="#cb47-2"></a>omnibus_mse <span class="ot">&lt;-</span> omnibus_values<span class="sc">$</span>meansq[<span class="dv">4</span>]</span>
+<span id="cb47-3"><a href="#cb47-3"></a>omnibus_ss_error <span class="ot">&lt;-</span> omnibus_values<span class="sc">$</span>sumsq[<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="step-3-subset-your-data-accordingly" class="level3"><h3 class="anchored" data-anchor-id="step-3-subset-your-data-accordingly">step 3: subset your data accordingly</h3>
+<p>In order to do this we will need to subset the data. For example I am interested in running my follow-ups on Computer data and Standard data separately, so my first move is to perform this subset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>computer_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(dataset, Presentation<span class="sc">==</span><span class="st">"Computer"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2"></a>standard_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(dataset, Presentation<span class="sc">==</span><span class="st">"Standard"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>(FWIW you could also do the subsetting in the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> call)</p>
+</section><section id="step-4-run-your-one-way-simple-effects-anovas" class="level3"><h3 class="anchored" data-anchor-id="step-4-run-your-one-way-simple-effects-anovas">step 4: run your One-way simple effects ANOVA(s)</h3>
+<p>Here I’m focusing on the <code>computer_data</code> for my example. You can return to the <code>standard_data</code> later.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>computer_aov_values <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture, dataset <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Presentation<span class="sc">==</span><span class="st">"Computer"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>  sjstats<span class="sc">::</span><span class="fu">anova_stats</span>()</span>
+<span id="cb49-3"><a href="#cb49-3"></a>computer_aov_values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term      | df | sumsq |  meansq | statistic | p.value | etasq | partial.etasq | omegasq | partial.omegasq | epsilonsq | cohens.f | power
+-----------------------------------------------------------------------------------------------------------------------------------------
+Lecture   |  2 |   208 | 104.000 |     3.421 |   0.060 | 0.313 |         0.313 |   0.212 |           0.212 |     0.222 |    0.675 | 0.635
+Residuals | 15 |   456 |  30.400 |           |         |       |               |         |                 |           |          |      </code></pre>
+</div>
+</div>
+</section><section id="step-5-get-the-treatment-ms-df-ss-and-f-value-from-your-simple-anova" class="level3"><h3 class="anchored" data-anchor-id="step-5-get-the-treatment-ms-df-ss-and-f-value-from-your-simple-anova">step 5: get the treatment MS, df, SS, and F-value from your simple ANOVA</h3>
+<p>As before, this can be done by calling attributes from our simple ANOVA, <code>computer_aov</code>. We need to grab the following values related to the treatment:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># treatment df</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>simple_df <span class="ot">&lt;-</span> computer_aov_values<span class="sc">$</span>df[<span class="dv">1</span>]</span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="co"># treatment MS</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a>simple_ms <span class="ot">&lt;-</span> computer_aov_values<span class="sc">$</span>meansq[<span class="dv">1</span>]</span>
+<span id="cb51-5"><a href="#cb51-5"></a><span class="co"># and the simple treatment SS:</span></span>
+<span id="cb51-6"><a href="#cb51-6"></a>simple_ss <span class="ot">&lt;-</span> computer_aov_values<span class="sc">$</span>sumsq[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="step-6-make-our-corrections" class="level3"><h3 class="anchored" data-anchor-id="step-6-make-our-corrections">step 6: make our corrections</h3>
+<p>As I noted above the F-value, p-value, and effect size (pes, <span class="math inline">\(\eta_p^2\)</span>) that you originally obtained in the simple effects <code>computer_aov</code> are not correct. We need to make the appropriate corrections. This can be done my hand, using the values we’ve extracted and calculated above:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># calculate F using simple treatment  MS and omnibus MSE</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>corrected_f <span class="ot">&lt;-</span> simple_ms<span class="sc">/</span>omnibus_mse</span>
+<span id="cb52-3"><a href="#cb52-3"></a></span>
+<span id="cb52-4"><a href="#cb52-4"></a><span class="co"># the pf function calculates the cummulative p.value using the corrected_f and appropriate degrees of freedom. Since its cumulative we subtract this result from 1:</span></span>
+<span id="cb52-5"><a href="#cb52-5"></a></span>
+<span id="cb52-6"><a href="#cb52-6"></a>corrected_p <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(corrected_f,<span class="at">df1 =</span> simple_df,<span class="at">df2 =</span> omnibus_df))</span>
+<span id="cb52-7"><a href="#cb52-7"></a></span>
+<span id="cb52-8"><a href="#cb52-8"></a><span class="co"># calculate the pes by using simple treatment SS and omnibus MSE:</span></span>
+<span id="cb52-9"><a href="#cb52-9"></a>corrected_pes <span class="ot">&lt;-</span> (simple_ss<span class="sc">/</span>(simple_ss<span class="sc">+</span>omnibus_ss_error))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Congrats!! You have made the appropriate corrections! Taking a look at your corrected result it appears that we should accept the null hypothesis of no difference in means on the computer data. As with posthoc comparisons, effect sizes for simple effects ANOVA are somewhat debatable, but this might be the most appropriate way to do this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">tibble</span>(corrected_f, corrected_p, corrected_pes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  corrected_f corrected_p corrected_pes
+        &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
+1        1.87       0.172         0.111</code></pre>
+</div>
+</div>
+</section></section><section id="the-emmeans-way" class="level2"><h2 class="anchored" data-anchor-id="the-emmeans-way">the emmeans() way</h2>
+<section id="the-simple-effects-anova" class="level3"><h3 class="anchored" data-anchor-id="the-simple-effects-anova">the simple effects ANOVA</h3>
+<p>In years past, I would have shown you how to create your own function to do this, but instead we can also use the <strong>emmeans</strong> package to conduct simple effects follow-ups. In class I introduced you to the function <strong><code>joint_test()</code></strong> which can be used to conduct a simple effects ANOVA. [NOTE: I show you an alternative method using <code>emmeans::emeans()</code> at the end of this walkthough. Both are equivalent].</p>
+<p>In this case we need to tell <code>joint_test</code> how to parse our <code>omnibus_aov</code> model. Here we are telling it to look at the effects of <code>Lecture</code> by each level of <code>Presentation</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>simple_effects_by_presentation <span class="ot">&lt;-</span> <span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"Presentation"</span>)</span>
+<span id="cb55-2"><a href="#cb55-2"></a></span>
+<span id="cb55-3"><a href="#cb55-3"></a>simple_effects_by_presentation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Presentation = Computer:
+ model term df1 df2 F.ratio p.value
+ Lecture      2  30   1.871  0.1716
+
+Presentation = Standard:
+ model term df1 df2 F.ratio p.value
+ Lecture      2  30  15.360  &lt;.0001</code></pre>
+</div>
+</div>
+<p>Based on this output we have a simple effect for standard but not computer.</p>
+</section><section id="effects-size-partial-eta-sq-for-the-anova" class="level3"><h3 class="anchored" data-anchor-id="effects-size-partial-eta-sq-for-the-anova">effects size (partial eta sq) for the ANOVA</h3>
+<p>Instead of calculating partial eta squared for the simple effects ANOVA by hand, we can use the <code>F_to_eta2</code> function from the <code>effectsize</code> package. FWIW the <code>effectsize</code> package has a host of other functions for calculating effect sizes. Here, <code>F_to_eta2</code> takes three arguments, the <code>f</code> value of the (simple effects) ANOVA, and its numerator (treatment) and denominator (error) <code>df</code>s. Looking at the output from the last section, these values are <code>f = 15.36, df = 2, df_error = 30</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(effectsize)</span>
+<span id="cb57-2"><a href="#cb57-2"></a><span class="fu">F_to_eta2</span>(<span class="at">f =</span> <span class="fl">15.36</span>, <span class="at">df =</span> <span class="dv">2</span>, <span class="at">df_error =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eta2 (partial) |       95% CI
+-----------------------------
+0.51           | [0.27, 1.00]
+
+- One-sided CIs: upper bound fixed at [1.00].</code></pre>
+</div>
+</div>
+</section><section id="post-hoc-analyses-on-the-simple-effects-anova" class="level3"><h3 class="anchored" data-anchor-id="post-hoc-analyses-on-the-simple-effects-anova">post-hoc analyses on the simple effects ANOVA</h3>
+<p>Given that we have a simple effect for standard, we need to run pairwise posthoc analyses to test the effect of Lecture on each presentation thype. However, given that our test suggested no simple effect on Computer, we can just ignore that part of the output.</p>
+<p>We can do so using <code>emmeans()</code> and specifying that we want to break our pairwise comparisons up <code>by</code> Presentation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>pairwise_comps <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"Presentation"</span>, <span class="at">specs =</span> pairwise<span class="sc">~</span>Lecture)</span>
+<span id="cb59-2"><a href="#cb59-2"></a></span>
+<span id="cb59-3"><a href="#cb59-3"></a>pairwise_comps <span class="sc">%&gt;%</span> <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in class(rtn) &lt;- c("summary_emm", "data.frame"): Setting class(x) to
+multiple strings ("summary_emm", "data.frame", ...); result will no longer be
+an S4 object</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] x
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<p>Given our latter result above we see that in the Standard presentation, scores based on Social lectures were significantly less than the other two.</p>
+<p>If we wanted to calculate any effect sizes for the pairwise comparisons (corrected Cohen’s D) we could use the function we learned last week. Again, ignore Computer as it was non-significant.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>emmeans<span class="sc">::</span><span class="fu">eff_size</span>(<span class="at">object =</span> pairwise_comps,</span>
+<span id="cb62-2"><a href="#cb62-2"></a>         <span class="at">sigma =</span> <span class="fu">sigma</span>(omnibus_aov),</span>
+<span id="cb62-3"><a href="#cb62-3"></a>         <span class="at">edf =</span> <span class="fu">df.residual</span>(omnibus_aov))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Since 'object' is a list, we are using the contrasts already present.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Presentation = Computer:
+ contrast             effect.size    SE df lower.CL upper.CL
+ (History - Physical)      -1.073 0.594 30   -2.285    0.140
+ (History - Social)        -0.268 0.578 30   -1.449    0.913
+ (Physical - Social)        0.805 0.587 30   -0.393    2.003
+
+Presentation = Standard:
+ contrast             effect.size    SE df lower.CL upper.CL
+ (History - Physical)      -0.402 0.580 30   -1.586    0.782
+ (History - Social)         2.548 0.664 30    1.191    3.905
+ (Physical - Social)        2.950 0.692 30    1.538    4.363
+
+sigma used for effect sizes: 7.457 
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+</section></section><section id="interpreting-these-results" class="level2"><h2 class="anchored" data-anchor-id="interpreting-these-results">Interpreting these results:</h2>
+<p>Given everything above, there are several things that this data are telling us:</p>
+<ul>
+<li>
+<strong>Main effect for computer:</strong> on average people tended to perform better in the Computer presentation</li>
+<li>
+<strong>Main effect for Lecture:</strong> this main effect is not as clear. Overall, people may have performed worst on the <code>Social</code> lecture content, it’s quite apparent that the presence of this effect is muddled by presentation type. This is what the presence of our <strong>interaction</strong> is telling us.</li>
+<li>
+<strong>Simple effect of lecture type via computer:</strong> No differences in means suggests that people perform equally well on all lecture content types when administered via computer</li>
+<li>
+<strong>Simple effect of lecture type via standard lecture:</strong> significant simple effect and subsequent posthocs demonstrate that while students perform equally as well on Physical Science and History content via standard lectures, they perform worse on tests of Social science content.</li>
+</ul>
+<p>Given this pattern of results two major conclusions become apparent:</p>
+<ul>
+<li>First, students overall perform better via Computer. This was the case for all three lecture types. True, how much better varies by condition, but in all cases scores were higher.</li>
+<li>Second, while performance via Computer was indifferent to Lecture type (all lecture content scores were nearly equal) there was an attrition for Social science content when provided via standard lecture.</li>
+</ul>
+<p>From this one might conclude that administering content via E-course is better for student outcomes, especially if the subject content is in the Social Sciences! Also, I think that one of the lessons of 2020 is that this result is demonstrably FALSE ;).</p>
+</section><section id="example-write-up" class="level2"><h2 class="anchored" data-anchor-id="example-write-up">Example write-up:</h2>
+<p>First my camera ready plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">ggplot</span>(dataset,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Presentation)) <span class="sc">+</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,</span>
+<span id="cb65-3"><a href="#cb65-3"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb65-4"><a href="#cb65-4"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>), <span class="co"># dodge to prevent overlap</span></span>
+<span id="cb65-5"><a href="#cb65-5"></a>               <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> <span class="co"># each level of presentation gets a shape</span></span>
+<span id="cb65-6"><a href="#cb65-6"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun =</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb65-7"><a href="#cb65-7"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb65-8"><a href="#cb65-8"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="11_1-interactions_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Figure 1</em> Scores as a function of Lecture type and Presentation style. Error bars represent standard error.</p>
+<p>To test for the effects of Presentation style (Standard, Computer) and Lecture Type (Physics, History, Social) we ran a 2 × 3 factorial ANOVA. This ANOVA revealed main effects for both Presentation style, <span class="math inline">\(F(1,30)=39.73, p&lt;.001, \eta_p^2=.57\)</span>, and Lecture type, <span class="math inline">\(F(2,30)=10.74, p&lt;.001, \eta_p^2=.42\)</span>.</p>
+<p>As shown in Figure 1, these effects we qualified by a Presentation style × Lecture type interaction, <span class="math inline">\(F(2,30)=6.49, p=.005, \eta_p^2=.30\)</span>. Differences in Lecture type were only observed when material was presented in the Standard presentation, <span class="math inline">\(F(2,30)=15.36, p&lt;.001, \eta_p^2=.51\)</span>, where scores from the Social lecture were significantly different from the remaining two (Tukey HSD, <em>p</em>&lt; .05). No differences were observed when the material was presented via computer (<em>p</em>&gt;.05). Overall, participants performed better when the material was presented via computer (<em>M±SD</em>: 41.33 ± 6.25) compared to standard presentations (25.67 ± 13.11).</p>
+<p><strong><em>(One thing you may notice is that I still stressed the main effect. This is to stress to the reader that presentation type did make a difference overall.)</em></strong></p>
+<p>One to the next one!!!</p>
+
+
+<!-- -->
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb66" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">---</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="an">title:</span><span class="co"> "Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA"</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="co">---</span></span>
+<span id="cb66-4"><a href="#cb66-4"></a></span>
+<span id="cb66-5"><a href="#cb66-5"></a>This walkthrough is a continuation of our focus on Factorial ANOVA. Here we're asking the question "what to do if you have an interaction". As we have discussed when running a factorial ANOVA, your first question should be "do I have an interaction". If you do have an interaction then you need to examine that interaction in detail. How do we do this? Well, let's think about what that interaction means. As an example, let's revisit some of the data (or situations) from the previous walkthrough. We'll also progressively ramp-up the complexity of our designs.</span>
+<span id="cb66-6"><a href="#cb66-6"></a></span>
+<span id="cb66-7"><a href="#cb66-7"></a>This write-up requires the following packages:</span>
+<span id="cb66-8"><a href="#cb66-8"></a></span>
+<span id="cb66-11"><a href="#cb66-11"></a><span class="in">```{r}</span></span>
+<span id="cb66-12"><a href="#cb66-12"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, </span>
+<span id="cb66-13"><a href="#cb66-13"></a>               cowplot, </span>
+<span id="cb66-14"><a href="#cb66-14"></a>               Rmisc, </span>
+<span id="cb66-15"><a href="#cb66-15"></a>               emmeans)</span>
+<span id="cb66-16"><a href="#cb66-16"></a><span class="in">```</span></span>
+<span id="cb66-17"><a href="#cb66-17"></a></span>
+<span id="cb66-18"><a href="#cb66-18"></a><span class="fu"># Example 1: a 2×2 ANOVA</span></span>
+<span id="cb66-19"><a href="#cb66-19"></a></span>
+<span id="cb66-20"><a href="#cb66-20"></a>To start let's look at the first example from last week's walkthrough. To remind ourselves of the particulars, our example ANOVA comes from a study testing the effects of smoking on performance in different types of *putatively* (perhaps I'm showing my theoretical biases here) information processing tasks.</span>
+<span id="cb66-21"><a href="#cb66-21"></a></span>
+<span id="cb66-22"><a href="#cb66-22"></a>There were 3 types of cognitive tasks:</span>
+<span id="cb66-23"><a href="#cb66-23"></a></span>
+<span id="cb66-24"><a href="#cb66-24"></a><span class="ss">-   </span>**1** = a pattern recognition task where participants had to locate a target on a screen;</span>
+<span id="cb66-25"><a href="#cb66-25"></a></span>
+<span id="cb66-26"><a href="#cb66-26"></a><span class="ss">-   </span>**2** = a cognitive task where participants had to read a passage and recall bits of information from that passage later;</span>
+<span id="cb66-27"><a href="#cb66-27"></a></span>
+<span id="cb66-28"><a href="#cb66-28"></a><span class="ss">-   </span>**3** = participants performed a driving simulation.</span>
+<span id="cb66-29"><a href="#cb66-29"></a></span>
+<span id="cb66-30"><a href="#cb66-30"></a>Additionally, 3 groups of smokers were recruited</span>
+<span id="cb66-31"><a href="#cb66-31"></a></span>
+<span id="cb66-32"><a href="#cb66-32"></a><span class="ss">-   </span>**1** = those that were actively smoking prior to and during the experiment;</span>
+<span id="cb66-33"><a href="#cb66-33"></a></span>
+<span id="cb66-34"><a href="#cb66-34"></a><span class="ss">-   </span>**2 =** those that were smokers, but did not smoke 3 hours prior to the experiment;</span>
+<span id="cb66-35"><a href="#cb66-35"></a></span>
+<span id="cb66-36"><a href="#cb66-36"></a><span class="ss">-   </span>**3 =** non-smokers.</span>
+<span id="cb66-37"><a href="#cb66-37"></a></span>
+<span id="cb66-38"><a href="#cb66-38"></a>As this is a between design, each participant only completed one of the cognitive tasks. For this first example we are going to drop the second levels of each IV (Cognitive and Delayed groups respectively).</span>
+<span id="cb66-39"><a href="#cb66-39"></a></span>
+<span id="cb66-40"><a href="#cb66-40"></a>Let's build the data frame (see previous walkthrough for more detail)</span>
+<span id="cb66-41"><a href="#cb66-41"></a></span>
+<span id="cb66-44"><a href="#cb66-44"></a><span class="in">```{r}</span></span>
+<span id="cb66-45"><a href="#cb66-45"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Sec13-5.dat"</span>, <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb66-46"><a href="#cb66-46"></a>dataset<span class="sc">$</span>PartID <span class="ot">&lt;-</span> <span class="fu">seq_along</span>(dataset<span class="sc">$</span>score)</span>
+<span id="cb66-47"><a href="#cb66-47"></a>dataset<span class="sc">$</span>Task <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Task, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Pattern Recognition"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Cognitive"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Driving Simulation"</span>) </span>
+<span id="cb66-48"><a href="#cb66-48"></a>dataset<span class="sc">$</span>Smkgrp <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Smkgrp, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Nonsmoking"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Delayed"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Active"</span>)</span>
+<span id="cb66-49"><a href="#cb66-49"></a></span>
+<span id="cb66-50"><a href="#cb66-50"></a>dataset_2by2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(dataset, Smkgrp<span class="sc">!=</span><span class="st">"Delayed"</span> <span class="sc">&amp;</span> Task<span class="sc">!=</span><span class="st">"Cognitive"</span>)</span>
+<span id="cb66-51"><a href="#cb66-51"></a></span>
+<span id="cb66-52"><a href="#cb66-52"></a>dataset_2by2</span>
+<span id="cb66-53"><a href="#cb66-53"></a><span class="in">```</span></span>
+<span id="cb66-54"><a href="#cb66-54"></a></span>
+<span id="cb66-55"><a href="#cb66-55"></a>And let's take a look at our cells to ensure that they have similar numbers:</span>
+<span id="cb66-56"><a href="#cb66-56"></a></span>
+<span id="cb66-59"><a href="#cb66-59"></a><span class="in">```{r}</span></span>
+<span id="cb66-60"><a href="#cb66-60"></a><span class="fu">summary</span>(dataset_2by2)</span>
+<span id="cb66-61"><a href="#cb66-61"></a></span>
+<span id="cb66-62"><a href="#cb66-62"></a>ez<span class="sc">::</span><span class="fu">ezDesign</span>(<span class="at">data =</span> dataset_2by2, </span>
+<span id="cb66-63"><a href="#cb66-63"></a>             <span class="at">x=</span>Task, <span class="co"># what do you want along the x-axis</span></span>
+<span id="cb66-64"><a href="#cb66-64"></a>             <span class="at">y=</span>Smkgrp, <span class="co"># what do you want along the y-axis</span></span>
+<span id="cb66-65"><a href="#cb66-65"></a>             <span class="at">row =</span> <span class="cn">NULL</span>, <span class="co"># are we doing any sub-divisions by row...</span></span>
+<span id="cb66-66"><a href="#cb66-66"></a>             <span class="at">col =</span> <span class="cn">NULL</span>) <span class="co"># or column</span></span>
+<span id="cb66-67"><a href="#cb66-67"></a><span class="in">```</span></span>
+<span id="cb66-68"><a href="#cb66-68"></a></span>
+<span id="cb66-69"><a href="#cb66-69"></a><span class="fu">## Interaction plots</span></span>
+<span id="cb66-70"><a href="#cb66-70"></a></span>
+<span id="cb66-71"><a href="#cb66-71"></a>Interaction plots take into consideration the influence of each of the IVs on one another---in this case the mean and CI of each smoking group (Active v. Nonsmoking) as a function of Task (Driving Simulation v. Pattern Recognition). For example, a line plot might look like this:</span>
+<span id="cb66-72"><a href="#cb66-72"></a></span>
+<span id="cb66-75"><a href="#cb66-75"></a><span class="in">```{r}</span></span>
+<span id="cb66-76"><a href="#cb66-76"></a><span class="co"># line plot</span></span>
+<span id="cb66-77"><a href="#cb66-77"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,</span>
+<span id="cb66-78"><a href="#cb66-78"></a>                                        <span class="at">y=</span>score,</span>
+<span id="cb66-79"><a href="#cb66-79"></a>                                        <span class="at">group=</span>Task)) <span class="sc">+</span> <span class="co"># grouping the data by levels of Task</span></span>
+<span id="cb66-80"><a href="#cb66-80"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb66-81"><a href="#cb66-81"></a>               <span class="at">fun.data =</span> <span class="st">"mean_cl_normal"</span>, </span>
+<span id="cb66-82"><a href="#cb66-82"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">5</span>)) <span class="sc">+</span> <span class="co"># dodging position so points do not overlap with one another</span></span>
+<span id="cb66-83"><a href="#cb66-83"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb66-84"><a href="#cb66-84"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb66-85"><a href="#cb66-85"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">5</span>), </span>
+<span id="cb66-86"><a href="#cb66-86"></a>               <span class="fu">aes</span>(<span class="at">linetype=</span>Task)) <span class="sc">+</span> <span class="co"># each level of Task gets its own linetype</span></span>
+<span id="cb66-87"><a href="#cb66-87"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb66-88"><a href="#cb66-88"></a><span class="in">```</span></span>
+<span id="cb66-89"><a href="#cb66-89"></a></span>
+<span id="cb66-90"><a href="#cb66-90"></a><span class="fu">## Running the ANOVA `lm()` method</span></span>
+<span id="cb66-91"><a href="#cb66-91"></a></span>
+<span id="cb66-92"><a href="#cb66-92"></a>Now we can run the ANOVA using the <span class="in">`lm()`</span> method. The new wrinkle from last week is that we are adding our interaction terms the formula equation the structural equation:</span>
+<span id="cb66-93"><a href="#cb66-93"></a></span>
+<span id="cb66-94"><a href="#cb66-94"></a>$$y=IV_1+IV_2+(IV_1*IV_2)$$ where the first and second terms capture our main effects and the third is our interaction.</span>
+<span id="cb66-95"><a href="#cb66-95"></a></span>
+<span id="cb66-96"><a href="#cb66-96"></a>Last week you only focused on the main effects so our model is what we would call **additive**:</span>
+<span id="cb66-97"><a href="#cb66-97"></a></span>
+<span id="cb66-98"><a href="#cb66-98"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb66-99"><a href="#cb66-99"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp<span class="sc">+</span>Task,<span class="at">data =</span> dataset_2by2)</span>
+<span id="cb66-100"><a href="#cb66-100"></a><span class="in">```</span></span>
+<span id="cb66-101"><a href="#cb66-101"></a></span>
+<span id="cb66-102"><a href="#cb66-102"></a>This week we are including the interaction term. In <span class="in">`R`</span> this formula now becomes:</span>
+<span id="cb66-103"><a href="#cb66-103"></a></span>
+<span id="cb66-104"><a href="#cb66-104"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb66-105"><a href="#cb66-105"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp <span class="sc">+</span> Task <span class="sc">+</span> Smkgrp<span class="sc">*</span>Task,<span class="at">data =</span> dataset_2by2)</span>
+<span id="cb66-106"><a href="#cb66-106"></a><span class="in">```</span></span>
+<span id="cb66-107"><a href="#cb66-107"></a></span>
+<span id="cb66-108"><a href="#cb66-108"></a>The operator <span class="in">`*`</span> may be understood here as "crossed-by" or "interaction between". Depending on your reference, you may also see <span class="in">`:`</span> which means the same thing.</span>
+<span id="cb66-109"><a href="#cb66-109"></a></span>
+<span id="cb66-110"><a href="#cb66-110"></a>Note that we can write this same equation in shorthand:</span>
+<span id="cb66-111"><a href="#cb66-111"></a></span>
+<span id="cb66-112"><a href="#cb66-112"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb66-113"><a href="#cb66-113"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp<span class="sc">*</span>Task,<span class="at">data =</span> dataset_2by2)</span>
+<span id="cb66-114"><a href="#cb66-114"></a><span class="in">```</span></span>
+<span id="cb66-115"><a href="#cb66-115"></a></span>
+<span id="cb66-116"><a href="#cb66-116"></a>where the <span class="in">`*`</span> operator tells <span class="in">`R`</span> to examine **all** related main effects and interactions. This is usually the best way to code this, as the long-form becomes unwieldy as we increase IVs and combinations of interactions. ***However, note that if you have planned comparisons you may elect to only specify certain main effects and interactions in long-form. This may become increasing important when you start to deal with more complex models. I think I'll do a brief write up about this one day (before the end of the semester) by for now...***</span>
+<span id="cb66-117"><a href="#cb66-117"></a></span>
+<span id="cb66-118"><a href="#cb66-118"></a>Before continuing, let's compare the outputs of the **additive model** and the **interaction** **model:**</span>
+<span id="cb66-119"><a href="#cb66-119"></a></span>
+<span id="cb66-122"><a href="#cb66-122"></a><span class="in">```{r}</span></span>
+<span id="cb66-123"><a href="#cb66-123"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp <span class="sc">+</span> Task,<span class="at">data =</span> dataset_2by2) <span class="sc">%&gt;%</span> <span class="fu">anova</span>()</span>
+<span id="cb66-124"><a href="#cb66-124"></a><span class="in">```</span></span>
+<span id="cb66-125"><a href="#cb66-125"></a></span>
+<span id="cb66-128"><a href="#cb66-128"></a><span class="in">```{r}</span></span>
+<span id="cb66-129"><a href="#cb66-129"></a><span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp <span class="sc">*</span> Task,<span class="at">data =</span> dataset_2by2) <span class="sc">%&gt;%</span> <span class="fu">anova</span>()</span>
+<span id="cb66-130"><a href="#cb66-130"></a><span class="in">```</span></span>
+<span id="cb66-131"><a href="#cb66-131"></a></span>
+<span id="cb66-132"><a href="#cb66-132"></a>Notice that adding the interaction terms does not affect our analysis of the main effects, both models have identical Mean Square and F values for the main effects. This is what we mean when we say that the tests within ANOVA are orthogonal to one another (independent of one another).</span>
+<span id="cb66-133"><a href="#cb66-133"></a></span>
+<span id="cb66-134"><a href="#cb66-134"></a>Another thing to note here are that the apparent equal F-values in our **Task** effect and **Interaction** is due to rounding. This is simply an anomaly, and is not to be expected in most cases. Even here, they are different, but only nearly identical. **As a thought experiment, can we think of why they are nearly identical in this case (Hint: can you see in the plot what might be causing the interaction)?**</span>
+<span id="cb66-135"><a href="#cb66-135"></a></span>
+<span id="cb66-136"><a href="#cb66-136"></a><span class="fu">### Checking assumptions</span></span>
+<span id="cb66-137"><a href="#cb66-137"></a></span>
+<span id="cb66-138"><a href="#cb66-138"></a>Okay let's save our model and proceed to do the requisite assumptions checks:</span>
+<span id="cb66-139"><a href="#cb66-139"></a></span>
+<span id="cb66-140"><a href="#cb66-140"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb66-141"><a href="#cb66-141"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp<span class="sc">*</span>Task,<span class="at">data =</span> dataset_2by2)</span>
+<span id="cb66-142"><a href="#cb66-142"></a><span class="in">```</span></span>
+<span id="cb66-143"><a href="#cb66-143"></a></span>
+<span id="cb66-146"><a href="#cb66-146"></a><span class="in">```{r}</span></span>
+<span id="cb66-147"><a href="#cb66-147"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_model</span>(<span class="at">panel=</span>F)</span>
+<span id="cb66-148"><a href="#cb66-148"></a><span class="in">```</span></span>
+<span id="cb66-149"><a href="#cb66-149"></a></span>
+<span id="cb66-152"><a href="#cb66-152"></a><span class="in">```{r}</span></span>
+<span id="cb66-153"><a href="#cb66-153"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_normality</span>() <span class="co"># shapiro test from performance</span></span>
+<span id="cb66-154"><a href="#cb66-154"></a>aov_model <span class="sc">%&gt;%</span> car<span class="sc">::</span><span class="fu">leveneTest</span>()</span>
+<span id="cb66-155"><a href="#cb66-155"></a><span class="in">```</span></span>
+<span id="cb66-156"><a href="#cb66-156"></a></span>
+<span id="cb66-157"><a href="#cb66-157"></a>As in the last walkthrough we'll ignore the issues with homogeneity. Let's run our ANOVA:</span>
+<span id="cb66-158"><a href="#cb66-158"></a></span>
+<span id="cb66-161"><a href="#cb66-161"></a><span class="in">```{r}</span></span>
+<span id="cb66-162"><a href="#cb66-162"></a>sjstats<span class="sc">::</span><span class="fu">anova_stats</span>(aov_model)[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb66-163"><a href="#cb66-163"></a><span class="in">```</span></span>
+<span id="cb66-164"><a href="#cb66-164"></a></span>
+<span id="cb66-165"><a href="#cb66-165"></a><span class="fu">## Adressing the interaction</span></span>
+<span id="cb66-166"><a href="#cb66-166"></a></span>
+<span id="cb66-167"><a href="#cb66-167"></a>This model yields a Smoking group by task interaction! Looking at our interaction plot above, we shouldn't have been too surprised by this. We see that for Non smokers, there is minimal difference between the two cognitive tasks, whereas with the smoking group, the scores of the Driving Simulation group were much lower than the Pattern recognition group. Another, equally valid way of interpreting the data is that while Pattern recognition scores were unaffected by smoking condition, Driving simulation scores were drastically decreased for smokers compared to non-smokers. While both interpretations are equally valid in the neutral sense, one may be more interesting to you the researcher (this is where your a priori hypotheses would come into play). Is it more interesting that Non smokers performed equivalently on both types of cognitive tasks while active smokes performed better on the pattern recognition task than the driving task **OR** is it more interesting that Pattern recognition scores where unaffected by smoking whereas driving simulation scores were?</span>
+<span id="cb66-168"><a href="#cb66-168"></a></span>
+<span id="cb66-169"><a href="#cb66-169"></a>I bring this up, as while it may be appropriate to mention both trends, you typically only TEST for one or the other. Remember, there is a cost for every test that your run---you need to adjust for familywise error.</span>
+<span id="cb66-170"><a href="#cb66-170"></a></span>
+<span id="cb66-171"><a href="#cb66-171"></a>In this case I'm going test the second variant, testing how performance on each cognitive task changes by virtue of smoking group. To run a post-hoc ANOVA. This can be accomplished sending our model to <span class="in">`joint_tests()`</span>. So the model is saying take a look at how smoking group scores change **on each level of task**.</span>
+<span id="cb66-172"><a href="#cb66-172"></a></span>
+<span id="cb66-175"><a href="#cb66-175"></a><span class="in">```{r}</span></span>
+<span id="cb66-176"><a href="#cb66-176"></a>aov_model <span class="sc">%&gt;%</span> emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(<span class="at">by =</span> <span class="st">"Task"</span>)</span>
+<span id="cb66-177"><a href="#cb66-177"></a><span class="in">```</span></span>
+<span id="cb66-178"><a href="#cb66-178"></a></span>
+<span id="cb66-179"><a href="#cb66-179"></a>Since smoking group only has 2 groups, I could stop here and report my obtained $F$ tests. If you prefer to report the pairwise $t$ test you can simply specify your pairwise comparisons for <span class="in">`Smkgrp`</span>, <span class="in">`by`</span> each level of <span class="in">`Task`</span> using <span class="in">`emmeans()`</span>.</span>
+<span id="cb66-180"><a href="#cb66-180"></a></span>
+<span id="cb66-183"><a href="#cb66-183"></a><span class="in">```{r}</span></span>
+<span id="cb66-184"><a href="#cb66-184"></a>aov_model <span class="sc">%&gt;%</span> </span>
+<span id="cb66-185"><a href="#cb66-185"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="at">spec =</span> <span class="st">"Smkgrp"</span>, <span class="at">by =</span> <span class="st">"Task"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-186"><a href="#cb66-186"></a>  <span class="fu">pairs</span>(<span class="at">adjust=</span><span class="st">"tukey"</span>)</span>
+<span id="cb66-187"><a href="#cb66-187"></a><span class="in">```</span></span>
+<span id="cb66-188"><a href="#cb66-188"></a></span>
+<span id="cb66-189"><a href="#cb66-189"></a>The output above shows what we expect, that for Pattern recognition groups, scores are indifferent to whether participants are smokers or not, where with the Driving simulation groups, Nonsmokers performed much better.</span>
+<span id="cb66-190"><a href="#cb66-190"></a></span>
+<span id="cb66-191"><a href="#cb66-191"></a><span class="fu">## 2 × 3 ANOVA</span></span>
+<span id="cb66-192"><a href="#cb66-192"></a></span>
+<span id="cb66-193"><a href="#cb66-193"></a>Things become slightly more complex when on of our factors has 3 or more levels. To see this let's revisit the second example from the previous walkthrough:</span>
+<span id="cb66-194"><a href="#cb66-194"></a></span>
+<span id="cb66-195"><a href="#cb66-195"></a><span class="at">&gt; Background: Given the ease of access for new technologies and increasing enrollment demands, many university are advocating that departments switch over to E-courses, where students view an online, pre-recorded lecture on the course topic in lieu of sitting in a classroom in a live lecture. Given this push, a critical question remains regarding the impact of E-courses on student outcomes. More it may be the case that certain subject content more readily lends itself to E-course presentations than other subjects. To address this question we tested students performance on a test one week after participating in the related lecture. Lectures were either experienced via online (Computer) or in a live classroom (Standard). In addition, the lecture content varied in topic (Physical science, Social science, History)</span></span>
+<span id="cb66-196"><a href="#cb66-196"></a></span>
+<span id="cb66-197"><a href="#cb66-197"></a>Here's the data, where Score represents performance:</span>
+<span id="cb66-198"><a href="#cb66-198"></a></span>
+<span id="cb66-201"><a href="#cb66-201"></a><span class="in">```{r}</span></span>
+<span id="cb66-202"><a href="#cb66-202"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/factorial_AOV_data.csv"</span>)</span>
+<span id="cb66-203"><a href="#cb66-203"></a><span class="in">```</span></span>
+<span id="cb66-204"><a href="#cb66-204"></a></span>
+<span id="cb66-205"><a href="#cb66-205"></a><span class="fu">## Plotting the data and descriptive stats</span></span>
+<span id="cb66-206"><a href="#cb66-206"></a></span>
+<span id="cb66-207"><a href="#cb66-207"></a>Here's what our results look like. I'll revisit the particulars on constructing this sort of plot in the next walkthrough. For now, all we are doing is extending the plotting methods that you have been using for the past few weeks. The important addition here is the addition of <span class="in">`group =`</span> in the first line the <span class="in">`ggplot`</span>.</span>
+<span id="cb66-208"><a href="#cb66-208"></a></span>
+<span id="cb66-209"><a href="#cb66-209"></a>For example:</span>
+<span id="cb66-210"><a href="#cb66-210"></a></span>
+<span id="cb66-211"><a href="#cb66-211"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb66-212"><a href="#cb66-212"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Lecture,</span>
+<span id="cb66-213"><a href="#cb66-213"></a>                                   <span class="at">y=</span>Score,</span>
+<span id="cb66-214"><a href="#cb66-214"></a>                                   <span class="at">group=</span>Presentation))</span>
+<span id="cb66-215"><a href="#cb66-215"></a><span class="in">```</span></span>
+<span id="cb66-216"><a href="#cb66-216"></a></span>
+<span id="cb66-217"><a href="#cb66-217"></a>indicates that we are:</span>
+<span id="cb66-218"><a href="#cb66-218"></a></span>
+<span id="cb66-219"><a href="#cb66-219"></a><span class="ss">-   </span>using the <span class="in">`dataset`</span> data set</span>
+<span id="cb66-220"><a href="#cb66-220"></a></span>
+<span id="cb66-221"><a href="#cb66-221"></a><span class="ss">-   </span>putting first IV, <span class="in">`Lecture`</span>, on the x-axis</span>
+<span id="cb66-222"><a href="#cb66-222"></a></span>
+<span id="cb66-223"><a href="#cb66-223"></a><span class="ss">-   </span>putting our dv, <span class="in">`Score`</span> on the y-axis</span>
+<span id="cb66-224"><a href="#cb66-224"></a></span>
+<span id="cb66-225"><a href="#cb66-225"></a><span class="ss">-   </span>and grouping our data by our other IV, <span class="in">`Presentation`</span></span>
+<span id="cb66-226"><a href="#cb66-226"></a></span>
+<span id="cb66-227"><a href="#cb66-227"></a>This last bit is important as it makes clear that the resulting mean plots should be of the cell means related to <span class="in">`Lecture`</span> x <span class="in">`Presentation`</span>. Note that in the plot below, I am also adjusting the <span class="in">`shape`</span> of the data points by <span class="in">`Presentation`</span> (done in <span class="in">`stat_summary`</span> .</span>
+<span id="cb66-228"><a href="#cb66-228"></a></span>
+<span id="cb66-231"><a href="#cb66-231"></a><span class="in">```{r}</span></span>
+<span id="cb66-232"><a href="#cb66-232"></a><span class="fu">ggplot</span>(dataset,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Presentation)) <span class="sc">+</span></span>
+<span id="cb66-233"><a href="#cb66-233"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,</span>
+<span id="cb66-234"><a href="#cb66-234"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb66-235"><a href="#cb66-235"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>), <span class="co"># dodge to prevent overlap</span></span>
+<span id="cb66-236"><a href="#cb66-236"></a>               <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> <span class="co"># each level of presentation gets a shape</span></span>
+<span id="cb66-237"><a href="#cb66-237"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun.y=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb66-238"><a href="#cb66-238"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb66-239"><a href="#cb66-239"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>))</span>
+<span id="cb66-240"><a href="#cb66-240"></a><span class="in">```</span></span>
+<span id="cb66-241"><a href="#cb66-241"></a></span>
+<span id="cb66-242"><a href="#cb66-242"></a>And now getting the cell means and marginal means. Remember that analysis of the marginal means is what is tested in the main effects. The test for an interaction focuses on the cell means. Here we are using the <span class="in">`summarySE`</span> function from the <span class="in">`Rmisc`</span> package. I find it to be more efficient than <span class="in">`psych::describeBy()`</span> and its useful next week when we do Repeated Measures ANOVA</span>
+<span id="cb66-243"><a href="#cb66-243"></a></span>
+<span id="cb66-246"><a href="#cb66-246"></a><span class="in">```{r}</span></span>
+<span id="cb66-247"><a href="#cb66-247"></a><span class="co"># cell means:</span></span>
+<span id="cb66-248"><a href="#cb66-248"></a><span class="fu">summarySE</span>(<span class="at">data =</span> dataset,<span class="at">measurevar =</span> <span class="st">"Score"</span>, <span class="at">groupvars =</span> <span class="fu">c</span>(<span class="st">"Presentation"</span>,<span class="st">"Lecture"</span>))</span>
+<span id="cb66-249"><a href="#cb66-249"></a></span>
+<span id="cb66-250"><a href="#cb66-250"></a><span class="co"># marginal means</span></span>
+<span id="cb66-251"><a href="#cb66-251"></a><span class="fu">summarySE</span>(<span class="at">data =</span> dataset,<span class="at">measurevar =</span> <span class="st">"Score"</span>, <span class="at">groupvars =</span> <span class="st">"Lecture"</span>)</span>
+<span id="cb66-252"><a href="#cb66-252"></a><span class="fu">summarySE</span>(<span class="at">data =</span> dataset,<span class="at">measurevar =</span> <span class="st">"Score"</span>, <span class="at">groupvars =</span> <span class="st">"Presentation"</span>)</span>
+<span id="cb66-253"><a href="#cb66-253"></a></span>
+<span id="cb66-254"><a href="#cb66-254"></a><span class="in">```</span></span>
+<span id="cb66-255"><a href="#cb66-255"></a></span>
+<span id="cb66-256"><a href="#cb66-256"></a><span class="fu">## the Omnibus ANOVA (and assumption tests)</span></span>
+<span id="cb66-257"><a href="#cb66-257"></a></span>
+<span id="cb66-258"><a href="#cb66-258"></a>The very first ANOVA model that we build crosses all of our independent variables. This is the **omnibus ANOVA**. Let's build this model and run our assumption checks</span>
+<span id="cb66-259"><a href="#cb66-259"></a></span>
+<span id="cb66-262"><a href="#cb66-262"></a><span class="in">```{r}</span></span>
+<span id="cb66-263"><a href="#cb66-263"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation, dataset)</span>
+<span id="cb66-264"><a href="#cb66-264"></a><span class="in">```</span></span>
+<span id="cb66-265"><a href="#cb66-265"></a></span>
+<span id="cb66-266"><a href="#cb66-266"></a>I'm going to skip the assumption checks (bad professor!) and go straight to our results:</span>
+<span id="cb66-267"><a href="#cb66-267"></a></span>
+<span id="cb66-270"><a href="#cb66-270"></a><span class="in">```{r}</span></span>
+<span id="cb66-271"><a href="#cb66-271"></a>sjstats<span class="sc">::</span><span class="fu">anova_stats</span>(omnibus_aov)[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb66-272"><a href="#cb66-272"></a><span class="in">```</span></span>
+<span id="cb66-273"><a href="#cb66-273"></a></span>
+<span id="cb66-274"><a href="#cb66-274"></a>**Looking at the ANOVA**: Our ANOVA reveals two main effects and in interaction. Looking back at the plot (always, always plot before you think about doing any sort of follow-ups!!) it is fairly apparent what is happening---when moving from one lecture to the next, we see a much more dramatic decrease in score for the Social group in the **Standard** presentation group compared to the **Computer** presentation. That is, moving from left to right the pattern of change is different for the **Standard** group, compared to the **Computer** group. This is what our eyeball test is telling us---we need to confirm it with some stats! There are two ways to address this interaction, each involves sub-setting the data for further analysis.</span>
+<span id="cb66-275"><a href="#cb66-275"></a></span>
+<span id="cb66-276"><a href="#cb66-276"></a>As mentioned above, when you have an interaction, you proceed by testing for differences between means for one condition, on **each individual level of the other**. For example, we can test for and effect of Lecture Type when the Presentation is Computer, and effect of Lecture Type when the Presentation is Standard. In this case you would run two separate simple effects ANOVAs, each taking a look at changes for each line in the plot above.</span>
+<span id="cb66-277"><a href="#cb66-277"></a></span>
+<span id="cb66-278"><a href="#cb66-278"></a>--OR--</span>
+<span id="cb66-279"><a href="#cb66-279"></a></span>
+<span id="cb66-280"><a href="#cb66-280"></a>You could check for difference between Presentations on each Lecture type. Here you would be comparing Computer v Standard in each of the Lecture conditions. This would involve running three ANOVAs each checking for the Presentation differences (circle v. triangle) present at History, Physical, and Social.</span>
+<span id="cb66-281"><a href="#cb66-281"></a></span>
+<span id="cb66-282"><a href="#cb66-282"></a>Which you choose, ultimately depends on which narrative you are trying to convey in your data. Here it may make sense to do the former. That is eyeballing the data it looks like the means in the Computer presentation level are not as different from one another as the Standard presentation.</span>
+<span id="cb66-283"><a href="#cb66-283"></a></span>
+<span id="cb66-284"><a href="#cb66-284"></a><span class="fu">## Running the simple effects ANOVA in 6 steps:</span></span>
+<span id="cb66-285"><a href="#cb66-285"></a></span>
+<span id="cb66-286"><a href="#cb66-286"></a>Given that we have elected to take a look at Lecture on each level of Presentation, we would need to run 2 **simple effects ANOVAs**. This is because breaking the omnibus in this way still leaves in each subsequent analysis a comparison of the 3 levels of Lecture. Basically we are running 2 separate One-way ANOVAs:</span>
+<span id="cb66-287"><a href="#cb66-287"></a></span>
+<span id="cb66-288"><a href="#cb66-288"></a><span class="ss">1.  </span>the first looks at Scores\~Lecture when Presentation = Computer</span>
+<span id="cb66-289"><a href="#cb66-289"></a><span class="ss">2.  </span>the second looks at Scores\~Lecture when Presentation = Standard</span>
+<span id="cb66-290"><a href="#cb66-290"></a></span>
+<span id="cb66-291"><a href="#cb66-291"></a>There is, however, one major caveat. When you run the follow-up ANOVA **you need to use the error terms from your omnibus ANOVA**. *That is your simple effects ANOVA calls for the omnibus ANOVA errors: Sum of Squares, Mean Square Error, and denominator degrees of freedom.*</span>
+<span id="cb66-292"><a href="#cb66-292"></a></span>
+<span id="cb66-293"><a href="#cb66-293"></a>**What this means is that if you were to actually run this data as two distinct One-Way ANOVAs, the F-value (and subsequent p-values) that you get would be WRONG. For example simply running a `filter` and then ANOVA like this will not work:**</span>
+<span id="cb66-294"><a href="#cb66-294"></a></span>
+<span id="cb66-297"><a href="#cb66-297"></a><span class="in">```{r}</span></span>
+<span id="cb66-298"><a href="#cb66-298"></a><span class="co"># this is wrong... don't do this!!!</span></span>
+<span id="cb66-299"><a href="#cb66-299"></a><span class="fu">lm</span>(Score<span class="sc">~</span>Lecture, dataset <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Presentation<span class="sc">==</span><span class="st">"Computer"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb66-300"><a href="#cb66-300"></a>  sjstats<span class="sc">::</span><span class="fu">anova_stats</span>() <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
+<span id="cb66-301"><a href="#cb66-301"></a><span class="in">```</span></span>
+<span id="cb66-302"><a href="#cb66-302"></a></span>
+<span id="cb66-303"><a href="#cb66-303"></a>A quick glance at the table above reveals the error. You'll notice that the denominator df are 15 where in the omnibus ANOVA they were 30. Fixing this isn't as simple as adjusting the denominator df and looking it up on the F-table. This involves a series of calculations that results in a different F-ratio as well. For the sake of clarity I'm going to show you how to do this "by hand" and then show you how you'll never need to do it "by hand"</span>
+<span id="cb66-304"><a href="#cb66-304"></a></span>
+<span id="cb66-305"><a href="#cb66-305"></a>There are several steps that need to be run for each simple effects ANOVA:</span>
+<span id="cb66-306"><a href="#cb66-306"></a></span>
+<span id="cb66-307"><a href="#cb66-307"></a><span class="fu">### step 1: get the omnibus ANOVA:</span></span>
+<span id="cb66-308"><a href="#cb66-308"></a></span>
+<span id="cb66-309"><a href="#cb66-309"></a>Assuming you haven't already we need to run the omnibus ANOVA. Let's get this again</span>
+<span id="cb66-310"><a href="#cb66-310"></a></span>
+<span id="cb66-313"><a href="#cb66-313"></a><span class="in">```{r}</span></span>
+<span id="cb66-314"><a href="#cb66-314"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation, dataset)</span>
+<span id="cb66-315"><a href="#cb66-315"></a><span class="in">```</span></span>
+<span id="cb66-316"><a href="#cb66-316"></a></span>
+<span id="cb66-317"><a href="#cb66-317"></a><span class="fu">### step 2: get the MSError, Error df, and Error SS from omnibus ANOVA</span></span>
+<span id="cb66-318"><a href="#cb66-318"></a></span>
+<span id="cb66-319"><a href="#cb66-319"></a>We can pull these values directly from the <span class="in">`sjstats::anova_stats()`</span> output. It easier to just save this output to an object first. We can then check its <span class="in">`attributes()`</span></span>
+<span id="cb66-320"><a href="#cb66-320"></a></span>
+<span id="cb66-323"><a href="#cb66-323"></a><span class="in">```{r}</span></span>
+<span id="cb66-324"><a href="#cb66-324"></a>omnibus_values <span class="ot">&lt;-</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>(omnibus_aov)</span>
+<span id="cb66-325"><a href="#cb66-325"></a><span class="fu">attributes</span>(omnibus_values)</span>
+<span id="cb66-326"><a href="#cb66-326"></a><span class="in">```</span></span>
+<span id="cb66-327"><a href="#cb66-327"></a></span>
+<span id="cb66-328"><a href="#cb66-328"></a>In the above list, we are interested in <span class="in">`sumsq`</span> and <span class="in">`df`</span>. We need to index each by number. In this case residuals are on the 4th line:</span>
+<span id="cb66-329"><a href="#cb66-329"></a></span>
+<span id="cb66-332"><a href="#cb66-332"></a><span class="in">```{r}</span></span>
+<span id="cb66-333"><a href="#cb66-333"></a>omnibus_df <span class="ot">&lt;-</span> omnibus_values<span class="sc">$</span>df[<span class="dv">4</span>]</span>
+<span id="cb66-334"><a href="#cb66-334"></a>omnibus_mse <span class="ot">&lt;-</span> omnibus_values<span class="sc">$</span>meansq[<span class="dv">4</span>]</span>
+<span id="cb66-335"><a href="#cb66-335"></a>omnibus_ss_error <span class="ot">&lt;-</span> omnibus_values<span class="sc">$</span>sumsq[<span class="dv">4</span>]</span>
+<span id="cb66-336"><a href="#cb66-336"></a><span class="in">```</span></span>
+<span id="cb66-337"><a href="#cb66-337"></a></span>
+<span id="cb66-338"><a href="#cb66-338"></a><span class="fu">### step 3: subset your data accordingly</span></span>
+<span id="cb66-339"><a href="#cb66-339"></a></span>
+<span id="cb66-340"><a href="#cb66-340"></a>In order to do this we will need to subset the data. For example I am interested in running my follow-ups on Computer data and Standard data separately, so my first move is to perform this subset:</span>
+<span id="cb66-341"><a href="#cb66-341"></a></span>
+<span id="cb66-344"><a href="#cb66-344"></a><span class="in">```{r}</span></span>
+<span id="cb66-345"><a href="#cb66-345"></a>computer_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(dataset, Presentation<span class="sc">==</span><span class="st">"Computer"</span>)</span>
+<span id="cb66-346"><a href="#cb66-346"></a>standard_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(dataset, Presentation<span class="sc">==</span><span class="st">"Standard"</span>)</span>
+<span id="cb66-347"><a href="#cb66-347"></a><span class="in">```</span></span>
+<span id="cb66-348"><a href="#cb66-348"></a></span>
+<span id="cb66-349"><a href="#cb66-349"></a>(FWIW you could also do the subsetting in the <span class="in">`lm()`</span> call)</span>
+<span id="cb66-350"><a href="#cb66-350"></a></span>
+<span id="cb66-351"><a href="#cb66-351"></a><span class="fu">### step 4: run your One-way simple effects ANOVA(s)</span></span>
+<span id="cb66-352"><a href="#cb66-352"></a></span>
+<span id="cb66-353"><a href="#cb66-353"></a>Here I'm focusing on the <span class="in">`computer_data`</span> for my example. You can return to the <span class="in">`standard_data`</span> later.</span>
+<span id="cb66-354"><a href="#cb66-354"></a></span>
+<span id="cb66-357"><a href="#cb66-357"></a><span class="in">```{r}</span></span>
+<span id="cb66-358"><a href="#cb66-358"></a>computer_aov_values <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture, dataset <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Presentation<span class="sc">==</span><span class="st">"Computer"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb66-359"><a href="#cb66-359"></a>  sjstats<span class="sc">::</span><span class="fu">anova_stats</span>()</span>
+<span id="cb66-360"><a href="#cb66-360"></a>computer_aov_values</span>
+<span id="cb66-361"><a href="#cb66-361"></a><span class="in">```</span></span>
+<span id="cb66-362"><a href="#cb66-362"></a></span>
+<span id="cb66-363"><a href="#cb66-363"></a><span class="fu">### step 5: get the treatment MS, df, SS, and F-value from your simple ANOVA</span></span>
+<span id="cb66-364"><a href="#cb66-364"></a></span>
+<span id="cb66-365"><a href="#cb66-365"></a>As before, this can be done by calling attributes from our simple ANOVA, <span class="in">`computer_aov`</span>. We need to grab the following values related to the treatment:</span>
+<span id="cb66-366"><a href="#cb66-366"></a></span>
+<span id="cb66-369"><a href="#cb66-369"></a><span class="in">```{r}</span></span>
+<span id="cb66-370"><a href="#cb66-370"></a><span class="co"># treatment df</span></span>
+<span id="cb66-371"><a href="#cb66-371"></a>simple_df <span class="ot">&lt;-</span> computer_aov_values<span class="sc">$</span>df[<span class="dv">1</span>]</span>
+<span id="cb66-372"><a href="#cb66-372"></a><span class="co"># treatment MS</span></span>
+<span id="cb66-373"><a href="#cb66-373"></a>simple_ms <span class="ot">&lt;-</span> computer_aov_values<span class="sc">$</span>meansq[<span class="dv">1</span>]</span>
+<span id="cb66-374"><a href="#cb66-374"></a><span class="co"># and the simple treatment SS:</span></span>
+<span id="cb66-375"><a href="#cb66-375"></a>simple_ss <span class="ot">&lt;-</span> computer_aov_values<span class="sc">$</span>sumsq[<span class="dv">1</span>]</span>
+<span id="cb66-376"><a href="#cb66-376"></a><span class="in">```</span></span>
+<span id="cb66-377"><a href="#cb66-377"></a></span>
+<span id="cb66-378"><a href="#cb66-378"></a><span class="fu">### step 6: make our corrections</span></span>
+<span id="cb66-379"><a href="#cb66-379"></a></span>
+<span id="cb66-380"><a href="#cb66-380"></a>As I noted above the F-value, p-value, and effect size (pes, $\eta_p^2$) that you originally obtained in the simple effects <span class="in">`computer_aov`</span> are not correct. We need to make the appropriate corrections. This can be done my hand, using the values we've extracted and calculated above:</span>
+<span id="cb66-381"><a href="#cb66-381"></a></span>
+<span id="cb66-384"><a href="#cb66-384"></a><span class="in">```{r}</span></span>
+<span id="cb66-385"><a href="#cb66-385"></a><span class="co"># calculate F using simple treatment  MS and omnibus MSE</span></span>
+<span id="cb66-386"><a href="#cb66-386"></a>corrected_f <span class="ot">&lt;-</span> simple_ms<span class="sc">/</span>omnibus_mse</span>
+<span id="cb66-387"><a href="#cb66-387"></a></span>
+<span id="cb66-388"><a href="#cb66-388"></a><span class="co"># the pf function calculates the cummulative p.value using the corrected_f and appropriate degrees of freedom. Since its cumulative we subtract this result from 1:</span></span>
+<span id="cb66-389"><a href="#cb66-389"></a></span>
+<span id="cb66-390"><a href="#cb66-390"></a>corrected_p <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(corrected_f,<span class="at">df1 =</span> simple_df,<span class="at">df2 =</span> omnibus_df))</span>
+<span id="cb66-391"><a href="#cb66-391"></a></span>
+<span id="cb66-392"><a href="#cb66-392"></a><span class="co"># calculate the pes by using simple treatment SS and omnibus MSE:</span></span>
+<span id="cb66-393"><a href="#cb66-393"></a>corrected_pes <span class="ot">&lt;-</span> (simple_ss<span class="sc">/</span>(simple_ss<span class="sc">+</span>omnibus_ss_error))</span>
+<span id="cb66-394"><a href="#cb66-394"></a><span class="in">```</span></span>
+<span id="cb66-395"><a href="#cb66-395"></a></span>
+<span id="cb66-396"><a href="#cb66-396"></a>Congrats!! You have made the appropriate corrections! Taking a look at your corrected result it appears that we should accept the null hypothesis of no difference in means on the computer data. As with posthoc comparisons, effect sizes for simple effects ANOVA are somewhat debatable, but this might be the most appropriate way to do this.</span>
+<span id="cb66-397"><a href="#cb66-397"></a></span>
+<span id="cb66-400"><a href="#cb66-400"></a><span class="in">```{r}</span></span>
+<span id="cb66-401"><a href="#cb66-401"></a><span class="fu">tibble</span>(corrected_f, corrected_p, corrected_pes)</span>
+<span id="cb66-402"><a href="#cb66-402"></a><span class="in">```</span></span>
+<span id="cb66-403"><a href="#cb66-403"></a></span>
+<span id="cb66-404"><a href="#cb66-404"></a><span class="fu">## the emmeans() way</span></span>
+<span id="cb66-405"><a href="#cb66-405"></a></span>
+<span id="cb66-406"><a href="#cb66-406"></a><span class="fu">### the simple effects ANOVA</span></span>
+<span id="cb66-407"><a href="#cb66-407"></a></span>
+<span id="cb66-408"><a href="#cb66-408"></a>In years past, I would have shown you how to create your own function to do this, but instead we can also use the **emmeans** package to conduct simple effects follow-ups. In class I introduced you to the function **`joint_test()`** which can be used to conduct a simple effects ANOVA. <span class="co">[</span><span class="ot">NOTE: I show you an alternative method using `emmeans::emeans()` at the end of this walkthough. Both are equivalent</span><span class="co">]</span>.</span>
+<span id="cb66-409"><a href="#cb66-409"></a></span>
+<span id="cb66-410"><a href="#cb66-410"></a>In this case we need to tell <span class="in">`joint_test`</span> how to parse our <span class="in">`omnibus_aov`</span> model. Here we are telling it to look at the effects of <span class="in">`Lecture`</span> by each level of <span class="in">`Presentation`</span>.</span>
+<span id="cb66-411"><a href="#cb66-411"></a></span>
+<span id="cb66-414"><a href="#cb66-414"></a><span class="in">```{r}</span></span>
+<span id="cb66-415"><a href="#cb66-415"></a>simple_effects_by_presentation <span class="ot">&lt;-</span> <span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"Presentation"</span>)</span>
+<span id="cb66-416"><a href="#cb66-416"></a></span>
+<span id="cb66-417"><a href="#cb66-417"></a>simple_effects_by_presentation</span>
+<span id="cb66-418"><a href="#cb66-418"></a><span class="in">```</span></span>
+<span id="cb66-419"><a href="#cb66-419"></a></span>
+<span id="cb66-420"><a href="#cb66-420"></a>Based on this output we have a simple effect for standard but not computer.</span>
+<span id="cb66-421"><a href="#cb66-421"></a></span>
+<span id="cb66-422"><a href="#cb66-422"></a><span class="fu">### effects size (partial eta sq) for the ANOVA</span></span>
+<span id="cb66-423"><a href="#cb66-423"></a></span>
+<span id="cb66-424"><a href="#cb66-424"></a>Instead of calculating partial eta squared for the simple effects ANOVA by hand, we can use the <span class="in">`F_to_eta2`</span> function from the <span class="in">`effectsize`</span> package. FWIW the <span class="in">`effectsize`</span> package has a host of other functions for calculating effect sizes. Here, <span class="in">`F_to_eta2`</span> takes three arguments, the <span class="in">`f`</span> value of the (simple effects) ANOVA, and its numerator (treatment) and denominator (error) <span class="in">`df`</span>s. Looking at the output from the last section, these values are <span class="in">`f = 15.36, df = 2, df_error = 30`</span>:</span>
+<span id="cb66-425"><a href="#cb66-425"></a></span>
+<span id="cb66-428"><a href="#cb66-428"></a><span class="in">```{r}</span></span>
+<span id="cb66-429"><a href="#cb66-429"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(effectsize)</span>
+<span id="cb66-430"><a href="#cb66-430"></a><span class="fu">F_to_eta2</span>(<span class="at">f =</span> <span class="fl">15.36</span>, <span class="at">df =</span> <span class="dv">2</span>, <span class="at">df_error =</span> <span class="dv">30</span>)</span>
+<span id="cb66-431"><a href="#cb66-431"></a><span class="in">```</span></span>
+<span id="cb66-432"><a href="#cb66-432"></a></span>
+<span id="cb66-433"><a href="#cb66-433"></a><span class="fu">### post-hoc analyses on the simple effects ANOVA</span></span>
+<span id="cb66-434"><a href="#cb66-434"></a></span>
+<span id="cb66-435"><a href="#cb66-435"></a>Given that we have a simple effect for standard, we need to run pairwise posthoc analyses to test the effect of Lecture on each presentation thype. However, given that our test suggested no simple effect on Computer, we can just ignore that part of the output.</span>
+<span id="cb66-436"><a href="#cb66-436"></a></span>
+<span id="cb66-437"><a href="#cb66-437"></a>We can do so using <span class="in">`emmeans()`</span> and specifying that we want to break our pairwise comparisons up <span class="in">`by`</span> Presentation.</span>
+<span id="cb66-438"><a href="#cb66-438"></a></span>
+<span id="cb66-441"><a href="#cb66-441"></a><span class="in">```{r}</span></span>
+<span id="cb66-442"><a href="#cb66-442"></a>pairwise_comps <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"Presentation"</span>, <span class="at">specs =</span> pairwise<span class="sc">~</span>Lecture)</span>
+<span id="cb66-443"><a href="#cb66-443"></a></span>
+<span id="cb66-444"><a href="#cb66-444"></a>pairwise_comps <span class="sc">%&gt;%</span> <span class="fu">pairs</span>()</span>
+<span id="cb66-445"><a href="#cb66-445"></a><span class="in">```</span></span>
+<span id="cb66-446"><a href="#cb66-446"></a></span>
+<span id="cb66-447"><a href="#cb66-447"></a>Given our latter result above we see that in the Standard presentation, scores based on Social lectures were significantly less than the other two.</span>
+<span id="cb66-448"><a href="#cb66-448"></a></span>
+<span id="cb66-449"><a href="#cb66-449"></a>If we wanted to calculate any effect sizes for the pairwise comparisons (corrected Cohen's D) we could use the function we learned last week. Again, ignore Computer as it was non-significant.</span>
+<span id="cb66-450"><a href="#cb66-450"></a></span>
+<span id="cb66-453"><a href="#cb66-453"></a><span class="in">```{r}</span></span>
+<span id="cb66-454"><a href="#cb66-454"></a>emmeans<span class="sc">::</span><span class="fu">eff_size</span>(<span class="at">object =</span> pairwise_comps,</span>
+<span id="cb66-455"><a href="#cb66-455"></a>         <span class="at">sigma =</span> <span class="fu">sigma</span>(omnibus_aov),</span>
+<span id="cb66-456"><a href="#cb66-456"></a>         <span class="at">edf =</span> <span class="fu">df.residual</span>(omnibus_aov))</span>
+<span id="cb66-457"><a href="#cb66-457"></a><span class="in">```</span></span>
+<span id="cb66-458"><a href="#cb66-458"></a></span>
+<span id="cb66-459"><a href="#cb66-459"></a><span class="fu">## Interpreting these results:</span></span>
+<span id="cb66-460"><a href="#cb66-460"></a></span>
+<span id="cb66-461"><a href="#cb66-461"></a>Given everything above, there are several things that this data are telling us:</span>
+<span id="cb66-462"><a href="#cb66-462"></a></span>
+<span id="cb66-463"><a href="#cb66-463"></a><span class="ss">-   </span>**Main effect for computer:** on average people tended to perform better in the Computer presentation</span>
+<span id="cb66-464"><a href="#cb66-464"></a><span class="ss">-   </span>**Main effect for Lecture:** this main effect is not as clear. Overall, people may have performed worst on the `Social` lecture content, it's quite apparent that the presence of this effect is muddled by presentation type. This is what the presence of our **interaction** is telling us.</span>
+<span id="cb66-465"><a href="#cb66-465"></a><span class="ss">-   </span>**Simple effect of lecture type via computer:** No differences in means suggests that people perform equally well on all lecture content types when administered via computer</span>
+<span id="cb66-466"><a href="#cb66-466"></a><span class="ss">-   </span>**Simple effect of lecture type via standard lecture:** significant simple effect and subsequent posthocs demonstrate that while students perform equally as well on Physical Science and History content via standard lectures, they perform worse on tests of Social science content.</span>
+<span id="cb66-467"><a href="#cb66-467"></a></span>
+<span id="cb66-468"><a href="#cb66-468"></a>Given this pattern of results two major conclusions become apparent:</span>
+<span id="cb66-469"><a href="#cb66-469"></a></span>
+<span id="cb66-470"><a href="#cb66-470"></a><span class="ss">-   </span>First, students overall perform better via Computer. This was the case for all three lecture types. True, how much better varies by condition, but in all cases scores were higher.</span>
+<span id="cb66-471"><a href="#cb66-471"></a><span class="ss">-   </span>Second, while performance via Computer was indifferent to Lecture type (all lecture content scores were nearly equal) there was an attrition for Social science content when provided via standard lecture.</span>
+<span id="cb66-472"><a href="#cb66-472"></a></span>
+<span id="cb66-473"><a href="#cb66-473"></a>From this one might conclude that administering content via E-course is better for student outcomes, especially if the subject content is in the Social Sciences! Also, I think that one of the lessons of 2020 is that this result is demonstrably FALSE ;).</span>
+<span id="cb66-474"><a href="#cb66-474"></a></span>
+<span id="cb66-475"><a href="#cb66-475"></a><span class="fu">## Example write-up:</span></span>
+<span id="cb66-476"><a href="#cb66-476"></a></span>
+<span id="cb66-477"><a href="#cb66-477"></a>First my camera ready plot:</span>
+<span id="cb66-478"><a href="#cb66-478"></a></span>
+<span id="cb66-481"><a href="#cb66-481"></a><span class="in">```{r}</span></span>
+<span id="cb66-482"><a href="#cb66-482"></a><span class="fu">ggplot</span>(dataset,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Presentation)) <span class="sc">+</span></span>
+<span id="cb66-483"><a href="#cb66-483"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,</span>
+<span id="cb66-484"><a href="#cb66-484"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb66-485"><a href="#cb66-485"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>), <span class="co"># dodge to prevent overlap</span></span>
+<span id="cb66-486"><a href="#cb66-486"></a>               <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> <span class="co"># each level of presentation gets a shape</span></span>
+<span id="cb66-487"><a href="#cb66-487"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun =</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb66-488"><a href="#cb66-488"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb66-489"><a href="#cb66-489"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>))</span>
+<span id="cb66-490"><a href="#cb66-490"></a><span class="in">```</span></span>
+<span id="cb66-491"><a href="#cb66-491"></a></span>
+<span id="cb66-492"><a href="#cb66-492"></a>*Figure 1* Scores as a function of Lecture type and Presentation style. Error bars represent standard error.</span>
+<span id="cb66-493"><a href="#cb66-493"></a></span>
+<span id="cb66-494"><a href="#cb66-494"></a>To test for the effects of Presentation style (Standard, Computer) and Lecture Type (Physics, History, Social) we ran a 2 × 3 factorial ANOVA. This ANOVA revealed main effects for both Presentation style, $F(1,30)=39.73, p&lt;.001, \eta_p^2=.57$, and Lecture type, $F(2,30)=10.74, p&lt;.001, \eta_p^2=.42$.</span>
+<span id="cb66-495"><a href="#cb66-495"></a></span>
+<span id="cb66-496"><a href="#cb66-496"></a>As shown in Figure 1, these effects we qualified by a Presentation style × Lecture type interaction, $F(2,30)=6.49, p=.005, \eta_p^2=.30$. Differences in Lecture type were only observed when material was presented in the Standard presentation, $F(2,30)=15.36, p&lt;.001, \eta_p^2=.51$, where scores from the Social lecture were significantly different from the remaining two (Tukey HSD, *p*\&lt; .05). No differences were observed when the material was presented via computer (*p*\&gt;.05). Overall, participants performed better when the material was presented via computer (*M±SD*: 41.33 ± 6.25) compared to standard presentations (25.67 ± 13.11).</span>
+<span id="cb66-497"><a href="#cb66-497"></a></span>
+<span id="cb66-498"><a href="#cb66-498"></a>***(One thing you may notice is that I still stressed the main effect. This is to stress to the reader that presentation type did make a difference overall.)***</span>
+<span id="cb66-499"><a href="#cb66-499"></a></span>
+<span id="cb66-500"><a href="#cb66-500"></a></span>
+<span id="cb66-501"><a href="#cb66-501"></a>One to the next one!!!</span>
+<span id="cb66-502"><a href="#cb66-502"></a></span>
+<span id="cb66-503"><a href="#cb66-503"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>
