@@ -1,0 +1,5 @@
+---
+title: "PSYC 7014"
+---
+
+This is a landing page for the PSYC 7014 Walkthroughs. Individual weeks and sections can be found on the left sidebar.

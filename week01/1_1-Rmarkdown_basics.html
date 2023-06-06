@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Rmarkdown Basics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../index.qmd">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.qmd">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-courses" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Courses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-courses">
+<li>
+    <a class="dropdown-item" href="../walkthroughs.html">
+ <span class="dropdown-text">PSYC 7014</span></a>
+  </li>  
+        <li class="dropdown-header">Graduate Statistics 1</li>
+    </ul>
+</li>
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Rmarkdown Basics</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link active">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#hello-there" id="toc-hello-there" class="nav-link active" data-scroll-target="#hello-there">Hello there</a></li>
+  <li>
+<a href="#header-1-check-out-the-toc" id="toc-header-1-check-out-the-toc" class="nav-link" data-scroll-target="#header-1-check-out-the-toc">Header 1 (check out the TOC)</a>
+  <ul class="collapse">
+<li>
+<a href="#header-2" id="toc-header-2" class="nav-link" data-scroll-target="#header-2">Header 2</a>
+  <ul class="collapse">
+<li><a href="#header-3" id="toc-header-3" class="nav-link" data-scroll-target="#header-3">Header 3</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li><a href="#marrying-code-and-text" id="toc-marrying-code-and-text" class="nav-link" data-scroll-target="#marrying-code-and-text">Marrying code and text</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Rmarkdown Basics</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><ul>
+<li><p>Note that this page is formatted. It might help to download the Rmarkdown file from the <code>&lt;/&gt; Code</code> button at the top of this page.</p></li>
+<li><p>Another note… much (but not all) of this is unnecessary assuming you use the <strong>Visual</strong> option in your source pane. That said you can still type markdown into your visual editor and it will auto-magically format things for you.</p></li>
+</ul>
+<section id="hello-there" class="level1"><h1>Hello there</h1>
+<p>This is an example of a quarto markdown notebook. These notebooks have some pretty nifty features that in theory allow you to perform both your analyses and your write-ups in the same environment.</p>
+<p>New notebooks can be opened by: <strong>File &gt; New File &gt; Quarto Document</strong>.</p>
+<p>If you are looking at this code, you may have wondered why in the heck did I place that previous line in double-stars. This is how you format text in markdown. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="sc">**</span>bold text<span class="sc">**</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>produces <strong>bold text</strong>, and</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>_italics text_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>renders <em>italics text</em>, and</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="st">`</span><span class="at">code text</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>makes <code>code text.</code></p>
+<p><strong>More examples include:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="do">## Header 1 (check out the TOC)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="header-1-check-out-the-toc" class="level1"><h1>Header 1 (check out the TOC)</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="do">## Header 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="header-2" class="level2"><h2 class="anchored" data-anchor-id="header-2">Header 2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="do">### Header 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="header-3" class="level3"><h3 class="anchored" data-anchor-id="header-3">Header 3</h3>
+<p>Also,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="sc">-</span> an unordered list</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="sc">--</span> can be don like this</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>an unordered list
+<ul>
+<li>can be done like this</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fl">1.</span> here is an example of</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fl">2.</span> an <span class="fu">ordered</span> (numbered) list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>here’s and example of</li>
+<li>an ordered (numbered) list</li>
+</ol>
+<p>and here is how you</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="sc">&gt;</span> blockquote some text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>blockquote some text</p>
+</blockquote>
+<p>are but a few that you may encounter. An expanded list can be found <a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">here</a>. Which, by the way, is how you embed weblinks. Heck you can even do mathematical equations. For example, here is the binomial probability.</p>
+<p><span class="math display">\[f(y|N,p) = \frac{N!}{y!(N-y)!}\cdot p^y \cdot (1-p)^{N-y} = {{N}\choose{y}} \cdot p^y \cdot (1-p)^{N-y}\]</span></p>
+<p>and this is how it was created:</p>
+<pre style="background-color: #EEEEEE; overflow-wrap: normal; font-size: 14px;"><code>$$f(y|N,p) = \frac{N!}{y!(N-y)!}\cdot p^y \cdot (1-p)^{N-y} = {{N}\choose{y}} \cdot p^y \cdot (1-p)^{N-y}$$</code></pre>
+<p>Granted the syntax for this might seem daunting at first (and isn’t required for this course), but just wanted to show you some of the things you can do. At the very least learning equation syntax might be useful for superscripts<span class="math inline">\(^2\)</span>, subscripts<span class="math inline">\(_2\)</span>, and mathematical symbols like <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\chi\)</span>, and <span class="math inline">\(\sum\)</span>. Although you can also do superscripts<sup>2</sup> and subscripts<sub>2</sub> inline. I suppose fractions are pretty useful too:</p>
+<p><span class="math display">\[fraction = \frac{numerator}{denominator}\]</span></p>
+</section></section></section><section id="marrying-code-and-text" class="level1"><h1>Marrying code and text</h1>
+<p>Perhaps the most important aspects of using notebooks like this is that you can marry text and code. Code is placed in <em>chunks</em> starting with ```{r}. For example, try executing this chunk by clicking the <strong>Run</strong> button within the chunk or by placing your cursor inside it and pressing <strong>Cmd+Shift+Enter</strong> (Mac) or <strong>Ctrl+Shift+Enter)</strong> (Win).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">plot</span>(cars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can add a new chunk by clicking the <strong>Insert Code Chunk</strong> button on the toolbar.</p>
+<p>To compile (print) the contents of this notebook you can click the <strong>Render</strong> button. Or, if you choose, you can export in into a <em>pdf</em> or <em>doc</em> using other <em>Knit</em> options. The first time you try this, <code>RStudio</code> may ask you to install a few packages. This only happens the very first time.</p>
+<p>You may have notice that the resulting output also prints the code. This may not be what you want. You can elect to hide code on a <em>by-chunk</em> basis by adding <code>#| echo: false</code> to the top of your chunk. You notice that there are several option options here as well, including hiding warnings, and using a custom figure size.</p>
+<p>Try toying around with these options on the chunk below:</p>
+<div class="cell">
+
+</div>
+<p>One last bit. By default, an <code>Quarto Document</code> executes all code inline, meaning the output shows up underneath the chuck. Depending on your preferences this may not be desirable. As an alternative you can elect to have the code sent to the <code>Console</code>. This can be accomplished the selecting the Preferences Gear button and selecting `Chunk output console. Do this and re-run each of the chunks separately.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Rmarkdown Basics"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="an">execute:</span><span class="co"> </span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">  eval: false</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">---</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="ss">-   </span>Note that this page is formatted. It might help to download the Rmarkdown file from the <span class="in">`&lt;/&gt; Code`</span> button at the top of this page.</span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="ss">-   </span>Another note... much (but not all) of this is unnecessary assuming you use the **Visual** option in your source pane. That said you can still type markdown into your visual editor and it will auto-magically format things for you.</span>
+<span id="cb12-10"><a href="#cb12-10"></a></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="fu"># Hello there</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a>This is an example of a quarto markdown notebook. These notebooks have some pretty nifty features that in theory allow you to perform both your analyses and your write-ups in the same environment.</span>
+<span id="cb12-14"><a href="#cb12-14"></a></span>
+<span id="cb12-15"><a href="#cb12-15"></a>New notebooks can be opened by: **File \&gt; New File \&gt; Quarto Document**.</span>
+<span id="cb12-16"><a href="#cb12-16"></a></span>
+<span id="cb12-17"><a href="#cb12-17"></a>If you are looking at this code, you may have wondered why in the heck did I place that previous line in double-stars. This is how you format text in markdown. For example:</span>
+<span id="cb12-18"><a href="#cb12-18"></a></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="in">```{r}</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="sc">**</span>bold text<span class="sc">**</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="in">```</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a></span>
+<span id="cb12-26"><a href="#cb12-26"></a>produces **bold text**, and</span>
+<span id="cb12-27"><a href="#cb12-27"></a></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="in">```{r}</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a>_italics text_</span>
+<span id="cb12-33"><a href="#cb12-33"></a><span class="in">```</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a></span>
+<span id="cb12-35"><a href="#cb12-35"></a>renders *italics text*, and</span>
+<span id="cb12-36"><a href="#cb12-36"></a></span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="in">```{r}</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a><span class="st">`</span><span class="at">code text</span><span class="st">`</span></span>
+<span id="cb12-42"><a href="#cb12-42"></a><span class="in">```</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a></span>
+<span id="cb12-44"><a href="#cb12-44"></a>makes <span class="in">`code text.`</span></span>
+<span id="cb12-45"><a href="#cb12-45"></a></span>
+<span id="cb12-46"><a href="#cb12-46"></a>**More examples include:**</span>
+<span id="cb12-47"><a href="#cb12-47"></a></span>
+<span id="cb12-50"><a href="#cb12-50"></a><span class="in">```{r}</span></span>
+<span id="cb12-51"><a href="#cb12-51"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-52"><a href="#cb12-52"></a><span class="do">## Header 1 (check out the TOC)</span></span>
+<span id="cb12-53"><a href="#cb12-53"></a><span class="in">```</span></span>
+<span id="cb12-54"><a href="#cb12-54"></a></span>
+<span id="cb12-55"><a href="#cb12-55"></a><span class="fu"># Header 1 (check out the TOC)</span></span>
+<span id="cb12-56"><a href="#cb12-56"></a></span>
+<span id="cb12-59"><a href="#cb12-59"></a><span class="in">```{r}</span></span>
+<span id="cb12-60"><a href="#cb12-60"></a><span class="do">## Header 2</span></span>
+<span id="cb12-61"><a href="#cb12-61"></a><span class="in">```</span></span>
+<span id="cb12-62"><a href="#cb12-62"></a></span>
+<span id="cb12-63"><a href="#cb12-63"></a><span class="fu">## Header 2</span></span>
+<span id="cb12-64"><a href="#cb12-64"></a></span>
+<span id="cb12-67"><a href="#cb12-67"></a><span class="in">```{r}</span></span>
+<span id="cb12-68"><a href="#cb12-68"></a><span class="do">### Header 3</span></span>
+<span id="cb12-69"><a href="#cb12-69"></a><span class="in">```</span></span>
+<span id="cb12-70"><a href="#cb12-70"></a></span>
+<span id="cb12-71"><a href="#cb12-71"></a><span class="fu">### Header 3</span></span>
+<span id="cb12-72"><a href="#cb12-72"></a></span>
+<span id="cb12-73"><a href="#cb12-73"></a>Also,</span>
+<span id="cb12-74"><a href="#cb12-74"></a></span>
+<span id="cb12-77"><a href="#cb12-77"></a><span class="in">```{r}</span></span>
+<span id="cb12-78"><a href="#cb12-78"></a><span class="sc">-</span> an unordered list</span>
+<span id="cb12-79"><a href="#cb12-79"></a><span class="sc">--</span> can be don like this</span>
+<span id="cb12-80"><a href="#cb12-80"></a><span class="in">```</span></span>
+<span id="cb12-81"><a href="#cb12-81"></a></span>
+<span id="cb12-82"><a href="#cb12-82"></a><span class="ss">-   </span>an unordered list</span>
+<span id="cb12-83"><a href="#cb12-83"></a><span class="ss">    -   </span>can be done like this</span>
+<span id="cb12-84"><a href="#cb12-84"></a></span>
+<span id="cb12-87"><a href="#cb12-87"></a><span class="in">```{r}</span></span>
+<span id="cb12-88"><a href="#cb12-88"></a><span class="fl">1.</span> here is an example of</span>
+<span id="cb12-89"><a href="#cb12-89"></a><span class="fl">2.</span> an <span class="fu">ordered</span> (numbered) list</span>
+<span id="cb12-90"><a href="#cb12-90"></a><span class="in">```</span></span>
+<span id="cb12-91"><a href="#cb12-91"></a></span>
+<span id="cb12-92"><a href="#cb12-92"></a><span class="ss">1.  </span>here's and example of</span>
+<span id="cb12-93"><a href="#cb12-93"></a><span class="ss">2.  </span>an ordered (numbered) list</span>
+<span id="cb12-94"><a href="#cb12-94"></a></span>
+<span id="cb12-95"><a href="#cb12-95"></a>and here is how you</span>
+<span id="cb12-96"><a href="#cb12-96"></a></span>
+<span id="cb12-99"><a href="#cb12-99"></a><span class="in">```{r}</span></span>
+<span id="cb12-100"><a href="#cb12-100"></a><span class="sc">&gt;</span> blockquote some text</span>
+<span id="cb12-101"><a href="#cb12-101"></a><span class="in">```</span></span>
+<span id="cb12-102"><a href="#cb12-102"></a></span>
+<span id="cb12-103"><a href="#cb12-103"></a><span class="at">&gt; blockquote some text</span></span>
+<span id="cb12-104"><a href="#cb12-104"></a></span>
+<span id="cb12-105"><a href="#cb12-105"></a>are but a few that you may encounter. An expanded list can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)</span>. Which, by the way, is how you embed weblinks. Heck you can even do mathematical equations. For example, here is the binomial probability.</span>
+<span id="cb12-106"><a href="#cb12-106"></a></span>
+<span id="cb12-107"><a href="#cb12-107"></a>$$f(y|N,p) = \frac{N!}{y!(N-y)!}\cdot p^y \cdot (1-p)^{N-y} = {{N}\choose{y}} \cdot p^y \cdot (1-p)^{N-y}$$</span>
+<span id="cb12-108"><a href="#cb12-108"></a></span>
+<span id="cb12-109"><a href="#cb12-109"></a>and this is how it was created:</span>
+<span id="cb12-110"><a href="#cb12-110"></a></span>
+<span id="cb12-111"><a href="#cb12-111"></a><span class="in">``` {style="background-color: #EEEEEE; overflow-wrap: normal; font-size: 14px;"}</span></span>
+<span id="cb12-112"><a href="#cb12-112"></a><span class="in">$$f(y|N,p) = \frac{N!}{y!(N-y)!}\cdot p^y \cdot (1-p)^{N-y} = {{N}\choose{y}} \cdot p^y \cdot (1-p)^{N-y}$$</span></span>
+<span id="cb12-113"><a href="#cb12-113"></a><span class="in">```</span></span>
+<span id="cb12-114"><a href="#cb12-114"></a></span>
+<span id="cb12-115"><a href="#cb12-115"></a>Granted the syntax for this might seem daunting at first (and isn't required for this course), but just wanted to show you some of the things you can do. At the very least learning equation syntax might be useful for superscripts$^2$, subscripts$_2$, and mathematical symbols like $\alpha$, $\chi$, and $\sum$. Although you can also do superscripts^2^ and subscripts~2~ inline. I suppose fractions are pretty useful too:</span>
+<span id="cb12-116"><a href="#cb12-116"></a></span>
+<span id="cb12-117"><a href="#cb12-117"></a>$$fraction = \frac{numerator}{denominator}$$</span>
+<span id="cb12-118"><a href="#cb12-118"></a></span>
+<span id="cb12-119"><a href="#cb12-119"></a><span class="fu"># Marrying code and text</span></span>
+<span id="cb12-120"><a href="#cb12-120"></a></span>
+<span id="cb12-121"><a href="#cb12-121"></a>Perhaps the most important aspects of using notebooks like this is that you can marry text and code. Code is placed in *chunks* starting with \`\`\`{r}. For example, try executing this chunk by clicking the **Run** button within the chunk or by placing your cursor inside it and pressing **Cmd+Shift+Enter** (Mac) or **Ctrl+Shift+Enter)** (Win).</span>
+<span id="cb12-122"><a href="#cb12-122"></a></span>
+<span id="cb12-125"><a href="#cb12-125"></a><span class="in">```{r}</span></span>
+<span id="cb12-126"><a href="#cb12-126"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb12-127"><a href="#cb12-127"></a><span class="in">```</span></span>
+<span id="cb12-128"><a href="#cb12-128"></a></span>
+<span id="cb12-129"><a href="#cb12-129"></a>You can add a new chunk by clicking the **Insert Code Chunk** button on the toolbar.</span>
+<span id="cb12-130"><a href="#cb12-130"></a></span>
+<span id="cb12-131"><a href="#cb12-131"></a>To compile (print) the contents of this notebook you can click the **Render** button. Or, if you choose, you can export in into a *pdf* or *doc* using other *Knit* options. The first time you try this, <span class="in">`RStudio`</span> may ask you to install a few packages. This only happens the very first time.</span>
+<span id="cb12-132"><a href="#cb12-132"></a></span>
+<span id="cb12-133"><a href="#cb12-133"></a>You may have notice that the resulting output also prints the code. This may not be what you want. You can elect to hide code on a *by-chunk* basis by adding <span class="in">`#| echo: false`</span> to the top of your chunk. You notice that there are several option options here as well, including hiding warnings, and using a custom figure size.</span>
+<span id="cb12-134"><a href="#cb12-134"></a></span>
+<span id="cb12-135"><a href="#cb12-135"></a>Try toying around with these options on the chunk below:</span>
+<span id="cb12-136"><a href="#cb12-136"></a></span>
+<span id="cb12-139"><a href="#cb12-139"></a><span class="in">```{r}</span></span>
+<span id="cb12-140"><a href="#cb12-140"></a><span class="co">#| echo: false</span></span>
+<span id="cb12-141"><a href="#cb12-141"></a><span class="co">#| fig-height: 6</span></span>
+<span id="cb12-142"><a href="#cb12-142"></a><span class="co">#| fig-width: 6</span></span>
+<span id="cb12-143"><a href="#cb12-143"></a><span class="co">#| warning: true</span></span>
+<span id="cb12-144"><a href="#cb12-144"></a></span>
+<span id="cb12-145"><a href="#cb12-145"></a></span>
+<span id="cb12-146"><a href="#cb12-146"></a><span class="fu">plot</span>(cars, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb12-147"><a href="#cb12-147"></a><span class="in">```</span></span>
+<span id="cb12-148"><a href="#cb12-148"></a></span>
+<span id="cb12-149"><a href="#cb12-149"></a>One last bit. By default, an <span class="in">`Quarto Document`</span> executes all code inline, meaning the output shows up underneath the chuck. Depending on your preferences this may not be desirable. As an alternative you can elect to have the code sent to the <span class="in">`Console`</span>. This can be accomplished the selecting the Preferences Gear button and selecting <span class="sc">\`</span>Chunk output console. Do this and re-run each of the chunks separately.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

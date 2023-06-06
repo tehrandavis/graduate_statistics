@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Thinking about nothing (aka the null)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../index.qmd">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.qmd">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-courses" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Courses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-courses">
+<li>
+    <a class="dropdown-item" href="../walkthroughs.html">
+ <span class="dropdown-text">PSYC 7014</span></a>
+  </li>  
+        <li class="dropdown-header">Graduate Statistics 1</li>
+    </ul>
+</li>
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Thinking about nothing (aka the null)</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link active">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#the-example-of-an-h_0-distribution" id="toc-the-example-of-an-h_0-distribution" class="nav-link active" data-scroll-target="#the-example-of-an-h_0-distribution">The example of an <span class="math inline">\(H_0\)</span> distribution</a></li>
+  <li><a href="#example-of-an-h_1-distribution" id="toc-example-of-an-h_1-distribution" class="nav-link" data-scroll-target="#example-of-an-h_1-distribution">example of an <span class="math inline">\(H_1\)</span> distribution</a></li>
+  <li><a href="#group-means-and-grand-means" id="toc-group-means-and-grand-means" class="nav-link" data-scroll-target="#group-means-and-grand-means">group means and grand means</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Thinking about nothing (aka the null)</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>On thing that was hinted at earlier in the semester is that even though we cover several different tests this semester, with different names, and seemingly different esoteric rules, they are all in fact, “just a linear model”. Before we jump into an example how this relates to the <span class="math inline">\(t\)</span>-test for independent samples, I want to build up a few intuitions about the null and alternate hypotheses for this test. We’ll introduce a contrast between <strong>group means</strong> and <strong>the grand mean</strong>, that will pay off for us in the next walkthrough when we talk about the modeling. First the packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, cowplot, pander)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the most general terms, an independent samples <span class="math inline">\(t\)</span>-test compares the difference between means between a <strong>control group</strong> and an <strong>experimental group.</strong> The <strong>research hypothesis</strong> is typically that members of each of these two groups are qualitatively different from one another in a way that captured quantitatively. For example, referring to the stereotype threat study from the previous walkthrough, or theoretical position is that individuals under stereotype threat are <em>different</em> from controls in a way that we can index through their scores. The <strong>null hypothesis</strong> is that these two groups, and consequently their scores are <em>not</em> different from one another.</p>
+<p>There are two ways to state the null hypothesis. Both end up being equivalent mathematically:</p>
+<ol type="1">
+<li>
+<span class="math inline">\(H_0\)</span><strong>: Members from the Control group and the Threat group were, in fact drawn from the same population.</strong>
+</li>
+<li>
+<span class="math inline">\(H_0\)</span><strong>:</strong> <strong>The mean score from the Control group is equal to the mean score of the Threat group.</strong>
+</li>
+</ol>
+<p>The second is how we typically see the null hypothesis expressed mathematically. However, (statement 2) is a consequence of (statement 1). That is, if members of the two groups are really, in fact, from the same population then their distributions of scores should be as if we drew two random samples from that population.</p>
+<section id="the-example-of-an-h_0-distribution" class="level2"><h2 class="anchored" data-anchor-id="the-example-of-an-h_0-distribution">The example of an <span class="math inline">\(H_0\)</span> distribution</h2>
+<p>As an example, let’s imagine the we have the population <strong><code>ohio_population</code></strong> of 10 million people (6e06 in scientific notation, or a 6 followed by 6 zeroes) with a true mean score of 50 and a standard deviation of 5.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ohio_population_null <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">10e06</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(ohio_population_null)<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_2_t-test-null-model_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now let’s say I pull 100 people at random from this population and label them the Control group and and another 100 and call them the Experimental (Threat) group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>control_group <span class="ot">&lt;-</span> <span class="fu">sample</span>(ohio_population_null, <span class="at">size =</span> <span class="dv">100</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>experimental_group <span class="ot">&lt;-</span> <span class="fu">sample</span>(ohio_population_null, <span class="at">size =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Taking a look at these two samples (note your numbers may be slightly different then mine due to randomness)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>control_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(control_group)<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>experimental_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(experimental_group)<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">plot_grid</span>(control_plot, experimental_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_2_t-test-null-model_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">mean</span>(control_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50.71159</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">mean</span>(experimental_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 49.25439</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">mean</span>(control_group) <span class="sc">-</span> <span class="fu">mean</span>(experimental_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.4572</code></pre>
+</div>
+</div>
+<p>Pretty close to zero.</p>
+<p>In fact, image that I did this 1000 times, getting the difference between my two means:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>null_simulations <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">mutate</span>(<span class="at">control_group_mean =</span> <span class="fu">sample</span>(ohio_population_null, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(),</span>
+<span id="cb11-4"><a href="#cb11-4"></a>         <span class="at">experimental_group_mean =</span> <span class="fu">sample</span>(ohio_population_null, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(),</span>
+<span id="cb11-5"><a href="#cb11-5"></a>         <span class="at">difference_means =</span> control_group_mean <span class="sc">-</span> experimental_group_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>null_distribution_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(null_simulations) <span class="sc">+</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> difference_means), <span class="at">binwidth=</span>.<span class="dv">05</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a>null_distribution_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_2_t-test-null-model_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The histogram above is centered on zero. Peering deeper, the average difference between any two random samples can be expressed as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">tibble</span>(<span class="at">mean_diff =</span> <span class="fu">mean</span>(null_simulations<span class="sc">$</span>difference_means),</span>
+<span id="cb13-2"><a href="#cb13-2"></a>                        <span class="at">st_err_diff =</span> <span class="fu">sd</span>(null_simulations<span class="sc">$</span>difference_means)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">pander</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 19%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">mean_diff</th>
+<th style="text-align: center;">st_err_diff</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: center;">0.04312</td>
+<td style="text-align: center;">0.6979</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p>Thus is members of our two groups are from the same population, and there is nothing distinguishing them from one another, then there should be no difference between the means of any two random samples. FWIW, the extremes of the <code>null_distribution</code> give us a hint as to what mean differences have such low probability that we might consider them significant enough to reject the null hypothesis (look at the tails).</p>
+</section><section id="example-of-an-h_1-distribution" class="level2"><h2 class="anchored" data-anchor-id="example-of-an-h_1-distribution">example of an <span class="math inline">\(H_1\)</span> distribution</h2>
+<p>Now let’s imagine that 25% of my <strong><code>ohio_population</code></strong> faces stereotype threat. Typically, people facing stereotype threat (my experimental group) score about 30 points lower than those that do not. Meaning my breakdown of populations is such:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>threat_pop <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">2.5e06</span>, <span class="at">mean =</span> <span class="fl">27.5</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>control_pop <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">7.5e06</span>, <span class="at">mean =</span> <span class="fl">57.5</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a>ohio_population_alt <span class="ot">&lt;-</span> <span class="fu">c</span>(threat_pop, control_pop)</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="fu">mean</span>(ohio_population_alt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50.00065</code></pre>
+</div>
+</div>
+<p>You’ll note here that this alternative <strong><code>ohio_population</code></strong> has roughly the same mean as in the previous example (about 50), but peering in we see that the scores notatbly bimodal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(ohio_population_alt)<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_2_t-test-null-model_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Again we can posit taking a single sample from each sub population and comparing their means</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>control_group_mean <span class="ot">&lt;-</span> <span class="fu">sample</span>(control_pop, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb17-2"><a href="#cb17-2"></a>experimental_group_mean <span class="ot">&lt;-</span> <span class="fu">sample</span>(threat_pop, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a>control_group_mean <span class="sc">-</span> experimental_group_mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31.06114</code></pre>
+</div>
+</div>
+<p>And we can imagine doing this 1000 times</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>alt_simulations <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">mutate</span>(<span class="at">control_group_mean =</span> <span class="fu">sample</span>(control_pop, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(),</span>
+<span id="cb19-4"><a href="#cb19-4"></a>         <span class="at">experimental_group_mean =</span> <span class="fu">sample</span>(threat_pop, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(),</span>
+<span id="cb19-5"><a href="#cb19-5"></a>         <span class="at">difference_means =</span> control_group_mean <span class="sc">-</span> experimental_group_mean)</span>
+<span id="cb19-6"><a href="#cb19-6"></a></span>
+<span id="cb19-7"><a href="#cb19-7"></a>diff_distribution_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(alt_simulations) <span class="sc">+</span> </span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> difference_means), <span class="at">binwidth=</span>.<span class="dv">05</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb19-9"><a href="#cb19-9"></a></span>
+<span id="cb19-10"><a href="#cb19-10"></a>diff_distribution_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_2_t-test-null-model_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The histogram above is centered on near 30. Peering deeper, the average difference between any two random samples can be expressed as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">tibble</span>(<span class="at">mean_diff =</span> <span class="fu">mean</span>(alt_simulations<span class="sc">$</span>difference_means),</span>
+<span id="cb20-2"><a href="#cb20-2"></a>                        <span class="at">st_err_diff =</span> <span class="fu">sd</span>(alt_simulations<span class="sc">$</span>difference_means)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">pander</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 19%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">mean_diff</th>
+<th style="text-align: center;">st_err_diff</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">0.7236</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</section><section id="group-means-and-grand-means" class="level2"><h2 class="anchored" data-anchor-id="group-means-and-grand-means">group means and grand means</h2>
+<p>In both examples, the overall <strong>grand mean</strong> of the <strong><code>ohio population</code></strong> was the same (± some random error): 50.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">tibble</span>(<span class="at">mean_null_pop =</span> <span class="fu">mean</span>(ohio_population_null),</span>
+<span id="cb21-2"><a href="#cb21-2"></a>       <span class="at">mean_alt_pop =</span> <span class="fu">mean</span>(ohio_population_alt)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">pander</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">mean_null_pop</th>
+<th style="text-align: center;">mean_alt_pop</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">50</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p>However, in the first example, were the null hypothesis was indeed true, we pulled everyone from the same population… sort of like saying there really is no difference between those under threat and those that are not (control). In the second example, this was not true! In fact if we take a look at our group means from each example we see that while control and experimental are nearly identical from example 1, they are very different in example 2 (this is just reiterating what the histograms and difference scores told us above)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">tibble</span>(<span class="at">null_cont_mean =</span> <span class="fu">mean</span>(null_simulations<span class="sc">$</span>control_group_mean),</span>
+<span id="cb22-2"><a href="#cb22-2"></a>       <span class="at">null_exp_mean =</span> <span class="fu">mean</span>(null_simulations<span class="sc">$</span>experimental_group_mean),</span>
+<span id="cb22-3"><a href="#cb22-3"></a>       <span class="at">null_grand_mean =</span> <span class="fu">mean</span>(ohio_population_null),</span>
+<span id="cb22-4"><a href="#cb22-4"></a>       <span class="at">alt_cont_mean =</span> <span class="fu">mean</span>(alt_simulations<span class="sc">$</span>control_group_mean),</span>
+<span id="cb22-5"><a href="#cb22-5"></a>       <span class="at">alt_exp_mean =</span> <span class="fu">mean</span>(alt_simulations<span class="sc">$</span>experimental_group_mean),</span>
+<span id="cb22-6"><a href="#cb22-6"></a>       <span class="at">alt_grand_mean =</span> <span class="fu">mean</span>(ohio_population_alt)) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">pander</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 22%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">null_cont_mean</th>
+<th style="text-align: center;">null_exp_mean</th>
+<th style="text-align: center;">null_grand_mean</th>
+<th style="text-align: center;">alt_cont_mean</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: center;">50.01</td>
+<td style="text-align: center;">49.97</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">57.5</td>
+</tr></tbody>
+</table>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 23%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">alt_exp_mean</th>
+<th style="text-align: center;">alt_grand_mean</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: center;">27.49</td>
+<td style="text-align: center;">50</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p>This is that key mathematical truth that I was getting at earlier. <strong>If the null hypothesis is true, not only are the group means equal to one another, but they are also equal to the grand mean assuming both come from the same population.</strong> Put another way, if you were to look at the sample mean from the control group and the sample mean from the experimental group, the null hypothesis indicates that they should both be equal to one another. If this is the case, then it must also be true that each of the group means is equal to the grand mean you would get if you took an average of all of the scores (from both groups) combined.</p>
+<p>If the null hypothesis is not true, then not only are the two means different from one another, but they should also be different from the grand mean. Looking to the next walkthrough, the grand mean is what factors into our <code>null_lm_model</code>, the model that takes the form: <strong>outcome~1, or outcome as predicted by the intercept-only.</strong> Last week, we talked about how in simple regression, this intercept represented the mean of all outcome scores (assuming no predictor). The same thing is true here… the grand mean <strong><em>is</em></strong> the mean of all outcome scores.</p>
+<p>If you’ve made it this far, move on to the next walkthrough for the pay-off.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">---</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="an">title:</span><span class="co"> "Thinking about nothing (aka the null)"</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">---</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a>On thing that was hinted at earlier in the semester is that even though we cover several different tests this semester, with different names, and seemingly different esoteric rules, they are all in fact, "just a linear model". Before we jump into an example how this relates to the $t$-test for independent samples, I want to build up a few intuitions about the null and alternate hypotheses for this test. We'll introduce a contrast between **group means** and **the grand mean**, that will pay off for us in the next walkthrough when we talk about the modeling. First the packages:</span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="in">```{r}</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, cowplot, pander)</span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="in">```</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a></span>
+<span id="cb23-13"><a href="#cb23-13"></a>In the most general terms, an independent samples $t$-test compares the difference between means between a **control group** and an **experimental group.** The **research hypothesis** is typically that members of each of these two groups are qualitatively different from one another in a way that captured quantitatively. For example, referring to the stereotype threat study from the previous walkthrough, or theoretical position is that individuals under stereotype threat are *different* from controls in a way that we can index through their scores. The **null hypothesis** is that these two groups, and consequently their scores are *not* different from one another.</span>
+<span id="cb23-14"><a href="#cb23-14"></a></span>
+<span id="cb23-15"><a href="#cb23-15"></a>There are two ways to state the null hypothesis. Both end up being equivalent mathematically:</span>
+<span id="cb23-16"><a href="#cb23-16"></a></span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="ss">1.  </span>$H_0$**: Members from the Control group and the Threat group were, in fact drawn from the same population.**</span>
+<span id="cb23-18"><a href="#cb23-18"></a><span class="ss">2.  </span>$H_0$**:** **The mean score from the Control group is equal to the mean score of the Threat group.**</span>
+<span id="cb23-19"><a href="#cb23-19"></a></span>
+<span id="cb23-20"><a href="#cb23-20"></a>The second is how we typically see the null hypothesis expressed mathematically. However, (statement 2) is a consequence of (statement 1). That is, if members of the two groups are really, in fact, from the same population then their distributions of scores should be as if we drew two random samples from that population.</span>
+<span id="cb23-21"><a href="#cb23-21"></a></span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="fu">## The example of an $H_0$ distribution</span></span>
+<span id="cb23-23"><a href="#cb23-23"></a></span>
+<span id="cb23-24"><a href="#cb23-24"></a>As an example, let's imagine the we have the population **`ohio_population`** of 10 million people (6e06 in scientific notation, or a 6 followed by 6 zeroes) with a true mean score of 50 and a standard deviation of 5.</span>
+<span id="cb23-25"><a href="#cb23-25"></a></span>
+<span id="cb23-28"><a href="#cb23-28"></a><span class="in">```{r}</span></span>
+<span id="cb23-29"><a href="#cb23-29"></a>ohio_population_null <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">10e06</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb23-30"><a href="#cb23-30"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(ohio_population_null)<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb23-31"><a href="#cb23-31"></a><span class="in">```</span></span>
+<span id="cb23-32"><a href="#cb23-32"></a></span>
+<span id="cb23-33"><a href="#cb23-33"></a>Now let's say I pull 100 people at random from this population and label them the Control group and and another 100 and call them the Experimental (Threat) group.</span>
+<span id="cb23-34"><a href="#cb23-34"></a></span>
+<span id="cb23-37"><a href="#cb23-37"></a><span class="in">```{r}</span></span>
+<span id="cb23-38"><a href="#cb23-38"></a>control_group <span class="ot">&lt;-</span> <span class="fu">sample</span>(ohio_population_null, <span class="at">size =</span> <span class="dv">100</span>)</span>
+<span id="cb23-39"><a href="#cb23-39"></a>experimental_group <span class="ot">&lt;-</span> <span class="fu">sample</span>(ohio_population_null, <span class="at">size =</span> <span class="dv">100</span>)</span>
+<span id="cb23-40"><a href="#cb23-40"></a><span class="in">```</span></span>
+<span id="cb23-41"><a href="#cb23-41"></a></span>
+<span id="cb23-42"><a href="#cb23-42"></a>Taking a look at these two samples (note your numbers may be slightly different then mine due to randomness)</span>
+<span id="cb23-43"><a href="#cb23-43"></a></span>
+<span id="cb23-46"><a href="#cb23-46"></a><span class="in">```{r}</span></span>
+<span id="cb23-47"><a href="#cb23-47"></a>control_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(control_group)<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb23-48"><a href="#cb23-48"></a></span>
+<span id="cb23-49"><a href="#cb23-49"></a>experimental_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(experimental_group)<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb23-50"><a href="#cb23-50"></a></span>
+<span id="cb23-51"><a href="#cb23-51"></a><span class="fu">plot_grid</span>(control_plot, experimental_plot)</span>
+<span id="cb23-52"><a href="#cb23-52"></a><span class="in">```</span></span>
+<span id="cb23-53"><a href="#cb23-53"></a></span>
+<span id="cb23-56"><a href="#cb23-56"></a><span class="in">```{r}</span></span>
+<span id="cb23-57"><a href="#cb23-57"></a><span class="fu">mean</span>(control_group)</span>
+<span id="cb23-58"><a href="#cb23-58"></a><span class="fu">mean</span>(experimental_group)</span>
+<span id="cb23-59"><a href="#cb23-59"></a></span>
+<span id="cb23-60"><a href="#cb23-60"></a><span class="fu">mean</span>(control_group) <span class="sc">-</span> <span class="fu">mean</span>(experimental_group)</span>
+<span id="cb23-61"><a href="#cb23-61"></a><span class="in">```</span></span>
+<span id="cb23-62"><a href="#cb23-62"></a></span>
+<span id="cb23-63"><a href="#cb23-63"></a>Pretty close to zero.</span>
+<span id="cb23-64"><a href="#cb23-64"></a></span>
+<span id="cb23-65"><a href="#cb23-65"></a>In fact, image that I did this 1000 times, getting the difference between my two means:</span>
+<span id="cb23-66"><a href="#cb23-66"></a></span>
+<span id="cb23-69"><a href="#cb23-69"></a><span class="in">```{r}</span></span>
+<span id="cb23-70"><a href="#cb23-70"></a>null_simulations <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-71"><a href="#cb23-71"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span></span>
+<span id="cb23-72"><a href="#cb23-72"></a>  <span class="fu">mutate</span>(<span class="at">control_group_mean =</span> <span class="fu">sample</span>(ohio_population_null, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(),</span>
+<span id="cb23-73"><a href="#cb23-73"></a>         <span class="at">experimental_group_mean =</span> <span class="fu">sample</span>(ohio_population_null, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(),</span>
+<span id="cb23-74"><a href="#cb23-74"></a>         <span class="at">difference_means =</span> control_group_mean <span class="sc">-</span> experimental_group_mean)</span>
+<span id="cb23-75"><a href="#cb23-75"></a>  </span>
+<span id="cb23-76"><a href="#cb23-76"></a><span class="in">```</span></span>
+<span id="cb23-77"><a href="#cb23-77"></a></span>
+<span id="cb23-80"><a href="#cb23-80"></a><span class="in">```{r}</span></span>
+<span id="cb23-81"><a href="#cb23-81"></a>null_distribution_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(null_simulations) <span class="sc">+</span> </span>
+<span id="cb23-82"><a href="#cb23-82"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> difference_means), <span class="at">binwidth=</span>.<span class="dv">05</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb23-83"><a href="#cb23-83"></a></span>
+<span id="cb23-84"><a href="#cb23-84"></a>null_distribution_plot</span>
+<span id="cb23-85"><a href="#cb23-85"></a><span class="in">```</span></span>
+<span id="cb23-86"><a href="#cb23-86"></a></span>
+<span id="cb23-87"><a href="#cb23-87"></a>The histogram above is centered on zero. Peering deeper, the average difference between any two random samples can be expressed as:</span>
+<span id="cb23-88"><a href="#cb23-88"></a></span>
+<span id="cb23-91"><a href="#cb23-91"></a><span class="in">```{r}</span></span>
+<span id="cb23-92"><a href="#cb23-92"></a><span class="fu">tibble</span>(<span class="at">mean_diff =</span> <span class="fu">mean</span>(null_simulations<span class="sc">$</span>difference_means),</span>
+<span id="cb23-93"><a href="#cb23-93"></a>                        <span class="at">st_err_diff =</span> <span class="fu">sd</span>(null_simulations<span class="sc">$</span>difference_means)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-94"><a href="#cb23-94"></a>  <span class="fu">pander</span>()</span>
+<span id="cb23-95"><a href="#cb23-95"></a><span class="in">```</span></span>
+<span id="cb23-96"><a href="#cb23-96"></a></span>
+<span id="cb23-97"><a href="#cb23-97"></a>Thus is members of our two groups are from the same population, and there is nothing distinguishing them from one another, then there should be no difference between the means of any two random samples. FWIW, the extremes of the <span class="in">`null_distribution`</span> give us a hint as to what mean differences have such low probability that we might consider them significant enough to reject the null hypothesis (look at the tails).</span>
+<span id="cb23-98"><a href="#cb23-98"></a></span>
+<span id="cb23-99"><a href="#cb23-99"></a><span class="fu">## example of an $H_1$ distribution</span></span>
+<span id="cb23-100"><a href="#cb23-100"></a></span>
+<span id="cb23-101"><a href="#cb23-101"></a>Now let's imagine that 25% of my **`ohio_population`** faces stereotype threat. Typically, people facing stereotype threat (my experimental group) score about 30 points lower than those that do not. Meaning my breakdown of populations is such:</span>
+<span id="cb23-102"><a href="#cb23-102"></a></span>
+<span id="cb23-105"><a href="#cb23-105"></a><span class="in">```{r}</span></span>
+<span id="cb23-106"><a href="#cb23-106"></a>threat_pop <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">2.5e06</span>, <span class="at">mean =</span> <span class="fl">27.5</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb23-107"><a href="#cb23-107"></a>control_pop <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">7.5e06</span>, <span class="at">mean =</span> <span class="fl">57.5</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb23-108"><a href="#cb23-108"></a></span>
+<span id="cb23-109"><a href="#cb23-109"></a>ohio_population_alt <span class="ot">&lt;-</span> <span class="fu">c</span>(threat_pop, control_pop)</span>
+<span id="cb23-110"><a href="#cb23-110"></a></span>
+<span id="cb23-111"><a href="#cb23-111"></a><span class="fu">mean</span>(ohio_population_alt)</span>
+<span id="cb23-112"><a href="#cb23-112"></a><span class="in">```</span></span>
+<span id="cb23-113"><a href="#cb23-113"></a></span>
+<span id="cb23-114"><a href="#cb23-114"></a>You'll note here that this alternative **`ohio_population`** has roughly the same mean as in the previous example (about 50), but peering in we see that the scores notatbly bimodal.</span>
+<span id="cb23-115"><a href="#cb23-115"></a></span>
+<span id="cb23-118"><a href="#cb23-118"></a><span class="in">```{r}</span></span>
+<span id="cb23-119"><a href="#cb23-119"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(ohio_population_alt)<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb23-120"><a href="#cb23-120"></a><span class="in">```</span></span>
+<span id="cb23-121"><a href="#cb23-121"></a></span>
+<span id="cb23-122"><a href="#cb23-122"></a>Again we can posit taking a single sample from each sub population and comparing their means</span>
+<span id="cb23-123"><a href="#cb23-123"></a></span>
+<span id="cb23-126"><a href="#cb23-126"></a><span class="in">```{r}</span></span>
+<span id="cb23-127"><a href="#cb23-127"></a>control_group_mean <span class="ot">&lt;-</span> <span class="fu">sample</span>(control_pop, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb23-128"><a href="#cb23-128"></a>experimental_group_mean <span class="ot">&lt;-</span> <span class="fu">sample</span>(threat_pop, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb23-129"><a href="#cb23-129"></a></span>
+<span id="cb23-130"><a href="#cb23-130"></a>control_group_mean <span class="sc">-</span> experimental_group_mean</span>
+<span id="cb23-131"><a href="#cb23-131"></a><span class="in">```</span></span>
+<span id="cb23-132"><a href="#cb23-132"></a></span>
+<span id="cb23-133"><a href="#cb23-133"></a>And we can imagine doing this 1000 times</span>
+<span id="cb23-134"><a href="#cb23-134"></a></span>
+<span id="cb23-137"><a href="#cb23-137"></a><span class="in">```{r}</span></span>
+<span id="cb23-138"><a href="#cb23-138"></a>alt_simulations <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-139"><a href="#cb23-139"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span></span>
+<span id="cb23-140"><a href="#cb23-140"></a>  <span class="fu">mutate</span>(<span class="at">control_group_mean =</span> <span class="fu">sample</span>(control_pop, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(),</span>
+<span id="cb23-141"><a href="#cb23-141"></a>         <span class="at">experimental_group_mean =</span> <span class="fu">sample</span>(threat_pop, <span class="at">size =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(),</span>
+<span id="cb23-142"><a href="#cb23-142"></a>         <span class="at">difference_means =</span> control_group_mean <span class="sc">-</span> experimental_group_mean)</span>
+<span id="cb23-143"><a href="#cb23-143"></a></span>
+<span id="cb23-144"><a href="#cb23-144"></a>diff_distribution_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(alt_simulations) <span class="sc">+</span> </span>
+<span id="cb23-145"><a href="#cb23-145"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> difference_means), <span class="at">binwidth=</span>.<span class="dv">05</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb23-146"><a href="#cb23-146"></a></span>
+<span id="cb23-147"><a href="#cb23-147"></a>diff_distribution_plot</span>
+<span id="cb23-148"><a href="#cb23-148"></a><span class="in">```</span></span>
+<span id="cb23-149"><a href="#cb23-149"></a></span>
+<span id="cb23-150"><a href="#cb23-150"></a>The histogram above is centered on near 30. Peering deeper, the average difference between any two random samples can be expressed as:</span>
+<span id="cb23-151"><a href="#cb23-151"></a></span>
+<span id="cb23-154"><a href="#cb23-154"></a><span class="in">```{r}</span></span>
+<span id="cb23-155"><a href="#cb23-155"></a><span class="fu">tibble</span>(<span class="at">mean_diff =</span> <span class="fu">mean</span>(alt_simulations<span class="sc">$</span>difference_means),</span>
+<span id="cb23-156"><a href="#cb23-156"></a>                        <span class="at">st_err_diff =</span> <span class="fu">sd</span>(alt_simulations<span class="sc">$</span>difference_means)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-157"><a href="#cb23-157"></a>  <span class="fu">pander</span>()</span>
+<span id="cb23-158"><a href="#cb23-158"></a><span class="in">```</span></span>
+<span id="cb23-159"><a href="#cb23-159"></a></span>
+<span id="cb23-160"><a href="#cb23-160"></a><span class="fu">## group means and grand means</span></span>
+<span id="cb23-161"><a href="#cb23-161"></a></span>
+<span id="cb23-162"><a href="#cb23-162"></a>In both examples, the overall **grand mean** of the **`ohio population`** was the same (± some random error): 50.</span>
+<span id="cb23-163"><a href="#cb23-163"></a></span>
+<span id="cb23-166"><a href="#cb23-166"></a><span class="in">```{r}</span></span>
+<span id="cb23-167"><a href="#cb23-167"></a><span class="fu">tibble</span>(<span class="at">mean_null_pop =</span> <span class="fu">mean</span>(ohio_population_null),</span>
+<span id="cb23-168"><a href="#cb23-168"></a>       <span class="at">mean_alt_pop =</span> <span class="fu">mean</span>(ohio_population_alt)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-169"><a href="#cb23-169"></a>  <span class="fu">pander</span>()</span>
+<span id="cb23-170"><a href="#cb23-170"></a><span class="in">```</span></span>
+<span id="cb23-171"><a href="#cb23-171"></a></span>
+<span id="cb23-172"><a href="#cb23-172"></a>However, in the first example, were the null hypothesis was indeed true, we pulled everyone from the same population... sort of like saying there really is no difference between those under threat and those that are not (control). In the second example, this was not true! In fact if we take a look at our group means from each example we see that while control and experimental are nearly identical from example 1, they are very different in example 2 (this is just reiterating what the histograms and difference scores told us above)</span>
+<span id="cb23-173"><a href="#cb23-173"></a></span>
+<span id="cb23-176"><a href="#cb23-176"></a><span class="in">```{r}</span></span>
+<span id="cb23-177"><a href="#cb23-177"></a><span class="fu">tibble</span>(<span class="at">null_cont_mean =</span> <span class="fu">mean</span>(null_simulations<span class="sc">$</span>control_group_mean),</span>
+<span id="cb23-178"><a href="#cb23-178"></a>       <span class="at">null_exp_mean =</span> <span class="fu">mean</span>(null_simulations<span class="sc">$</span>experimental_group_mean),</span>
+<span id="cb23-179"><a href="#cb23-179"></a>       <span class="at">null_grand_mean =</span> <span class="fu">mean</span>(ohio_population_null),</span>
+<span id="cb23-180"><a href="#cb23-180"></a>       <span class="at">alt_cont_mean =</span> <span class="fu">mean</span>(alt_simulations<span class="sc">$</span>control_group_mean),</span>
+<span id="cb23-181"><a href="#cb23-181"></a>       <span class="at">alt_exp_mean =</span> <span class="fu">mean</span>(alt_simulations<span class="sc">$</span>experimental_group_mean),</span>
+<span id="cb23-182"><a href="#cb23-182"></a>       <span class="at">alt_grand_mean =</span> <span class="fu">mean</span>(ohio_population_alt)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-183"><a href="#cb23-183"></a>  <span class="fu">pander</span>()</span>
+<span id="cb23-184"><a href="#cb23-184"></a></span>
+<span id="cb23-185"><a href="#cb23-185"></a><span class="in">```</span></span>
+<span id="cb23-186"><a href="#cb23-186"></a></span>
+<span id="cb23-187"><a href="#cb23-187"></a>This is that key mathematical truth that I was getting at earlier. **If the null hypothesis is true, not only are the group means equal to one another, but they are also equal to the grand mean assuming both come from the same population.** Put another way, if you were to look at the sample mean from the control group and the sample mean from the experimental group, the null hypothesis indicates that they should both be equal to one another. If this is the case, then it must also be true that each of the group means is equal to the grand mean you would get if you took an average of all of the scores (from both groups) combined.</span>
+<span id="cb23-188"><a href="#cb23-188"></a></span>
+<span id="cb23-189"><a href="#cb23-189"></a>If the null hypothesis is not true, then not only are the two means different from one another, but they should also be different from the grand mean. Looking to the next walkthrough, the grand mean is what factors into our <span class="in">`null_lm_model`</span>, the model that takes the form: **outcome\~1, or outcome as predicted by the intercept-only.** Last week, we talked about how in simple regression, this intercept represented the mean of all outcome scores (assuming no predictor). The same thing is true here... the grand mean ***is*** the mean of all outcome scores.</span>
+<span id="cb23-190"><a href="#cb23-190"></a></span>
+<span id="cb23-191"><a href="#cb23-191"></a>If you've made it this far, move on to the next walkthrough for the pay-off.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

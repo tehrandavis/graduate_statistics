@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - ANOVA and Regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">ANOVA and Regression</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link active">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#means-method-v.-regression-method" id="toc-means-method-v.-regression-method" class="nav-link active" data-scroll-target="#means-method-v.-regression-method">Means method v. Regression method</a>
+  <ul class="collapse">
+<li><a href="#comparing-two-models" id="toc-comparing-two-models" class="nav-link" data-scroll-target="#comparing-two-models">Comparing two models</a></li>
+  <li><a href="#means-method-calculations" id="toc-means-method-calculations" class="nav-link" data-scroll-target="#means-method-calculations">Means method calculations</a></li>
+  </ul>
+</li>
+  <li><a href="#bringing-it-together-its-all-about-the-residuals-baby" id="toc-bringing-it-together-its-all-about-the-residuals-baby" class="nav-link" data-scroll-target="#bringing-it-together-its-all-about-the-residuals-baby">Bringing it together: it’s all about the residuals, baby</a></li>
+  <li><a href="#critical-point-unpacking-those-residuals-baby" id="toc-critical-point-unpacking-those-residuals-baby" class="nav-link" data-scroll-target="#critical-point-unpacking-those-residuals-baby">CRITICAL POINT: unpacking those residuals, baby</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">ANOVA and Regression</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>This walkthrough assumes you have the following installed and loaded:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
+<span id="cb1-2"><a href="#cb1-2"></a>               broom,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>               cowplot,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>               ungeviz,</span>
+<span id="cb1-5"><a href="#cb1-5"></a>               ggpmisc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>also installing the dependencies 'ggpp', 'confintr', 'lmodel2'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+The downloaded binary packages are in
+    /var/folders/7k/6v7xmh35305_vjzy660s9_q40000gs/T//Rtmp85cExZ/downloaded_packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+ggpmisc installed</code></pre>
+</div>
+</div>
+<section id="means-method-v.-regression-method" class="level2"><h2 class="anchored" data-anchor-id="means-method-v.-regression-method">Means method v. Regression method</h2>
+<p>Admittedly I’m anticipating some work that we will be doing in a few weeks, but I wanted to take some time to circle back around to a few points from our class discussion, the previous walkthrough and our lectures on regression. I’ve repeatedly commented on how ANOVA and Regression are indeed one in the same. In the previous walkthrough we performed ANOVA using both a dedicated function <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> as well as the same function we used a few weeks back for regression <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. In doing so, we also noted how the <span class="math inline">\(F\)</span> statistic calculated by <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> is the same that’s calculated for <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> (and those of you that can remember all the way back to the regression week that you were asked to report your <span class="math inline">\(F\)</span> value along with your <span class="math inline">\(R^2\)</span> in your regression results when talking about the fit of the overall model.</p>
+<p>By now you may ask: “Well, if ANOVA is simply linear regression then why involve different functions?” To add insult to injury, would you be even more peeved if I told you that the <span class="math inline">\(F\)</span> statistic for regression is calculated differently from the <span class="math inline">\(F\)</span> statistic for ANOVA, even though they give you the exact same result!!! Ugh… Why, WHY?!?!?!, WHYYYYY?!?!?!?!?!</p>
+<p>Sadly, tradition and convention are all I can tell you. While in both cases the <span class="math inline">\(F\)</span> value or ratio is an expression of amount of variance that your model (<code>lm</code> or <code>aov</code>) explains given total variance that exists in the data. In the ANOVA case we are concerned with the means of discrete groups or IVs. Since <code>lm</code> deals with continuous predictors (or IVs) then it makes little sense to talk about means, other than the grand mean. In both instances, however, the derived <span class="math inline">\(F\)</span> is an expression of the model’s fit.</p>
+<p>My goal for this section is to demonstrate to you that the regression method we used to derive the the <span class="math inline">\(F\)</span> ratios during our week on regression is identical to the means method Cohen introduced you to this week. First to recap the regression method, our equation from the correlation week’s lecture slides was:</p>
+<p><span class="math display">\[F=\frac{r^2 / df_{reg}}{(1-r^2)/df_{res}}\]</span></p>
+<ul>
+<li>where <span class="math inline">\(r^2\)</span> is the model’s coefficient of determination</li>
+<li>
+<span class="math inline">\(df_{reg}\)</span>: the model’s <span class="math inline">\(df\)</span> (based on # of predictors), and</li>
+<li>
+<span class="math inline">\(df_{res}\)</span>: the model’s residual <span class="math inline">\(df\)</span>
+</li>
+</ul>
+<p>moreover,</p>
+<p><span class="math display">\[r^2=\frac{SS_Y-SS_{res}}{SS_Y}\]</span></p>
+<ul>
+<li>where <span class="math inline">\(SS_Y\)</span> is the sum of squared differences between the observed values <span class="math inline">\(Y\)</span> and the grand mean <span class="math inline">\(\bar{Y}\)</span>
+</li>
+<li>
+<span class="math inline">\(SS_{res}\)</span> is the sum of squared differences between the observed values <span class="math inline">\(Y\)</span> and the model-predicted values <span class="math inline">\(\hat{Y}\)</span> (or distance to regression line).</li>
+</ul>
+<p>For those of you interested in reading further on the mathematics, pay close attention to the Flora chapter assigned this week.</p>
+<section id="comparing-two-models" class="level3"><h3 class="anchored" data-anchor-id="comparing-two-models">Comparing two models</h3>
+<p>To conceptualize lets take another look at our data again. But first it might help to take another look at my earlier spiel on <a href="https://tehrandav.is/psyc7014/week02/2_4-means_other_models.html">means and other models here</a> and our related discussion on <a href="https://tehrandav.is/psyc7014/week06/6_3_t-test-lm.html">t-tests as linear models here</a>.</p>
+<p>Go ahead, I’ll wait…</p>
+<p>OK, now that you’re back let’s have another look at our example data from the previous walkthrough. First let’s read in the clean <code>dataset</code> from walkthrough 1</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">'clean_dataset.rds'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the plot below, the dotted line represents the <code>grand_mean</code> model, where we are using the mean of <em>all data</em> to predict individual scores. This corresponds to our assumption that all samples come from the same population and are randomly distributed (aka random error). It is from this <em>means model</em> that <span class="math inline">\(SS_Y\)</span> is calculated.</p>
+<p>Visually the means model looks like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> GROUP_NUM, <span class="at">y =</span> RECALL, <span class="at">col=</span><span class="fu">factor</span>(GROUP_NUM))) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">mean</span>(dataset<span class="sc">$</span>RECALL)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">height =</span> 0L, <span class="at">seed =</span> 1L, <span class="at">width=</span><span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x=</span>GROUP_NUM, <span class="at">ymax=</span>RECALL, <span class="at">ymin=</span><span class="fu">mean</span>(dataset<span class="sc">$</span>RECALL)),</span>
+<span id="cb6-5"><a href="#cb6-5"></a>                 <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">height =</span> 0L, <span class="at">seed =</span> 1L, <span class="at">width=</span><span class="fl">0.2</span>)) <span class="sc">+</span> </span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Use of `dataset$RECALL` is discouraged.
+ℹ Use `RECALL` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="8_2-anova-regression_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The solid line represents the mean of the entire dataset, or the grand mean. Each of our groups are color coded and the lines connecting the data points to the grand mean are the residuals. We can express the <em>grand means model</em> as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>grand_mean_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RECALL<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> dataset) </span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># Here, "1"" indicates assume scores simply vary randomly about the grand mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Further <span class="math inline">\(SS_Y\)</span> is simply the sum of the squared residuals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>SS_Y <span class="ot">&lt;-</span> <span class="fu">sum</span>(grand_mean_model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>SS_Y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 786.82</code></pre>
+</div>
+</div>
+<p>In contrast, the <code>group_means</code> model represents the model (line) of best fit for our <em>ANOVA model</em> which, in addition to assuming random error about the grand mean, also assumes that <code>GROUP</code> (encoding) is a predictor of variation that we see in the data (aka systematic error). Its from this model which <span class="math inline">\(SS_{res}\)</span> is calculated. This model may be expressed:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># add GROUP as a predictor to our grand means model (RECALL~1)</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>group_means_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RECALL<span class="sc">~</span><span class="dv">1</span> <span class="sc">+</span> GROUP_FACTOR, <span class="at">data =</span> dataset) </span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># also shorthand</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co"># group_means_model &lt;- lm(RECALL~1 + GROUP_FACTOR, data = dataset)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and visualized as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># add group predicteds for plotting</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>dataset<span class="sc">$</span>group_predicteds <span class="ot">&lt;-</span> group_means_model<span class="sc">$</span>fitted</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> GROUP_NUM, <span class="at">y =</span> RECALL, <span class="at">col=</span><span class="fu">factor</span>(GROUP_NUM))) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">height =</span> 0L, <span class="at">seed =</span> 1L, <span class="at">width=</span><span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"hpline"</span>, <span class="at">width =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">fun=</span><span class="st">"mean"</span>) <span class="sc">+</span> </span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x=</span>GROUP_NUM, <span class="at">ymax=</span>RECALL, <span class="at">ymin=</span>group_predicteds),</span>
+<span id="cb12-8"><a href="#cb12-8"></a>                 <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">height =</span> 0L, <span class="at">seed =</span> 1L, <span class="at">width=</span><span class="fl">0.2</span>)) <span class="sc">+</span> </span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using the `size` aesthetic in this geom was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` in the `default_aes` field and elsewhere instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="8_2-anova-regression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note that the horizontal lines are the predicted values in this model… the group means.</p>
+<p>The resulting sum of squares for this model <span class="math inline">\(SS_{res}\)</span> is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>SS_res <span class="ot">&lt;-</span> <span class="fu">sum</span>(group_means_model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>SS_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 435.3</code></pre>
+</div>
+</div>
+<p>Thus <span class="math inline">\(R^2\)</span> is simply a statement about the difference in the grand mean model and the experimental model (in this case our ANOVA model with GROUP predictor) residuals as a percentage of <span class="math inline">\(SS_Y\)</span>. Looking at the <span class="math inline">\(R^2\)</span> of the <code>group_means_model</code> show us that it is .4468.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(group_means_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic   p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.447         0.398  3.11      9.08 0.0000182     4  -125.  262.  274.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(R^2\)</span> as calculated from our <code>SS_res</code> and <code>SS_Y</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>r2 <span class="ot">&lt;-</span> (SS_Y<span class="sc">-</span>SS_res)<span class="sc">/</span>SS_Y</span>
+<span id="cb18-2"><a href="#cb18-2"></a>r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4467604</code></pre>
+</div>
+</div>
+<p>Given this value we can calculate the <span class="math inline">\(F\)</span>-ratio using the equation above, noting that the model’s degrees of freedom based on the number of predictors = <span class="math inline">\(df_{reg}\)</span> = 4 and the model’s residual degrees of freedom = <span class="math inline">\(df_{res}\)</span> = 45 (more on this below)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>f_ratio <span class="ot">&lt;-</span> (r2<span class="sc">/</span><span class="dv">4</span>)<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>r2)<span class="sc">/</span><span class="dv">45</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>f_ratio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.084769</code></pre>
+</div>
+</div>
+<p>In addition, with ANOVA we are dealing with discrete predictors rather than continuous. Visually, as you can see that the data in the plot are stacked into columns, with the mean of each group located at the center of the columns’ density. This also means that rather than a continuous range of predicted values <span class="math inline">\(\hat{Y}\)</span> we have a set number of <span class="math inline">\(\hat{Y}\)</span>, one for each group mean that we are considering in the ANOVA. Therefore:</p>
+<ul>
+<li>
+<span class="math inline">\(SS_Y\)</span> may be thought of in terms of the differences between every score compared to the grand mean.</li>
+<li>
+<span class="math inline">\(SS_{res}\)</span> may be thought of as the differences between every score within the group and the group mean <span class="math inline">\(\hat{Y}\)</span>
+</li>
+</ul>
+<p>To put it more succinctly, with ANOVA we are directly comparing our <code>GROUP</code> predictor model’s ability to account for variance in the data above what we might expect by chance. Unpacking this a bit, we have a <code>grand_mean</code> model and a <code>group_mean</code> model. As you will see in a few weeks we can use a <em>Likelihood Ratio Test</em> to directly compare to models to see if the second accounts for significantly more variance than the first. In <code>R</code> this is accomplished using…. <em>dun, dun, dun</em> <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Here, "1"" indicates let scores simply vary randomly</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>grand_mean_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RECALL<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> dataset) </span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># add GROUP as a predictor to our original model</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>group_means_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RECALL<span class="sc">~</span><span class="dv">1</span> <span class="sc">+</span> GROUP_FACTOR, <span class="at">data =</span> dataset) </span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># run Likelihood Ratio Test to compare two models</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="fu">anova</span>(grand_mean_model, group_means_model, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: RECALL ~ 1
+Model 2: RECALL ~ 1 + GROUP_FACTOR
+  Res.Df    RSS Df Sum of Sq  Pr(&gt;Chi)    
+1     49 786.82                           
+2     45 435.30  4    351.52 2.464e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The output above tells you the structure (formula) of each model and that <code>Model 2</code> accounts for significantly more variance than <code>Model 1</code> (as assessed on the Chi-sq. distribution). For what it’s worth, let’s run this same comparison of models using a different test, <code>F</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># run Likelihood Ratio Test to compare two models</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">anova</span>(grand_mean_model, group_means_model, <span class="at">test=</span><span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: RECALL ~ 1
+Model 2: RECALL ~ 1 + GROUP_FACTOR
+  Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+1     49 786.82                                  
+2     45 435.30  4    351.52 9.0848 1.815e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Those numbers look familiar (df and F)? What does that suggest is really going on with ANOVA?</p>
+</section><section id="means-method-calculations" class="level3"><h3 class="anchored" data-anchor-id="means-method-calculations">Means method calculations</h3>
+<p>Now lets turn to our <em>F</em>-ratio equation for the means method:</p>
+<p><span class="math display">\[F=\frac{MS_{bet}}{MS_{error}}\]</span></p>
+<p>where</p>
+<ul>
+<li>
+<span class="math inline">\(MS_{error}\)</span> = <span class="math inline">\(SS_{res}/df_{res}\)</span>
+</li>
+<li>and <span class="math inline">\(MS_{bet}\)</span> = (<span class="math inline">\((SS_{Y}-SS_{res})/df_{reg}\)</span>;</li>
+</ul>
+<p>note that <span class="math inline">\(df_{res}\)</span> may be calculated as <span class="math inline">\(k(n-1)\)</span> where <span class="math inline">\(k\)</span> is the number of IV and <span class="math inline">\(n\)</span> is the number of scores in each group; <span class="math inline">\(df_{reg}\)</span> is <span class="math inline">\(k-1\)</span>.</p>
+<p>so for our model, <code>aov_model</code> (our ANOVA) we can calculate the <code>F-ratio</code> using the means method as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(RECALL<span class="sc">~</span>GROUP_FACTOR,dataset)</span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="co"># calculate TSS from grand mean residuals</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>SS_Y <span class="ot">&lt;-</span> ((dataset<span class="sc">$</span>RECALL<span class="sc">-</span><span class="fu">mean</span>(dataset<span class="sc">$</span>RECALL))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span>
+<span id="cb26-5"><a href="#cb26-5"></a></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="co"># calculate RSS from model residuals (group means compared to grand mean)</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>SS_res <span class="ot">&lt;-</span> (aov_model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span>
+<span id="cb26-8"><a href="#cb26-8"></a></span>
+<span id="cb26-9"><a href="#cb26-9"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># predictors</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number in each group</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="co"># between df</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a>df_reg <span class="ot">&lt;-</span> k<span class="dv">-1</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a></span>
+<span id="cb26-15"><a href="#cb26-15"></a><span class="co"># within df</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>df_res <span class="ot">&lt;-</span> k<span class="sc">*</span>(n<span class="dv">-1</span>)</span>
+<span id="cb26-17"><a href="#cb26-17"></a></span>
+<span id="cb26-18"><a href="#cb26-18"></a><span class="co"># MS treatments</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a>MS_treat <span class="ot">&lt;-</span> (SS_Y<span class="sc">-</span>SS_res)<span class="sc">/</span>df_reg</span>
+<span id="cb26-20"><a href="#cb26-20"></a></span>
+<span id="cb26-21"><a href="#cb26-21"></a><span class="co"># MS error</span></span>
+<span id="cb26-22"><a href="#cb26-22"></a>MS_error <span class="ot">&lt;-</span> SS_res<span class="sc">/</span>df_res</span>
+<span id="cb26-23"><a href="#cb26-23"></a></span>
+<span id="cb26-24"><a href="#cb26-24"></a></span>
+<span id="cb26-25"><a href="#cb26-25"></a>F.ratio <span class="ot">&lt;-</span> (MS_treat<span class="sc">/</span>MS_error) <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.084769</code></pre>
+</div>
+</div>
+</section></section><section id="bringing-it-together-its-all-about-the-residuals-baby" class="level2"><h2 class="anchored" data-anchor-id="bringing-it-together-its-all-about-the-residuals-baby">Bringing it together: it’s all about the residuals, baby</h2>
+<p>So on one hand we have the <em>F</em>-ratio being calculated using <span class="math inline">\(r^2\)</span> and on the other we have it being calculated using the mean square. Underlying both is a calculation of various <span class="math inline">\(SS\)</span> and it is using this fact that we can show that the two methods are equivalent. Drawn out, we have on the left our <span class="math inline">\(r^2\)</span> calculation and on the right the mean square calculation:</p>
+<p><span class="math display">\[F=\frac{r^2 / df_{reg}}{(1-r^2)/df_{res}} =\frac{MS_{bet}}{MS_{error}}\]</span></p>
+<p>rewriting our <span class="math inline">\(r^2\)</span> in terms of <span class="math inline">\(SS\)</span> (sums of squares) we get:</p>
+<p><span class="math display">\[\frac{\frac{SS_Y-SS_{res}}{SS_Y} / df_{reg}}{(1-\frac{SS_Y-SS_{res}}{SS_Y})/df_{res}} =\frac{MS_{bet}}{MS_{error}}\]</span></p>
+<p>and rewriting our <span class="math inline">\(MS\)</span> side of the equation in terms of <span class="math inline">\(SS\)</span>: <span class="math display">\[\frac{\frac{SS_Y-SS_{res}}{SS_Y} / df_{reg}}{(1-\frac{SS_Y-SS_{res}}{SS_Y})/df_{res}} =\frac{(SS_{Y}-SS_{res})/df_{reg}}{SS_{res}/df_{res}}\]</span></p>
+<p>multiplying the left side of the equation by 1, or <span class="math inline">\(\frac{SS_Y}{SS_Y}\)</span>:</p>
+<p><span class="math display">\[\frac{(SS_Y-SS_{res}) / df_{reg}}{(SS_Y-(SS_Y-SS_{res}))/df_{res}} =\frac{(SS_{Y}-SS_{res})/df_{reg}}{SS_{res}/df_{res}}\]</span></p>
+<p>which gives us:</p>
+<p><span class="math display">\[\frac{(SS_{Y}-SS_{res})/df_{reg}}{SS_{res}/df_{res}}=\frac{(SS_{Y}-SS_{res})/df_{reg}}{SS_{res}/df_{res}}\]</span></p>
+<p>See… told you… SAME DAMN THING!</p>
+<p>What does this mean for you… well perhaps nothing. Honestly, if you are using your computer for stats a correct calculation is a correct calculation. However, conceptually it may be easier to get and keep yourself in general linear model mode, as it will make incorporating more complex modeling techniques (higher-order ANOVA, ANCOVA, mixed-models, multi-level models, growth curve models) a more intuitive step in the future.</p>
+</section><section id="critical-point-unpacking-those-residuals-baby" class="level2"><h2 class="anchored" data-anchor-id="critical-point-unpacking-those-residuals-baby">CRITICAL POINT: unpacking those residuals, baby</h2>
+<p>In class I asked you to note two very important ideas, one in the context of ANOVA and the other for regression. For ANOVA, we noted that:</p>
+<ol type="1">
+<li>the null hypothesis for ANOVA is that the mean scores of all sample groups are equal to one another</li>
+<li>mathematically, that if the null hypothesis is true, then each of the group means are not only equal to one another, but to the <strong>grand mean</strong> of the scores from all combined groups (mean of dumping everyone’s score together)</li>
+</ol>
+<p>Taking a look a the previous section, <span class="math inline">\(SS_Y\)</span> (aka, Total Sum of Squares) are the residuals with respect to the grand mean of all groups. In other words, these are the amount of error / residuals that you would expect <strong>if the null hypothesis was TRUE!!!</strong>. Tying this more explicitly to some of the terminology that we used in lecture for ANOVA (the variance ratio method), these residuals represent what you would expect our within-groups variability to be if the null hypothesis is true (that is the null hypothesis assumes that all of this data comes from a single group… your hypothesis test is designed to refute that notion).</p>
+<p><span class="math inline">\(SS_{res}\)</span> represents the within group residuals related to a model that assumes group differences. That is this is what the within residuals look like when each data point is tied to a particular group mean, instead of the grand mean. When the null hypothesis is true, <span class="math inline">\(SS_{res} = SS_Y\)</span>. The further you group means are from one another, the further <span class="math inline">\(SS_{res}\)</span> decreases from <span class="math inline">\(SS_Y\)</span>. In the variance-ratio terminology, the further the <span class="math inline">\(MS_{error}\)</span> gets from the Total Sum of Squares (MS) as is the random variation in data points (error) moves from being accounted for by the grand mean to the individual means. In turn, this suggests that the differences in individual means is sucking-up some of that random variance (i.e.&nbsp;has some explanatory value). The amount of the variation that the group means accounts for can be taken be taking the <span class="math inline">\(SS_Y\)</span> from the null hypothesis residuals and subtracting the <span class="math inline">\(SS_{res}\)</span> from the group predictor residuals. What remains are the residuals accounted for by mean differences! These are the residuals for our effect (<span class="math inline">\(MS_{bet}\)</span>). In the context of ANOVA these raw sums of squares are understood in terms of the degrees of freedom for our predictors and groups… the mean squares (MS) are the sums of squares divided be the appropriate degrees of freedom.</p>
+<p>Ideally we want the residuals tied to our effect (<span class="math inline">\(MS_{bet}\)</span>) to be greater than the random variance left over <span class="math inline">\(MS_{error}\)</span> which is why we evaluate the resulting F-ratio <span class="math inline">\(\frac{MS_{bet}}{MS_{error}}\)</span> in terms of being “how much greater than 1”. To put this into terms that we are familiar with from the our discussions of <a href="http://tehrandav.is/PSYC7014_walkthroughs/docs/6_1-effect_size.html#cohen-brings-the-noise-signal-detection-theory">Effect Size</a>, our between groups effect is our signal, and the random within groups variation is our noise.</p>
+<p>If you are looking at this video, https://youtu.be/YrFehOKUJBw, and working with the accompanying excel file, the gist is the further the results of the Within SS box are from the Total SS box, to more likely you are to get a significant effect (the greater the Between SS box).</p>
+<p>FWIW, this logic also applies to regression, where:</p>
+<ol type="1">
+<li>the null hypothesis is that the predictive model accounts for no variance (<span class="math inline">\(r^2\)</span> = 0).</li>
+<li>in a simple regression this would also mean that the <span class="math inline">\(beta\)</span> coefficient representing your slope would also be zero, with an intercept at, wait for it… the <strong>grand mean</strong>!!</li>
+</ol>
+<p>From here everything plays out as above, beginning with the initial residuals, <span class="math inline">\(SS_Y\)</span> or (TSS) being based upon the grand mean, and the <span class="math inline">\(SS_{res}\)</span> being those residuals around the line of best fit.</p>
+<p>Hope this helps understand what’s going on behind the scenes!</p>
+<p>See you next week!</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb28" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">---</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="an">title:</span><span class="co"> "ANOVA and Regression"</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="co">---</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a>This walkthrough assumes you have the following installed and loaded:</span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="in">```{r}</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
+<span id="cb28-11"><a href="#cb28-11"></a>               broom,</span>
+<span id="cb28-12"><a href="#cb28-12"></a>               cowplot,</span>
+<span id="cb28-13"><a href="#cb28-13"></a>               ungeviz,</span>
+<span id="cb28-14"><a href="#cb28-14"></a>               ggpmisc)</span>
+<span id="cb28-15"><a href="#cb28-15"></a><span class="in">```</span></span>
+<span id="cb28-16"><a href="#cb28-16"></a></span>
+<span id="cb28-17"><a href="#cb28-17"></a><span class="fu">## Means method v. Regression method</span></span>
+<span id="cb28-18"><a href="#cb28-18"></a></span>
+<span id="cb28-19"><a href="#cb28-19"></a>Admittedly I'm anticipating some work that we will be doing in a few weeks, but I wanted to take some time to circle back around to a few points from our class discussion, the previous walkthrough and our lectures on regression. I've repeatedly commented on how ANOVA and Regression are indeed one in the same. In the previous walkthrough we performed ANOVA using both a dedicated function <span class="in">`aov()`</span> as well as the same function we used a few weeks back for regression <span class="in">`lm()`</span>. In doing so, we also noted how the $F$ statistic calculated by <span class="in">`aov()`</span> is the same that's calculated for <span class="in">`lm()`</span> (and those of you that can remember all the way back to the regression week that you were asked to report your $F$ value along with your $R^2$ in your regression results when talking about the fit of the overall model.</span>
+<span id="cb28-20"><a href="#cb28-20"></a></span>
+<span id="cb28-21"><a href="#cb28-21"></a>By now you may ask: "Well, if ANOVA is simply linear regression then why involve different functions?" To add insult to injury, would you be even more peeved if I told you that the $F$ statistic for regression is calculated differently from the $F$ statistic for ANOVA, even though they give you the exact same result!!! Ugh... Why, WHY?!?!?!, WHYYYYY?!?!?!?!?!</span>
+<span id="cb28-22"><a href="#cb28-22"></a></span>
+<span id="cb28-23"><a href="#cb28-23"></a>Sadly, tradition and convention are all I can tell you. While in both cases the $F$ value or ratio is an expression of amount of variance that your model (<span class="in">`lm`</span> or <span class="in">`aov`</span>) explains given total variance that exists in the data. In the ANOVA case we are concerned with the means of discrete groups or IVs. Since <span class="in">`lm`</span> deals with continuous predictors (or IVs) then it makes little sense to talk about means, other than the grand mean. In both instances, however, the derived $F$ is an expression of the model's fit.</span>
+<span id="cb28-24"><a href="#cb28-24"></a></span>
+<span id="cb28-25"><a href="#cb28-25"></a>My goal for this section is to demonstrate to you that the regression method we used to derive the the $F$ ratios during our week on regression is identical to the means method Cohen introduced you to this week. First to recap the regression method, our equation from the correlation week's lecture slides was:</span>
+<span id="cb28-26"><a href="#cb28-26"></a></span>
+<span id="cb28-27"><a href="#cb28-27"></a>$$F=\frac{r^2 / df_{reg}}{(1-r^2)/df_{res}}$$</span>
+<span id="cb28-28"><a href="#cb28-28"></a></span>
+<span id="cb28-29"><a href="#cb28-29"></a><span class="ss">-   </span>where $r^2$ is the model's coefficient of determination</span>
+<span id="cb28-30"><a href="#cb28-30"></a><span class="ss">-   </span>$df_{reg}$: the model's $df$ (based on <span class="sc">\#</span> of predictors), and</span>
+<span id="cb28-31"><a href="#cb28-31"></a><span class="ss">-   </span>$df_{res}$: the model's residual $df$</span>
+<span id="cb28-32"><a href="#cb28-32"></a></span>
+<span id="cb28-33"><a href="#cb28-33"></a>moreover,</span>
+<span id="cb28-34"><a href="#cb28-34"></a></span>
+<span id="cb28-35"><a href="#cb28-35"></a>$$r^2=\frac{SS_Y-SS_{res}}{SS_Y}$$</span>
+<span id="cb28-36"><a href="#cb28-36"></a></span>
+<span id="cb28-37"><a href="#cb28-37"></a><span class="ss">-   </span>where $SS_Y$ is the sum of squared differences between the observed values $Y$ and the grand mean $\bar{Y}$</span>
+<span id="cb28-38"><a href="#cb28-38"></a><span class="ss">-   </span>$SS_{res}$ is the sum of squared differences between the observed values $Y$ and the model-predicted values $\hat{Y}$ (or distance to regression line).</span>
+<span id="cb28-39"><a href="#cb28-39"></a></span>
+<span id="cb28-40"><a href="#cb28-40"></a>For those of you interested in reading further on the mathematics, pay close attention to the Flora chapter assigned this week.</span>
+<span id="cb28-41"><a href="#cb28-41"></a></span>
+<span id="cb28-42"><a href="#cb28-42"></a><span class="fu">### Comparing two models</span></span>
+<span id="cb28-43"><a href="#cb28-43"></a></span>
+<span id="cb28-44"><a href="#cb28-44"></a>To conceptualize lets take another look at our data again. But first it might help to take another look at my earlier spiel on <span class="co">[</span><span class="ot">means and other models here</span><span class="co">](https://tehrandav.is/psyc7014/week02/2_4-means_other_models.html)</span> and our related discussion on <span class="co">[</span><span class="ot">t-tests as linear models here</span><span class="co">](https://tehrandav.is/psyc7014/week06/6_3_t-test-lm.html)</span>.</span>
+<span id="cb28-45"><a href="#cb28-45"></a></span>
+<span id="cb28-46"><a href="#cb28-46"></a>Go ahead, I'll wait...</span>
+<span id="cb28-47"><a href="#cb28-47"></a></span>
+<span id="cb28-48"><a href="#cb28-48"></a>OK, now that you're back let's have another look at our example data from the previous walkthrough. First let's read in the clean <span class="in">`dataset`</span> from walkthrough 1</span>
+<span id="cb28-49"><a href="#cb28-49"></a></span>
+<span id="cb28-52"><a href="#cb28-52"></a><span class="in">```{r}</span></span>
+<span id="cb28-53"><a href="#cb28-53"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">'clean_dataset.rds'</span>)</span>
+<span id="cb28-54"><a href="#cb28-54"></a><span class="in">```</span></span>
+<span id="cb28-55"><a href="#cb28-55"></a></span>
+<span id="cb28-56"><a href="#cb28-56"></a>In the plot below, the dotted line represents the <span class="in">`grand_mean`</span> model, where we are using the mean of *all data* to predict individual scores. This corresponds to our assumption that all samples come from the same population and are randomly distributed (aka random error). It is from this *means model* that $SS_Y$ is calculated.</span>
+<span id="cb28-57"><a href="#cb28-57"></a></span>
+<span id="cb28-58"><a href="#cb28-58"></a>Visually the means model looks like this:</span>
+<span id="cb28-59"><a href="#cb28-59"></a></span>
+<span id="cb28-62"><a href="#cb28-62"></a><span class="in">```{r}</span></span>
+<span id="cb28-63"><a href="#cb28-63"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> GROUP_NUM, <span class="at">y =</span> RECALL, <span class="at">col=</span><span class="fu">factor</span>(GROUP_NUM))) <span class="sc">+</span></span>
+<span id="cb28-64"><a href="#cb28-64"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">mean</span>(dataset<span class="sc">$</span>RECALL)) <span class="sc">+</span></span>
+<span id="cb28-65"><a href="#cb28-65"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">height =</span> 0L, <span class="at">seed =</span> 1L, <span class="at">width=</span><span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb28-66"><a href="#cb28-66"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x=</span>GROUP_NUM, <span class="at">ymax=</span>RECALL, <span class="at">ymin=</span><span class="fu">mean</span>(dataset<span class="sc">$</span>RECALL)),</span>
+<span id="cb28-67"><a href="#cb28-67"></a>                 <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">height =</span> 0L, <span class="at">seed =</span> 1L, <span class="at">width=</span><span class="fl">0.2</span>)) <span class="sc">+</span> </span>
+<span id="cb28-68"><a href="#cb28-68"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb28-69"><a href="#cb28-69"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb28-70"><a href="#cb28-70"></a><span class="in">```</span></span>
+<span id="cb28-71"><a href="#cb28-71"></a></span>
+<span id="cb28-72"><a href="#cb28-72"></a>The solid line represents the mean of the entire dataset, or the grand mean. Each of our groups are color coded and the lines connecting the data points to the grand mean are the residuals. We can express the *grand means model* as:</span>
+<span id="cb28-73"><a href="#cb28-73"></a></span>
+<span id="cb28-76"><a href="#cb28-76"></a><span class="in">```{r}</span></span>
+<span id="cb28-77"><a href="#cb28-77"></a>grand_mean_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RECALL<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> dataset) </span>
+<span id="cb28-78"><a href="#cb28-78"></a><span class="co"># Here, "1"" indicates assume scores simply vary randomly about the grand mean</span></span>
+<span id="cb28-79"><a href="#cb28-79"></a><span class="in">```</span></span>
+<span id="cb28-80"><a href="#cb28-80"></a></span>
+<span id="cb28-81"><a href="#cb28-81"></a>Further $SS_Y$ is simply the sum of the squared residuals:</span>
+<span id="cb28-82"><a href="#cb28-82"></a></span>
+<span id="cb28-85"><a href="#cb28-85"></a><span class="in">```{r}</span></span>
+<span id="cb28-86"><a href="#cb28-86"></a>SS_Y <span class="ot">&lt;-</span> <span class="fu">sum</span>(grand_mean_model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb28-87"><a href="#cb28-87"></a>SS_Y</span>
+<span id="cb28-88"><a href="#cb28-88"></a><span class="in">```</span></span>
+<span id="cb28-89"><a href="#cb28-89"></a></span>
+<span id="cb28-90"><a href="#cb28-90"></a>In contrast, the <span class="in">`group_means`</span> model represents the model (line) of best fit for our *ANOVA model* which, in addition to assuming random error about the grand mean, also assumes that <span class="in">`GROUP`</span> (encoding) is a predictor of variation that we see in the data (aka systematic error). Its from this model which $SS_{res}$ is calculated. This model may be expressed:</span>
+<span id="cb28-91"><a href="#cb28-91"></a></span>
+<span id="cb28-94"><a href="#cb28-94"></a><span class="in">```{r}</span></span>
+<span id="cb28-95"><a href="#cb28-95"></a><span class="co"># add GROUP as a predictor to our grand means model (RECALL~1)</span></span>
+<span id="cb28-96"><a href="#cb28-96"></a>group_means_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RECALL<span class="sc">~</span><span class="dv">1</span> <span class="sc">+</span> GROUP_FACTOR, <span class="at">data =</span> dataset) </span>
+<span id="cb28-97"><a href="#cb28-97"></a></span>
+<span id="cb28-98"><a href="#cb28-98"></a><span class="co"># also shorthand</span></span>
+<span id="cb28-99"><a href="#cb28-99"></a><span class="co"># group_means_model &lt;- lm(RECALL~1 + GROUP_FACTOR, data = dataset)</span></span>
+<span id="cb28-100"><a href="#cb28-100"></a><span class="in">```</span></span>
+<span id="cb28-101"><a href="#cb28-101"></a></span>
+<span id="cb28-102"><a href="#cb28-102"></a>and visualized as:</span>
+<span id="cb28-103"><a href="#cb28-103"></a></span>
+<span id="cb28-106"><a href="#cb28-106"></a><span class="in">```{r}</span></span>
+<span id="cb28-107"><a href="#cb28-107"></a><span class="co"># add group predicteds for plotting</span></span>
+<span id="cb28-108"><a href="#cb28-108"></a>dataset<span class="sc">$</span>group_predicteds <span class="ot">&lt;-</span> group_means_model<span class="sc">$</span>fitted</span>
+<span id="cb28-109"><a href="#cb28-109"></a></span>
+<span id="cb28-110"><a href="#cb28-110"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> GROUP_NUM, <span class="at">y =</span> RECALL, <span class="at">col=</span><span class="fu">factor</span>(GROUP_NUM))) <span class="sc">+</span></span>
+<span id="cb28-111"><a href="#cb28-111"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">height =</span> 0L, <span class="at">seed =</span> 1L, <span class="at">width=</span><span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb28-112"><a href="#cb28-112"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"hpline"</span>, <span class="at">width =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">fun=</span><span class="st">"mean"</span>) <span class="sc">+</span> </span>
+<span id="cb28-113"><a href="#cb28-113"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x=</span>GROUP_NUM, <span class="at">ymax=</span>RECALL, <span class="at">ymin=</span>group_predicteds),</span>
+<span id="cb28-114"><a href="#cb28-114"></a>                 <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">height =</span> 0L, <span class="at">seed =</span> 1L, <span class="at">width=</span><span class="fl">0.2</span>)) <span class="sc">+</span> </span>
+<span id="cb28-115"><a href="#cb28-115"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb28-116"><a href="#cb28-116"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb28-117"><a href="#cb28-117"></a><span class="in">```</span></span>
+<span id="cb28-118"><a href="#cb28-118"></a></span>
+<span id="cb28-119"><a href="#cb28-119"></a>Note that the horizontal lines are the predicted values in this model... the group means.</span>
+<span id="cb28-120"><a href="#cb28-120"></a></span>
+<span id="cb28-121"><a href="#cb28-121"></a>The resulting sum of squares for this model $SS_{res}$ is:</span>
+<span id="cb28-122"><a href="#cb28-122"></a></span>
+<span id="cb28-125"><a href="#cb28-125"></a><span class="in">```{r}</span></span>
+<span id="cb28-126"><a href="#cb28-126"></a>SS_res <span class="ot">&lt;-</span> <span class="fu">sum</span>(group_means_model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb28-127"><a href="#cb28-127"></a>SS_res</span>
+<span id="cb28-128"><a href="#cb28-128"></a><span class="in">```</span></span>
+<span id="cb28-129"><a href="#cb28-129"></a></span>
+<span id="cb28-130"><a href="#cb28-130"></a>Thus $R^2$ is simply a statement about the difference in the grand mean model and the experimental model (in this case our ANOVA model with GROUP predictor) residuals as a percentage of $SS_Y$. Looking at the $R^2$ of the <span class="in">`group_means_model`</span> show us that it is .4468.</span>
+<span id="cb28-131"><a href="#cb28-131"></a></span>
+<span id="cb28-134"><a href="#cb28-134"></a><span class="in">```{r}</span></span>
+<span id="cb28-135"><a href="#cb28-135"></a>broom<span class="sc">::</span><span class="fu">glance</span>(group_means_model)</span>
+<span id="cb28-136"><a href="#cb28-136"></a><span class="in">```</span></span>
+<span id="cb28-137"><a href="#cb28-137"></a></span>
+<span id="cb28-138"><a href="#cb28-138"></a>$R^2$ as calculated from our <span class="in">`SS_res`</span> and <span class="in">`SS_Y`</span>:</span>
+<span id="cb28-139"><a href="#cb28-139"></a></span>
+<span id="cb28-142"><a href="#cb28-142"></a><span class="in">```{r}</span></span>
+<span id="cb28-143"><a href="#cb28-143"></a>r2 <span class="ot">&lt;-</span> (SS_Y<span class="sc">-</span>SS_res)<span class="sc">/</span>SS_Y</span>
+<span id="cb28-144"><a href="#cb28-144"></a>r2</span>
+<span id="cb28-145"><a href="#cb28-145"></a><span class="in">```</span></span>
+<span id="cb28-146"><a href="#cb28-146"></a></span>
+<span id="cb28-147"><a href="#cb28-147"></a>Given this value we can calculate the $F$-ratio using the equation above, noting that the model's degrees of freedom based on the number of predictors = $df_{reg}$ = 4 and the model's residual degrees of freedom = $df_{res}$ = 45 (more on this below)</span>
+<span id="cb28-148"><a href="#cb28-148"></a></span>
+<span id="cb28-151"><a href="#cb28-151"></a><span class="in">```{r}</span></span>
+<span id="cb28-152"><a href="#cb28-152"></a>f_ratio <span class="ot">&lt;-</span> (r2<span class="sc">/</span><span class="dv">4</span>)<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>r2)<span class="sc">/</span><span class="dv">45</span>)</span>
+<span id="cb28-153"><a href="#cb28-153"></a>f_ratio</span>
+<span id="cb28-154"><a href="#cb28-154"></a><span class="in">```</span></span>
+<span id="cb28-155"><a href="#cb28-155"></a></span>
+<span id="cb28-156"><a href="#cb28-156"></a>In addition, with ANOVA we are dealing with discrete predictors rather than continuous. Visually, as you can see that the data in the plot are stacked into columns, with the mean of each group located at the center of the columns' density. This also means that rather than a continuous range of predicted values $\hat{Y}$ we have a set number of $\hat{Y}$, one for each group mean that we are considering in the ANOVA. Therefore:</span>
+<span id="cb28-157"><a href="#cb28-157"></a></span>
+<span id="cb28-158"><a href="#cb28-158"></a><span class="ss">-   </span>$SS_Y$ may be thought of in terms of the differences between every score compared to the grand mean.</span>
+<span id="cb28-159"><a href="#cb28-159"></a><span class="ss">-   </span>$SS_{res}$ may be thought of as the differences between every score within the group and the group mean $\hat{Y}$</span>
+<span id="cb28-160"><a href="#cb28-160"></a></span>
+<span id="cb28-161"><a href="#cb28-161"></a>To put it more succinctly, with ANOVA we are directly comparing our <span class="in">`GROUP`</span> predictor model's ability to account for variance in the data above what we might expect by chance. Unpacking this a bit, we have a <span class="in">`grand_mean`</span> model and a <span class="in">`group_mean`</span> model. As you will see in a few weeks we can use a *Likelihood Ratio Test* to directly compare to models to see if the second accounts for significantly more variance than the first. In `R` this is accomplished using.... *dun, dun, dun* <span class="in">`anova()`</span>:</span>
+<span id="cb28-162"><a href="#cb28-162"></a></span>
+<span id="cb28-165"><a href="#cb28-165"></a><span class="in">```{r}</span></span>
+<span id="cb28-166"><a href="#cb28-166"></a><span class="co"># Here, "1"" indicates let scores simply vary randomly</span></span>
+<span id="cb28-167"><a href="#cb28-167"></a>grand_mean_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RECALL<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> dataset) </span>
+<span id="cb28-168"><a href="#cb28-168"></a></span>
+<span id="cb28-169"><a href="#cb28-169"></a><span class="co"># add GROUP as a predictor to our original model</span></span>
+<span id="cb28-170"><a href="#cb28-170"></a>group_means_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RECALL<span class="sc">~</span><span class="dv">1</span> <span class="sc">+</span> GROUP_FACTOR, <span class="at">data =</span> dataset) </span>
+<span id="cb28-171"><a href="#cb28-171"></a></span>
+<span id="cb28-172"><a href="#cb28-172"></a><span class="co"># run Likelihood Ratio Test to compare two models</span></span>
+<span id="cb28-173"><a href="#cb28-173"></a><span class="fu">anova</span>(grand_mean_model, group_means_model, <span class="at">test=</span><span class="st">"LRT"</span>)</span>
+<span id="cb28-174"><a href="#cb28-174"></a><span class="in">```</span></span>
+<span id="cb28-175"><a href="#cb28-175"></a></span>
+<span id="cb28-176"><a href="#cb28-176"></a>The output above tells you the structure (formula) of each model and that <span class="in">`Model 2`</span> accounts for significantly more variance than <span class="in">`Model 1`</span> (as assessed on the Chi-sq. distribution). For what it's worth, let's run this same comparison of models using a different test, <span class="in">`F`</span>:</span>
+<span id="cb28-177"><a href="#cb28-177"></a></span>
+<span id="cb28-180"><a href="#cb28-180"></a><span class="in">```{r}</span></span>
+<span id="cb28-181"><a href="#cb28-181"></a><span class="co"># run Likelihood Ratio Test to compare two models</span></span>
+<span id="cb28-182"><a href="#cb28-182"></a><span class="fu">anova</span>(grand_mean_model, group_means_model, <span class="at">test=</span><span class="st">"F"</span>)</span>
+<span id="cb28-183"><a href="#cb28-183"></a><span class="in">```</span></span>
+<span id="cb28-184"><a href="#cb28-184"></a></span>
+<span id="cb28-185"><a href="#cb28-185"></a>Those numbers look familiar (df and F)? What does that suggest is really going on with ANOVA?</span>
+<span id="cb28-186"><a href="#cb28-186"></a></span>
+<span id="cb28-187"><a href="#cb28-187"></a><span class="fu">### Means method calculations</span></span>
+<span id="cb28-188"><a href="#cb28-188"></a></span>
+<span id="cb28-189"><a href="#cb28-189"></a>Now lets turn to our *F*-ratio equation for the means method:</span>
+<span id="cb28-190"><a href="#cb28-190"></a></span>
+<span id="cb28-191"><a href="#cb28-191"></a>$$F=\frac{MS_{bet}}{MS_{error}}$$</span>
+<span id="cb28-192"><a href="#cb28-192"></a></span>
+<span id="cb28-193"><a href="#cb28-193"></a>where</span>
+<span id="cb28-194"><a href="#cb28-194"></a></span>
+<span id="cb28-195"><a href="#cb28-195"></a><span class="ss">-   </span>$MS_{error}$ = $SS_{res}/df_{res}$</span>
+<span id="cb28-196"><a href="#cb28-196"></a><span class="ss">-   </span>and $MS_{bet}$ = ($(SS_{Y}-SS_{res})/df_{reg}$;</span>
+<span id="cb28-197"><a href="#cb28-197"></a></span>
+<span id="cb28-198"><a href="#cb28-198"></a>note that $df_{res}$ may be calculated as $k(n-1)$ where $k$ is the number of IV and $n$ is the number of scores in each group; $df_{reg}$ is $k-1$.</span>
+<span id="cb28-199"><a href="#cb28-199"></a></span>
+<span id="cb28-200"><a href="#cb28-200"></a>so for our model, <span class="in">`aov_model`</span> (our ANOVA) we can calculate the <span class="in">`F-ratio`</span> using the means method as follows:</span>
+<span id="cb28-201"><a href="#cb28-201"></a></span>
+<span id="cb28-204"><a href="#cb28-204"></a><span class="in">```{r}</span></span>
+<span id="cb28-205"><a href="#cb28-205"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(RECALL<span class="sc">~</span>GROUP_FACTOR,dataset)</span>
+<span id="cb28-206"><a href="#cb28-206"></a></span>
+<span id="cb28-207"><a href="#cb28-207"></a><span class="co"># calculate TSS from grand mean residuals</span></span>
+<span id="cb28-208"><a href="#cb28-208"></a>SS_Y <span class="ot">&lt;-</span> ((dataset<span class="sc">$</span>RECALL<span class="sc">-</span><span class="fu">mean</span>(dataset<span class="sc">$</span>RECALL))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span>
+<span id="cb28-209"><a href="#cb28-209"></a></span>
+<span id="cb28-210"><a href="#cb28-210"></a><span class="co"># calculate RSS from model residuals (group means compared to grand mean)</span></span>
+<span id="cb28-211"><a href="#cb28-211"></a>SS_res <span class="ot">&lt;-</span> (aov_model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span>
+<span id="cb28-212"><a href="#cb28-212"></a></span>
+<span id="cb28-213"><a href="#cb28-213"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># predictors</span></span>
+<span id="cb28-214"><a href="#cb28-214"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number in each group</span></span>
+<span id="cb28-215"><a href="#cb28-215"></a></span>
+<span id="cb28-216"><a href="#cb28-216"></a><span class="co"># between df</span></span>
+<span id="cb28-217"><a href="#cb28-217"></a>df_reg <span class="ot">&lt;-</span> k<span class="dv">-1</span></span>
+<span id="cb28-218"><a href="#cb28-218"></a></span>
+<span id="cb28-219"><a href="#cb28-219"></a><span class="co"># within df</span></span>
+<span id="cb28-220"><a href="#cb28-220"></a>df_res <span class="ot">&lt;-</span> k<span class="sc">*</span>(n<span class="dv">-1</span>)</span>
+<span id="cb28-221"><a href="#cb28-221"></a></span>
+<span id="cb28-222"><a href="#cb28-222"></a><span class="co"># MS treatments</span></span>
+<span id="cb28-223"><a href="#cb28-223"></a>MS_treat <span class="ot">&lt;-</span> (SS_Y<span class="sc">-</span>SS_res)<span class="sc">/</span>df_reg</span>
+<span id="cb28-224"><a href="#cb28-224"></a></span>
+<span id="cb28-225"><a href="#cb28-225"></a><span class="co"># MS error</span></span>
+<span id="cb28-226"><a href="#cb28-226"></a>MS_error <span class="ot">&lt;-</span> SS_res<span class="sc">/</span>df_res</span>
+<span id="cb28-227"><a href="#cb28-227"></a></span>
+<span id="cb28-228"><a href="#cb28-228"></a></span>
+<span id="cb28-229"><a href="#cb28-229"></a>F.ratio <span class="ot">&lt;-</span> (MS_treat<span class="sc">/</span>MS_error) <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span>
+<span id="cb28-230"><a href="#cb28-230"></a><span class="in">```</span></span>
+<span id="cb28-231"><a href="#cb28-231"></a></span>
+<span id="cb28-232"><a href="#cb28-232"></a><span class="fu">## Bringing it together: it's all about the residuals, baby</span></span>
+<span id="cb28-233"><a href="#cb28-233"></a></span>
+<span id="cb28-234"><a href="#cb28-234"></a>So on one hand we have the *F*-ratio being calculated using $r^2$ and on the other we have it being calculated using the mean square. Underlying both is a calculation of various $SS$ and it is using this fact that we can show that the two methods are equivalent. Drawn out, we have on the left our $r^2$ calculation and on the right the mean square calculation:</span>
+<span id="cb28-235"><a href="#cb28-235"></a></span>
+<span id="cb28-236"><a href="#cb28-236"></a>$$F=\frac{r^2 / df_{reg}}{(1-r^2)/df_{res}} =\frac{MS_{bet}}{MS_{error}}$$</span>
+<span id="cb28-237"><a href="#cb28-237"></a></span>
+<span id="cb28-238"><a href="#cb28-238"></a>rewriting our $r^2$ in terms of $SS$ (sums of squares) we get:</span>
+<span id="cb28-239"><a href="#cb28-239"></a></span>
+<span id="cb28-240"><a href="#cb28-240"></a>$$\frac{\frac{SS_Y-SS_{res}}{SS_Y} / df_{reg}}{(1-\frac{SS_Y-SS_{res}}{SS_Y})/df_{res}} =\frac{MS_{bet}}{MS_{error}}$$</span>
+<span id="cb28-241"><a href="#cb28-241"></a></span>
+<span id="cb28-242"><a href="#cb28-242"></a>and rewriting our $MS$ side of the equation in terms of $SS$: $$\frac{\frac{SS_Y-SS_{res}}{SS_Y} / df_{reg}}{(1-\frac{SS_Y-SS_{res}}{SS_Y})/df_{res}} =\frac{(SS_{Y}-SS_{res})/df_{reg}}{SS_{res}/df_{res}}$$</span>
+<span id="cb28-243"><a href="#cb28-243"></a></span>
+<span id="cb28-244"><a href="#cb28-244"></a>multiplying the left side of the equation by 1, or $\frac{SS_Y}{SS_Y}$:</span>
+<span id="cb28-245"><a href="#cb28-245"></a></span>
+<span id="cb28-246"><a href="#cb28-246"></a>$$\frac{(SS_Y-SS_{res}) / df_{reg}}{(SS_Y-(SS_Y-SS_{res}))/df_{res}} =\frac{(SS_{Y}-SS_{res})/df_{reg}}{SS_{res}/df_{res}}$$</span>
+<span id="cb28-247"><a href="#cb28-247"></a></span>
+<span id="cb28-248"><a href="#cb28-248"></a>which gives us:</span>
+<span id="cb28-249"><a href="#cb28-249"></a></span>
+<span id="cb28-250"><a href="#cb28-250"></a>$$\frac{(SS_{Y}-SS_{res})/df_{reg}}{SS_{res}/df_{res}}=\frac{(SS_{Y}-SS_{res})/df_{reg}}{SS_{res}/df_{res}}$$</span>
+<span id="cb28-251"><a href="#cb28-251"></a></span>
+<span id="cb28-252"><a href="#cb28-252"></a>See... told you... SAME DAMN THING!</span>
+<span id="cb28-253"><a href="#cb28-253"></a></span>
+<span id="cb28-254"><a href="#cb28-254"></a>What does this mean for you... well perhaps nothing. Honestly, if you are using your computer for stats a correct calculation is a correct calculation. However, conceptually it may be easier to get and keep yourself in general linear model mode, as it will make incorporating more complex modeling techniques (higher-order ANOVA, ANCOVA, mixed-models, multi-level models, growth curve models) a more intuitive step in the future.</span>
+<span id="cb28-255"><a href="#cb28-255"></a></span>
+<span id="cb28-256"><a href="#cb28-256"></a><span class="fu">## CRITICAL POINT: unpacking those residuals, baby</span></span>
+<span id="cb28-257"><a href="#cb28-257"></a></span>
+<span id="cb28-258"><a href="#cb28-258"></a>In class I asked you to note two very important ideas, one in the context of ANOVA and the other for regression. For ANOVA, we noted that:</span>
+<span id="cb28-259"><a href="#cb28-259"></a></span>
+<span id="cb28-260"><a href="#cb28-260"></a><span class="ss">1.  </span>the null hypothesis for ANOVA is that the mean scores of all sample groups are equal to one another</span>
+<span id="cb28-261"><a href="#cb28-261"></a><span class="ss">2.  </span>mathematically, that if the null hypothesis is true, then each of the group means are not only equal to one another, but to the **grand mean** of the scores from all combined groups (mean of dumping everyone's score together)</span>
+<span id="cb28-262"><a href="#cb28-262"></a></span>
+<span id="cb28-263"><a href="#cb28-263"></a>Taking a look a the previous section, $SS_Y$ (aka, Total Sum of Squares) are the residuals with respect to the grand mean of all groups. In other words, these are the amount of error / residuals that you would expect **if the null hypothesis was TRUE!!!**. Tying this more explicitly to some of the terminology that we used in lecture for ANOVA (the variance ratio method), these residuals represent what you would expect our within-groups variability to be if the null hypothesis is true (that is the null hypothesis assumes that all of this data comes from a single group... your hypothesis test is designed to refute that notion).</span>
+<span id="cb28-264"><a href="#cb28-264"></a></span>
+<span id="cb28-265"><a href="#cb28-265"></a>$SS_{res}$ represents the within group residuals related to a model that assumes group differences. That is this is what the within residuals look like when each data point is tied to a particular group mean, instead of the grand mean. When the null hypothesis is true, $SS_{res} = SS_Y$. The further you group means are from one another, the further $SS_{res}$ decreases from $SS_Y$. In the variance-ratio terminology, the further the $MS_{error}$ gets from the Total Sum of Squares (MS) as is the random variation in data points (error) moves from being accounted for by the grand mean to the individual means. In turn, this suggests that the differences in individual means is sucking-up some of that random variance (i.e. has some explanatory value). The amount of the variation that the group means accounts for can be taken be taking the $SS_Y$ from the null hypothesis residuals and subtracting the $SS_{res}$ from the group predictor residuals. What remains are the residuals accounted for by mean differences! These are the residuals for our effect ($MS_{bet}$). In the context of ANOVA these raw sums of squares are understood in terms of the degrees of freedom for our predictors and groups... the mean squares (MS) are the sums of squares divided be the appropriate degrees of freedom.</span>
+<span id="cb28-266"><a href="#cb28-266"></a></span>
+<span id="cb28-267"><a href="#cb28-267"></a>Ideally we want the residuals tied to our effect ($MS_{bet}$) to be greater than the random variance left over $MS_{error}$ which is why we evaluate the resulting F-ratio $\frac{MS_{bet}}{MS_{error}}$ in terms of being "how much greater than 1". To put this into terms that we are familiar with from the our discussions of <span class="co">[</span><span class="ot">Effect Size</span><span class="co">](http://tehrandav.is/PSYC7014_walkthroughs/docs/6_1-effect_size.html#cohen-brings-the-noise-signal-detection-theory)</span>, our between groups effect is our signal, and the random within groups variation is our noise.</span>
+<span id="cb28-268"><a href="#cb28-268"></a></span>
+<span id="cb28-269"><a href="#cb28-269"></a>If you are looking at this video, https://youtu.be/YrFehOKUJBw, and working with the accompanying excel file, the gist is the further the results of the Within SS box are from the Total SS box, to more likely you are to get a significant effect (the greater the Between SS box).</span>
+<span id="cb28-270"><a href="#cb28-270"></a></span>
+<span id="cb28-271"><a href="#cb28-271"></a>FWIW, this logic also applies to regression, where:</span>
+<span id="cb28-272"><a href="#cb28-272"></a></span>
+<span id="cb28-273"><a href="#cb28-273"></a><span class="ss">1.  </span>the null hypothesis is that the predictive model accounts for no variance ($r^2$ = 0).</span>
+<span id="cb28-274"><a href="#cb28-274"></a><span class="ss">2.  </span>in a simple regression this would also mean that the $beta$ coefficient representing your slope would also be zero, with an intercept at, wait for it... the **grand mean**!!</span>
+<span id="cb28-275"><a href="#cb28-275"></a></span>
+<span id="cb28-276"><a href="#cb28-276"></a>From here everything plays out as above, beginning with the initial residuals, $SS_Y$ or (TSS) being based upon the grand mean, and the $SS_{res}$ being those residuals around the line of best fit.</span>
+<span id="cb28-277"><a href="#cb28-277"></a></span>
+<span id="cb28-278"><a href="#cb28-278"></a>Hope this helps understand what's going on behind the scenes!</span>
+<span id="cb28-279"><a href="#cb28-279"></a></span>
+<span id="cb28-280"><a href="#cb28-280"></a>See you next week!</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>
