@@ -25,7 +25,7 @@ The lectures were presented in two manners
 The researchers hypothesized that students that learned the material in the standard lecture would perform better than those that learned via computer.
 
 ```{r}
-dataset_no_inter <- read_csv("http://tehrandav.is/psyc7014/practice_dataSets/factorial_ANOVA_dataset_no_interactions.csv")
+dataset_no_inter <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/factorial_ANOVA_dataset_no_interactions.csv")
 
 dataset_no_inter$Lecture <- recode_factor(dataset_no_inter$Lecture, "1"="Phys","2"="Soc","3"="Hist")
 

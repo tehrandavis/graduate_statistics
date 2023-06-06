@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Factorial RM-ANOVA and simple effects</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="../site_libs/plotly-binding-4.10.1/plotly.js"></script><script src="../site_libs/typedarray-0.1/typedarray.min.js"></script><script src="../site_libs/jquery-3.5.1/jquery.min.js"></script><link href="../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Factorial RM-ANOVA and simple effects</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link active">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#loading-in-the-necessary-packages-and-data" id="toc-loading-in-the-necessary-packages-and-data" class="nav-link active" data-scroll-target="#loading-in-the-necessary-packages-and-data">loading in the necessary packages and data:</a></li>
+  <li>
+<a href="#plotting-the-data" id="toc-plotting-the-data" class="nav-link" data-scroll-target="#plotting-the-data">plotting the data</a>
+  <ul class="collapse">
+<li><a href="#individual-subjects-plots-spaghetti" id="toc-individual-subjects-plots-spaghetti" class="nav-link" data-scroll-target="#individual-subjects-plots-spaghetti">individual subjects plots: Spaghetti</a></li>
+  <li><a href="#running-the-omnibus-anova" id="toc-running-the-omnibus-anova" class="nav-link" data-scroll-target="#running-the-omnibus-anova">running the omnibus ANOVA:</a></li>
+  <li><a href="#running-the-simple-effects-anovas" id="toc-running-the-simple-effects-anovas" class="nav-link" data-scroll-target="#running-the-simple-effects-anovas">running the simple effects ANOVAs</a></li>
+  <li><a href="#writing-this-up" id="toc-writing-this-up" class="nav-link" data-scroll-target="#writing-this-up">Writing this up</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Factorial RM-ANOVA and simple effects</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>Let’s ramp-up the complexity. Here is a dataset testing Recall over three days as a function of depth of processing (Lo, Med, High). In this case we have two within factors.</p>
+<section id="loading-in-the-necessary-packages-and-data" class="level2"><h2 class="anchored" data-anchor-id="loading-in-the-necessary-packages-and-data">loading in the necessary packages and data:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
+<span id="cb1-2"><a href="#cb1-2"></a>               afex,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>               cowplot,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>               emmeans)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/custom_functions/withinSummary.R"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>factorial_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/withinEx3.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 90 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): ProcessDepth, Day
+dbl (2): Subject, Recalled
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>factorial_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 90 × 4
+   Subject Recalled ProcessDepth Day  
+     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;
+ 1       1       14 High         Day1 
+ 2       2       10 High         Day1 
+ 3       3       13 High         Day1 
+ 4       4       14 High         Day1 
+ 5       5       12 High         Day1 
+ 6       6        8 High         Day1 
+ 7       7       13 High         Day1 
+ 8       8       11 High         Day1 
+ 9       9        9 High         Day1 
+10      10       12 High         Day1 
+# ℹ 80 more rows</code></pre>
+</div>
+</div>
+<p>One thing to note is that <strong>Subject</strong> is being treated as a &lt;dbl&gt; number. It should be treated as a factor.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>factorial_df<span class="sc">$</span>Subject <span class="ot">&lt;-</span>  <span class="fu">as.factor</span>(factorial_df<span class="sc">$</span>Subject)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="plotting-the-data" class="level2"><h2 class="anchored" data-anchor-id="plotting-the-data">plotting the data</h2>
+<section id="individual-subjects-plots-spaghetti" class="level3"><h3 class="anchored" data-anchor-id="individual-subjects-plots-spaghetti">individual subjects plots: Spaghetti</h3>
+<p>Since I have two factors here, one strategy may be to <strong>facet</strong> my spaghetti plots. In this case I am creating seperate spaghetti plots for each level of <strong>ProcessDepth:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factorial_df, <span class="fu">aes</span>(<span class="at">x=</span>Day, <span class="at">y=</span>Recalled, <span class="at">group =</span> Subject)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col=</span>Subject)) <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">col=</span>Subject)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>ProcessDepth)</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2b8c88a1ffce766581d4" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-2b8c88a1ffce766581d4">{"x":{"data":[{"x":[1,2,3],"y":[14,12,18],"text":["Day: Day1<br />Recalled: 14<br />Subject: 1<br />Subject: 1","Day: Day2<br />Recalled: 12<br />Subject: 1<br />Subject: 1","Day: Day3<br />Recalled: 18<br />Subject: 1<br />Subject: 1"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[11,10,10],"text":["Day: Day1<br />Recalled: 11<br />Subject: 1<br />Subject: 1","Day: Day2<br />Recalled: 10<br />Subject: 1<br />Subject: 1","Day: Day3<br />Recalled: 10<br />Subject: 1<br />Subject: 1"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,10,14],"text":["Day: Day1<br />Recalled: 12<br />Subject: 1<br />Subject: 1","Day: Day2<br />Recalled: 10<br />Subject: 1<br />Subject: 1","Day: Day3<br />Recalled: 14<br />Subject: 1<br />Subject: 1"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,16,20],"text":["Day: Day1<br />Recalled: 10<br />Subject: 2<br />Subject: 2","Day: Day2<br />Recalled: 16<br />Subject: 2<br />Subject: 2","Day: Day3<br />Recalled: 20<br />Subject: 2<br />Subject: 2"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[9,8,9],"text":["Day: Day1<br />Recalled:  9<br />Subject: 2<br />Subject: 2","Day: Day2<br />Recalled:  8<br />Subject: 2<br />Subject: 2","Day: Day3<br />Recalled:  9<br />Subject: 2<br />Subject: 2"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,15,15],"text":["Day: Day1<br />Recalled:  8<br />Subject: 2<br />Subject: 2","Day: Day2<br />Recalled: 15<br />Subject: 2<br />Subject: 2","Day: Day3<br />Recalled: 15<br />Subject: 2<br />Subject: 2"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[13,18,16],"text":["Day: Day1<br />Recalled: 13<br />Subject: 3<br />Subject: 3","Day: Day2<br />Recalled: 18<br />Subject: 3<br />Subject: 3","Day: Day3<br />Recalled: 16<br />Subject: 3<br />Subject: 3"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,12,11],"text":["Day: Day1<br />Recalled:  8<br />Subject: 3<br />Subject: 3","Day: Day2<br />Recalled: 12<br />Subject: 3<br />Subject: 3","Day: Day3<br />Recalled: 11<br />Subject: 3<br />Subject: 3"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,14,14],"text":["Day: Day1<br />Recalled: 10<br />Subject: 3<br />Subject: 3","Day: Day2<br />Recalled: 14<br />Subject: 3<br />Subject: 3","Day: Day3<br />Recalled: 14<br />Subject: 3<br />Subject: 3"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[14,15,22],"text":["Day: Day1<br />Recalled: 14<br />Subject: 4<br />Subject: 4","Day: Day2<br />Recalled: 15<br />Subject: 4<br />Subject: 4","Day: Day3<br />Recalled: 22<br />Subject: 4<br />Subject: 4"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,8,11],"text":["Day: Day1<br />Recalled: 10<br />Subject: 4<br />Subject: 4","Day: Day2<br />Recalled:  8<br />Subject: 4<br />Subject: 4","Day: Day3<br />Recalled: 11<br />Subject: 4<br />Subject: 4"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[11,15,15],"text":["Day: Day1<br />Recalled: 11<br />Subject: 4<br />Subject: 4","Day: Day2<br />Recalled: 15<br />Subject: 4<br />Subject: 4","Day: Day3<br />Recalled: 15<br />Subject: 4<br />Subject: 4"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,14,19],"text":["Day: Day1<br />Recalled: 12<br />Subject: 5<br />Subject: 5","Day: Day2<br />Recalled: 14<br />Subject: 5<br />Subject: 5","Day: Day3<br />Recalled: 19<br />Subject: 5<br />Subject: 5"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[7,12,8],"text":["Day: Day1<br />Recalled:  7<br />Subject: 5<br />Subject: 5","Day: Day2<br />Recalled: 12<br />Subject: 5<br />Subject: 5","Day: Day3<br />Recalled:  8<br />Subject: 5<br />Subject: 5"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,11,12],"text":["Day: Day1<br />Recalled: 10<br />Subject: 5<br />Subject: 5","Day: Day2<br />Recalled: 11<br />Subject: 5<br />Subject: 5","Day: Day3<br />Recalled: 12<br />Subject: 5<br />Subject: 5"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,11,17],"text":["Day: Day1<br />Recalled:  8<br />Subject: 6<br />Subject: 6","Day: Day2<br />Recalled: 11<br />Subject: 6<br />Subject: 6","Day: Day3<br />Recalled: 17<br />Subject: 6<br />Subject: 6"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"6","legendgroup":"6","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,9,9],"text":["Day: Day1<br />Recalled:  8<br />Subject: 6<br />Subject: 6","Day: Day2<br />Recalled:  9<br />Subject: 6<br />Subject: 6","Day: Day3<br />Recalled:  9<br />Subject: 6<br />Subject: 6"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"6","legendgroup":"6","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[13,10,17],"text":["Day: Day1<br />Recalled: 13<br />Subject: 6<br />Subject: 6","Day: Day2<br />Recalled: 10<br />Subject: 6<br />Subject: 6","Day: Day3<br />Recalled: 17<br />Subject: 6<br />Subject: 6"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"6","legendgroup":"6","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[13,15,21],"text":["Day: Day1<br />Recalled: 13<br />Subject: 7<br />Subject: 7","Day: Day2<br />Recalled: 15<br />Subject: 7<br />Subject: 7","Day: Day3<br />Recalled: 21<br />Subject: 7<br />Subject: 7"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"7","legendgroup":"7","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,10,11],"text":["Day: Day1<br />Recalled:  8<br />Subject: 7<br />Subject: 7","Day: Day2<br />Recalled: 10<br />Subject: 7<br />Subject: 7","Day: Day3<br />Recalled: 11<br />Subject: 7<br />Subject: 7"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"7","legendgroup":"7","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,14,16],"text":["Day: Day1<br />Recalled: 10<br />Subject: 7<br />Subject: 7","Day: Day2<br />Recalled: 14<br />Subject: 7<br />Subject: 7","Day: Day3<br />Recalled: 16<br />Subject: 7<br />Subject: 7"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"7","legendgroup":"7","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[11,16,16],"text":["Day: Day1<br />Recalled: 11<br />Subject: 8<br />Subject: 8","Day: Day2<br />Recalled: 16<br />Subject: 8<br />Subject: 8","Day: Day3<br />Recalled: 16<br />Subject: 8<br />Subject: 8"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)"}},"hoveron":"points","name":"8","legendgroup":"8","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,9,10],"text":["Day: Day1<br />Recalled: 12<br />Subject: 8<br />Subject: 8","Day: Day2<br />Recalled:  9<br />Subject: 8<br />Subject: 8","Day: Day3<br />Recalled: 10<br />Subject: 8<br />Subject: 8"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)"}},"hoveron":"points","name":"8","legendgroup":"8","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,10,11],"text":["Day: Day1<br />Recalled:  8<br />Subject: 8<br />Subject: 8","Day: Day2<br />Recalled: 10<br />Subject: 8<br />Subject: 8","Day: Day3<br />Recalled: 11<br />Subject: 8<br />Subject: 8"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)"}},"hoveron":"points","name":"8","legendgroup":"8","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[9,13,22],"text":["Day: Day1<br />Recalled:  9<br />Subject: 9<br />Subject: 9","Day: Day2<br />Recalled: 13<br />Subject: 9<br />Subject: 9","Day: Day3<br />Recalled: 22<br />Subject: 9<br />Subject: 9"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"9","legendgroup":"9","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[9,9,9],"text":["Day: Day1<br />Recalled:  9<br />Subject: 9<br />Subject: 9","Day: Day2<br />Recalled:  9<br />Subject: 9<br />Subject: 9","Day: Day3<br />Recalled:  9<br />Subject: 9<br />Subject: 9"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"9","legendgroup":"9","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,12,14],"text":["Day: Day1<br />Recalled: 12<br />Subject: 9<br />Subject: 9","Day: Day2<br />Recalled: 12<br />Subject: 9<br />Subject: 9","Day: Day3<br />Recalled: 14<br />Subject: 9<br />Subject: 9"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"9","legendgroup":"9","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,11,19],"text":["Day: Day1<br />Recalled: 12<br />Subject: 10<br />Subject: 10","Day: Day2<br />Recalled: 11<br />Subject: 10<br />Subject: 10","Day: Day3<br />Recalled: 19<br />Subject: 10<br />Subject: 10"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)"}},"hoveron":"points","name":"10","legendgroup":"10","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[9,8,12],"text":["Day: Day1<br />Recalled:  9<br />Subject: 10<br />Subject: 10","Day: Day2<br />Recalled:  8<br />Subject: 10<br />Subject: 10","Day: Day3<br />Recalled: 12<br />Subject: 10<br />Subject: 10"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)"}},"hoveron":"points","name":"10","legendgroup":"10","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[11,9,16],"text":["Day: Day1<br />Recalled: 11<br />Subject: 10<br />Subject: 10","Day: Day2<br />Recalled:  9<br />Subject: 10<br />Subject: 10","Day: Day3<br />Recalled: 16<br />Subject: 10<br />Subject: 10"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)"}},"hoveron":"points","name":"10","legendgroup":"10","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":37.9178082191781,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,0.322461404653185],"automargin":true,"type":"linear","autorange":false,"range":[0.4,3.6],"tickmode":"array","ticktext":["Day1","Day2","Day3"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["Day1","Day2","Day3"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"annotations":[{"text":"Day","x":0.5,"y":0,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"top","annotationType":"axis","yshift":-21.9178082191781},{"text":"Recalled","x":0,"y":0.5,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-90,"xanchor":"right","yanchor":"center","annotationType":"axis","xshift":-21.9178082191781},{"text":"High","x":0.161230702326593,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Lo","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Med","x":0.838769297673407,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"}],"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[6.25,22.75],"tickmode":"array","ticktext":["10","15","20"],"tickvals":[10,15,20],"categoryorder":"array","categoryarray":["10","15","20"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":0.322461404653185,"y0":0,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.322461404653185,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.344205262013481,"x1":0.655794737986519,"y0":0,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.344205262013481,"x1":0.655794737986519,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.677538595346814,"x1":1,"y0":0,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.677538595346814,"x1":1,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"}],"xaxis2":{"type":"linear","autorange":false,"range":[0.4,3.6],"tickmode":"array","ticktext":["Day1","Day2","Day3"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["Day1","Day2","Day3"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.344205262013481,0.655794737986519],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"xaxis3":{"type":"linear","autorange":false,"range":[0.4,3.6],"tickmode":"array","ticktext":["Day1","Day2","Day3"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["Day1","Day2","Day3"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.677538595346814,1],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Subject","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"2e9d2cbbafc9":{"x":{},"y":{},"colour":{},"type":"scatter"},"2e9d5611cc10":{"x":{},"y":{},"colour":{}}},"cur_data":"2e9d2cbbafc9","visdat":{"2e9d2cbbafc9":["function (y) ","x"],"2e9d5611cc10":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>FWIW, on thing that this plot has clued my in on is that the order of my <strong>Processing Depth</strong> levels is High, Lo, Med. I might actually want that to be Lo, Med, High:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>factorial_df<span class="sc">$</span>ProcessDepth <span class="ot">&lt;-</span> <span class="fu">fct_relevel</span>(factorial_df<span class="sc">$</span>ProcessDepth, </span>
+<span id="cb7-2"><a href="#cb7-2"></a>                                     <span class="fu">c</span>(<span class="st">"Lo"</span>,<span class="st">"Med"</span>,<span class="st">"High"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>                              )   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and now re-plotting…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factorial_df, <span class="fu">aes</span>(<span class="at">x=</span>Day, <span class="at">y=</span>Recalled, <span class="at">group =</span> Subject)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col=</span>Subject)) <span class="sc">+</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">col=</span>Subject)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>ProcessDepth)</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2ebee572680170df1dff" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-2ebee572680170df1dff">{"x":{"data":[{"x":[1,2,3],"y":[11,10,10],"text":["Day: Day1<br />Recalled: 11<br />Subject: 1<br />Subject: 1","Day: Day2<br />Recalled: 10<br />Subject: 1<br />Subject: 1","Day: Day3<br />Recalled: 10<br />Subject: 1<br />Subject: 1"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,10,14],"text":["Day: Day1<br />Recalled: 12<br />Subject: 1<br />Subject: 1","Day: Day2<br />Recalled: 10<br />Subject: 1<br />Subject: 1","Day: Day3<br />Recalled: 14<br />Subject: 1<br />Subject: 1"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[14,12,18],"text":["Day: Day1<br />Recalled: 14<br />Subject: 1<br />Subject: 1","Day: Day2<br />Recalled: 12<br />Subject: 1<br />Subject: 1","Day: Day3<br />Recalled: 18<br />Subject: 1<br />Subject: 1"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[9,8,9],"text":["Day: Day1<br />Recalled:  9<br />Subject: 2<br />Subject: 2","Day: Day2<br />Recalled:  8<br />Subject: 2<br />Subject: 2","Day: Day3<br />Recalled:  9<br />Subject: 2<br />Subject: 2"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,15,15],"text":["Day: Day1<br />Recalled:  8<br />Subject: 2<br />Subject: 2","Day: Day2<br />Recalled: 15<br />Subject: 2<br />Subject: 2","Day: Day3<br />Recalled: 15<br />Subject: 2<br />Subject: 2"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,16,20],"text":["Day: Day1<br />Recalled: 10<br />Subject: 2<br />Subject: 2","Day: Day2<br />Recalled: 16<br />Subject: 2<br />Subject: 2","Day: Day3<br />Recalled: 20<br />Subject: 2<br />Subject: 2"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,12,11],"text":["Day: Day1<br />Recalled:  8<br />Subject: 3<br />Subject: 3","Day: Day2<br />Recalled: 12<br />Subject: 3<br />Subject: 3","Day: Day3<br />Recalled: 11<br />Subject: 3<br />Subject: 3"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,14,14],"text":["Day: Day1<br />Recalled: 10<br />Subject: 3<br />Subject: 3","Day: Day2<br />Recalled: 14<br />Subject: 3<br />Subject: 3","Day: Day3<br />Recalled: 14<br />Subject: 3<br />Subject: 3"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[13,18,16],"text":["Day: Day1<br />Recalled: 13<br />Subject: 3<br />Subject: 3","Day: Day2<br />Recalled: 18<br />Subject: 3<br />Subject: 3","Day: Day3<br />Recalled: 16<br />Subject: 3<br />Subject: 3"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,8,11],"text":["Day: Day1<br />Recalled: 10<br />Subject: 4<br />Subject: 4","Day: Day2<br />Recalled:  8<br />Subject: 4<br />Subject: 4","Day: Day3<br />Recalled: 11<br />Subject: 4<br />Subject: 4"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[11,15,15],"text":["Day: Day1<br />Recalled: 11<br />Subject: 4<br />Subject: 4","Day: Day2<br />Recalled: 15<br />Subject: 4<br />Subject: 4","Day: Day3<br />Recalled: 15<br />Subject: 4<br />Subject: 4"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[14,15,22],"text":["Day: Day1<br />Recalled: 14<br />Subject: 4<br />Subject: 4","Day: Day2<br />Recalled: 15<br />Subject: 4<br />Subject: 4","Day: Day3<br />Recalled: 22<br />Subject: 4<br />Subject: 4"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[7,12,8],"text":["Day: Day1<br />Recalled:  7<br />Subject: 5<br />Subject: 5","Day: Day2<br />Recalled: 12<br />Subject: 5<br />Subject: 5","Day: Day3<br />Recalled:  8<br />Subject: 5<br />Subject: 5"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,11,12],"text":["Day: Day1<br />Recalled: 10<br />Subject: 5<br />Subject: 5","Day: Day2<br />Recalled: 11<br />Subject: 5<br />Subject: 5","Day: Day3<br />Recalled: 12<br />Subject: 5<br />Subject: 5"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,14,19],"text":["Day: Day1<br />Recalled: 12<br />Subject: 5<br />Subject: 5","Day: Day2<br />Recalled: 14<br />Subject: 5<br />Subject: 5","Day: Day3<br />Recalled: 19<br />Subject: 5<br />Subject: 5"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,9,9],"text":["Day: Day1<br />Recalled:  8<br />Subject: 6<br />Subject: 6","Day: Day2<br />Recalled:  9<br />Subject: 6<br />Subject: 6","Day: Day3<br />Recalled:  9<br />Subject: 6<br />Subject: 6"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"6","legendgroup":"6","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[13,10,17],"text":["Day: Day1<br />Recalled: 13<br />Subject: 6<br />Subject: 6","Day: Day2<br />Recalled: 10<br />Subject: 6<br />Subject: 6","Day: Day3<br />Recalled: 17<br />Subject: 6<br />Subject: 6"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"6","legendgroup":"6","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,11,17],"text":["Day: Day1<br />Recalled:  8<br />Subject: 6<br />Subject: 6","Day: Day2<br />Recalled: 11<br />Subject: 6<br />Subject: 6","Day: Day3<br />Recalled: 17<br />Subject: 6<br />Subject: 6"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"6","legendgroup":"6","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,10,11],"text":["Day: Day1<br />Recalled:  8<br />Subject: 7<br />Subject: 7","Day: Day2<br />Recalled: 10<br />Subject: 7<br />Subject: 7","Day: Day3<br />Recalled: 11<br />Subject: 7<br />Subject: 7"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"7","legendgroup":"7","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[10,14,16],"text":["Day: Day1<br />Recalled: 10<br />Subject: 7<br />Subject: 7","Day: Day2<br />Recalled: 14<br />Subject: 7<br />Subject: 7","Day: Day3<br />Recalled: 16<br />Subject: 7<br />Subject: 7"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"7","legendgroup":"7","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[13,15,21],"text":["Day: Day1<br />Recalled: 13<br />Subject: 7<br />Subject: 7","Day: Day2<br />Recalled: 15<br />Subject: 7<br />Subject: 7","Day: Day3<br />Recalled: 21<br />Subject: 7<br />Subject: 7"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"7","legendgroup":"7","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,9,10],"text":["Day: Day1<br />Recalled: 12<br />Subject: 8<br />Subject: 8","Day: Day2<br />Recalled:  9<br />Subject: 8<br />Subject: 8","Day: Day3<br />Recalled: 10<br />Subject: 8<br />Subject: 8"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)"}},"hoveron":"points","name":"8","legendgroup":"8","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[8,10,11],"text":["Day: Day1<br />Recalled:  8<br />Subject: 8<br />Subject: 8","Day: Day2<br />Recalled: 10<br />Subject: 8<br />Subject: 8","Day: Day3<br />Recalled: 11<br />Subject: 8<br />Subject: 8"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)"}},"hoveron":"points","name":"8","legendgroup":"8","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[11,16,16],"text":["Day: Day1<br />Recalled: 11<br />Subject: 8<br />Subject: 8","Day: Day2<br />Recalled: 16<br />Subject: 8<br />Subject: 8","Day: Day3<br />Recalled: 16<br />Subject: 8<br />Subject: 8"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)"}},"hoveron":"points","name":"8","legendgroup":"8","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[9,9,9],"text":["Day: Day1<br />Recalled:  9<br />Subject: 9<br />Subject: 9","Day: Day2<br />Recalled:  9<br />Subject: 9<br />Subject: 9","Day: Day3<br />Recalled:  9<br />Subject: 9<br />Subject: 9"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"9","legendgroup":"9","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,12,14],"text":["Day: Day1<br />Recalled: 12<br />Subject: 9<br />Subject: 9","Day: Day2<br />Recalled: 12<br />Subject: 9<br />Subject: 9","Day: Day3<br />Recalled: 14<br />Subject: 9<br />Subject: 9"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"9","legendgroup":"9","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[9,13,22],"text":["Day: Day1<br />Recalled:  9<br />Subject: 9<br />Subject: 9","Day: Day2<br />Recalled: 13<br />Subject: 9<br />Subject: 9","Day: Day3<br />Recalled: 22<br />Subject: 9<br />Subject: 9"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"9","legendgroup":"9","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[9,8,12],"text":["Day: Day1<br />Recalled:  9<br />Subject: 10<br />Subject: 10","Day: Day2<br />Recalled:  8<br />Subject: 10<br />Subject: 10","Day: Day3<br />Recalled: 12<br />Subject: 10<br />Subject: 10"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)"}},"hoveron":"points","name":"10","legendgroup":"10","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[11,9,16],"text":["Day: Day1<br />Recalled: 11<br />Subject: 10<br />Subject: 10","Day: Day2<br />Recalled:  9<br />Subject: 10<br />Subject: 10","Day: Day3<br />Recalled: 16<br />Subject: 10<br />Subject: 10"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)"}},"hoveron":"points","name":"10","legendgroup":"10","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)","dash":"solid"},"frame":null},{"x":[1,2,3],"y":[12,11,19],"text":["Day: Day1<br />Recalled: 12<br />Subject: 10<br />Subject: 10","Day: Day2<br />Recalled: 11<br />Subject: 10<br />Subject: 10","Day: Day3<br />Recalled: 19<br />Subject: 10<br />Subject: 10"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)"}},"hoveron":"points","name":"10","legendgroup":"10","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":37.9178082191781,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,0.322461404653185],"automargin":true,"type":"linear","autorange":false,"range":[0.4,3.6],"tickmode":"array","ticktext":["Day1","Day2","Day3"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["Day1","Day2","Day3"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"annotations":[{"text":"Day","x":0.5,"y":0,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"top","annotationType":"axis","yshift":-21.9178082191781},{"text":"Recalled","x":0,"y":0.5,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-90,"xanchor":"right","yanchor":"center","annotationType":"axis","xshift":-21.9178082191781},{"text":"Lo","x":0.161230702326593,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Med","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"High","x":0.838769297673407,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"}],"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[6.25,22.75],"tickmode":"array","ticktext":["10","15","20"],"tickvals":[10,15,20],"categoryorder":"array","categoryarray":["10","15","20"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":0.322461404653185,"y0":0,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.322461404653185,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.344205262013481,"x1":0.655794737986519,"y0":0,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.344205262013481,"x1":0.655794737986519,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.677538595346814,"x1":1,"y0":0,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.677538595346814,"x1":1,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"}],"xaxis2":{"type":"linear","autorange":false,"range":[0.4,3.6],"tickmode":"array","ticktext":["Day1","Day2","Day3"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["Day1","Day2","Day3"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.344205262013481,0.655794737986519],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"xaxis3":{"type":"linear","autorange":false,"range":[0.4,3.6],"tickmode":"array","ticktext":["Day1","Day2","Day3"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["Day1","Day2","Day3"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.677538595346814,1],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Subject","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"2e9de58d16":{"x":{},"y":{},"colour":{},"type":"scatter"},"2e9d5e919fcf":{"x":{},"y":{},"colour":{}}},"cur_data":"2e9de58d16","visdat":{"2e9de58d16":["function (y) ","x"],"2e9d5e919fcf":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<section id="means-plots" class="level4"><h4 class="anchored" data-anchor-id="means-plots">means plots</h4>
+<p>Again, we need to make the appropriate correction for our error bars. In this case the number of within groups is the number of cells that is formed by crossing Day (1,2,3) and Processing Depth (Lo, Med, Hi). As this is a 3 * 3 design there are 9 cells, or <code>nWithinGroups=9</code>. As before this is handled auto-magically in <code>summarySEwithin2</code>, or our custom function <code>withinSummary</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>descriptiveStats <span class="ot">&lt;-</span> <span class="fu">withinSummary</span>(<span class="at">data=</span>factorial_df,</span>
+<span id="cb9-2"><a href="#cb9-2"></a>                                  <span class="at">measurevar =</span> <span class="st">"Recalled"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>                                  <span class="at">withinvars =</span> <span class="fu">c</span>(<span class="st">"Day"</span>,<span class="st">"ProcessDepth"</span>),</span>
+<span id="cb9-4"><a href="#cb9-4"></a>                                  <span class="at">idvar =</span> <span class="st">"Subject"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Automatically converting the following non-factors to factors: Day</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'data.table'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:lubridate':
+
+    hour, isoweek, mday, minute, month, quarter, second, wday, week,
+    yday, year</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:dplyr':
+
+    between, first, last</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    transpose</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(descriptiveStats<span class="sc">$</span>Corrected, <span class="fu">aes</span>(<span class="at">x =</span> Day,</span>
+<span id="cb15-2"><a href="#cb15-2"></a>                                            <span class="at">y =</span> Recalled, </span>
+<span id="cb15-3"><a href="#cb15-3"></a>                                            <span class="at">group=</span>ProcessDepth)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">2.5</span>, <span class="fu">aes</span>(<span class="at">shape =</span> ProcessDepth)) <span class="sc">+</span> </span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>, <span class="fu">aes</span>(<span class="at">linetype=</span>ProcessDepth)) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>Recalled<span class="sc">-</span>se, <span class="at">ymax=</span>Recalled<span class="sc">+</span>se), <span class="at">width=</span><span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-9"><a href="#cb15-9"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb15-10"><a href="#cb15-10"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb15-11"><a href="#cb15-11"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb15-12"><a href="#cb15-12"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">75</span>)) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"grey50"</span>)) <span class="sc">+</span> </span>
+<span id="cb15-14"><a href="#cb15-14"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb15-15"><a href="#cb15-15"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb15-17"><a href="#cb15-17"></a>  </span>
+<span id="cb15-18"><a href="#cb15-18"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12_3-factorial_rma_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="running-the-omnibus-anova" class="level3"><h3 class="anchored" data-anchor-id="running-the-omnibus-anova">running the omnibus ANOVA:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>omnibus_aov <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">"Subject"</span>, </span>
+<span id="cb18-2"><a href="#cb18-2"></a>                            <span class="at">dv =</span> <span class="st">"Recalled"</span>, </span>
+<span id="cb18-3"><a href="#cb18-3"></a>                            <span class="at">data =</span> factorial_df,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>                            <span class="at">between =</span> <span class="cn">NULL</span>,</span>
+<span id="cb18-5"><a href="#cb18-5"></a>                            <span class="at">within =</span> <span class="fu">c</span>(<span class="st">"ProcessDepth"</span>,<span class="st">"Day"</span>),</span>
+<span id="cb18-6"><a href="#cb18-6"></a>                            <span class="at">type =</span> <span class="dv">3</span>, </span>
+<span id="cb18-7"><a href="#cb18-7"></a>                            <span class="at">return =</span> <span class="st">"afex_aov"</span>, </span>
+<span id="cb18-8"><a href="#cb18-8"></a>                            <span class="at">include_aov =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb18-9"><a href="#cb18-9"></a>                            <span class="at">anova_table=</span><span class="fu">list</span>(<span class="at">es =</span> <span class="st">"pes"</span>))</span>
+<span id="cb18-10"><a href="#cb18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="fu">summary</span>(omnibus_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in summary.Anova.mlm(object$Anova, multivariate = FALSE): HF eps &gt; 1
+treated as 1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+
+                  Sum Sq num Df Error SS den Df  F value    Pr(&gt;F)    
+(Intercept)      13493.4      1   41.067      9 2957.153 1.209e-12 ***
+ProcessDepth       432.2      2   61.400     18   63.345 7.137e-09 ***
+Day                254.5      2   95.733     18   23.925 8.521e-06 ***
+ProcessDepth:Day   110.4      4   93.400     36   10.636 8.567e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+Mauchly Tests for Sphericity
+
+                 Test statistic p-value
+ProcessDepth            0.94884 0.81054
+Day                     0.81573 0.44277
+ProcessDepth:Day        0.22026 0.27277
+
+
+Greenhouse-Geisser and Huynh-Feldt Corrections
+ for Departure from Sphericity
+
+                  GG eps Pr(&gt;F[GG])    
+ProcessDepth     0.95133  1.559e-08 ***
+Day              0.84440  3.539e-05 ***
+ProcessDepth:Day 0.71617  0.0001178 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                   HF eps   Pr(&gt;F[HF])
+ProcessDepth     1.199509 7.136593e-09
+Day              1.018163 8.520701e-06
+ProcessDepth:Day 1.085791 8.566883e-06</code></pre>
+</div>
+</div>
+<p>Here we have two main effects and an interaction. Let’s unpack the interaction by taking a look at whether <code>Recall</code> increases over successive days.</p>
+</section><section id="running-the-simple-effects-anovas" class="level3"><h3 class="anchored" data-anchor-id="running-the-simple-effects-anovas">running the simple effects ANOVAs</h3>
+<section id="recommended-method-assumed-violation-of-spherecity" class="level4"><h4 class="anchored" data-anchor-id="recommended-method-assumed-violation-of-spherecity">Recommended method (assumed violation of spherecity)</h4>
+<p>The Cohen chapter assigned this week recommends that <strong>one avoid the use of pooled error terms when performing simple effects analysis of within-subjects ANOVA</strong>. This is definitely the case when the spherecity assumption is violated, but as a general rule, even when the assumption is not technically violated, deviations from spherecity can artificially inflate Type I error. So in this case, simple follow up ANOVAs that refer to their own error terms are justified. That said as Type I error goes down, Type II goes up. Something to consider.</p>
+<p>One way to do this would be, as we have done in the past, separate out the data and run separate simple effects ANOVAs using <code>emmeans</code>. <strong>This time, we DO NOT use the error term from the omnibus ANOVA</strong>, we treat each simple effects ANOVA as self contained. This can be accomplished using <code>joint_tests()</code> from <code>emmeans</code> telling it how we want to separate our original model. As before, we need to add <code>model="multivariate"</code> to our call (this tells <code>R</code> to use the simple effects error term and not the omnibus).</p>
+<p>Here I’m taking a look at the effect of Day on each level of Processing Depth. A better way of saying this is whether you see different rates of learning over Days depending on what level of Processing is involved.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"ProcessDepth"</span>, <span class="at">model=</span><span class="st">"multivariate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ProcessDepth = Lo:
+ model term df1 df2 F.ratio p.value
+ Day          2   9   1.487  0.2768
+
+ProcessDepth = Med:
+ model term df1 df2 F.ratio p.value
+ Day          2   9  30.146  0.0001
+
+ProcessDepth = High:
+ model term df1 df2 F.ratio p.value
+ Day          2   9  32.045  0.0001</code></pre>
+</div>
+</div>
+</section><section id="assuming-spherecity" class="level4"><h4 class="anchored" data-anchor-id="assuming-spherecity">Assuming spherecity</h4>
+<p>If we wanted to throw Cohen’s caution to the wind, we would simply run the simple effects tests with a <code>univariate</code> model. Note that this method attempts to deal with potential violations of our spherecity assumptions by using Satterthwaite degrees of freedom. Keep in mind, we are less protected from Type 1 error in this case.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"ProcessDepth"</span>, <span class="at">model=</span><span class="st">"univariate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ProcessDepth = Lo:
+ model term df1  df2 F.ratio p.value
+ Day          2 47.6   0.581  0.5635
+
+ProcessDepth = Med:
+ model term df1  df2 F.ratio p.value
+ Day          2 47.6  11.049  0.0001
+
+ProcessDepth = High:
+ model term df1  df2 F.ratio p.value
+ Day          2 47.6  40.457  &lt;.0001</code></pre>
+</div>
+</div>
+<p>In both cases we find an effect for <code>Day</code> on the <code>High</code> and <code>Med</code> <code>ProcessDepth</code>.</p>
+<p>As a follow up we would run the pairwise tests. Here’s the multivariate method:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># multivariate method</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">emmeans</span>(omnibus_aov, </span>
+<span id="cb25-3"><a href="#cb25-3"></a>        <span class="at">by =</span> <span class="st">"ProcessDepth"</span>, </span>
+<span id="cb25-4"><a href="#cb25-4"></a>        <span class="at">specs =</span> pairwise <span class="sc">~</span> Day, </span>
+<span id="cb25-5"><a href="#cb25-5"></a>        <span class="at">model=</span><span class="st">"multivariate"</span>, </span>
+<span id="cb25-6"><a href="#cb25-6"></a>        <span class="at">adjust=</span><span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ProcessDepth = Lo:
+ Day  emmean    SE df lower.CL upper.CL
+ Day1    9.1 0.482  9     8.01     10.2
+ Day2    9.5 0.477  9     8.42     10.6
+ Day3   10.0 0.394  9     9.11     10.9
+
+ProcessDepth = Med:
+ Day  emmean    SE df lower.CL upper.CL
+ Day1   10.5 0.522  9     9.32     11.7
+ Day2   12.0 0.730  9    10.35     13.7
+ Day3   14.4 0.581  9    13.09     15.7
+
+ProcessDepth = High:
+ Day  emmean    SE df lower.CL upper.CL
+ Day1   11.6 0.653  9    10.12     13.1
+ Day2   14.1 0.737  9    12.43     15.8
+ Day3   19.0 0.715  9    17.38     20.6
+
+Confidence level used: 0.95 
+
+$contrasts
+ProcessDepth = Lo:
+ contrast    estimate    SE df t.ratio p.value
+ Day1 - Day2     -0.4 0.819  9  -0.488  0.8785
+ Day1 - Day3     -0.9 0.547  9  -1.646  0.2768
+ Day2 - Day3     -0.5 0.687  9  -0.728  0.7539
+
+ProcessDepth = Med:
+ contrast    estimate    SE df t.ratio p.value
+ Day1 - Day2     -1.5 1.035  9  -1.449  0.3585
+ Day1 - Day3     -3.9 0.547  9  -7.134  0.0001
+ Day2 - Day3     -2.4 0.859  9  -2.794  0.0498
+
+ProcessDepth = High:
+ contrast    estimate    SE df t.ratio p.value
+ Day1 - Day2     -2.5 0.833  9  -3.000  0.0361
+ Day1 - Day3     -7.4 0.933  9  -7.929  0.0001
+ Day2 - Day3     -4.9 1.090  9  -4.496  0.0038
+
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+<p>and the univariate (pooled error term):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">emmeans</span>(omnibus_aov, </span>
+<span id="cb27-2"><a href="#cb27-2"></a>        <span class="at">by =</span> <span class="st">"ProcessDepth"</span>, </span>
+<span id="cb27-3"><a href="#cb27-3"></a>        <span class="at">specs =</span> pairwise <span class="sc">~</span> Day, </span>
+<span id="cb27-4"><a href="#cb27-4"></a>        <span class="at">model=</span><span class="st">"univariate"</span>, </span>
+<span id="cb27-5"><a href="#cb27-5"></a>        <span class="at">adjust=</span><span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ProcessDepth = Lo:
+ Day  emmean  SE df lower.CL upper.CL
+ Day1    9.1 0.6 74      7.9     10.3
+ Day2    9.5 0.6 74      8.3     10.7
+ Day3   10.0 0.6 74      8.8     11.2
+
+ProcessDepth = Med:
+ Day  emmean  SE df lower.CL upper.CL
+ Day1   10.5 0.6 74      9.3     11.7
+ Day2   12.0 0.6 74     10.8     13.2
+ Day3   14.4 0.6 74     13.2     15.6
+
+ProcessDepth = High:
+ Day  emmean  SE df lower.CL upper.CL
+ Day1   11.6 0.6 74     10.4     12.8
+ Day2   14.1 0.6 74     12.9     15.3
+ Day3   19.0 0.6 74     17.8     20.2
+
+Warning: EMMs are biased unless design is perfectly balanced 
+Confidence level used: 0.95 
+
+$contrasts
+ProcessDepth = Lo:
+ contrast    estimate    SE   df t.ratio p.value
+ Day1 - Day2     -0.4 0.837 47.6  -0.478  0.8820
+ Day1 - Day3     -0.9 0.837 47.6  -1.075  0.5339
+ Day2 - Day3     -0.5 0.837 47.6  -0.597  0.8222
+
+ProcessDepth = Med:
+ contrast    estimate    SE   df t.ratio p.value
+ Day1 - Day2     -1.5 0.837 47.6  -1.792  0.1831
+ Day1 - Day3     -3.9 0.837 47.6  -4.660  0.0001
+ Day2 - Day3     -2.4 0.837 47.6  -2.868  0.0166
+
+ProcessDepth = High:
+ contrast    estimate    SE   df t.ratio p.value
+ Day1 - Day2     -2.5 0.837 47.6  -2.987  0.0121
+ Day1 - Day3     -7.4 0.837 47.6  -8.842  &lt;.0001
+ Day2 - Day3     -4.9 0.837 47.6  -5.855  &lt;.0001
+
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+</section></section><section id="writing-this-up" class="level3"><h3 class="anchored" data-anchor-id="writing-this-up">Writing this up</h3>
+<p>… To test this hypothesis we ran a 3 (Process Depth) × 3 (Day) repeated-measures ANOVA. Where there were violations of spherecity, we used Greenhouse-Geisser corrected degrees of freedom. This analysis revealed a significant interaction, <span class="math inline">\(F\)</span>(2.86, 25.78) = 10.64, <span class="math inline">\(p\)</span> &lt; .001, <span class="math inline">\(\eta_p^2\)</span> = .54. To test this interaction we ran seperate simple effects ANOVA for Day on each level of Process Depth. A simple effect for Day was found on High processing depth, <span class="math inline">\(F\)</span>(2, 9) = 32.05, <span class="math inline">\(p\)</span> &lt; .001, where there were statistically significant increases in performance from each Day to the next (Tukey HSD, <span class="math inline">\(p\)</span> &lt; .05). A simple effect for Day was also found on Med processing depth, <span class="math inline">\(F\)</span>(2, 9) = 30.15, <span class="math inline">\(p\)</span> &lt; .001. While scores increased across the 3 days, only Day 3 was significantly greater than the other two (<span class="math inline">\(p\)</span>s &lt; .05). No simple effect was observed for Day in the Lo processing depth condition.</p>
+<p>See the next walkthrough for how to do this in SPSS.</p>
+
+
+<!-- -->
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb29" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">---</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="an">title:</span><span class="co"> "Factorial RM-ANOVA and simple effects"</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="co">---</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a></span>
+<span id="cb29-5"><a href="#cb29-5"></a>Let's ramp-up the complexity. Here is a dataset testing Recall over three days as a function of depth of processing (Lo, Med, High). In this case we have two within factors.</span>
+<span id="cb29-6"><a href="#cb29-6"></a></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="fu">## loading in the necessary packages and data:</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a></span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="in">```{r}</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
+<span id="cb29-13"><a href="#cb29-13"></a>               afex,</span>
+<span id="cb29-14"><a href="#cb29-14"></a>               cowplot,</span>
+<span id="cb29-15"><a href="#cb29-15"></a>               emmeans)</span>
+<span id="cb29-16"><a href="#cb29-16"></a></span>
+<span id="cb29-17"><a href="#cb29-17"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/custom_functions/withinSummary.R"</span>)</span>
+<span id="cb29-18"><a href="#cb29-18"></a></span>
+<span id="cb29-19"><a href="#cb29-19"></a>factorial_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/withinEx3.csv"</span>)</span>
+<span id="cb29-20"><a href="#cb29-20"></a></span>
+<span id="cb29-21"><a href="#cb29-21"></a>factorial_df</span>
+<span id="cb29-22"><a href="#cb29-22"></a><span class="in">```</span></span>
+<span id="cb29-23"><a href="#cb29-23"></a></span>
+<span id="cb29-24"><a href="#cb29-24"></a>One thing to note is that **Subject** is being treated as a <span class="sc">\&lt;</span>dbl<span class="sc">\&gt;</span> number. It should be treated as a factor.</span>
+<span id="cb29-25"><a href="#cb29-25"></a></span>
+<span id="cb29-28"><a href="#cb29-28"></a><span class="in">```{r}</span></span>
+<span id="cb29-29"><a href="#cb29-29"></a>factorial_df<span class="sc">$</span>Subject <span class="ot">&lt;-</span>  <span class="fu">as.factor</span>(factorial_df<span class="sc">$</span>Subject)</span>
+<span id="cb29-30"><a href="#cb29-30"></a><span class="in">```</span></span>
+<span id="cb29-31"><a href="#cb29-31"></a></span>
+<span id="cb29-32"><a href="#cb29-32"></a><span class="fu">## plotting the data</span></span>
+<span id="cb29-33"><a href="#cb29-33"></a></span>
+<span id="cb29-34"><a href="#cb29-34"></a><span class="fu">### individual subjects plots: Spaghetti</span></span>
+<span id="cb29-35"><a href="#cb29-35"></a></span>
+<span id="cb29-36"><a href="#cb29-36"></a>Since I have two factors here, one strategy may be to **facet** my spaghetti plots. In this case I am creating seperate spaghetti plots for each level of **ProcessDepth:**</span>
+<span id="cb29-37"><a href="#cb29-37"></a></span>
+<span id="cb29-40"><a href="#cb29-40"></a><span class="in">```{r}</span></span>
+<span id="cb29-41"><a href="#cb29-41"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factorial_df, <span class="fu">aes</span>(<span class="at">x=</span>Day, <span class="at">y=</span>Recalled, <span class="at">group =</span> Subject)) <span class="sc">+</span></span>
+<span id="cb29-42"><a href="#cb29-42"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col=</span>Subject)) <span class="sc">+</span> </span>
+<span id="cb29-43"><a href="#cb29-43"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">col=</span>Subject)) <span class="sc">+</span></span>
+<span id="cb29-44"><a href="#cb29-44"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>ProcessDepth)</span>
+<span id="cb29-45"><a href="#cb29-45"></a></span>
+<span id="cb29-46"><a href="#cb29-46"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(p)</span>
+<span id="cb29-47"><a href="#cb29-47"></a><span class="in">```</span></span>
+<span id="cb29-48"><a href="#cb29-48"></a></span>
+<span id="cb29-49"><a href="#cb29-49"></a>FWIW, on thing that this plot has clued my in on is that the order of my **Processing Depth** levels is High, Lo, Med. I might actually want that to be Lo, Med, High:</span>
+<span id="cb29-50"><a href="#cb29-50"></a></span>
+<span id="cb29-53"><a href="#cb29-53"></a><span class="in">```{r}</span></span>
+<span id="cb29-54"><a href="#cb29-54"></a>factorial_df<span class="sc">$</span>ProcessDepth <span class="ot">&lt;-</span> <span class="fu">fct_relevel</span>(factorial_df<span class="sc">$</span>ProcessDepth, </span>
+<span id="cb29-55"><a href="#cb29-55"></a>                                     <span class="fu">c</span>(<span class="st">"Lo"</span>,<span class="st">"Med"</span>,<span class="st">"High"</span>)</span>
+<span id="cb29-56"><a href="#cb29-56"></a>                              )   </span>
+<span id="cb29-57"><a href="#cb29-57"></a><span class="in">```</span></span>
+<span id="cb29-58"><a href="#cb29-58"></a></span>
+<span id="cb29-59"><a href="#cb29-59"></a>and now re-plotting...</span>
+<span id="cb29-60"><a href="#cb29-60"></a></span>
+<span id="cb29-63"><a href="#cb29-63"></a><span class="in">```{r}</span></span>
+<span id="cb29-64"><a href="#cb29-64"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factorial_df, <span class="fu">aes</span>(<span class="at">x=</span>Day, <span class="at">y=</span>Recalled, <span class="at">group =</span> Subject)) <span class="sc">+</span></span>
+<span id="cb29-65"><a href="#cb29-65"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col=</span>Subject)) <span class="sc">+</span> </span>
+<span id="cb29-66"><a href="#cb29-66"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">col=</span>Subject)) <span class="sc">+</span></span>
+<span id="cb29-67"><a href="#cb29-67"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>ProcessDepth)</span>
+<span id="cb29-68"><a href="#cb29-68"></a></span>
+<span id="cb29-69"><a href="#cb29-69"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(p)</span>
+<span id="cb29-70"><a href="#cb29-70"></a><span class="in">```</span></span>
+<span id="cb29-71"><a href="#cb29-71"></a></span>
+<span id="cb29-72"><a href="#cb29-72"></a><span class="fu">#### means plots</span></span>
+<span id="cb29-73"><a href="#cb29-73"></a></span>
+<span id="cb29-74"><a href="#cb29-74"></a>Again, we need to make the appropriate correction for our error bars. In this case the number of within groups is the number of cells that is formed by crossing Day (1,2,3) and Processing Depth (Lo, Med, Hi). As this is a 3 <span class="sc">\*</span> 3 design there are 9 cells, or <span class="in">`nWithinGroups=9`</span>. As before this is handled auto-magically in <span class="in">`summarySEwithin2`</span>, or our custom function <span class="in">`withinSummary`</span></span>
+<span id="cb29-75"><a href="#cb29-75"></a></span>
+<span id="cb29-78"><a href="#cb29-78"></a><span class="in">```{r}</span></span>
+<span id="cb29-79"><a href="#cb29-79"></a>descriptiveStats <span class="ot">&lt;-</span> <span class="fu">withinSummary</span>(<span class="at">data=</span>factorial_df,</span>
+<span id="cb29-80"><a href="#cb29-80"></a>                                  <span class="at">measurevar =</span> <span class="st">"Recalled"</span>,</span>
+<span id="cb29-81"><a href="#cb29-81"></a>                                  <span class="at">withinvars =</span> <span class="fu">c</span>(<span class="st">"Day"</span>,<span class="st">"ProcessDepth"</span>),</span>
+<span id="cb29-82"><a href="#cb29-82"></a>                                  <span class="at">idvar =</span> <span class="st">"Subject"</span>)</span>
+<span id="cb29-83"><a href="#cb29-83"></a></span>
+<span id="cb29-84"><a href="#cb29-84"></a></span>
+<span id="cb29-85"><a href="#cb29-85"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(descriptiveStats<span class="sc">$</span>Corrected, <span class="fu">aes</span>(<span class="at">x =</span> Day,</span>
+<span id="cb29-86"><a href="#cb29-86"></a>                                            <span class="at">y =</span> Recalled, </span>
+<span id="cb29-87"><a href="#cb29-87"></a>                                            <span class="at">group=</span>ProcessDepth)) <span class="sc">+</span></span>
+<span id="cb29-88"><a href="#cb29-88"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">2.5</span>, <span class="fu">aes</span>(<span class="at">shape =</span> ProcessDepth)) <span class="sc">+</span> </span>
+<span id="cb29-89"><a href="#cb29-89"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>, <span class="fu">aes</span>(<span class="at">linetype=</span>ProcessDepth)) <span class="sc">+</span></span>
+<span id="cb29-90"><a href="#cb29-90"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>Recalled<span class="sc">-</span>se, <span class="at">ymax=</span>Recalled<span class="sc">+</span>se), <span class="at">width=</span><span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb29-91"><a href="#cb29-91"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb29-92"><a href="#cb29-92"></a>  <span class="fu">theme</span>(</span>
+<span id="cb29-93"><a href="#cb29-93"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb29-94"><a href="#cb29-94"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb29-95"><a href="#cb29-95"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb29-96"><a href="#cb29-96"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">75</span>)) <span class="sc">+</span></span>
+<span id="cb29-97"><a href="#cb29-97"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"grey50"</span>)) <span class="sc">+</span> </span>
+<span id="cb29-98"><a href="#cb29-98"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb29-99"><a href="#cb29-99"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb29-100"><a href="#cb29-100"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb29-101"><a href="#cb29-101"></a>  </span>
+<span id="cb29-102"><a href="#cb29-102"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb29-103"><a href="#cb29-103"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span>
+<span id="cb29-104"><a href="#cb29-104"></a></span>
+<span id="cb29-105"><a href="#cb29-105"></a><span class="fu">show</span>(p)</span>
+<span id="cb29-106"><a href="#cb29-106"></a><span class="in">```</span></span>
+<span id="cb29-107"><a href="#cb29-107"></a></span>
+<span id="cb29-108"><a href="#cb29-108"></a><span class="fu">### running the omnibus ANOVA:</span></span>
+<span id="cb29-109"><a href="#cb29-109"></a></span>
+<span id="cb29-112"><a href="#cb29-112"></a><span class="in">```{r}</span></span>
+<span id="cb29-113"><a href="#cb29-113"></a>omnibus_aov <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">"Subject"</span>, </span>
+<span id="cb29-114"><a href="#cb29-114"></a>                            <span class="at">dv =</span> <span class="st">"Recalled"</span>, </span>
+<span id="cb29-115"><a href="#cb29-115"></a>                            <span class="at">data =</span> factorial_df,</span>
+<span id="cb29-116"><a href="#cb29-116"></a>                            <span class="at">between =</span> <span class="cn">NULL</span>,</span>
+<span id="cb29-117"><a href="#cb29-117"></a>                            <span class="at">within =</span> <span class="fu">c</span>(<span class="st">"ProcessDepth"</span>,<span class="st">"Day"</span>),</span>
+<span id="cb29-118"><a href="#cb29-118"></a>                            <span class="at">type =</span> <span class="dv">3</span>, </span>
+<span id="cb29-119"><a href="#cb29-119"></a>                            <span class="at">return =</span> <span class="st">"afex_aov"</span>, </span>
+<span id="cb29-120"><a href="#cb29-120"></a>                            <span class="at">include_aov =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb29-121"><a href="#cb29-121"></a>                            <span class="at">anova_table=</span><span class="fu">list</span>(<span class="at">es =</span> <span class="st">"pes"</span>))</span>
+<span id="cb29-122"><a href="#cb29-122"></a></span>
+<span id="cb29-123"><a href="#cb29-123"></a><span class="fu">summary</span>(omnibus_aov)</span>
+<span id="cb29-124"><a href="#cb29-124"></a><span class="in">```</span></span>
+<span id="cb29-125"><a href="#cb29-125"></a></span>
+<span id="cb29-126"><a href="#cb29-126"></a>Here we have two main effects and an interaction. Let's unpack the interaction by taking a look at whether <span class="in">`Recall`</span> increases over successive days.</span>
+<span id="cb29-127"><a href="#cb29-127"></a></span>
+<span id="cb29-128"><a href="#cb29-128"></a><span class="fu">### running the simple effects ANOVAs</span></span>
+<span id="cb29-129"><a href="#cb29-129"></a></span>
+<span id="cb29-130"><a href="#cb29-130"></a><span class="fu">#### Recommended method (assumed violation of spherecity)</span></span>
+<span id="cb29-131"><a href="#cb29-131"></a></span>
+<span id="cb29-132"><a href="#cb29-132"></a>The Cohen chapter assigned this week recommends that **one avoid the use of pooled error terms when performing simple effects analysis of within-subjects ANOVA**. This is definitely the case when the spherecity assumption is violated, but as a general rule, even when the assumption is not technically violated, deviations from spherecity can artificially inflate Type I error. So in this case, simple follow up ANOVAs that refer to their own error terms are justified. That said as Type I error goes down, Type II goes up. Something to consider.</span>
+<span id="cb29-133"><a href="#cb29-133"></a></span>
+<span id="cb29-134"><a href="#cb29-134"></a>One way to do this would be, as we have done in the past, separate out the data and run separate simple effects ANOVAs using <span class="in">`emmeans`</span>. **This time, we DO NOT use the error term from the omnibus ANOVA**, we treat each simple effects ANOVA as self contained. This can be accomplished using <span class="in">`joint_tests()`</span> from <span class="in">`emmeans`</span> telling it how we want to separate our original model. As before, we need to add <span class="in">`model="multivariate"`</span> to our call (this tells <span class="in">`R`</span> to use the simple effects error term and not the omnibus).</span>
+<span id="cb29-135"><a href="#cb29-135"></a></span>
+<span id="cb29-136"><a href="#cb29-136"></a>Here I'm taking a look at the effect of Day on each level of Processing Depth. A better way of saying this is whether you see different rates of learning over Days depending on what level of Processing is involved.</span>
+<span id="cb29-137"><a href="#cb29-137"></a></span>
+<span id="cb29-140"><a href="#cb29-140"></a><span class="in">```{r}</span></span>
+<span id="cb29-141"><a href="#cb29-141"></a><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"ProcessDepth"</span>, <span class="at">model=</span><span class="st">"multivariate"</span>)</span>
+<span id="cb29-142"><a href="#cb29-142"></a><span class="in">```</span></span>
+<span id="cb29-143"><a href="#cb29-143"></a></span>
+<span id="cb29-144"><a href="#cb29-144"></a><span class="fu">#### Assuming spherecity</span></span>
+<span id="cb29-145"><a href="#cb29-145"></a></span>
+<span id="cb29-146"><a href="#cb29-146"></a>If we wanted to throw Cohen's caution to the wind, we would simply run the simple effects tests with a <span class="in">`univariate`</span> model. Note that this method attempts to deal with potential violations of our spherecity assumptions by using Satterthwaite degrees of freedom. Keep in mind, we are less protected from Type 1 error in this case.</span>
+<span id="cb29-147"><a href="#cb29-147"></a></span>
+<span id="cb29-150"><a href="#cb29-150"></a><span class="in">```{r}</span></span>
+<span id="cb29-151"><a href="#cb29-151"></a><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"ProcessDepth"</span>, <span class="at">model=</span><span class="st">"univariate"</span>)</span>
+<span id="cb29-152"><a href="#cb29-152"></a><span class="in">```</span></span>
+<span id="cb29-153"><a href="#cb29-153"></a></span>
+<span id="cb29-154"><a href="#cb29-154"></a>In both cases we find an effect for <span class="in">`Day`</span> on the <span class="in">`High`</span> and <span class="in">`Med`</span> <span class="in">`ProcessDepth`</span>.</span>
+<span id="cb29-155"><a href="#cb29-155"></a></span>
+<span id="cb29-156"><a href="#cb29-156"></a>As a follow up we would run the pairwise tests. Here's the multivariate method:</span>
+<span id="cb29-157"><a href="#cb29-157"></a></span>
+<span id="cb29-160"><a href="#cb29-160"></a><span class="in">```{r}</span></span>
+<span id="cb29-161"><a href="#cb29-161"></a><span class="co"># multivariate method</span></span>
+<span id="cb29-162"><a href="#cb29-162"></a><span class="fu">emmeans</span>(omnibus_aov, </span>
+<span id="cb29-163"><a href="#cb29-163"></a>        <span class="at">by =</span> <span class="st">"ProcessDepth"</span>, </span>
+<span id="cb29-164"><a href="#cb29-164"></a>        <span class="at">specs =</span> pairwise <span class="sc">~</span> Day, </span>
+<span id="cb29-165"><a href="#cb29-165"></a>        <span class="at">model=</span><span class="st">"multivariate"</span>, </span>
+<span id="cb29-166"><a href="#cb29-166"></a>        <span class="at">adjust=</span><span class="st">"tukey"</span>)</span>
+<span id="cb29-167"><a href="#cb29-167"></a><span class="in">```</span></span>
+<span id="cb29-168"><a href="#cb29-168"></a></span>
+<span id="cb29-169"><a href="#cb29-169"></a>and the univariate (pooled error term):</span>
+<span id="cb29-170"><a href="#cb29-170"></a></span>
+<span id="cb29-173"><a href="#cb29-173"></a><span class="in">```{r}</span></span>
+<span id="cb29-174"><a href="#cb29-174"></a><span class="fu">emmeans</span>(omnibus_aov, </span>
+<span id="cb29-175"><a href="#cb29-175"></a>        <span class="at">by =</span> <span class="st">"ProcessDepth"</span>, </span>
+<span id="cb29-176"><a href="#cb29-176"></a>        <span class="at">specs =</span> pairwise <span class="sc">~</span> Day, </span>
+<span id="cb29-177"><a href="#cb29-177"></a>        <span class="at">model=</span><span class="st">"univariate"</span>, </span>
+<span id="cb29-178"><a href="#cb29-178"></a>        <span class="at">adjust=</span><span class="st">"tukey"</span>)</span>
+<span id="cb29-179"><a href="#cb29-179"></a><span class="in">```</span></span>
+<span id="cb29-180"><a href="#cb29-180"></a></span>
+<span id="cb29-181"><a href="#cb29-181"></a><span class="fu">### Writing this up</span></span>
+<span id="cb29-182"><a href="#cb29-182"></a></span>
+<span id="cb29-183"><a href="#cb29-183"></a>... To test this hypothesis we ran a 3 (Process Depth) × 3 (Day) repeated-measures ANOVA. Where there were violations of spherecity, we used Greenhouse-Geisser corrected degrees of freedom. This analysis revealed a significant interaction, $F$(2.86, 25.78) = 10.64, $p$ <span class="sc">\&lt;</span> .001, $\eta_p^2$ = .54. To test this interaction we ran seperate simple effects ANOVA for Day on each level of Process Depth. A simple effect for Day was found on High processing depth, $F$(2, 9) = 32.05, $p$ <span class="sc">\&lt;</span> .001, where there were statistically significant increases in performance from each Day to the next (Tukey HSD, $p$ <span class="sc">\&lt;</span> .05). A simple effect for Day was also found on Med processing depth, $F$(2, 9) = 30.15, $p$ <span class="sc">\&lt;</span> .001. While scores increased across the 3 days, only Day 3 was significantly greater than the other two ($p$s <span class="sc">\&lt;</span> .05). No simple effect was observed for Day in the Lo processing depth condition.</span>
+<span id="cb29-184"><a href="#cb29-184"></a></span>
+<span id="cb29-185"><a href="#cb29-185"></a>See the next walkthrough for how to do this in SPSS.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

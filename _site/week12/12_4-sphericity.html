@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Sphericity: Variances and Co-Variances</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Sphericity: Variances and Co-Variances</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link active">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#between-subjects-example" id="toc-between-subjects-example" class="nav-link active" data-scroll-target="#between-subjects-example">Between Subjects Example</a>
+  <ul class="collapse">
+<li>
+<a href="#the-correlation-matrix" id="toc-the-correlation-matrix" class="nav-link" data-scroll-target="#the-correlation-matrix">The correlation matrix</a>
+  <ul class="collapse">
+<li><a href="#auto-correlation" id="toc-auto-correlation" class="nav-link" data-scroll-target="#auto-correlation">Auto-correlation</a></li>
+  <li><a href="#across-groups-correlations" id="toc-across-groups-correlations" class="nav-link" data-scroll-target="#across-groups-correlations">across groups correlations</a></li>
+  </ul>
+</li>
+  <li><a href="#the-covariance-matrix" id="toc-the-covariance-matrix" class="nav-link" data-scroll-target="#the-covariance-matrix">The covariance matrix</a></li>
+  </ul>
+</li>
+  <li><a href="#within-subjects-example" id="toc-within-subjects-example" class="nav-link" data-scroll-target="#within-subjects-example">Within Subjects example</a></li>
+  <li><a href="#what-all-of-this-means" id="toc-what-all-of-this-means" class="nav-link" data-scroll-target="#what-all-of-this-means">What all of this means</a></li>
+  <li>
+<a href="#sphericity-demonstration-calculator" id="toc-sphericity-demonstration-calculator" class="nav-link" data-scroll-target="#sphericity-demonstration-calculator">Sphericity demonstration calculator</a>
+  <ul class="collapse">
+<li><a href="#build-correlation-matrix" id="toc-build-correlation-matrix" class="nav-link" data-scroll-target="#build-correlation-matrix">Build correlation matrix</a></li>
+  <li><a href="#build-a-covariance-matrix" id="toc-build-a-covariance-matrix" class="nav-link" data-scroll-target="#build-a-covariance-matrix">build a covariance matrix</a></li>
+  <li><a href="#build-simulated-data" id="toc-build-simulated-data" class="nav-link" data-scroll-target="#build-simulated-data">build simulated data</a></li>
+  <li><a href="#analyze-for-homogeneity-of-sums-minus-covariances" id="toc-analyze-for-homogeneity-of-sums-minus-covariances" class="nav-link" data-scroll-target="#analyze-for-homogeneity-of-sums-minus-covariances">Analyze for Homogeneity of Sums minus Covariances:</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Sphericity: Variances and Co-Variances</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>In this walkthrough I’m just going to be building a few intuitions about what we mean by sphericity and how it relates to our homogeneity of variance assumptions.</p>
+<section id="between-subjects-example" class="level1"><h1>Between Subjects Example</h1>
+<p>For this example, let’s assume that we have three <strong>groups</strong> of participants that we are comparing against one another. Let’s generate the data for these groups—A, B, &amp; C.Each group has the same number of members and same variances (sds), but different means:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>A <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">60</span>, <span class="at">sd =</span> <span class="dv">7</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>B <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">65</span>, <span class="at">sd =</span> <span class="dv">7</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>C <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">70</span>, <span class="at">sd =</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="the-correlation-matrix" class="level2"><h2 class="anchored" data-anchor-id="the-correlation-matrix">The correlation matrix</h2>
+<section id="auto-correlation" class="level3"><h3 class="anchored" data-anchor-id="auto-correlation">Auto-correlation</h3>
+<p>Auto correlation simply means the correlation of data with itself. In practical circumstances there is an additional wrinkle to auto-correlation like introducing a “lag” in the data, but for our purposes we are just going to correlate the original data from each group against itself. This will always result in a correlation of 1:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>aa <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,A)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>bb <span class="ot">&lt;-</span> <span class="fu">cor</span>(B,B)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>cc <span class="ot">&lt;-</span> <span class="fu">cor</span>(C,C)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">c</span>(<span class="st">"correlation A"</span> <span class="ot">=</span> aa,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="st">"correlation B"</span> <span class="ot">=</span> bb,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="st">"correlation C"</span> <span class="ot">=</span> cc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>correlation A correlation B correlation C 
+            1             1             1 </code></pre>
+</div>
+</div>
+</section><section id="across-groups-correlations" class="level3"><h3 class="anchored" data-anchor-id="across-groups-correlations">across groups correlations</h3>
+<p>Now we need to test for the correlations of each group to the other groups. Notice that when we generated our data in Chunk 1, each group was <strong>randomly</strong> generated, <strong>independent</strong> of one another. This captures these two critical assumptions of Between Subjects ANOVA. This also means that there should be no correlations (inter-dependencies) between our groups. While theoretically this means that any between group correlations should equal zero, in practice we should get a very low number. (Keep in mind your values may be different from mine due to random generation, unless you set the seed as I did to 1):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,B)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>ac <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,C)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>bc <span class="ot">&lt;-</span> <span class="fu">cor</span>(B,C)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">c</span>(<span class="st">"correlation AB"</span> <span class="ot">=</span> ab, <span class="st">"correlation AC"</span> <span class="ot">=</span> ac, <span class="st">"correlation BC"</span> <span class="ot">=</span> bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>correlation AB correlation AC correlation BC 
+  -0.039087178    0.026287227    0.003552006 </code></pre>
+</div>
+</div>
+<p>From here, we can build our correlation matrix by first assigning the mirrors to our correlations above (e.g., the correlation of A to C is the same as C to A).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>ba <span class="ot">&lt;-</span> ab <span class="co"># mirrors</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>ca <span class="ot">&lt;-</span> ac</span>
+<span id="cb6-3"><a href="#cb6-3"></a>cb <span class="ot">&lt;-</span> bc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And building the matrix</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(aa, ab, ac,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>                               ba, bb, bc,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>                               ca, cb, cc),</span>
+<span id="cb7-4"><a href="#cb7-4"></a>                             <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="fu">rownames</span>(correlation_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">colnames</span>(correlation_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a>correlation_matrix <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       A      B     C
+A  1.000 -0.039 0.026
+B -0.039  1.000 0.004
+C  0.026  0.004 1.000</code></pre>
+</div>
+</div>
+</section></section><section id="the-covariance-matrix" class="level2"><h2 class="anchored" data-anchor-id="the-covariance-matrix">The covariance matrix</h2>
+<p>We can translate the correlation matrix to a covariance matrix by cross multiplying by our group standard deviations. (Or, since we had the original data, I suppose we could have just taken the <code><a href="https://rdrr.io/r/stats/cor.html">cov()</a></code> of each column)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>stdevs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sd</span>(A), <span class="fu">sd</span>(B), <span class="fu">sd</span>(C))</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># need to transpose for matrix multiplication</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>covariance_matrix <span class="ot">&lt;-</span> correlation_matrix <span class="sc">*</span> stdevs <span class="sc">%*%</span> <span class="fu">t</span>(stdevs) </span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>covariance_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           A          B          C
+A 33.8695775 -1.5427086  0.9635283
+B -1.5427086 45.9927476  0.1517166
+C  0.9635283  0.1517166 39.6670215</code></pre>
+</div>
+</div>
+<p>The important thing to note here, that our simulations reinforce is that for the sake of the Between Subjects ANOVAs <strong>all values off of the diagonal are effectively zero</strong>. Therefore the Between Subjects ANOVA is only concerned with the relationships (equivalence) of values along the diagonal.</p>
+<p>Let kick this up to within subjects (repeated measures) designs.</p>
+</section></section><section id="within-subjects-example" class="level1"><h1>Within Subjects example</h1>
+<p>Lets start by generating a Group-Condition, <code>A</code>. We’ll create the same values as before</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>A <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">60</span>, <span class="at">sd =</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, this time, instead of generating <code>B</code> and <code>C</code> independently, we will psuedo-randomly generate these scores based on <code>A</code>: where <code>B</code> is 5 greater than <code>A</code> plus or minus some random noise, and <code>C</code> is 5 greater than <code>B</code> plus or minus noise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>B <span class="ot">&lt;-</span> A <span class="sc">+</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fu">runif</span>(<span class="dv">50</span>) <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">50</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>C <span class="ot">&lt;-</span> B <span class="sc">+</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fu">runif</span>(<span class="dv">50</span>) <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now lets run our auto-correlations and between conditions correlations:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#auto correlations all equal 1</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>aa <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,A)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>bb <span class="ot">&lt;-</span> <span class="fu">cor</span>(B,B)</span>
+<span id="cb13-4"><a href="#cb13-4"></a>cc <span class="ot">&lt;-</span> <span class="fu">cor</span>(C,C)</span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co"># cross condition correlations</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>ab <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,B)</span>
+<span id="cb13-8"><a href="#cb13-8"></a>ac <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,C)</span>
+<span id="cb13-9"><a href="#cb13-9"></a>ba <span class="ot">&lt;-</span> ab <span class="co"># mirrors</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>bc <span class="ot">&lt;-</span> <span class="fu">cor</span>(B,C)</span>
+<span id="cb13-11"><a href="#cb13-11"></a>ca <span class="ot">&lt;-</span> ac</span>
+<span id="cb13-12"><a href="#cb13-12"></a>cb <span class="ot">&lt;-</span> bc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and finally build the correlation matrix:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(aa, ab, ac,</span>
+<span id="cb14-2"><a href="#cb14-2"></a>                               ba, bb, bc,</span>
+<span id="cb14-3"><a href="#cb14-3"></a>                               ca, cb, cc),</span>
+<span id="cb14-4"><a href="#cb14-4"></a>                             <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="fu">rownames</span>(correlation_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="fu">colnames</span>(correlation_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
+<span id="cb14-9"><a href="#cb14-9"></a>correlation_matrix <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      A     B     C
+A 1.000 0.998 0.996
+B 0.998 1.000 0.999
+C 0.996 0.999 1.000</code></pre>
+</div>
+</div>
+<p>As we see in this case, scores in each condition are very strongly correlated with one another (the off-diagonal correlations). We can then take a look at the covariance matrix by cross multiplying by our group standard deviations. (Or, again, since we had the original data, I suppose we could have just taken the <code><a href="https://rdrr.io/r/stats/cor.html">cov()</a></code> of each column)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>stdevs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sd</span>(A), <span class="fu">sd</span>(B), <span class="fu">sd</span>(C))</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># need to transpose for matrix multiplication</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>covariance_matrix <span class="ot">&lt;-</span> correlation_matrix <span class="sc">*</span> stdevs <span class="sc">%*%</span> <span class="fu">t</span>(stdevs) </span>
+<span id="cb16-5"><a href="#cb16-5"></a></span>
+<span id="cb16-6"><a href="#cb16-6"></a>covariance_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         A        B        C
+A 33.86958 34.31762 34.24638
+B 34.31762 34.89534 34.84546
+C 34.24638 34.84546 34.89718</code></pre>
+</div>
+</div>
+<p>The covariance matrix above represents a case on near-compound-symmetry. This would be as close to the perfect sphericity as we would expect given generated data. I really wouldn’t expect these clean of values ever from my empirical data.</p>
+</section><section id="what-all-of-this-means" class="level1"><h1>What all of this means</h1>
+<p>Hopefully, the above example captures how we can use the variance / co-variance matrix to assess how strongly the data in our conditions (and groups) is correlated with one another. For example, I can easily transform back and forth between covariances and correlations using the standard deviations of my groups. For example, going from covariance to correlation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>covariance_matrix <span class="sc">/</span> stdevs <span class="sc">%*%</span> <span class="fu">t</span>(stdevs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          A         B         C
+A 1.0000000 0.9982252 0.9961268
+B 0.9982252 1.0000000 0.9985442
+C 0.9961268 0.9985442 1.0000000</code></pre>
+</div>
+</div>
+<p>So, our assessment of sphericity is an assement of the degree to data in each condition’s data is correlated with one another, where the ideal scenario is that data in each group is perfectly correlated with the other groups (note this <strong>does not mean</strong> that the data is indentical, just strongly correlated).</p>
+</section><section id="sphericity-demonstration-calculator" class="level1"><h1>Sphericity demonstration calculator</h1>
+<p>With this in mind we can build a calculator example to better understand how devations in correlations result in deviations away from the sphericity assumption. Here we can start with our correlations, use those values to generate hypothetical data, and work our way back. In the code below, you can alter the group means <code>mu</code> and standard deviations <code>stddev</code>, as well as the between condition correlations.</p>
+<section id="build-correlation-matrix" class="level2"><h2 class="anchored" data-anchor-id="build-correlation-matrix">Build correlation matrix</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co"># YOU CAN CHANGE ME</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.23</span>, <span class="fl">3.01</span>, <span class="fl">2.91</span>) <span class="co"># group means</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>stddev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>) <span class="co"># group standard devs</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="co"># correlations (variances, DO NOT CHANGE)</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>aa <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>bb <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a>cc <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a></span>
+<span id="cb23-14"><a href="#cb23-14"></a><span class="co"># correlations (covariances, a to b, a to c, b to c, CHANGE)</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a>ab <span class="ot">=</span> .<span class="dv">3</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a>ac <span class="ot">=</span> .<span class="dv">6</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a>bc <span class="ot">=</span> .<span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Based upon your changes you can not build the appropriate correlation matrix</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># DO NOT ALTER</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a>ba <span class="ot">=</span> ab <span class="co">#mirror</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>ca <span class="ot">=</span> ac</span>
+<span id="cb24-5"><a href="#cb24-5"></a>cb <span class="ot">=</span> bc</span>
+<span id="cb24-6"><a href="#cb24-6"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a>corMat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(aa, ab, ac,</span>
+<span id="cb24-8"><a href="#cb24-8"></a>                   ba, bb, bc,</span>
+<span id="cb24-9"><a href="#cb24-9"></a>                   ca, cb, cc),</span>
+<span id="cb24-10"><a href="#cb24-10"></a>                 <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb24-11"><a href="#cb24-11"></a></span>
+<span id="cb24-12"><a href="#cb24-12"></a>corMat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]  1.0  0.3  0.6
+[2,]  0.3  1.0  0.1
+[3,]  0.6  0.1  1.0</code></pre>
+</div>
+</div>
+</section><section id="build-a-covariance-matrix" class="level2"><h2 class="anchored" data-anchor-id="build-a-covariance-matrix">build a covariance matrix</h2>
+<p>Now to create the covariance matrix</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>covMat <span class="ot">&lt;-</span> stddev <span class="sc">%*%</span> <span class="fu">t</span>(stddev) <span class="sc">*</span> corMat</span>
+<span id="cb26-2"><a href="#cb26-2"></a>covMat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]  4.0  1.2  2.4
+[2,]  1.2  4.0  0.4
+[3,]  2.4  0.4  4.0</code></pre>
+</div>
+</div>
+</section><section id="build-simulated-data" class="level2"><h2 class="anchored" data-anchor-id="build-simulated-data">build simulated data</h2>
+<p>you can use this code to build out simulated data based on the parameters you have entered above:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="at">n =</span> <span class="dv">212</span>, <span class="co"># number of participants</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>              <span class="at">mu =</span> mu, <span class="co"># means from above</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>              <span class="at">Sigma =</span> covMat, <span class="co"># covariance matrix from above</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>              <span class="at">empirical =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">data.frame</span>()</span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>)</span>
+<span id="cb28-7"><a href="#cb28-7"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               A           B           C
+1    4.277062678  3.90719459  4.45579227
+2    4.641274608  1.49615783  1.42113739
+3    3.827340659  3.83714702  5.24109404
+4    5.851299251  5.04517587  2.13024154
+5    4.246887804  0.05766786  1.90040053
+6    4.979052424  2.92928818  6.02874995
+7    6.093413904  5.03705424  4.14889026
+8    6.957267914  6.01743282  4.43155681
+9    4.127715697  3.16528570  3.57542196
+10   3.995481497  2.58402796  2.89951762
+11   5.159923190 -1.11939545  6.27617987
+12   2.835283218  3.66516386  2.74910499
+13  -0.005171068  3.08004143  0.64309191
+14   1.604748598  0.93847074  2.93725316
+15   0.104871288  3.46868401  0.21707385
+16   2.978828416  2.71749637  2.21460297
+17   3.511566669  4.64110544  1.64587304
+18   0.969214756  8.69093535 -2.51418694
+19   4.006297746  2.87981840  2.17936103
+20   4.286101350  2.22302861  5.02910647
+21   3.095643825  1.01454567  1.53614891
+22   3.565675803  1.48623563  1.37257349
+23   2.526985556 -0.62642339  1.32087133
+24   7.546741165  2.33181844  6.23095835
+25   3.903580984 -0.71824722  5.30337738
+26   3.309238135  3.69308917  1.76454027
+27   3.941415739  0.52761729  1.74132239
+28   7.374147523  1.68879043  4.44490095
+29   4.548794063  4.13414632  3.92912026
+30   3.843303195  4.39002312  3.23504463
+31   4.665123667  2.93900057  2.74286733
+32   6.816769693  1.45988113  5.23032884
+33   5.554110070  2.21077803 -0.94466206
+34   3.177194088  0.67750507  1.13568517
+35   7.328580371  2.64875995  3.09567325
+36   4.031199119  1.31165763  2.20948641
+37   2.946212473  5.23347820  1.33831893
+38   5.638877551  7.53906151  4.77114360
+39   2.524047840  4.99203285  3.45085161
+40   5.952927868  5.31870294  2.54216798
+41   2.644049929 -1.61338551  2.60930780
+42   2.675571255  3.54267916  2.70994174
+43   0.689786180  2.24912497 -0.38416886
+44   5.546689126  2.88443793 -0.90832427
+45   2.559404085  3.05165811  2.17096064
+46   4.916914595  3.80676397  1.09483360
+47   3.007383173  2.42163012  4.99117018
+48   4.484086905  4.16310585  3.19081765
+49   6.437561152  8.48952865  0.53957314
+50   4.798749088  3.57288866  3.22632821
+51   6.741865472  1.39823211  4.11913155
+52   2.041130755  1.36884085  1.84317573
+53   4.914176044  1.68598773  2.64389017
+54   6.403865046  3.22546950  7.48096292
+55   4.583086014  2.48682853  4.59807826
+56   2.366962683  3.66978645  2.49962789
+57   2.616965642  2.24802193 -0.37949205
+58   3.761107399  3.77498769  1.69129705
+59   5.191838186  4.55744819  2.35175825
+60   3.079915252  2.82050020  1.04896171
+61   5.888754446  7.73430658  2.14805398
+62   7.115827043  2.22991475  5.33892244
+63   7.488374891  4.71283481  6.79726047
+64   5.934307128  3.74617467  2.74320888
+65   1.226151281  3.35782120  0.90249027
+66   3.893422498  3.12289455  3.49477790
+67   4.858224567  7.13468474  4.61313986
+68   4.698820470  4.20263249  2.92976471
+69   4.842739506  5.80489466  3.88425063
+70   4.384869661  4.74484519  1.68006882
+71   0.724852026  1.38955548  1.27280809
+72   5.466053126  3.31746769  4.96210063
+73   5.539570315  4.22359237  2.00879115
+74   1.525839944  1.47877832  1.48290147
+75   6.564609727  2.60421403  5.44700856
+76   7.540720669  6.49204720  3.05327059
+77   7.330073078  1.69561488  6.00749110
+78   3.288495378  2.82239924  1.67319019
+79   2.465953025  1.26157259  2.55677739
+80   4.955757395  3.83721184  4.59742601
+81   7.114691053  4.17457903  3.71117308
+82   4.165306104  6.08176310  4.04956514
+83   2.489275635 -0.54667597  2.68746169
+84   1.991995396  1.90605485  1.68026325
+85   6.685800702  2.82682678  4.48201578
+86   4.080930455  2.85201370  5.27139543
+87   4.658162092 -1.24823958  2.18653743
+88   6.366383739  5.59593453  3.73195364
+89   4.408515004  1.68368996  5.38051089
+90   5.935792738  5.38396806  3.60509507
+91   6.361088298  0.68857606  6.27594523
+92   3.502997064  4.09979322  3.83930421
+93   1.742894734  1.73502994 -0.21645273
+94   4.437940905  2.63980610  1.04405939
+95   7.647354334  2.82269152  4.79618384
+96   2.890270047  1.51172167  2.16817978
+97   4.715529686  4.35682082  2.87475186
+98   5.885987498  4.86234182  4.32861724
+99  -1.590478407 -1.09971579  1.61207753
+100  6.553873310  3.69122536  5.37320979
+101  1.918659612  3.43882916  5.54923542
+102  4.579194887  2.73765586  0.36680869
+103  4.052586532  1.50417752  2.82379931
+104  6.618348581  2.75663495  5.94125595
+105  8.094050768  5.18835527  5.32161960
+106  3.961341824  1.62088755  1.86097402
+107 -0.100848882  1.09591631  0.65965677
+108  2.669225212  4.65964963  4.74361915
+109  3.068611435  3.79168696  2.73302864
+110  6.736171603  1.19701224  4.96283307
+111  5.687754926  5.80268835  4.02387176
+112  5.513496066  0.28466870  3.54947645
+113  5.572249747  0.77714155 -0.10014258
+114  1.733975553  1.86674136  0.88253509
+115  4.070846031  4.50797576  4.91923864
+116  1.719285522 -0.57555341  2.24807024
+117  3.181364809  6.75887872  1.20234405
+118  3.061936122  2.06096413  1.37681613
+119  3.735262445  3.98179630  0.85369327
+120  2.777023228  2.28939315  2.74248268
+121  3.177633288  0.01405719  2.21224057
+122  3.759727726  2.04134204  1.02867964
+123  5.621811340  6.16973910  4.55326269
+124  3.162682761  6.22359498  2.20368518
+125  1.495419998  0.22749135  0.01224626
+126  2.910962828  1.11037135  3.05024568
+127  7.155604423  5.96300673  4.04218792
+128  5.235852596  1.29471411  2.93691950
+129 -1.039288431  4.39288460 -1.69485987
+130 -2.636641009  2.23463377 -0.56215565
+131  2.920555500  1.61447124 -0.93195323
+132  4.338234264  5.67143001  5.59065801
+133  2.211628570  4.79637589  1.69012464
+134  3.963014235  4.15356977  1.40229644
+135  6.811097035  4.70724849  1.82883493
+136  2.153369868  1.89678588  0.41912203
+137  4.578847704  2.63597591  3.13992896
+138  5.899353521  5.01470267  5.78889325
+139  4.301508346  4.76790374 -1.34641167
+140  4.891574666  2.75154904  3.36074262
+141  4.607337631  3.57348446  5.22655528
+142  2.861177851  2.59722616  1.88608748
+143  3.228850162 -1.97992565  1.94869896
+144  4.047054265  0.35846755  3.55206849
+145  7.991273330  4.76406833  6.54820328
+146  2.854297065  5.07641001 -0.39918021
+147  4.024171978  2.36517097  3.36387222
+148  3.834959195  2.68843119  3.68081879
+149  3.565449325  6.14544180  2.14334857
+150 10.688234597  7.23269190  6.95257620
+151  6.923292220  3.28840604  3.31089347
+152  7.029896676  2.88571454  4.62254573
+153  4.713844901  5.27697059  2.10969860
+154  5.566531794  1.34982026  4.65104416
+155  4.454156578  5.35119775  1.96025240
+156  5.403492577  2.10472226  2.03748430
+157  5.966224188  4.64794615  4.10956116
+158  6.156569509  2.93978422  1.99974788
+159  2.842394834  2.37827631  3.45407983
+160  6.663340690  3.66086927  4.80004140
+161  0.633401685  6.95937648  0.82884060
+162  5.912348389 -0.23307545  2.87259005
+163  3.137054659  2.49275246  2.02008801
+164  6.298191436  0.35241044  4.48701655
+165  3.070904489  3.54745178  2.32606343
+166  4.496609150  3.01485493  5.43954936
+167  5.447971819  3.60431561  3.95908532
+168  1.912932672  1.32998677  2.67801784
+169  6.811280570  2.66941277  7.02987690
+170  5.374025770  3.40827075  5.51909968
+171  5.185190160  5.39666199  5.43621164
+172  4.462388665  1.79474697  4.61470103
+173  6.332813675  5.08785560  6.76456048
+174  5.348235164  5.38288086  6.64319561
+175  5.501143713  3.30213108  4.44019326
+176  3.744667973  2.87792429  1.54938298
+177  2.293072024 -0.69028542  0.77429111
+178  2.117169544  3.31822499  3.10882611
+179  1.979164023 -0.30049849  1.84419768
+180  7.317472314  6.84005805  3.63116400
+181  4.345408665  0.08494558  0.53363204
+182  5.210681323  4.24477246  4.74047766
+183  4.750237470  1.68813633  3.26638967
+184 -0.171006222  0.64899783 -2.54210016
+185  2.814608215  4.80567279  2.55537546
+186  5.563067719  4.13854408  4.09863588
+187  3.763718560  4.99995695  0.21172177
+188  1.220724887  1.31075671  2.60446568
+189  5.373438916  3.39646036  1.72730598
+190  5.753128372  6.02352237  4.46976059
+191  4.533720364  4.09091974 -0.14326423
+192  3.916882338  3.28931152  1.09503713
+193  4.681860230  3.78965022  4.14961571
+194  1.843652778  0.84803951  1.49521177
+195  3.115964156  2.80808528  2.42176079
+196  9.287889591  2.69526989  6.08213853
+197  5.318852446  3.31253505  1.53751168
+198  1.749218662  3.17095635 -0.75159785
+199  3.234556324  1.85368972  5.35946551
+200  3.141401684  1.77327028  1.07158954
+201  1.206393970  1.69343124  1.20810150
+202  1.482106323 -0.01184140  4.53612541
+203  6.242192992  3.18006831  2.41977491
+204  5.712270352  2.83039353  7.68170170
+205  5.398089473  4.26064970  1.98862815
+206  2.910493463  0.71633051  3.22860748
+207  5.047575310  2.63646436  2.76197619
+208  2.954976966  2.49189066 -0.83984593
+209  3.579038340  3.16974229  3.09029601
+210  5.659629276  0.57006782  6.08220828
+211  2.344912445 -1.67070231  3.31976643
+212  2.434378236  1.74160205  0.47390910</code></pre>
+</div>
+</div>
+</section><section id="analyze-for-homogeneity-of-sums-minus-covariances" class="level2"><h2 class="anchored" data-anchor-id="analyze-for-homogeneity-of-sums-minus-covariances">Analyze for Homogeneity of Sums minus Covariances:</h2>
+<p>And finally check for the similarity of the Sums minus Covariances of each pairwise comparison. Note how the resulting values deviate from one another as you change the variances of each group and the correlations between groups from the start.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>varA <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>A)</span>
+<span id="cb30-2"><a href="#cb30-2"></a>varB <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>B)</span>
+<span id="cb30-3"><a href="#cb30-3"></a>varC <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>C)</span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a>covAB <span class="ot">&lt;-</span> <span class="fu">cov</span>(df<span class="sc">$</span>A, df<span class="sc">$</span>B)</span>
+<span id="cb30-6"><a href="#cb30-6"></a>covAC <span class="ot">&lt;-</span> <span class="fu">cov</span>(df<span class="sc">$</span>A, df<span class="sc">$</span>C)</span>
+<span id="cb30-7"><a href="#cb30-7"></a>covBC <span class="ot">&lt;-</span> <span class="fu">cov</span>(df<span class="sc">$</span>B, df<span class="sc">$</span>C)</span>
+<span id="cb30-8"><a href="#cb30-8"></a></span>
+<span id="cb30-9"><a href="#cb30-9"></a>AB <span class="ot">&lt;-</span> varA <span class="sc">+</span> varB <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>covAB</span>
+<span id="cb30-10"><a href="#cb30-10"></a>AC <span class="ot">&lt;-</span> varA <span class="sc">+</span> varC <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>covAC</span>
+<span id="cb30-11"><a href="#cb30-11"></a>BC <span class="ot">&lt;-</span> varB <span class="sc">+</span> varC <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>covBC</span>
+<span id="cb30-12"><a href="#cb30-12"></a></span>
+<span id="cb30-13"><a href="#cb30-13"></a><span class="fu">list</span>(<span class="st">"A to B"</span> <span class="ot">=</span> AB, <span class="st">"A to C"</span> <span class="ot">=</span> AC,<span class="st">"B to C"</span> <span class="ot">=</span> BC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$`A to B`
+[1] 5.6
+
+$`A to C`
+[1] 3.2
+
+$`B to C`
+[1] 7.2</code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb32" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="#cb32-1"></a><span class="co">---</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="an">title:</span><span class="co"> "Sphericity: Variances and Co-Variances"</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="an">output:</span><span class="co"> html_notebook</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="co">---</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a></span>
+<span id="cb32-6"><a href="#cb32-6"></a>In this walkthrough I'm just going to be building a few intuitions about what we mean by sphericity and how it relates to our homogeneity of variance assumptions.</span>
+<span id="cb32-7"><a href="#cb32-7"></a></span>
+<span id="cb32-8"><a href="#cb32-8"></a><span class="fu"># Between Subjects Example</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a></span>
+<span id="cb32-10"><a href="#cb32-10"></a>For this example, let's assume that we have three **groups** of participants that we are comparing against one another. Let's generate the data for these groups---A, B, &amp; C.Each group has the same number of members and same variances (sds), but different means:</span>
+<span id="cb32-11"><a href="#cb32-11"></a></span>
+<span id="cb32-14"><a href="#cb32-14"></a><span class="in">```{r}</span></span>
+<span id="cb32-15"><a href="#cb32-15"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb32-16"><a href="#cb32-16"></a></span>
+<span id="cb32-17"><a href="#cb32-17"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb32-18"><a href="#cb32-18"></a>A <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">60</span>, <span class="at">sd =</span> <span class="dv">7</span>)</span>
+<span id="cb32-19"><a href="#cb32-19"></a>B <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">65</span>, <span class="at">sd =</span> <span class="dv">7</span>)</span>
+<span id="cb32-20"><a href="#cb32-20"></a>C <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">70</span>, <span class="at">sd =</span> <span class="dv">7</span>)</span>
+<span id="cb32-21"><a href="#cb32-21"></a><span class="in">```</span></span>
+<span id="cb32-22"><a href="#cb32-22"></a></span>
+<span id="cb32-23"><a href="#cb32-23"></a><span class="fu">## The correlation matrix</span></span>
+<span id="cb32-24"><a href="#cb32-24"></a></span>
+<span id="cb32-25"><a href="#cb32-25"></a><span class="fu">### Auto-correlation</span></span>
+<span id="cb32-26"><a href="#cb32-26"></a></span>
+<span id="cb32-27"><a href="#cb32-27"></a>Auto correlation simply means the correlation of data with itself. In practical circumstances there is an additional wrinkle to auto-correlation like introducing a "lag" in the data, but for our purposes we are just going to correlate the original data from each group against itself. This will always result in a correlation of 1:</span>
+<span id="cb32-28"><a href="#cb32-28"></a></span>
+<span id="cb32-31"><a href="#cb32-31"></a><span class="in">```{r}</span></span>
+<span id="cb32-32"><a href="#cb32-32"></a>aa <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,A)</span>
+<span id="cb32-33"><a href="#cb32-33"></a>bb <span class="ot">&lt;-</span> <span class="fu">cor</span>(B,B)</span>
+<span id="cb32-34"><a href="#cb32-34"></a>cc <span class="ot">&lt;-</span> <span class="fu">cor</span>(C,C)</span>
+<span id="cb32-35"><a href="#cb32-35"></a></span>
+<span id="cb32-36"><a href="#cb32-36"></a><span class="fu">c</span>(<span class="st">"correlation A"</span> <span class="ot">=</span> aa,</span>
+<span id="cb32-37"><a href="#cb32-37"></a>  <span class="st">"correlation B"</span> <span class="ot">=</span> bb,</span>
+<span id="cb32-38"><a href="#cb32-38"></a>  <span class="st">"correlation C"</span> <span class="ot">=</span> cc)</span>
+<span id="cb32-39"><a href="#cb32-39"></a><span class="in">```</span></span>
+<span id="cb32-40"><a href="#cb32-40"></a></span>
+<span id="cb32-41"><a href="#cb32-41"></a><span class="fu">### across groups correlations</span></span>
+<span id="cb32-42"><a href="#cb32-42"></a></span>
+<span id="cb32-43"><a href="#cb32-43"></a>Now we need to test for the correlations of each group to the other groups. Notice that when we generated our data in Chunk 1, each group was **randomly** generated, **independent** of one another. This captures these two critical assumptions of Between Subjects ANOVA. This also means that there should be no correlations (inter-dependencies) between our groups. While theoretically this means that any between group correlations should equal zero, in practice we should get a very low number. (Keep in mind your values may be different from mine due to random generation, unless you set the seed as I did to 1):</span>
+<span id="cb32-44"><a href="#cb32-44"></a></span>
+<span id="cb32-47"><a href="#cb32-47"></a><span class="in">```{r}</span></span>
+<span id="cb32-48"><a href="#cb32-48"></a>ab <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,B)</span>
+<span id="cb32-49"><a href="#cb32-49"></a>ac <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,C)</span>
+<span id="cb32-50"><a href="#cb32-50"></a>bc <span class="ot">&lt;-</span> <span class="fu">cor</span>(B,C)</span>
+<span id="cb32-51"><a href="#cb32-51"></a></span>
+<span id="cb32-52"><a href="#cb32-52"></a><span class="fu">c</span>(<span class="st">"correlation AB"</span> <span class="ot">=</span> ab, <span class="st">"correlation AC"</span> <span class="ot">=</span> ac, <span class="st">"correlation BC"</span> <span class="ot">=</span> bc)</span>
+<span id="cb32-53"><a href="#cb32-53"></a><span class="in">```</span></span>
+<span id="cb32-54"><a href="#cb32-54"></a></span>
+<span id="cb32-55"><a href="#cb32-55"></a>From here, we can build our correlation matrix by first assigning the mirrors to our correlations above (e.g., the correlation of A to C is the same as C to A).</span>
+<span id="cb32-56"><a href="#cb32-56"></a></span>
+<span id="cb32-59"><a href="#cb32-59"></a><span class="in">```{r}</span></span>
+<span id="cb32-60"><a href="#cb32-60"></a>ba <span class="ot">&lt;-</span> ab <span class="co"># mirrors</span></span>
+<span id="cb32-61"><a href="#cb32-61"></a>ca <span class="ot">&lt;-</span> ac</span>
+<span id="cb32-62"><a href="#cb32-62"></a>cb <span class="ot">&lt;-</span> bc</span>
+<span id="cb32-63"><a href="#cb32-63"></a><span class="in">```</span></span>
+<span id="cb32-64"><a href="#cb32-64"></a></span>
+<span id="cb32-65"><a href="#cb32-65"></a>And building the matrix</span>
+<span id="cb32-66"><a href="#cb32-66"></a></span>
+<span id="cb32-69"><a href="#cb32-69"></a><span class="in">```{r}</span></span>
+<span id="cb32-70"><a href="#cb32-70"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(aa, ab, ac,</span>
+<span id="cb32-71"><a href="#cb32-71"></a>                               ba, bb, bc,</span>
+<span id="cb32-72"><a href="#cb32-72"></a>                               ca, cb, cc),</span>
+<span id="cb32-73"><a href="#cb32-73"></a>                             <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb32-74"><a href="#cb32-74"></a><span class="fu">rownames</span>(correlation_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb32-75"><a href="#cb32-75"></a><span class="fu">colnames</span>(correlation_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb32-76"><a href="#cb32-76"></a></span>
+<span id="cb32-77"><a href="#cb32-77"></a>correlation_matrix <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb32-78"><a href="#cb32-78"></a><span class="in">```</span></span>
+<span id="cb32-79"><a href="#cb32-79"></a></span>
+<span id="cb32-80"><a href="#cb32-80"></a><span class="fu">## The covariance matrix</span></span>
+<span id="cb32-81"><a href="#cb32-81"></a></span>
+<span id="cb32-82"><a href="#cb32-82"></a>We can translate the correlation matrix to a covariance matrix by cross multiplying by our group standard deviations. (Or, since we had the original data, I suppose we could have just taken the <span class="in">`cov()`</span> of each column)</span>
+<span id="cb32-83"><a href="#cb32-83"></a></span>
+<span id="cb32-86"><a href="#cb32-86"></a><span class="in">```{r}</span></span>
+<span id="cb32-87"><a href="#cb32-87"></a>stdevs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sd</span>(A), <span class="fu">sd</span>(B), <span class="fu">sd</span>(C))</span>
+<span id="cb32-88"><a href="#cb32-88"></a></span>
+<span id="cb32-89"><a href="#cb32-89"></a><span class="co"># need to transpose for matrix multiplication</span></span>
+<span id="cb32-90"><a href="#cb32-90"></a>covariance_matrix <span class="ot">&lt;-</span> correlation_matrix <span class="sc">*</span> stdevs <span class="sc">%*%</span> <span class="fu">t</span>(stdevs) </span>
+<span id="cb32-91"><a href="#cb32-91"></a></span>
+<span id="cb32-92"><a href="#cb32-92"></a>covariance_matrix</span>
+<span id="cb32-93"><a href="#cb32-93"></a><span class="in">```</span></span>
+<span id="cb32-94"><a href="#cb32-94"></a></span>
+<span id="cb32-95"><a href="#cb32-95"></a>The important thing to note here, that our simulations reinforce is that for the sake of the Between Subjects ANOVAs **all values off of the diagonal are effectively zero**. Therefore the Between Subjects ANOVA is only concerned with the relationships (equivalence) of values along the diagonal.</span>
+<span id="cb32-96"><a href="#cb32-96"></a></span>
+<span id="cb32-97"><a href="#cb32-97"></a>Let kick this up to within subjects (repeated measures) designs.</span>
+<span id="cb32-98"><a href="#cb32-98"></a></span>
+<span id="cb32-99"><a href="#cb32-99"></a><span class="fu"># Within Subjects example</span></span>
+<span id="cb32-100"><a href="#cb32-100"></a></span>
+<span id="cb32-101"><a href="#cb32-101"></a>Lets start by generating a Group-Condition, <span class="in">`A`</span>. We'll create the same values as before</span>
+<span id="cb32-102"><a href="#cb32-102"></a></span>
+<span id="cb32-105"><a href="#cb32-105"></a><span class="in">```{r}</span></span>
+<span id="cb32-106"><a href="#cb32-106"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb32-107"><a href="#cb32-107"></a>A <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">60</span>, <span class="at">sd =</span> <span class="dv">7</span>)</span>
+<span id="cb32-108"><a href="#cb32-108"></a><span class="in">```</span></span>
+<span id="cb32-109"><a href="#cb32-109"></a></span>
+<span id="cb32-110"><a href="#cb32-110"></a>However, this time, instead of generating <span class="in">`B`</span> and <span class="in">`C`</span> independently, we will psuedo-randomly generate these scores based on <span class="in">`A`</span>: where <span class="in">`B`</span> is 5 greater than <span class="in">`A`</span> plus or minus some random noise, and <span class="in">`C`</span> is 5 greater than <span class="in">`B`</span> plus or minus noise.</span>
+<span id="cb32-111"><a href="#cb32-111"></a></span>
+<span id="cb32-114"><a href="#cb32-114"></a><span class="in">```{r}</span></span>
+<span id="cb32-115"><a href="#cb32-115"></a>B <span class="ot">&lt;-</span> A <span class="sc">+</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fu">runif</span>(<span class="dv">50</span>) <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">50</span>)</span>
+<span id="cb32-116"><a href="#cb32-116"></a>C <span class="ot">&lt;-</span> B <span class="sc">+</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fu">runif</span>(<span class="dv">50</span>) <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">50</span>)</span>
+<span id="cb32-117"><a href="#cb32-117"></a><span class="in">```</span></span>
+<span id="cb32-118"><a href="#cb32-118"></a></span>
+<span id="cb32-119"><a href="#cb32-119"></a>Now lets run our auto-correlations and between conditions correlations:</span>
+<span id="cb32-120"><a href="#cb32-120"></a></span>
+<span id="cb32-123"><a href="#cb32-123"></a><span class="in">```{r}</span></span>
+<span id="cb32-124"><a href="#cb32-124"></a><span class="co">#auto correlations all equal 1</span></span>
+<span id="cb32-125"><a href="#cb32-125"></a>aa <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,A)</span>
+<span id="cb32-126"><a href="#cb32-126"></a>bb <span class="ot">&lt;-</span> <span class="fu">cor</span>(B,B)</span>
+<span id="cb32-127"><a href="#cb32-127"></a>cc <span class="ot">&lt;-</span> <span class="fu">cor</span>(C,C)</span>
+<span id="cb32-128"><a href="#cb32-128"></a></span>
+<span id="cb32-129"><a href="#cb32-129"></a><span class="co"># cross condition correlations</span></span>
+<span id="cb32-130"><a href="#cb32-130"></a>ab <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,B)</span>
+<span id="cb32-131"><a href="#cb32-131"></a>ac <span class="ot">&lt;-</span> <span class="fu">cor</span>(A,C)</span>
+<span id="cb32-132"><a href="#cb32-132"></a>ba <span class="ot">&lt;-</span> ab <span class="co"># mirrors</span></span>
+<span id="cb32-133"><a href="#cb32-133"></a>bc <span class="ot">&lt;-</span> <span class="fu">cor</span>(B,C)</span>
+<span id="cb32-134"><a href="#cb32-134"></a>ca <span class="ot">&lt;-</span> ac</span>
+<span id="cb32-135"><a href="#cb32-135"></a>cb <span class="ot">&lt;-</span> bc</span>
+<span id="cb32-136"><a href="#cb32-136"></a><span class="in">```</span></span>
+<span id="cb32-137"><a href="#cb32-137"></a></span>
+<span id="cb32-138"><a href="#cb32-138"></a>and finally build the correlation matrix:</span>
+<span id="cb32-139"><a href="#cb32-139"></a></span>
+<span id="cb32-142"><a href="#cb32-142"></a><span class="in">```{r}</span></span>
+<span id="cb32-143"><a href="#cb32-143"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(aa, ab, ac,</span>
+<span id="cb32-144"><a href="#cb32-144"></a>                               ba, bb, bc,</span>
+<span id="cb32-145"><a href="#cb32-145"></a>                               ca, cb, cc),</span>
+<span id="cb32-146"><a href="#cb32-146"></a>                             <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb32-147"><a href="#cb32-147"></a></span>
+<span id="cb32-148"><a href="#cb32-148"></a><span class="fu">rownames</span>(correlation_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb32-149"><a href="#cb32-149"></a><span class="fu">colnames</span>(correlation_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb32-150"><a href="#cb32-150"></a></span>
+<span id="cb32-151"><a href="#cb32-151"></a>correlation_matrix <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb32-152"><a href="#cb32-152"></a><span class="in">```</span></span>
+<span id="cb32-153"><a href="#cb32-153"></a></span>
+<span id="cb32-154"><a href="#cb32-154"></a>As we see in this case, scores in each condition are very strongly correlated with one another (the off-diagonal correlations). We can then take a look at the covariance matrix by cross multiplying by our group standard deviations. (Or, again, since we had the original data, I suppose we could have just taken the <span class="in">`cov()`</span> of each column)</span>
+<span id="cb32-155"><a href="#cb32-155"></a></span>
+<span id="cb32-158"><a href="#cb32-158"></a><span class="in">```{r}</span></span>
+<span id="cb32-159"><a href="#cb32-159"></a>stdevs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sd</span>(A), <span class="fu">sd</span>(B), <span class="fu">sd</span>(C))</span>
+<span id="cb32-160"><a href="#cb32-160"></a></span>
+<span id="cb32-161"><a href="#cb32-161"></a><span class="co"># need to transpose for matrix multiplication</span></span>
+<span id="cb32-162"><a href="#cb32-162"></a>covariance_matrix <span class="ot">&lt;-</span> correlation_matrix <span class="sc">*</span> stdevs <span class="sc">%*%</span> <span class="fu">t</span>(stdevs) </span>
+<span id="cb32-163"><a href="#cb32-163"></a></span>
+<span id="cb32-164"><a href="#cb32-164"></a>covariance_matrix</span>
+<span id="cb32-165"><a href="#cb32-165"></a><span class="in">```</span></span>
+<span id="cb32-166"><a href="#cb32-166"></a></span>
+<span id="cb32-167"><a href="#cb32-167"></a>The covariance matrix above represents a case on near-compound-symmetry. This would be as close to the perfect sphericity as we would expect given generated data. I really wouldn't expect these clean of values ever from my empirical data.</span>
+<span id="cb32-168"><a href="#cb32-168"></a></span>
+<span id="cb32-169"><a href="#cb32-169"></a><span class="fu"># What all of this means</span></span>
+<span id="cb32-170"><a href="#cb32-170"></a></span>
+<span id="cb32-171"><a href="#cb32-171"></a>Hopefully, the above example captures how we can use the variance / co-variance matrix to assess how strongly the data in our conditions (and groups) is correlated with one another. For example, I can easily transform back and forth between covariances and correlations using the standard deviations of my groups. For example, going from covariance to correlation:</span>
+<span id="cb32-172"><a href="#cb32-172"></a></span>
+<span id="cb32-175"><a href="#cb32-175"></a><span class="in">```{r}</span></span>
+<span id="cb32-176"><a href="#cb32-176"></a>covariance_matrix <span class="sc">/</span> stdevs <span class="sc">%*%</span> <span class="fu">t</span>(stdevs)</span>
+<span id="cb32-177"><a href="#cb32-177"></a><span class="in">```</span></span>
+<span id="cb32-178"><a href="#cb32-178"></a></span>
+<span id="cb32-179"><a href="#cb32-179"></a>So, our assessment of sphericity is an assement of the degree to data in each condition's data is correlated with one another, where the ideal scenario is that data in each group is perfectly correlated with the other groups (note this **does not mean** that the data is indentical, just strongly correlated).</span>
+<span id="cb32-180"><a href="#cb32-180"></a></span>
+<span id="cb32-181"><a href="#cb32-181"></a><span class="fu"># Sphericity demonstration calculator</span></span>
+<span id="cb32-182"><a href="#cb32-182"></a></span>
+<span id="cb32-183"><a href="#cb32-183"></a>With this in mind we can build a calculator example to better understand how devations in correlations result in deviations away from the sphericity assumption. Here we can start with our correlations, use those values to generate hypothetical data, and work our way back. In the code below, you can alter the group means <span class="in">`mu`</span> and standard deviations <span class="in">`stddev`</span>, as well as the between condition correlations.</span>
+<span id="cb32-184"><a href="#cb32-184"></a></span>
+<span id="cb32-185"><a href="#cb32-185"></a><span class="fu">## Build correlation matrix</span></span>
+<span id="cb32-186"><a href="#cb32-186"></a></span>
+<span id="cb32-189"><a href="#cb32-189"></a><span class="in">```{r}</span></span>
+<span id="cb32-190"><a href="#cb32-190"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb32-191"><a href="#cb32-191"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb32-192"><a href="#cb32-192"></a></span>
+<span id="cb32-193"><a href="#cb32-193"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
+<span id="cb32-194"><a href="#cb32-194"></a></span>
+<span id="cb32-195"><a href="#cb32-195"></a><span class="co"># YOU CAN CHANGE ME</span></span>
+<span id="cb32-196"><a href="#cb32-196"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.23</span>, <span class="fl">3.01</span>, <span class="fl">2.91</span>) <span class="co"># group means</span></span>
+<span id="cb32-197"><a href="#cb32-197"></a>stddev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>) <span class="co"># group standard devs</span></span>
+<span id="cb32-198"><a href="#cb32-198"></a></span>
+<span id="cb32-199"><a href="#cb32-199"></a><span class="co"># correlations (variances, DO NOT CHANGE)</span></span>
+<span id="cb32-200"><a href="#cb32-200"></a>aa <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb32-201"><a href="#cb32-201"></a>bb <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb32-202"><a href="#cb32-202"></a>cc <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb32-203"><a href="#cb32-203"></a></span>
+<span id="cb32-204"><a href="#cb32-204"></a><span class="co"># correlations (covariances, a to b, a to c, b to c, CHANGE)</span></span>
+<span id="cb32-205"><a href="#cb32-205"></a>ab <span class="ot">=</span> .<span class="dv">3</span></span>
+<span id="cb32-206"><a href="#cb32-206"></a>ac <span class="ot">=</span> .<span class="dv">6</span></span>
+<span id="cb32-207"><a href="#cb32-207"></a>bc <span class="ot">=</span> .<span class="dv">1</span></span>
+<span id="cb32-208"><a href="#cb32-208"></a><span class="in">```</span></span>
+<span id="cb32-209"><a href="#cb32-209"></a></span>
+<span id="cb32-210"><a href="#cb32-210"></a>Based upon your changes you can not build the appropriate correlation matrix</span>
+<span id="cb32-211"><a href="#cb32-211"></a></span>
+<span id="cb32-214"><a href="#cb32-214"></a><span class="in">```{r}</span></span>
+<span id="cb32-215"><a href="#cb32-215"></a><span class="co"># DO NOT ALTER</span></span>
+<span id="cb32-216"><a href="#cb32-216"></a></span>
+<span id="cb32-217"><a href="#cb32-217"></a>ba <span class="ot">=</span> ab <span class="co">#mirror</span></span>
+<span id="cb32-218"><a href="#cb32-218"></a>ca <span class="ot">=</span> ac</span>
+<span id="cb32-219"><a href="#cb32-219"></a>cb <span class="ot">=</span> bc</span>
+<span id="cb32-220"><a href="#cb32-220"></a></span>
+<span id="cb32-221"><a href="#cb32-221"></a>corMat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(aa, ab, ac,</span>
+<span id="cb32-222"><a href="#cb32-222"></a>                   ba, bb, bc,</span>
+<span id="cb32-223"><a href="#cb32-223"></a>                   ca, cb, cc),</span>
+<span id="cb32-224"><a href="#cb32-224"></a>                 <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb32-225"><a href="#cb32-225"></a></span>
+<span id="cb32-226"><a href="#cb32-226"></a>corMat</span>
+<span id="cb32-227"><a href="#cb32-227"></a><span class="in">```</span></span>
+<span id="cb32-228"><a href="#cb32-228"></a></span>
+<span id="cb32-229"><a href="#cb32-229"></a><span class="fu">## build a covariance matrix</span></span>
+<span id="cb32-230"><a href="#cb32-230"></a></span>
+<span id="cb32-231"><a href="#cb32-231"></a>Now to create the covariance matrix</span>
+<span id="cb32-232"><a href="#cb32-232"></a></span>
+<span id="cb32-235"><a href="#cb32-235"></a><span class="in">```{r}</span></span>
+<span id="cb32-236"><a href="#cb32-236"></a>covMat <span class="ot">&lt;-</span> stddev <span class="sc">%*%</span> <span class="fu">t</span>(stddev) <span class="sc">*</span> corMat</span>
+<span id="cb32-237"><a href="#cb32-237"></a>covMat</span>
+<span id="cb32-238"><a href="#cb32-238"></a><span class="in">```</span></span>
+<span id="cb32-239"><a href="#cb32-239"></a></span>
+<span id="cb32-240"><a href="#cb32-240"></a><span class="fu">## build simulated data</span></span>
+<span id="cb32-241"><a href="#cb32-241"></a></span>
+<span id="cb32-242"><a href="#cb32-242"></a>you can use this code to build out simulated data based on the parameters you have entered above:</span>
+<span id="cb32-243"><a href="#cb32-243"></a></span>
+<span id="cb32-246"><a href="#cb32-246"></a><span class="in">```{r}</span></span>
+<span id="cb32-247"><a href="#cb32-247"></a>df <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="at">n =</span> <span class="dv">212</span>, <span class="co"># number of participants</span></span>
+<span id="cb32-248"><a href="#cb32-248"></a>              <span class="at">mu =</span> mu, <span class="co"># means from above</span></span>
+<span id="cb32-249"><a href="#cb32-249"></a>              <span class="at">Sigma =</span> covMat, <span class="co"># covariance matrix from above</span></span>
+<span id="cb32-250"><a href="#cb32-250"></a>              <span class="at">empirical =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-251"><a href="#cb32-251"></a>  <span class="fu">data.frame</span>()</span>
+<span id="cb32-252"><a href="#cb32-252"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>)</span>
+<span id="cb32-253"><a href="#cb32-253"></a>df</span>
+<span id="cb32-254"><a href="#cb32-254"></a><span class="in">```</span></span>
+<span id="cb32-255"><a href="#cb32-255"></a></span>
+<span id="cb32-256"><a href="#cb32-256"></a><span class="fu">## Analyze for Homogeneity of Sums minus Covariances:</span></span>
+<span id="cb32-257"><a href="#cb32-257"></a></span>
+<span id="cb32-258"><a href="#cb32-258"></a>And finally check for the similarity of the Sums minus Covariances of each pairwise comparison. Note how the resulting values deviate from one another as you change the variances of each group and the correlations between groups from the start.</span>
+<span id="cb32-259"><a href="#cb32-259"></a></span>
+<span id="cb32-262"><a href="#cb32-262"></a><span class="in">```{r}</span></span>
+<span id="cb32-263"><a href="#cb32-263"></a>varA <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>A)</span>
+<span id="cb32-264"><a href="#cb32-264"></a>varB <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>B)</span>
+<span id="cb32-265"><a href="#cb32-265"></a>varC <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>C)</span>
+<span id="cb32-266"><a href="#cb32-266"></a></span>
+<span id="cb32-267"><a href="#cb32-267"></a>covAB <span class="ot">&lt;-</span> <span class="fu">cov</span>(df<span class="sc">$</span>A, df<span class="sc">$</span>B)</span>
+<span id="cb32-268"><a href="#cb32-268"></a>covAC <span class="ot">&lt;-</span> <span class="fu">cov</span>(df<span class="sc">$</span>A, df<span class="sc">$</span>C)</span>
+<span id="cb32-269"><a href="#cb32-269"></a>covBC <span class="ot">&lt;-</span> <span class="fu">cov</span>(df<span class="sc">$</span>B, df<span class="sc">$</span>C)</span>
+<span id="cb32-270"><a href="#cb32-270"></a></span>
+<span id="cb32-271"><a href="#cb32-271"></a>AB <span class="ot">&lt;-</span> varA <span class="sc">+</span> varB <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>covAB</span>
+<span id="cb32-272"><a href="#cb32-272"></a>AC <span class="ot">&lt;-</span> varA <span class="sc">+</span> varC <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>covAC</span>
+<span id="cb32-273"><a href="#cb32-273"></a>BC <span class="ot">&lt;-</span> varB <span class="sc">+</span> varC <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>covBC</span>
+<span id="cb32-274"><a href="#cb32-274"></a></span>
+<span id="cb32-275"><a href="#cb32-275"></a><span class="fu">list</span>(<span class="st">"A to B"</span> <span class="ot">=</span> AB, <span class="st">"A to C"</span> <span class="ot">=</span> AC,<span class="st">"B to C"</span> <span class="ot">=</span> BC)</span>
+<span id="cb32-276"><a href="#cb32-276"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

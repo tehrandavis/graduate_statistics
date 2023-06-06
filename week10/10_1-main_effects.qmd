@@ -32,7 +32,8 @@ For now, I want you focused on building intuitions about dealing with main effec
 ```{r}
 # Preliminaries
 ## load in data
-dataset <- read_csv("http://tehrandav.is/PSYC7014/practice_dataSets/factorial_ANOVA_dataset_no_interactions.csv")
+dataset <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/factorial_ANOVA_dataset_no_interactions.csv")
+
 
 ## in this case, fixing IV columns...
 dataset$Lecture <- recode_factor(dataset$Lecture, "1"="Phys","2"="Soc","3"="Hist")
@@ -336,7 +337,9 @@ For now, let's focus on testing the main effects.
 
 Now we can run the using the `lm()` method as we have previously done with the One-way ANOVA. The new wrinkle is simply adding our additional IV terms to the the formula equation:
 
-$$y=IV_1+IV_2+...+IV_n$$ where the first and second terms capture our main effects and the third is our interaction.
+$$y=IV_1+IV_2+...+IV_n$$
+
+where the first and second terms capture our main effects and the third is our interaction.
 
 Using our data in `R` this formula becomes:
 
@@ -376,7 +379,7 @@ Keep in mind that the Shapiro-Wilkes test for normality is notoriously conservat
 
 ```{r}
 # recommendation from Kim (2013)
-source("http://tehrandav.is/psyc7014/custom_functions/skew_kurtosis_z.R")
+source("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/custom_functions/skew_kurtosis_z.R")
 
 aov_model$residuals %>% skew_kurtosis_z()
 ```

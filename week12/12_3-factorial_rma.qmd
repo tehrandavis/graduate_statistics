@@ -12,9 +12,9 @@ pacman::p_load(tidyverse,
                cowplot,
                emmeans)
 
-source("http://tehrandav.is/psyc7014/custom_functions/withinSummary.R")
+source("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/custom_functions/withinSummary.R")
 
-factorial_df <- read_csv("http://tehrandav.is/psyc7014/practice_datasets/withinEx3.csv")
+factorial_df <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/withinEx3.csv")
 
 factorial_df
 ```

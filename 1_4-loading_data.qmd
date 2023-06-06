@@ -39,7 +39,7 @@ If the data is uploaded directly from the web, we can load it in using the `read
 ```{r}
 #| eval: false
 library(tidyverse) # no need to ask if already loaded
-alcohol_use_data <- read_csv("https://tehrandav.is/psyc7014/practice_datasets/alcuseN6.csv", col_names = T)
+alcohol_use_data <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/alcuseN6.csv", col_names = T)
 
 ```
 ```{r}

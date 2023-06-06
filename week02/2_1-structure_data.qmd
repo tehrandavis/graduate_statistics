@@ -11,7 +11,7 @@ Let's load some example data and assign it to the object `reading_data`:
 ```{r}
 # loading in the packages, see "Week 1: Leveling up
 pacman::p_load(tidyverse) 
-reading_data <- read_table("https://tehrandav.is/psyc7014/practice_datasets/reading.txt", col_names = T)
+reading_data <- read_table("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/reading.txt", col_names = T)
 ```
 
 And now look at the data:

@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Sampling distributions and seeing the logic of NHST</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Sampling distributions and seeing the logic of NHST</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link active">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#the-sampling-distribution" id="toc-the-sampling-distribution" class="nav-link active" data-scroll-target="#the-sampling-distribution">The sampling distribution</a></li>
+  <li><a href="#standard-error-of-the-mean" id="toc-standard-error-of-the-mean" class="nav-link" data-scroll-target="#standard-error-of-the-mean">Standard error of the mean</a></li>
+  <li><a href="#the-difference-distribution" id="toc-the-difference-distribution" class="nav-link" data-scroll-target="#the-difference-distribution">The difference distribution</a></li>
+  <li><a href="#the-null-distribution" id="toc-the-null-distribution" class="nav-link" data-scroll-target="#the-null-distribution">The Null distribution</a></li>
+  <li><a href="#probabilty-of-observed-differences" id="toc-probabilty-of-observed-differences" class="nav-link" data-scroll-target="#probabilty-of-observed-differences">Probabilty of observed differences</a></li>
+  <li><a href="#a-note-about-sample-size" id="toc-a-note-about-sample-size" class="nav-link" data-scroll-target="#a-note-about-sample-size">A note about sample size</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Sampling distributions and seeing the logic of NHST</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>So this week is typically one of the more confusing weeks for those that do not have much background in stats and programming because I’m asking you to do two conceptually demanding things.</p>
+<p>From the stats side: I’m asking you to imagine that the sample data that you collect is not <em>sui generis</em> (I always wonder if I’m using that term correctly), but part of a larger theoretical distribution of possible (but materially non-existent) sample data sets. The number of these sets is indefinitely many… which is a way of saying really large without invoking notions of infinity.</p>
+<p><del>On the programming side: I’m asking you to build simulations of these theoretical sampling distributions by using a <code>for()</code> loop; programming <code>R</code> to proceed in a recursive, iterative loop for a very larger number of instances.</del></p>
+<p>Amended: Actually we **won’t be using <code>for</code> loops. Instead we’ll be doing things the <code>tidy</code> way, which involves much simpler code. That said, for loops might be something to learn if you want to become more adept in your programming outside of this course.</p>
+<p>In the class lecture we laid out the logic of the sampling distribution (of means), the difference distribution (of means) and the null distribution (of means). In the workshop we made it as far as simulating the sampling distribution and using it to obtain important measures and to generate the distribution of means. Here I’m going to extend that work to show how to get both the difference distribution and the null distribution. This involve minor tweaks of what was done in class.</p>
+<p>Please follow along by entering the commands into your own console. First let’s load in the appropriate packages for this week:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(psych, tidyverse, radiant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="the-sampling-distribution" class="level2"><h2 class="anchored" data-anchor-id="the-sampling-distribution">The sampling distribution</h2>
+<p>To begin let’s start off with a control population. For the sake of example, let’s imagine that this population represents the obtained IQ scores of students in Tehran J. Davis High School (apparently I’m feeling myself) that were taught using a standard curriculum. The 5000 students (it’s a really big school) in this population have a mean IQ of 103 with a standard deviation of 14. Note that this mean and sd are FACTS… they are true values that exist independent of my measure. Also note that in real work, these truths about the population are rarely known.</p>
+<p>We can create a simulated population using the follow chunk of code; note that anytime you are generating “random” distributions or “random” sampling in <code>R</code> you’ll need to input the <code>set.seed(1)</code> command where I do to ensure that you get the same numbers I do:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># population of 5000 with an approximate mean = 100 and sd = 14</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>pop_basic <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5000</span>,<span class="at">mean =</span> <span class="dv">103</span>,<span class="at">sd =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Note</strong> Technically, there is an issue using these simulated scores for IQ. <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> assumes a continuous distribution, including decimals. We typically do not report IQ scores to the decimal. To clean this up I would need to take the obtained scores and apply the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>pop_basic <span class="ot">&lt;-</span> pop_basic <span class="sc">%&gt;%</span> <span class="fu">round</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When we take a look at what the above simulation generates, we see that the obtained values are sightly different than requested (it is random after all). BUT AGAIN, for the purposes of example these are still the facts of the population.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">mean</span>(pop_basic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 103.3048</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>radiant.data<span class="sc">::</span><span class="fu">sdpop</span>(pop_basic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.24815</code></pre>
+</div>
+</div>
+<p>Wait… what’s that <code><a href="https://radiant-rstats.github.io/radiant.data/reference/sdpop.html">radiant.data::sdpop()</a></code> mess?!?!?</p>
+<p><em>Remember</em> that calculating the standard deviation of a population is different than calculating for a sample, where the sample SD requires an adjustment for the degrees of freedom. Simply, the population SD uses <span class="math inline">\(N\)</span> in the denominator, where the sample SD uses <span class="math inline">\(N-1\)</span>. The <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function calculates sample SD. To get population SD, we can use the function <code>popsd()</code> from the <code>multicon</code> package.</p>
+<p>From this population, the Principal of TJD-HS tells us that we can only administer our IQ test to 250 students. This represents our sample:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>mySample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> pop_basic,<span class="at">size =</span> <span class="dv">250</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>psych<span class="sc">::</span><span class="fu">describe</span>(mySample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n   mean    sd median trimmed   mad min max range skew kurtosis   se
+X1    1 250 103.17 15.23    103  102.67 13.34  69 154    85 0.34     0.05 0.96</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">hist</span>(mySample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="4_3-sampling_distributions_and_seeing_the_logic_of_nhst_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If we run the above code again, we see that we get different measures for mySample:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>mySample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> pop_basic,<span class="at">size =</span> <span class="dv">250</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>psych<span class="sc">::</span><span class="fu">describe</span>(mySample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n   mean    sd median trimmed   mad min max range  skew kurtosis   se
+X1    1 250 104.46 14.15    105  104.56 14.83  69 145    76 -0.03    -0.28 0.89</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">hist</span>(mySample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="4_3-sampling_distributions_and_seeing_the_logic_of_nhst_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>and in <strong>neither case is the observed sample mean identical to the true population mean</strong>.</p>
+<p>These differences highlight the notion of <strong>Variability due to chance</strong>-the fact that statistics (e.g., means, SDs) obtained form samples naturally vary from one sample to the next due to the particular observations that are randomly included in the sample.</p>
+<p>The term <strong>sampling error</strong> is used to refer to variability due to chance, in that, the numerical value of a sample statistic will probably deviate (be in error) from the parameter it is estimating.</p>
+<p>In class we mentioned that we can build a theoretical distribution of <strong>sampling error</strong>, a sampling distribution of means. Essentially our goals are the following steps:</p>
+<ol type="1">
+<li>pull a sample of a given size from the population</li>
+<li>get the mean of that sample</li>
+<li>save that sample mean to a vector</li>
+<li>repeat 1-3</li>
+</ol>
+<p>How many times do we repeat? Theoretically an infinite number of times. Because we can’t wait for infinity, lets just use a really big number like 100,000 (or 1e+05)</p>
+<p>Building the sampling distribution of means (using <code>pop_basic</code> from above), note the comments highlight what each line / pipe argument is doing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>sampling_distributions <span class="ot">&lt;-</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="co"># tibble: create a table with a column "simulation" that contains values 1:100000</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="co"># group_by: perform every function after this for EACH num:</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="co"># mutate: add a column "sample_mean" that contains the mean for simulation num:</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">mutate</span>(<span class="at">sample_mean =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic,<span class="at">size =</span> <span class="dv">250</span>,<span class="at">replace =</span> T)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Lets take a look at our sampling distribution:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">hist</span>(sampling_distributions<span class="sc">$</span>sample_mean,<span class="at">main =</span> <span class="st">"Theoretical sampling distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="4_3-sampling_distributions_and_seeing_the_logic_of_nhst_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>and the grand mean of the sampling distribution (the mean of means if you will):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">mean</span>(sampling_distributions<span class="sc">$</span>sample_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 103.3048</code></pre>
+</div>
+</div>
+<p>Again not quite the TRUE mean of the population, but pretty darn close.</p>
+</section><section id="standard-error-of-the-mean" class="level2"><h2 class="anchored" data-anchor-id="standard-error-of-the-mean">Standard error of the mean</h2>
+<p>We’ve also learned that the standard error (SE) of the mean is simply the standard deviation of the sample distribution. That is, how much does the mean vary due to chance provided repeated sampling. In this case it can be found by:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">sd</span>(sampling_distributions<span class="sc">$</span>sample_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8981243</code></pre>
+</div>
+</div>
+<p>However, deriving the SE in this way assumes that we are free to sample and re-sample the population a large number of time (in this case 100 thousand) when in reality we may have neither the time, resources or inclination to do so. Instead, we use the following equation to provide an estimate of SE provided our sample:</p>
+<p><span class="math display">\[SE=\frac{SD_{sample}}{\sqrt{N_{sample}}}\]</span></p>
+<p>So in this case, for a given <code>mySample</code> from the population <code>pop_basic</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>mySample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> pop_basic,<span class="at">size =</span> <span class="dv">250</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>mySample_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(mySample)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">250</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="fu">show</span>(mySample_se)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.951111</code></pre>
+</div>
+</div>
+<p>Compared to the theoretically derived SE above, the estimate is not too far off (0.895 v. 0.884).</p>
+</section><section id="the-difference-distribution" class="level2"><h2 class="anchored" data-anchor-id="the-difference-distribution">The difference distribution</h2>
+<p>Imagine for the sake of example, we are interested in IQ. A central debate (as I understand the literature) at present is whether IQ is inherently static or can be improved with education. Indeed the implication of this can be quite controversial (IQ testing is like the third rail of understanding intelligence… making statements about intelligence is like the third rail of psychology… but I digress).</p>
+<p>In addition to our population of students taking the basic curriculum, we also have an equal number of students taking an advanced curriculum. Assuming that we have already controlled for other factors (e.g., baseline IQs from both groups the same before treatment) we would like to address the following question using data obtained from each group: “Does the enhanced cirriculum result in higher IQ?”</p>
+<p>First let’s create our populations:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>pop_basic <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5000</span>,<span class="at">mean =</span> <span class="dv">103</span>,<span class="at">sd =</span> <span class="dv">14</span>)</span>
+<span id="cb22-3"><a href="#cb22-3"></a>pop_advanced <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5000</span>,<span class="at">mean =</span> <span class="dv">108</span>,<span class="at">sd =</span> <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Again, you’ll note that in this example we’re omnipotent and know the truth of the matter (the true measures)… in the real world no one is all-seeing and knowing. You’ll also notice that I kept the SD for each population roughly equivalent. This <em>homogeniety of variences</em> (i.e., SDs should be approximately equal) is another assumption of our non-parametric tests (like ANOVA). Here I’ve made it so, but if in true the variances are not equal then we may have to adjust how we proceed with our analyses. More on that in a few weeks!</p>
+<p>And now to create our difference distribution using the same programming logic as above:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>difference_distribution <span class="ot">&lt;-</span> </span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="co"># tibble: create a table with a column "simulation" that contains values 1:100000</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="co"># group_by: perform every function after this for EACH num:</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="co"># mutate: add a column "basic_mean" that contains the mean for simulation num</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>  <span class="co">#         same for "advanced_mean"</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>  <span class="co">#         get difference between the two samples for that simulation</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>  <span class="fu">mutate</span>(<span class="at">basic_mean =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic,<span class="at">size =</span> <span class="dv">250</span>,<span class="at">replace =</span> T)),</span>
+<span id="cb23-10"><a href="#cb23-10"></a>         <span class="at">advanced_mean =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_advanced, <span class="at">size =</span> <span class="dv">250</span>, <span class="at">replace =</span> T)),</span>
+<span id="cb23-11"><a href="#cb23-11"></a>         <span class="at">difference_means =</span> advanced_mean<span class="sc">-</span>basic_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And now to take a look at the resulting difference distribution:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">mean</span>(difference_distribution<span class="sc">$</span>difference_means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.915453</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">hist</span>(difference_distribution<span class="sc">$</span>difference_means, <span class="at">main =</span> <span class="st">"Theoretical difference distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="4_3-sampling_distributions_and_seeing_the_logic_of_nhst_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As anticipated (because we know all) we end up with a difference distribution with a mean difference of about 5. What we are asked to consider is whether this difference (or any observed difference, really) is enough to say that the likelihood of it occurring by chance is sufficiently small (i.e.&nbsp;is <span class="math inline">\(p &lt; .05\)</span>). For this we need to create a null distribution.</p>
+</section><section id="the-null-distribution" class="level2"><h2 class="anchored" data-anchor-id="the-null-distribution">The Null distribution</h2>
+<p>The logic of constructing a null distribution rests on the claims made by the null hypothesis, that the means of the two (or more) populations in question are identical:</p>
+<p><span class="math display">\[\mu_1=\mu_2\]</span></p>
+<p>In a larger sense, if the null hypothesis is indeed true it suggests that the two populations may indeed be one single population. Here, we know that the null hypothesis is NOT true (again, all seeing and knowing).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">mean</span>(pop_advanced)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 107.8715</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">mean</span>(pop_basic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 102.9554</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># are the 2 means exactly equal?</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">mean</span>(pop_advanced)<span class="sc">==</span><span class="fu">mean</span>(pop_basic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>In the context of our everday experiments, we do not know whether the null is indeed true or not. Based upon the samples that we take we make an inference as to whether we have sufficient evidence to reject the null. We do so if the probability of our observed data, given the null is true, is sufficiently low. In other words, here we are asking: “IF the null is true, THEN what is the likelihood that we would get our observed differences in means.” If the likelihood is low, then we may have reason to believe the null hypothesis to be suspect.</p>
+<p>Returning to the logic of the null distribution, it assumes that our experimental group, <code>pop_advanced</code>, and our control group, <code>pop_basic</code> are from the same population. Thus, any samples obtained betwixt should be equal, and the differences in sample means should approximate 0 (never exactly 0 due to sampling error). However, by virtue of our experimental design we are <em>implicitly assuming that, in fact the two are different from one another</em>. This implicit assumption means that the <strong>null distribution</strong> cannot be created by creating a <strong>difference distribution</strong> between the two groups.</p>
+<p>So how to go about the business of creating a null distribution, then? We create a difference distribution that guarantees that all data is from the same population. In this case we are creating a difference distribution where we take repeated samples from the <strong>same population</strong> and compare their differences. Based on this distribution, we can make claims regarding the probability of observed differences between scores assuming they are from the same population. Again sampling error guarantees that these differences are not exactly zero.</p>
+<p>Typically the population we choose is our control population (group). In this case the logical control is <code>pop_basic</code>. Modifying the simulation code that we used for the difference distribution, we create a null distribution like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># create an empty vector to store the null difference in means</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>null_distribution <span class="ot">&lt;-</span> </span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="co"># tibble: create a table with a column "simulation" that contains values 1:100000</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="co"># group_by: perform every function after this for EACH num:</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-7"><a href="#cb33-7"></a>  <span class="co"># mutate: add a column "basic_mean" that contains the mean for simulation num</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a>  <span class="co">#         same for "advanced_mean"</span></span>
+<span id="cb33-9"><a href="#cb33-9"></a>  <span class="co">#         get difference between the two samples for that simulation</span></span>
+<span id="cb33-10"><a href="#cb33-10"></a>  <span class="fu">mutate</span>(<span class="at">control_sample1 =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic,<span class="at">size =</span> <span class="dv">250</span>,<span class="at">replace =</span> T)),</span>
+<span id="cb33-11"><a href="#cb33-11"></a>         <span class="at">control_sample2 =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic, <span class="at">size =</span> <span class="dv">250</span>, <span class="at">replace =</span> T)),</span>
+<span id="cb33-12"><a href="#cb33-12"></a>         <span class="at">null_means =</span> control_sample1<span class="sc">-</span>control_sample2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And now to take a look at the resulting null distribution:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">mean</span>(null_distribution<span class="sc">$</span>null_means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.004857817</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">hist</span>(null_distribution<span class="sc">$</span>null_means, <span class="at">main =</span> <span class="st">"Theoretical null distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="4_3-sampling_distributions_and_seeing_the_logic_of_nhst_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In discussion we made mention that due to the assumption of equal means and equal variances that the null distribution should approximate the form of the standard distribution were <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma = 1\)</span>. This fact allows us to say something about the probability of an observed difference as a probability of obtaining a Z-score that far removed from 0.</p>
+</section><section id="probabilty-of-observed-differences" class="level2"><h2 class="anchored" data-anchor-id="probabilty-of-observed-differences">Probabilty of observed differences</h2>
+<p>Continuing on from the previous section, we have our null distribution of IQ scores, appropriately named <code>null_distribution</code>. This is the theoretical distribution of differences assuming the two populations are the same. Simply put, this is the distribution of differences we might expect if our advanced curriculum did not have any impact. You’ll note that even assuming that the two groups are identical still yields some differences by chance:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">max</span>(null_distribution<span class="sc">$</span>null_means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.514248</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">min</span>(null_distribution<span class="sc">$</span>null_means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -5.409361</code></pre>
+</div>
+</div>
+<p>but that the probability of those extremes is very, very low (but still exists which is why we never <em>prove</em> the alternative hypothesis). Let’s say I take a sample from <code>pop_basic</code> and <code>pop_advanced</code> and find that my means differ by 3. Given the null distribution, what is the probability that I will observe a difference this large? To derive this probability, we take advantage of what we know about the standard distribution, where we have a known probability of obtaining any given Z-score.</p>
+<p>The process of answering the above is as follows: 1. transform the observed difference to a Z-score using the mean and SD of the null distribution; 2. calculate the probability of that extreme of a score.</p>
+<p>Here is step 1:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># 1. convert the observed difference to a z-score:</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>Zscore <span class="ot">&lt;-</span> (<span class="dv">3</span><span class="sc">-</span><span class="fu">mean</span>(null_distribution<span class="sc">$</span>null_means))<span class="sc">/</span><span class="fu">sd</span>(null_distribution<span class="sc">$</span>null_means) </span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="fu">show</span>(Zscore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.339173</code></pre>
+</div>
+</div>
+<p>I want to pause here to note that the obtained Z-score is positive. As a result the score is on the right side of the distribution. Our probability function, <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> returns the probability of an obtained score or lower (the cumulative probability). However, we want the probability of the observed score or <em>more extreme</em>. In this case <em>more extreme</em> means <em>greater than</em>. Conversely if the observed Z score is less than 0, then <em>more extreme</em> means <em>less than</em>. I bring this up as this determines what value we use to calculate the desired probability. In the latter case, <em>less than</em> we can simple take the output of <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> and call it a day. However, in cases like ours, when <span class="math inline">\(Z&gt;0\)</span> we need to use <code>1-pnorm()</code>.</p>
+<p>OK, on to the calculation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>Zscore <span class="ot">&lt;-</span> (<span class="dv">3</span><span class="sc">-</span><span class="fu">mean</span>(null_distribution<span class="sc">$</span>null_means))<span class="sc">/</span><span class="fu">sd</span>(null_distribution<span class="sc">$</span>null_means) </span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(Zscore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.009663249</code></pre>
+</div>
+</div>
+<p>Based on a criteria of rejecting the null if <span class="math inline">\(p&lt;.05\)</span> we would reject here. BUT NOTE: not necessarily because it’s less than .05. Remember that if I have a two-tailed test, my criteria requires that I split my <span class="math inline">\(\alpha\)</span>. So in truth I need to obtain a value less than .025 in either direction.</p>
+</section><section id="a-note-about-sample-size" class="level2"><h2 class="anchored" data-anchor-id="a-note-about-sample-size">A note about sample size</h2>
+<p>So I got a pretty low <em>p-value</em>, but you might say it was expected given that my sample size was 250 for each group. Let’s see what happens if I drop the sample size down to 10 students per group, creating a new null distribution, <code>null_distribution_10</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># create an empty vector to store the null difference in means</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>null_distribution_10 <span class="ot">&lt;-</span> </span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-5"><a href="#cb45-5"></a>  <span class="fu">mutate</span>(<span class="at">control_sample1 =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic,<span class="at">size =</span> <span class="dv">10</span>,<span class="at">replace =</span> T)),</span>
+<span id="cb45-6"><a href="#cb45-6"></a>         <span class="at">control_sample2 =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)),</span>
+<span id="cb45-7"><a href="#cb45-7"></a>         <span class="at">null_means =</span> control_sample1<span class="sc">-</span>control_sample2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What does this distribution look like?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">hist</span>(null_distribution_10<span class="sc">$</span>null_means, <span class="at">main =</span> <span class="st">"Theoretical null distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="4_3-sampling_distributions_and_seeing_the_logic_of_nhst_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">mean</span>(null_distribution_10<span class="sc">$</span>null_means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01041048</code></pre>
+</div>
+</div>
+<p>And let’s take a look at the probability of an observed difference of 3 in this case. Not that I’m using the <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> shortcut so I don’t need to calculate my Z by hand:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>,<span class="at">mean =</span> <span class="fu">mean</span>(null_distribution_10<span class="sc">$</span>null_means),<span class="at">sd =</span> <span class="fu">sd</span>(null_distribution_10<span class="sc">$</span>null_means))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3211936</code></pre>
+</div>
+</div>
+<p>As we can see, <em>size matters</em>. Given that we are omnipotent in this case, we know the truth of the matter is that the two populations are in fact different, and that the mean of <code>pop_basic</code> is not equal to the mean of <code>pop_advanced</code>. Thus what we have here is a failure to reject the null hypothesis when it is indeed false. Hmm, what kind of error is that again? This last example is going to figure prominently in our discussions of power and what power is, properly defined. For now, I think this is a good place to stop this week.</p>
+<p></p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb51" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href="#cb51-1"></a><span class="co">---</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="an">title:</span><span class="co"> "Sampling distributions and seeing the logic of NHST"</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="co">---</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a></span>
+<span id="cb51-5"><a href="#cb51-5"></a>So this week is typically one of the more confusing weeks for those that do not have much background in stats and programming because I'm asking you to do two conceptually demanding things.</span>
+<span id="cb51-6"><a href="#cb51-6"></a></span>
+<span id="cb51-7"><a href="#cb51-7"></a>From the stats side: I'm asking you to imagine that the sample data that you collect is not *sui generis* (I always wonder if I'm using that term correctly), but part of a larger theoretical distribution of possible (but materially non-existent) sample data sets. The number of these sets is indefinitely many... which is a way of saying really large without invoking notions of infinity.</span>
+<span id="cb51-8"><a href="#cb51-8"></a></span>
+<span id="cb51-9"><a href="#cb51-9"></a>~~On the programming side: I'm asking you to build simulations of these theoretical sampling distributions by using a `for()` loop; programming `R` to proceed in a recursive, iterative loop for a very larger number of instances.~~</span>
+<span id="cb51-10"><a href="#cb51-10"></a></span>
+<span id="cb51-11"><a href="#cb51-11"></a>Amended: Actually we <span class="sc">\*\*</span>won't be using <span class="in">`for`</span> loops. Instead we'll be doing things the <span class="in">`tidy`</span> way, which involves much simpler code. That said, for loops might be something to learn if you want to become more adept in your programming outside of this course.</span>
+<span id="cb51-12"><a href="#cb51-12"></a></span>
+<span id="cb51-13"><a href="#cb51-13"></a>In the class lecture we laid out the logic of the sampling distribution (of means), the difference distribution (of means) and the null distribution (of means). In the workshop we made it as far as simulating the sampling distribution and using it to obtain important measures and to generate the distribution of means. Here I'm going to extend that work to show how to get both the difference distribution and the null distribution. This involve minor tweaks of what was done in class.</span>
+<span id="cb51-14"><a href="#cb51-14"></a></span>
+<span id="cb51-15"><a href="#cb51-15"></a>Please follow along by entering the commands into your own console. First let's load in the appropriate packages for this week:</span>
+<span id="cb51-16"><a href="#cb51-16"></a></span>
+<span id="cb51-19"><a href="#cb51-19"></a><span class="in">```{r}</span></span>
+<span id="cb51-20"><a href="#cb51-20"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(psych, tidyverse, radiant)</span>
+<span id="cb51-21"><a href="#cb51-21"></a><span class="in">```</span></span>
+<span id="cb51-22"><a href="#cb51-22"></a></span>
+<span id="cb51-23"><a href="#cb51-23"></a><span class="fu">## The sampling distribution</span></span>
+<span id="cb51-24"><a href="#cb51-24"></a></span>
+<span id="cb51-25"><a href="#cb51-25"></a>To begin let's start off with a control population. For the sake of example, let's imagine that this population represents the obtained IQ scores of students in Tehran J. Davis High School (apparently I'm feeling myself) that were taught using a standard curriculum. The 5000 students (it's a really big school) in this population have a mean IQ of 103 with a standard deviation of 14. Note that this mean and sd are FACTS... they are true values that exist independent of my measure. Also note that in real work, these truths about the population are rarely known.</span>
+<span id="cb51-26"><a href="#cb51-26"></a></span>
+<span id="cb51-27"><a href="#cb51-27"></a>We can create a simulated population using the follow chunk of code; note that anytime you are generating "random" distributions or "random" sampling in <span class="in">`R`</span> you'll need to input the <span class="in">`set.seed(1)`</span> command where I do to ensure that you get the same numbers I do:</span>
+<span id="cb51-28"><a href="#cb51-28"></a></span>
+<span id="cb51-31"><a href="#cb51-31"></a><span class="in">```{r}</span></span>
+<span id="cb51-32"><a href="#cb51-32"></a><span class="co"># population of 5000 with an approximate mean = 100 and sd = 14</span></span>
+<span id="cb51-33"><a href="#cb51-33"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb51-34"><a href="#cb51-34"></a>pop_basic <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5000</span>,<span class="at">mean =</span> <span class="dv">103</span>,<span class="at">sd =</span> <span class="dv">14</span>)</span>
+<span id="cb51-35"><a href="#cb51-35"></a><span class="in">```</span></span>
+<span id="cb51-36"><a href="#cb51-36"></a></span>
+<span id="cb51-37"><a href="#cb51-37"></a>**Note** Technically, there is an issue using these simulated scores for IQ. <span class="in">`rnorm()`</span> assumes a continuous distribution, including decimals. We typically do not report IQ scores to the decimal. To clean this up I would need to take the obtained scores and apply the <span class="in">`round()`</span> function</span>
+<span id="cb51-38"><a href="#cb51-38"></a></span>
+<span id="cb51-41"><a href="#cb51-41"></a><span class="in">```{r}</span></span>
+<span id="cb51-42"><a href="#cb51-42"></a>pop_basic <span class="ot">&lt;-</span> pop_basic <span class="sc">%&gt;%</span> <span class="fu">round</span>()</span>
+<span id="cb51-43"><a href="#cb51-43"></a><span class="in">```</span></span>
+<span id="cb51-44"><a href="#cb51-44"></a></span>
+<span id="cb51-45"><a href="#cb51-45"></a>When we take a look at what the above simulation generates, we see that the obtained values are sightly different than requested (it is random after all). BUT AGAIN, for the purposes of example these are still the facts of the population.</span>
+<span id="cb51-46"><a href="#cb51-46"></a></span>
+<span id="cb51-49"><a href="#cb51-49"></a><span class="in">```{r}</span></span>
+<span id="cb51-50"><a href="#cb51-50"></a><span class="fu">mean</span>(pop_basic)</span>
+<span id="cb51-51"><a href="#cb51-51"></a>radiant.data<span class="sc">::</span><span class="fu">sdpop</span>(pop_basic)</span>
+<span id="cb51-52"><a href="#cb51-52"></a><span class="in">```</span></span>
+<span id="cb51-53"><a href="#cb51-53"></a></span>
+<span id="cb51-54"><a href="#cb51-54"></a>Wait... what's that <span class="in">`radiant.data::sdpop()`</span> mess?!?!?</span>
+<span id="cb51-55"><a href="#cb51-55"></a></span>
+<span id="cb51-56"><a href="#cb51-56"></a>*Remember* that calculating the standard deviation of a population is different than calculating for a sample, where the sample SD requires an adjustment for the degrees of freedom. Simply, the population SD uses $N$ in the denominator, where the sample SD uses $N-1$. The <span class="in">`sd()`</span> function calculates sample SD. To get population SD, we can use the function <span class="in">`popsd()`</span> from the <span class="in">`multicon`</span> package.</span>
+<span id="cb51-57"><a href="#cb51-57"></a></span>
+<span id="cb51-58"><a href="#cb51-58"></a>From this population, the Principal of TJD-HS tells us that we can only administer our IQ test to 250 students. This represents our sample:</span>
+<span id="cb51-59"><a href="#cb51-59"></a></span>
+<span id="cb51-62"><a href="#cb51-62"></a><span class="in">```{r}</span></span>
+<span id="cb51-63"><a href="#cb51-63"></a>mySample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> pop_basic,<span class="at">size =</span> <span class="dv">250</span>)</span>
+<span id="cb51-64"><a href="#cb51-64"></a>psych<span class="sc">::</span><span class="fu">describe</span>(mySample)</span>
+<span id="cb51-65"><a href="#cb51-65"></a><span class="fu">hist</span>(mySample)</span>
+<span id="cb51-66"><a href="#cb51-66"></a><span class="in">```</span></span>
+<span id="cb51-67"><a href="#cb51-67"></a></span>
+<span id="cb51-68"><a href="#cb51-68"></a>If we run the above code again, we see that we get different measures for mySample:</span>
+<span id="cb51-69"><a href="#cb51-69"></a></span>
+<span id="cb51-72"><a href="#cb51-72"></a><span class="in">```{r}</span></span>
+<span id="cb51-73"><a href="#cb51-73"></a>mySample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> pop_basic,<span class="at">size =</span> <span class="dv">250</span>)</span>
+<span id="cb51-74"><a href="#cb51-74"></a>psych<span class="sc">::</span><span class="fu">describe</span>(mySample)</span>
+<span id="cb51-75"><a href="#cb51-75"></a><span class="fu">hist</span>(mySample)</span>
+<span id="cb51-76"><a href="#cb51-76"></a><span class="in">```</span></span>
+<span id="cb51-77"><a href="#cb51-77"></a></span>
+<span id="cb51-78"><a href="#cb51-78"></a>and in **neither case is the observed sample mean identical to the true population mean**.</span>
+<span id="cb51-79"><a href="#cb51-79"></a></span>
+<span id="cb51-80"><a href="#cb51-80"></a>These differences highlight the notion of **Variability due to chance**-the fact that statistics (e.g., means, SDs) obtained form samples naturally vary from one sample to the next due to the particular observations that are randomly included in the sample.</span>
+<span id="cb51-81"><a href="#cb51-81"></a></span>
+<span id="cb51-82"><a href="#cb51-82"></a>The term **sampling error** is used to refer to variability due to chance, in that, the numerical value of a sample statistic will probably deviate (be in error) from the parameter it is estimating.</span>
+<span id="cb51-83"><a href="#cb51-83"></a></span>
+<span id="cb51-84"><a href="#cb51-84"></a>In class we mentioned that we can build a theoretical distribution of **sampling error**, a sampling distribution of means. Essentially our goals are the following steps:</span>
+<span id="cb51-85"><a href="#cb51-85"></a></span>
+<span id="cb51-86"><a href="#cb51-86"></a><span class="ss">1.  </span>pull a sample of a given size from the population</span>
+<span id="cb51-87"><a href="#cb51-87"></a><span class="ss">2.  </span>get the mean of that sample</span>
+<span id="cb51-88"><a href="#cb51-88"></a><span class="ss">3.  </span>save that sample mean to a vector</span>
+<span id="cb51-89"><a href="#cb51-89"></a><span class="ss">4.  </span>repeat 1-3</span>
+<span id="cb51-90"><a href="#cb51-90"></a></span>
+<span id="cb51-91"><a href="#cb51-91"></a>How many times do we repeat? Theoretically an infinite number of times. Because we can't wait for infinity, lets just use a really big number like 100,000 (or 1e+05)</span>
+<span id="cb51-92"><a href="#cb51-92"></a></span>
+<span id="cb51-93"><a href="#cb51-93"></a>Building the sampling distribution of means (using <span class="in">`pop_basic`</span> from above), note the comments highlight what each line / pipe argument is doing:</span>
+<span id="cb51-94"><a href="#cb51-94"></a></span>
+<span id="cb51-97"><a href="#cb51-97"></a><span class="in">```{r}</span></span>
+<span id="cb51-98"><a href="#cb51-98"></a>sampling_distributions <span class="ot">&lt;-</span> </span>
+<span id="cb51-99"><a href="#cb51-99"></a>  <span class="co"># tibble: create a table with a column "simulation" that contains values 1:100000</span></span>
+<span id="cb51-100"><a href="#cb51-100"></a>  <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-101"><a href="#cb51-101"></a>  <span class="co"># group_by: perform every function after this for EACH num:</span></span>
+<span id="cb51-102"><a href="#cb51-102"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-103"><a href="#cb51-103"></a>  <span class="co"># mutate: add a column "sample_mean" that contains the mean for simulation num:</span></span>
+<span id="cb51-104"><a href="#cb51-104"></a>  <span class="fu">mutate</span>(<span class="at">sample_mean =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic,<span class="at">size =</span> <span class="dv">250</span>,<span class="at">replace =</span> T)))</span>
+<span id="cb51-105"><a href="#cb51-105"></a><span class="in">```</span></span>
+<span id="cb51-106"><a href="#cb51-106"></a></span>
+<span id="cb51-107"><a href="#cb51-107"></a>Lets take a look at our sampling distribution:</span>
+<span id="cb51-108"><a href="#cb51-108"></a></span>
+<span id="cb51-111"><a href="#cb51-111"></a><span class="in">```{r}</span></span>
+<span id="cb51-112"><a href="#cb51-112"></a><span class="fu">hist</span>(sampling_distributions<span class="sc">$</span>sample_mean,<span class="at">main =</span> <span class="st">"Theoretical sampling distribution"</span>)</span>
+<span id="cb51-113"><a href="#cb51-113"></a><span class="in">```</span></span>
+<span id="cb51-114"><a href="#cb51-114"></a></span>
+<span id="cb51-115"><a href="#cb51-115"></a>and the grand mean of the sampling distribution (the mean of means if you will):</span>
+<span id="cb51-116"><a href="#cb51-116"></a></span>
+<span id="cb51-119"><a href="#cb51-119"></a><span class="in">```{r}</span></span>
+<span id="cb51-120"><a href="#cb51-120"></a><span class="fu">mean</span>(sampling_distributions<span class="sc">$</span>sample_mean)</span>
+<span id="cb51-121"><a href="#cb51-121"></a><span class="in">```</span></span>
+<span id="cb51-122"><a href="#cb51-122"></a></span>
+<span id="cb51-123"><a href="#cb51-123"></a>Again not quite the TRUE mean of the population, but pretty darn close.</span>
+<span id="cb51-124"><a href="#cb51-124"></a></span>
+<span id="cb51-125"><a href="#cb51-125"></a><span class="fu">## Standard error of the mean</span></span>
+<span id="cb51-126"><a href="#cb51-126"></a></span>
+<span id="cb51-127"><a href="#cb51-127"></a>We've also learned that the standard error (SE) of the mean is simply the standard deviation of the sample distribution. That is, how much does the mean vary due to chance provided repeated sampling. In this case it can be found by:</span>
+<span id="cb51-128"><a href="#cb51-128"></a></span>
+<span id="cb51-131"><a href="#cb51-131"></a><span class="in">```{r}</span></span>
+<span id="cb51-132"><a href="#cb51-132"></a><span class="fu">sd</span>(sampling_distributions<span class="sc">$</span>sample_mean)</span>
+<span id="cb51-133"><a href="#cb51-133"></a><span class="in">```</span></span>
+<span id="cb51-134"><a href="#cb51-134"></a></span>
+<span id="cb51-135"><a href="#cb51-135"></a>However, deriving the SE in this way assumes that we are free to sample and re-sample the population a large number of time (in this case 100 thousand) when in reality we may have neither the time, resources or inclination to do so. Instead, we use the following equation to provide an estimate of SE provided our sample:</span>
+<span id="cb51-136"><a href="#cb51-136"></a></span>
+<span id="cb51-137"><a href="#cb51-137"></a>$$SE=\frac{SD_{sample}}{\sqrt{N_{sample}}}$$</span>
+<span id="cb51-138"><a href="#cb51-138"></a></span>
+<span id="cb51-139"><a href="#cb51-139"></a>So in this case, for a given <span class="in">`mySample`</span> from the population <span class="in">`pop_basic`</span>:</span>
+<span id="cb51-140"><a href="#cb51-140"></a></span>
+<span id="cb51-143"><a href="#cb51-143"></a><span class="in">```{r}</span></span>
+<span id="cb51-144"><a href="#cb51-144"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb51-145"><a href="#cb51-145"></a>mySample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> pop_basic,<span class="at">size =</span> <span class="dv">250</span>)</span>
+<span id="cb51-146"><a href="#cb51-146"></a>mySample_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(mySample)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">250</span>)</span>
+<span id="cb51-147"><a href="#cb51-147"></a><span class="fu">show</span>(mySample_se)</span>
+<span id="cb51-148"><a href="#cb51-148"></a><span class="in">```</span></span>
+<span id="cb51-149"><a href="#cb51-149"></a></span>
+<span id="cb51-150"><a href="#cb51-150"></a>Compared to the theoretically derived SE above, the estimate is not too far off (0.895 v. 0.884).</span>
+<span id="cb51-151"><a href="#cb51-151"></a></span>
+<span id="cb51-152"><a href="#cb51-152"></a><span class="fu">## The difference distribution</span></span>
+<span id="cb51-153"><a href="#cb51-153"></a></span>
+<span id="cb51-154"><a href="#cb51-154"></a>Imagine for the sake of example, we are interested in IQ. A central debate (as I understand the literature) at present is whether IQ is inherently static or can be improved with education. Indeed the implication of this can be quite controversial (IQ testing is like the third rail of understanding intelligence... making statements about intelligence is like the third rail of psychology... but I digress).</span>
+<span id="cb51-155"><a href="#cb51-155"></a></span>
+<span id="cb51-156"><a href="#cb51-156"></a>In addition to our population of students taking the basic curriculum, we also have an equal number of students taking an advanced curriculum. Assuming that we have already controlled for other factors (e.g., baseline IQs from both groups the same before treatment) we would like to address the following question using data obtained from each group: "Does the enhanced cirriculum result in higher IQ?"</span>
+<span id="cb51-157"><a href="#cb51-157"></a></span>
+<span id="cb51-158"><a href="#cb51-158"></a>First let's create our populations:</span>
+<span id="cb51-159"><a href="#cb51-159"></a></span>
+<span id="cb51-162"><a href="#cb51-162"></a><span class="in">```{r}</span></span>
+<span id="cb51-163"><a href="#cb51-163"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb51-164"><a href="#cb51-164"></a>pop_basic <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5000</span>,<span class="at">mean =</span> <span class="dv">103</span>,<span class="at">sd =</span> <span class="dv">14</span>)</span>
+<span id="cb51-165"><a href="#cb51-165"></a>pop_advanced <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5000</span>,<span class="at">mean =</span> <span class="dv">108</span>,<span class="at">sd =</span> <span class="dv">13</span>)</span>
+<span id="cb51-166"><a href="#cb51-166"></a><span class="in">```</span></span>
+<span id="cb51-167"><a href="#cb51-167"></a></span>
+<span id="cb51-168"><a href="#cb51-168"></a>Again, you'll note that in this example we're omnipotent and know the truth of the matter (the true measures)... in the real world no one is all-seeing and knowing. You'll also notice that I kept the SD for each population roughly equivalent. This *homogeniety of variences* (i.e., SDs should be approximately equal) is another assumption of our non-parametric tests (like ANOVA). Here I've made it so, but if in true the variances are not equal then we may have to adjust how we proceed with our analyses. More on that in a few weeks!</span>
+<span id="cb51-169"><a href="#cb51-169"></a></span>
+<span id="cb51-170"><a href="#cb51-170"></a>And now to create our difference distribution using the same programming logic as above:</span>
+<span id="cb51-171"><a href="#cb51-171"></a></span>
+<span id="cb51-174"><a href="#cb51-174"></a><span class="in">```{r}</span></span>
+<span id="cb51-175"><a href="#cb51-175"></a>difference_distribution <span class="ot">&lt;-</span> </span>
+<span id="cb51-176"><a href="#cb51-176"></a>  <span class="co"># tibble: create a table with a column "simulation" that contains values 1:100000</span></span>
+<span id="cb51-177"><a href="#cb51-177"></a>  <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-178"><a href="#cb51-178"></a>  <span class="co"># group_by: perform every function after this for EACH num:</span></span>
+<span id="cb51-179"><a href="#cb51-179"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-180"><a href="#cb51-180"></a>  <span class="co"># mutate: add a column "basic_mean" that contains the mean for simulation num</span></span>
+<span id="cb51-181"><a href="#cb51-181"></a>  <span class="co">#         same for "advanced_mean"</span></span>
+<span id="cb51-182"><a href="#cb51-182"></a>  <span class="co">#         get difference between the two samples for that simulation</span></span>
+<span id="cb51-183"><a href="#cb51-183"></a>  <span class="fu">mutate</span>(<span class="at">basic_mean =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic,<span class="at">size =</span> <span class="dv">250</span>,<span class="at">replace =</span> T)),</span>
+<span id="cb51-184"><a href="#cb51-184"></a>         <span class="at">advanced_mean =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_advanced, <span class="at">size =</span> <span class="dv">250</span>, <span class="at">replace =</span> T)),</span>
+<span id="cb51-185"><a href="#cb51-185"></a>         <span class="at">difference_means =</span> advanced_mean<span class="sc">-</span>basic_mean)</span>
+<span id="cb51-186"><a href="#cb51-186"></a><span class="in">```</span></span>
+<span id="cb51-187"><a href="#cb51-187"></a></span>
+<span id="cb51-188"><a href="#cb51-188"></a>And now to take a look at the resulting difference distribution:</span>
+<span id="cb51-189"><a href="#cb51-189"></a></span>
+<span id="cb51-192"><a href="#cb51-192"></a><span class="in">```{r}</span></span>
+<span id="cb51-193"><a href="#cb51-193"></a><span class="fu">mean</span>(difference_distribution<span class="sc">$</span>difference_means)</span>
+<span id="cb51-194"><a href="#cb51-194"></a><span class="fu">hist</span>(difference_distribution<span class="sc">$</span>difference_means, <span class="at">main =</span> <span class="st">"Theoretical difference distribution"</span>)</span>
+<span id="cb51-195"><a href="#cb51-195"></a><span class="in">```</span></span>
+<span id="cb51-196"><a href="#cb51-196"></a></span>
+<span id="cb51-197"><a href="#cb51-197"></a>As anticipated (because we know all) we end up with a difference distribution with a mean difference of about 5. What we are asked to consider is whether this difference (or any observed difference, really) is enough to say that the likelihood of it occurring by chance is sufficiently small (i.e. is $p &lt; .05$). For this we need to create a null distribution.</span>
+<span id="cb51-198"><a href="#cb51-198"></a></span>
+<span id="cb51-199"><a href="#cb51-199"></a><span class="fu">## The Null distribution</span></span>
+<span id="cb51-200"><a href="#cb51-200"></a></span>
+<span id="cb51-201"><a href="#cb51-201"></a>The logic of constructing a null distribution rests on the claims made by the null hypothesis, that the means of the two (or more) populations in question are identical:</span>
+<span id="cb51-202"><a href="#cb51-202"></a></span>
+<span id="cb51-203"><a href="#cb51-203"></a>$$\mu_1=\mu_2$$</span>
+<span id="cb51-204"><a href="#cb51-204"></a></span>
+<span id="cb51-205"><a href="#cb51-205"></a>In a larger sense, if the null hypothesis is indeed true it suggests that the two populations may indeed be one single population. Here, we know that the null hypothesis is NOT true (again, all seeing and knowing).</span>
+<span id="cb51-206"><a href="#cb51-206"></a></span>
+<span id="cb51-209"><a href="#cb51-209"></a><span class="in">```{r}</span></span>
+<span id="cb51-210"><a href="#cb51-210"></a><span class="fu">mean</span>(pop_advanced)</span>
+<span id="cb51-211"><a href="#cb51-211"></a><span class="fu">mean</span>(pop_basic)</span>
+<span id="cb51-212"><a href="#cb51-212"></a></span>
+<span id="cb51-213"><a href="#cb51-213"></a><span class="co"># are the 2 means exactly equal?</span></span>
+<span id="cb51-214"><a href="#cb51-214"></a><span class="fu">mean</span>(pop_advanced)<span class="sc">==</span><span class="fu">mean</span>(pop_basic)</span>
+<span id="cb51-215"><a href="#cb51-215"></a><span class="in">```</span></span>
+<span id="cb51-216"><a href="#cb51-216"></a></span>
+<span id="cb51-217"><a href="#cb51-217"></a>In the context of our everday experiments, we do not know whether the null is indeed true or not. Based upon the samples that we take we make an inference as to whether we have sufficient evidence to reject the null. We do so if the probability of our observed data, given the null is true, is sufficiently low. In other words, here we are asking: "IF the null is true, THEN what is the likelihood that we would get our observed differences in means." If the likelihood is low, then we may have reason to believe the null hypothesis to be suspect.</span>
+<span id="cb51-218"><a href="#cb51-218"></a></span>
+<span id="cb51-219"><a href="#cb51-219"></a>Returning to the logic of the null distribution, it assumes that our experimental group, <span class="in">`pop_advanced`</span>, and our control group, <span class="in">`pop_basic`</span> are from the same population. Thus, any samples obtained betwixt should be equal, and the differences in sample means should approximate 0 (never exactly 0 due to sampling error). However, by virtue of our experimental design we are *implicitly assuming that, in fact the two are different from one another*. This implicit assumption means that the **null distribution** cannot be created by creating a **difference distribution** between the two groups.</span>
+<span id="cb51-220"><a href="#cb51-220"></a></span>
+<span id="cb51-221"><a href="#cb51-221"></a>So how to go about the business of creating a null distribution, then? We create a difference distribution that guarantees that all data is from the same population. In this case we are creating a difference distribution where we take repeated samples from the **same population** and compare their differences. Based on this distribution, we can make claims regarding the probability of observed differences between scores assuming they are from the same population. Again sampling error guarantees that these differences are not exactly zero.</span>
+<span id="cb51-222"><a href="#cb51-222"></a></span>
+<span id="cb51-223"><a href="#cb51-223"></a>Typically the population we choose is our control population (group). In this case the logical control is <span class="in">`pop_basic`</span>. Modifying the simulation code that we used for the difference distribution, we create a null distribution like so:</span>
+<span id="cb51-224"><a href="#cb51-224"></a></span>
+<span id="cb51-227"><a href="#cb51-227"></a><span class="in">```{r}</span></span>
+<span id="cb51-228"><a href="#cb51-228"></a><span class="co"># create an empty vector to store the null difference in means</span></span>
+<span id="cb51-229"><a href="#cb51-229"></a>null_distribution <span class="ot">&lt;-</span> </span>
+<span id="cb51-230"><a href="#cb51-230"></a>  <span class="co"># tibble: create a table with a column "simulation" that contains values 1:100000</span></span>
+<span id="cb51-231"><a href="#cb51-231"></a>  <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-232"><a href="#cb51-232"></a>  <span class="co"># group_by: perform every function after this for EACH num:</span></span>
+<span id="cb51-233"><a href="#cb51-233"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-234"><a href="#cb51-234"></a>  <span class="co"># mutate: add a column "basic_mean" that contains the mean for simulation num</span></span>
+<span id="cb51-235"><a href="#cb51-235"></a>  <span class="co">#         same for "advanced_mean"</span></span>
+<span id="cb51-236"><a href="#cb51-236"></a>  <span class="co">#         get difference between the two samples for that simulation</span></span>
+<span id="cb51-237"><a href="#cb51-237"></a>  <span class="fu">mutate</span>(<span class="at">control_sample1 =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic,<span class="at">size =</span> <span class="dv">250</span>,<span class="at">replace =</span> T)),</span>
+<span id="cb51-238"><a href="#cb51-238"></a>         <span class="at">control_sample2 =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic, <span class="at">size =</span> <span class="dv">250</span>, <span class="at">replace =</span> T)),</span>
+<span id="cb51-239"><a href="#cb51-239"></a>         <span class="at">null_means =</span> control_sample1<span class="sc">-</span>control_sample2)</span>
+<span id="cb51-240"><a href="#cb51-240"></a><span class="in">```</span></span>
+<span id="cb51-241"><a href="#cb51-241"></a></span>
+<span id="cb51-242"><a href="#cb51-242"></a>And now to take a look at the resulting null distribution:</span>
+<span id="cb51-243"><a href="#cb51-243"></a></span>
+<span id="cb51-246"><a href="#cb51-246"></a><span class="in">```{r}</span></span>
+<span id="cb51-247"><a href="#cb51-247"></a><span class="fu">mean</span>(null_distribution<span class="sc">$</span>null_means)</span>
+<span id="cb51-248"><a href="#cb51-248"></a><span class="fu">hist</span>(null_distribution<span class="sc">$</span>null_means, <span class="at">main =</span> <span class="st">"Theoretical null distribution"</span>)</span>
+<span id="cb51-249"><a href="#cb51-249"></a><span class="in">```</span></span>
+<span id="cb51-250"><a href="#cb51-250"></a></span>
+<span id="cb51-251"><a href="#cb51-251"></a>In discussion we made mention that due to the assumption of equal means and equal variances that the null distribution should approximate the form of the standard distribution were $\mu=0$ and $\sigma = 1$. This fact allows us to say something about the probability of an observed difference as a probability of obtaining a Z-score that far removed from 0.</span>
+<span id="cb51-252"><a href="#cb51-252"></a></span>
+<span id="cb51-253"><a href="#cb51-253"></a><span class="fu">## Probabilty of observed differences</span></span>
+<span id="cb51-254"><a href="#cb51-254"></a></span>
+<span id="cb51-255"><a href="#cb51-255"></a>Continuing on from the previous section, we have our null distribution of IQ scores, appropriately named <span class="in">`null_distribution`</span>. This is the theoretical distribution of differences assuming the two populations are the same. Simply put, this is the distribution of differences we might expect if our advanced curriculum did not have any impact. You'll note that even assuming that the two groups are identical still yields some differences by chance:</span>
+<span id="cb51-256"><a href="#cb51-256"></a></span>
+<span id="cb51-259"><a href="#cb51-259"></a><span class="in">```{r}</span></span>
+<span id="cb51-260"><a href="#cb51-260"></a><span class="fu">max</span>(null_distribution<span class="sc">$</span>null_means)</span>
+<span id="cb51-261"><a href="#cb51-261"></a><span class="fu">min</span>(null_distribution<span class="sc">$</span>null_means)</span>
+<span id="cb51-262"><a href="#cb51-262"></a><span class="in">```</span></span>
+<span id="cb51-263"><a href="#cb51-263"></a></span>
+<span id="cb51-264"><a href="#cb51-264"></a>but that the probability of those extremes is very, very low (but still exists which is why we never *prove* the alternative hypothesis). Let's say I take a sample from <span class="in">`pop_basic`</span> and <span class="in">`pop_advanced`</span> and find that my means differ by 3. Given the null distribution, what is the probability that I will observe a difference this large? To derive this probability, we take advantage of what we know about the standard distribution, where we have a known probability of obtaining any given Z-score.</span>
+<span id="cb51-265"><a href="#cb51-265"></a></span>
+<span id="cb51-266"><a href="#cb51-266"></a>The process of answering the above is as follows: 1. transform the observed difference to a Z-score using the mean and SD of the null distribution; 2. calculate the probability of that extreme of a score.</span>
+<span id="cb51-267"><a href="#cb51-267"></a></span>
+<span id="cb51-268"><a href="#cb51-268"></a>Here is step 1:</span>
+<span id="cb51-269"><a href="#cb51-269"></a></span>
+<span id="cb51-272"><a href="#cb51-272"></a><span class="in">```{r}</span></span>
+<span id="cb51-273"><a href="#cb51-273"></a><span class="co"># 1. convert the observed difference to a z-score:</span></span>
+<span id="cb51-274"><a href="#cb51-274"></a>Zscore <span class="ot">&lt;-</span> (<span class="dv">3</span><span class="sc">-</span><span class="fu">mean</span>(null_distribution<span class="sc">$</span>null_means))<span class="sc">/</span><span class="fu">sd</span>(null_distribution<span class="sc">$</span>null_means) </span>
+<span id="cb51-275"><a href="#cb51-275"></a><span class="fu">show</span>(Zscore)</span>
+<span id="cb51-276"><a href="#cb51-276"></a><span class="in">```</span></span>
+<span id="cb51-277"><a href="#cb51-277"></a></span>
+<span id="cb51-278"><a href="#cb51-278"></a>I want to pause here to note that the obtained Z-score is positive. As a result the score is on the right side of the distribution. Our probability function, <span class="in">`pnorm()`</span> returns the probability of an obtained score or lower (the cumulative probability). However, we want the probability of the observed score or *more extreme*. In this case *more extreme* means *greater than*. Conversely if the observed Z score is less than 0, then *more extreme* means *less than*. I bring this up as this determines what value we use to calculate the desired probability. In the latter case, *less than* we can simple take the output of <span class="in">`pnorm()`</span> and call it a day. However, in cases like ours, when $Z&gt;0$ we need to use <span class="in">`1-pnorm()`</span>.</span>
+<span id="cb51-279"><a href="#cb51-279"></a></span>
+<span id="cb51-280"><a href="#cb51-280"></a>OK, on to the calculation:</span>
+<span id="cb51-281"><a href="#cb51-281"></a></span>
+<span id="cb51-284"><a href="#cb51-284"></a><span class="in">```{r}</span></span>
+<span id="cb51-285"><a href="#cb51-285"></a>Zscore <span class="ot">&lt;-</span> (<span class="dv">3</span><span class="sc">-</span><span class="fu">mean</span>(null_distribution<span class="sc">$</span>null_means))<span class="sc">/</span><span class="fu">sd</span>(null_distribution<span class="sc">$</span>null_means) </span>
+<span id="cb51-286"><a href="#cb51-286"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(Zscore)</span>
+<span id="cb51-287"><a href="#cb51-287"></a><span class="in">```</span></span>
+<span id="cb51-288"><a href="#cb51-288"></a></span>
+<span id="cb51-289"><a href="#cb51-289"></a>Based on a criteria of rejecting the null if $p&lt;.05$ we would reject here. BUT NOTE: not necessarily because it's less than .05. Remember that if I have a two-tailed test, my criteria requires that I split my $\alpha$. So in truth I need to obtain a value less than .025 in either direction.</span>
+<span id="cb51-290"><a href="#cb51-290"></a></span>
+<span id="cb51-291"><a href="#cb51-291"></a><span class="fu">## A note about sample size</span></span>
+<span id="cb51-292"><a href="#cb51-292"></a></span>
+<span id="cb51-293"><a href="#cb51-293"></a>So I got a pretty low *p-value*, but you might say it was expected given that my sample size was 250 for each group. Let's see what happens if I drop the sample size down to 10 students per group, creating a new null distribution, <span class="in">`null_distribution_10`</span>:</span>
+<span id="cb51-294"><a href="#cb51-294"></a></span>
+<span id="cb51-297"><a href="#cb51-297"></a><span class="in">```{r}</span></span>
+<span id="cb51-298"><a href="#cb51-298"></a><span class="co"># create an empty vector to store the null difference in means</span></span>
+<span id="cb51-299"><a href="#cb51-299"></a>null_distribution_10 <span class="ot">&lt;-</span> </span>
+<span id="cb51-300"><a href="#cb51-300"></a>  <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-301"><a href="#cb51-301"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-302"><a href="#cb51-302"></a>  <span class="fu">mutate</span>(<span class="at">control_sample1 =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic,<span class="at">size =</span> <span class="dv">10</span>,<span class="at">replace =</span> T)),</span>
+<span id="cb51-303"><a href="#cb51-303"></a>         <span class="at">control_sample2 =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(pop_basic, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)),</span>
+<span id="cb51-304"><a href="#cb51-304"></a>         <span class="at">null_means =</span> control_sample1<span class="sc">-</span>control_sample2)</span>
+<span id="cb51-305"><a href="#cb51-305"></a><span class="in">```</span></span>
+<span id="cb51-306"><a href="#cb51-306"></a></span>
+<span id="cb51-307"><a href="#cb51-307"></a>What does this distribution look like?</span>
+<span id="cb51-308"><a href="#cb51-308"></a></span>
+<span id="cb51-311"><a href="#cb51-311"></a><span class="in">```{r}</span></span>
+<span id="cb51-312"><a href="#cb51-312"></a><span class="fu">hist</span>(null_distribution_10<span class="sc">$</span>null_means, <span class="at">main =</span> <span class="st">"Theoretical null distribution"</span>)</span>
+<span id="cb51-313"><a href="#cb51-313"></a><span class="fu">mean</span>(null_distribution_10<span class="sc">$</span>null_means)</span>
+<span id="cb51-314"><a href="#cb51-314"></a><span class="in">```</span></span>
+<span id="cb51-315"><a href="#cb51-315"></a></span>
+<span id="cb51-316"><a href="#cb51-316"></a>And let's take a look at the probability of an observed difference of 3 in this case. Not that I'm using the <span class="in">`pnorm()`</span> shortcut so I don't need to calculate my Z by hand:</span>
+<span id="cb51-317"><a href="#cb51-317"></a></span>
+<span id="cb51-320"><a href="#cb51-320"></a><span class="in">```{r}</span></span>
+<span id="cb51-321"><a href="#cb51-321"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>,<span class="at">mean =</span> <span class="fu">mean</span>(null_distribution_10<span class="sc">$</span>null_means),<span class="at">sd =</span> <span class="fu">sd</span>(null_distribution_10<span class="sc">$</span>null_means))</span>
+<span id="cb51-322"><a href="#cb51-322"></a><span class="in">```</span></span>
+<span id="cb51-323"><a href="#cb51-323"></a></span>
+<span id="cb51-324"><a href="#cb51-324"></a>As we can see, *size matters*. Given that we are omnipotent in this case, we know the truth of the matter is that the two populations are in fact different, and that the mean of <span class="in">`pop_basic`</span> is not equal to the mean of <span class="in">`pop_advanced`</span>. Thus what we have here is a failure to reject the null hypothesis when it is indeed false. Hmm, what kind of error is that again? This last example is going to figure prominently in our discussions of power and what power is, properly defined. For now, I think this is a good place to stop this week.</span>
+<span id="cb51-325"><a href="#cb51-325"></a></span>
+<span id="cb51-326"><a href="#cb51-326"></a><span class="kw">&lt;/br&gt;</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

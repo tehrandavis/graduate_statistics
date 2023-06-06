@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Correlations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Correlations</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link active">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#the-relationship-btw-stress-and-health" id="toc-the-relationship-btw-stress-and-health" class="nav-link active" data-scroll-target="#the-relationship-btw-stress-and-health">The Relationship b/tw Stress and Health</a>
+  <ul class="collapse">
+<li><a href="#testing-our-assumptions" id="toc-testing-our-assumptions" class="nav-link" data-scroll-target="#testing-our-assumptions">Testing our assumptions</a></li>
+  </ul>
+</li>
+  <li><a href="#plotting-the-data" id="toc-plotting-the-data" class="nav-link" data-scroll-target="#plotting-the-data">Plotting the data</a></li>
+  <li>
+<a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation">Covariance and Correlation</a>
+  <ul class="collapse">
+<li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance">Covariance</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
+  </ul>
+</li>
+  <li><a href="#adjusting-pearsonss-r-by-hand" id="toc-adjusting-pearsonss-r-by-hand" class="nav-link" data-scroll-target="#adjusting-pearsonss-r-by-hand">adjusting Pearsons’s <span class="math inline">\(r\)</span> by hand</a></li>
+  <li><a href="#significance-testing-r" id="toc-significance-testing-r" class="nav-link" data-scroll-target="#significance-testing-r">Significance testing <span class="math inline">\(r\)</span></a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Correlations</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>In this week’s readings and lecture we covered <strong>correlation</strong> and <strong>regression</strong>. In what follows we will revisit the ideas from this week’s readings and notes, making explicit callbacks to topics from slides and using an example. The examples from this page involve R. For a tutorial on how to perform similar analyses in SPSS, please look to my youtube channel. .</p>
+<p>Please note that this walkthrough assumes that you have the following packages installed and loaded in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(car, <span class="co"># qqPlot function</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>               cowplot, <span class="co"># apa plotting</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>               tidyverse, <span class="co"># tidyverse goodness</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>               psych, <span class="co"># descriptive stats</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>               lm.beta <span class="co"># getting a standard coefficient</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>               ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+The downloaded binary packages are in
+    /var/folders/7k/6v7xmh35305_vjzy660s9_q40000gs/T//RtmpBPdxC2/downloaded_packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+lm.beta installed</code></pre>
+</div>
+</div>
+<section id="the-relationship-btw-stress-and-health" class="level2"><h2 class="anchored" data-anchor-id="the-relationship-btw-stress-and-health">The Relationship b/tw Stress and Health</h2>
+<blockquote class="blockquote">
+<p>Wagner, Compas, and Howell (1988) investigated the relationship between stress and mental health in first-year college students. Using a scale they developed to measure the frequency, perceived importance, and desirability of recent life events, they created a measure of negative events weighted by the reported frequency and the respondent’s subjective estimate of the impact of each event. This served as their measure of the subject’s perceived social and environmental stress. They also asked students to complete the Hopkins Symptom Checklist, assessing the presence or absence of 57 psychological symptoms.</p>
+</blockquote>
+<p>This data can be accessed directly from this <a href="https://www.uvm.edu/~statdhtx/methods8/">companion website</a> for Howell’s stats textbook (a book I used a while back).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>stress_data <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab9-2.dat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+── Column specification ────────────────────────────────────────────────────────
+cols(
+  ID = col_double(),
+  Stress = col_double(),
+  Symptoms = col_double(),
+  lnSymptoms = col_double()
+)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(stress_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           vars   n  mean    sd median trimmed   mad   min    max  range skew
+ID            1 107 54.00 31.03  54.00   54.00 40.03  1.00 107.00 106.00 0.00
+Stress        2 107 21.29 12.49  20.00   20.49 11.86  1.00  58.00  57.00 0.62
+Symptoms      3 107 90.33 18.81  88.00   88.87 17.79 58.00 147.00  89.00 0.74
+lnSymptoms    4 107  4.48  0.20   4.48    4.48  0.19  4.06   4.99   0.93 0.21
+           kurtosis   se
+ID            -1.23 3.00
+Stress        -0.19 1.21
+Symptoms       0.45 1.82
+lnSymptoms    -0.28 0.02</code></pre>
+</div>
+</div>
+<section id="testing-our-assumptions" class="level3"><h3 class="anchored" data-anchor-id="testing-our-assumptions">Testing our assumptions</h3>
+<p>Here we are interested in the relationship between perceived <strong>Stress</strong> (as measured on a scale factors the number and impact of negative life events) and the presence of psychological <strong>Symptoms</strong>. As with any other parametric analysis, we first need to see if our data adheres to the assumptions of <strong>normality</strong> and <strong>homogeniety of varience</strong>. We can use the tools we’ve been employing for the last few weeks test these assumptions:</p>
+<p>First <strong>Stress</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">hist</span>(stress_data<span class="sc">$</span>Stress,<span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_2_correlations_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(stress_data<span class="sc">$</span>Stress)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_2_correlations_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 72 55</code></pre>
+</div>
+</div>
+<p>You might notice that the plotting functions that I’ve used here are NOT ggplots. In truth, for simple histograms and qqplots I just use the functions above. What’s nice about the <code>car::qqplot()</code> is that it highlights the extreme values, in this case participants 55 and 72. When putting together anything that invoves complex subsetting or presenting and publishing data, <code>ggplot</code> is my preferred method.</p>
+<p>Eyeballing the plots, our <strong>Stress</strong> measures look slightly skewed, but not egregiously so. Let’s take a look at the skew and kurtosis values. Remember that this entails dividing our <code>skew</code> value (from <code><a href="https://rdrr.io/pkg/psych/man/describe.html">psych::describe</a></code> of <code><a href="https://rdrr.io/pkg/psych/man/skew.html">psych::skew</a></code> by the standard error of the skew. Recall, to get the standard error of the skew, the best way is to bootstrap a sampling distribution.</p>
+<p>Here I’m just going to <em>bootstrap</em> the skew using <code><a href="https://andrisignorell.github.io/DescTools/reference/Skew.html">DescTools::Skew()</a></code> and get the 95% CI</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>boot_skew_data <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Skew</span>(stress_data<span class="sc">$</span>Stress, <span class="at">method =</span> <span class="dv">2</span>, <span class="at">ci.type =</span> <span class="st">"bca"</span>,<span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then to get the standard error I can just divide the range of the <code>ci</code> by 3.92 (95% of a normal distribution falls withing ±1.96 SD of the mean; the standard error = 1 SD).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>standard_error_skew <span class="ot">&lt;-</span> (boot_skew_data[<span class="st">"upr.ci"</span>] <span class="sc">-</span> boot_skew_data[<span class="st">"lwr.ci"</span>])<span class="sc">/</span><span class="fl">3.92</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>standard_error_skew <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1887328</code></pre>
+</div>
+</div>
+<p>Alternatively, we can also estimate this value running some simulations (bootstrapping manually):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>boot_skew_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">mutate</span>(<span class="at">skew_vals =</span> <span class="fu">sample</span>(stress_data<span class="sc">$</span>Stress,<span class="at">size =</span> <span class="dv">107</span>,<span class="at">replace =</span> T) <span class="sc">%&gt;%</span> psych<span class="sc">::</span><span class="fu">skew</span>())</span>
+<span id="cb14-4"><a href="#cb14-4"></a>standard_error_skew <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_skew_data<span class="sc">$</span>skew_vals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>At this point I would also like to introduce you to a slightly easier way of bootstrapping (you’ve earned it), using the <code>resample</code> package:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(resample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+The downloaded binary packages are in
+    /var/folders/7k/6v7xmh35305_vjzy660s9_q40000gs/T//RtmpBPdxC2/downloaded_packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+resample installed</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>boot_skew_data <span class="ot">&lt;-</span> resample<span class="sc">::</span><span class="fu">bootstrap</span>(<span class="at">data =</span> stress_data, <span class="at">statistic =</span> <span class="fu">mean</span>(Stress),<span class="at">R =</span> <span class="dv">10000</span>)</span>
+<span id="cb18-2"><a href="#cb18-2"></a>boot_skew_data<span class="sc">$</span>stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Observed       SE     Mean         Bias
+mean(Stress) 21.28972 1.201429 21.28782 -0.001896262</code></pre>
+</div>
+</div>
+<p>You’ll note that the output of this function (<code>boot_skew_data$stats</code>) gives us the:</p>
+<ul>
+<li>empirically <code>Observed</code> sample statistic, in this case the skew of our original sample (0.618)</li>
+<li>the standard error of the sampling distribution <code>SE</code> = .179</li>
+<li>the <code>Mean</code> of the sampling distribution</li>
+<li>and the <code>Bias</code>, the difference between the original sample statistic and the <code>Mean</code> of the sampling distribution.</li>
+</ul>
+<p>If so inclined I could get the distribution of skews by invoking <code>$replicates</code>. (See next section)</p>
+<p>Recall that we would then divide our the skew of the actual sample by the <code>SE</code> and evaluate the result against the criteria mentioned in class. (Again if we are being diligent we would repeat this for kurtosis).</p>
+<p>Finally, we might invoke the Shapiro-Wilkes test (<span class="math inline">\(W\)</span>) of normality by comparing our observed distribution against a theoretical normal. Here the null hypothesis is that the <span class="math inline">\(observed == theoretical\)</span>, where <span class="math inline">\(p &lt; .05\)</span> indicates that the observed distribution is <em>not normal</em>. Our obtained p-value confirms suggests the possibility that <strong>Stress</strong> measures deviate from normal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">shapiro.test</span>(stress_data<span class="sc">$</span>Stress) <span class="co"># see Field (2014), Sec 5.6.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  stress_data$Stress
+W = 0.96009, p-value = 0.002709</code></pre>
+</div>
+</div>
+<p>However, as noted in the Field text (5.6.1) we need to be careful using the Shapiro-Wilkes test on large samples. Ultimately you need to make a judgment on whether or not all of the evidence available leads you to the conclusion of non-normality. In this case I probably would trust the normality of this data due to what I see in the Q-Q plot (very few large deviations from the normal line).</p>
+<p><strong>Now Symptoms</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">hist</span>(stress_data<span class="sc">$</span>Symptoms,<span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_2_correlations_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(stress_data<span class="sc">$</span>Symptoms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n  mean    sd median trimmed   mad min max range skew kurtosis   se
+X1    1 107 90.33 18.81     88   88.87 17.79  58 147    89 0.74     0.45 1.82</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(stress_data<span class="sc">$</span>Symptoms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_2_correlations_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24 19</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">shapiro.test</span>(stress_data<span class="sc">$</span>Symptoms) <span class="co"># see Field (2014), Sec 5.6.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  stress_data$Symptoms
+W = 0.95918, p-value = 0.00232</code></pre>
+</div>
+</div>
+<p><strong>Symptoms</strong> does not pass either the eyeball or the Shapiro-Wilkes tests. These data are slightly positively skewed. Let’s use bootstrapped standard error of the skew to evaluate whether we have a meaningful deviation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>boot_skew_data <span class="ot">&lt;-</span> resample<span class="sc">::</span><span class="fu">bootstrap</span>(<span class="at">data =</span> stress_data, <span class="at">statistic =</span> psych<span class="sc">::</span> <span class="fu">skew</span>(Stress),<span class="at">R =</span> <span class="dv">10000</span>)</span>
+<span id="cb29-2"><a href="#cb29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3"></a>psych<span class="sc">::</span><span class="fu">skew</span>(stress_data<span class="sc">$</span>Symptoms)<span class="sc">/</span>boot_skew_data<span class="sc">$</span>stats<span class="sc">$</span>SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.128424</code></pre>
+</div>
+</div>
+<p>Using the criteria set forth in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3591587/">Kim (2013)</a>, this data is indeed skewed (&gt; 3.29).</p>
+<p>One way of dealing with non-normal data is by performing a logarithmic transformation (see Field, 5.8). Logarithmic transformations reduce the weight of extreme scores. For example, consider the following vector:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   2   4   6   8 100</code></pre>
+</div>
+</div>
+<p><code>100</code> is setting way out to the extreme of the other scores. Now let’s get the <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code> of this sequence:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">log</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6931472 1.3862944 1.7917595 2.0794415 4.6051702</code></pre>
+</div>
+</div>
+<p>The values become more manageable (i.e., closer) at this rescaling.</p>
+<p>This has already been performed for this data, <strong>lnSymptoms</strong> is a natural logarithmic transform of <strong>Symptoms</strong>. With your own data, this can be accomplished quite simply in R by using the <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code> as above:</p>
+<p><strong>Question 1. Perform a natural log transform of <code>Symptoms</code> and <code>mutate()</code> it to a new column in your data frame <code>TransformedData</code>. Assess <code>TransformedData</code> using a qqPlot:</strong></p>
+<div class="cell">
+
+</div>
+</section></section><section id="plotting-the-data" class="level2"><h2 class="anchored" data-anchor-id="plotting-the-data">Plotting the data</h2>
+<p>One of the first things that you should do is plot your data. Plotting gives you a sense of what is going on with your data. In fact, <strong>YOU SHOULD NEVER TAKE A TEST RESULT AT FACE VALUE WITHOUT FIRST LOOKING AT YOUR DATA!!</strong> Beware of <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s quartet</a>!</p>
+<p>To really drive this home, let’s look at an example from a function that Jan Vanhove developed as a teaching tool. the function <code>plot_r()</code> takes an input correlation coefficient <code>r</code> and number of observations <code>n</code> and plots 16 very distrinct types of patterns that can be produced. For the sake of not slowing down your machine too much, I’d recommend keeping <code>n</code> at less than 200.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">source</span>(<span class="st">"http://janhove.github.io/RCode/plot_r.R"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">plot_r</span>(<span class="at">r =</span> <span class="fl">0.5</span>, <span class="at">n =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_2_correlations_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s plot our data using <code>ggplot</code>. In this case we will be creating a scatterplot of our data. This can be accomplished by adding <code>geom_point()</code> to our base <code>ggplot()</code>. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">ggplot</span>(stress_data, <span class="fu">aes</span>(<span class="at">x =</span> Stress, <span class="at">y =</span> lnSymptoms)) <span class="sc">+</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> <span class="co"># turns the plot into something close to APA</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">xlab</span>(<span class="st">"Stress"</span>) <span class="sc">+</span> </span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">ylab</span>(<span class="st">"lnSymptoms"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_2_correlations_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Question 2: create a ggplot scatterplot comparing <code>lnSymptoms</code> to <code>Symptoms</code> What does the result look like. What about this relationship suggests that performing a logarithmic transform may be kosher</strong></p>
+</section><section id="covariance-and-correlation" class="level2"><h2 class="anchored" data-anchor-id="covariance-and-correlation">Covariance and Correlation</h2>
+<p>This week’s readings offer excellent overviews of <strong>covariance</strong> and <strong>correlation</strong> so I won’t go into too much depth here. Briefly, let’s make a few connections to ideas that we’ve already encountered.</p>
+<section id="covariance" class="level3"><h3 class="anchored" data-anchor-id="covariance">Covariance</h3>
+<p>Recall that <strong>variance</strong> may be calculated as: &nbsp; <span class="math inline">\(s_{x}^{2}=\frac{\sum \left ( x_{i}-\bar{X} \right )^{2}}{n-1}\)</span></p>
+<p>Where the numerator is the sum of squared differences from each score to the sample mean, and the denominator is our degrees of freedom.</p>
+<p>Variance tells us to what degree scores in a particular sample variable deviate from its mean. With this in mind, <strong>covarience</strong> is a statement about the degree to which two sampled variables deviate from their respective means. Consider we have sampled two measures, <em>X</em> &amp; <em>Y</em> from a population. When addressing the degree to which <em>X</em> and <em>Y</em> co-vary, we are asking the question: “To what degree and in what direction does <em>Y</em> move away from its mean as <em>X</em> moves from its mean?”</p>
+<p>As such, the formula for covariance is simply an extension of the formula for variance that we already know: <span class="math display">\[s_{xy}=\frac{\sum \left ( x_{i}-\bar{X} \right )\left ( y_{i}-\bar{Y} \right )}{n-1}\]</span></p>
+<p>So, in order to calculate the covariance we need the calculate the sum of the cross-product of the sum of squared differences of our two variables (<em>X</em> = <strong>Stress</strong>; <em>Y</em> = <strong>lnSymptoms</strong>) and divide that number by of degrees of freedom. We could go about the business of calculating this “by hand”:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># N = number of rows in data frame</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(stress_data)</span>
+<span id="cb37-3"><a href="#cb37-3"></a></span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="co">#mean Stress:</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>meanX <span class="ot">&lt;-</span> <span class="fu">mean</span>(stress_data<span class="sc">$</span>Stress)</span>
+<span id="cb37-7"><a href="#cb37-7"></a></span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="co"># and same for lnSymptoms:</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a>meanY <span class="ot">&lt;-</span> <span class="fu">mean</span>(stress_data<span class="sc">$</span>lnSymptoms)</span>
+<span id="cb37-10"><a href="#cb37-10"></a></span>
+<span id="cb37-11"><a href="#cb37-11"></a><span class="co"># plug these values into our equation:</span></span>
+<span id="cb37-12"><a href="#cb37-12"></a></span>
+<span id="cb37-13"><a href="#cb37-13"></a><span class="co"># sum of cross product</span></span>
+<span id="cb37-14"><a href="#cb37-14"></a>numerator <span class="ot">&lt;-</span> <span class="fu">sum</span>((stress_data<span class="sc">$</span>Stress<span class="sc">-</span>meanX)<span class="sc">*</span>(stress_data<span class="sc">$</span>lnSymptoms<span class="sc">-</span>meanY))</span>
+<span id="cb37-15"><a href="#cb37-15"></a></span>
+<span id="cb37-16"><a href="#cb37-16"></a><span class="co"># degrees of freedom</span></span>
+<span id="cb37-17"><a href="#cb37-17"></a>denominator <span class="ot">&lt;-</span> (N<span class="dv">-1</span>)</span>
+<span id="cb37-18"><a href="#cb37-18"></a></span>
+<span id="cb37-19"><a href="#cb37-19"></a><span class="co"># covariance:</span></span>
+<span id="cb37-20"><a href="#cb37-20"></a>covXY <span class="ot">&lt;-</span> (numerator<span class="sc">/</span>denominator) <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.336434</code></pre>
+</div>
+</div>
+<p>The covariance of Stress and lnSymptoms is <strong>1.336</strong>.</p>
+<p><strong>Question 3: Alternatively, covariance may be calculated quickly in <code>R</code> using the <code><a href="https://rdrr.io/r/stats/cor.html">cov()</a></code> function:</strong> Remember, once you open up a function, you can press the TAB key to get prompts about what to put in each argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># use cov() to calculate the covariance between stress_data$Stress and stress_data$lnSymptoms</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="correlation" class="level3"><h3 class="anchored" data-anchor-id="correlation">Correlation</h3>
+<p>It may be tempting to calculate our <strong>covariance</strong> and stop there, but covariance is a limited measure. What I mean by this is that covarience indexes the degree of relationship between two specific variables, but doesn’t allow for more general comparison across situations. For a quick example, lets multiply both <strong>Stress</strong> and <strong>lnSymptoms</strong> by two. Let’s use <code>mutate()</code> to create a these <code>by2</code> columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>stress_data <span class="ot">&lt;-</span> stress_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="st">"Stress_by2"</span> <span class="ot">=</span> Stress <span class="sc">*</span> <span class="dv">2</span>,</span>
+<span id="cb40-2"><a href="#cb40-2"></a>                                    <span class="st">"lnSymptoms_by2"</span> <span class="ot">=</span> lnSymptoms <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>                                    )</span>
+<span id="cb40-4"><a href="#cb40-4"></a>stress_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 107 × 6
+      ID Stress Symptoms lnSymptoms Stress_by2 lnSymptoms_by2
+   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
+ 1     1     30       99       4.60         60           9.19
+ 2     2     27       94       4.54         54           9.09
+ 3     3      9       80       4.38         18           8.76
+ 4     4     20       70       4.25         40           8.50
+ 5     5      3      100       4.61          6           9.21
+ 6     6     15      109       4.69         30           9.38
+ 7     7      5       62       4.13         10           8.25
+ 8     8     10       81       4.39         20           8.79
+ 9     9     23       74       4.30         46           8.61
+10    10     34      121       4.80         68           9.59
+# ℹ 97 more rows</code></pre>
+</div>
+</div>
+<p>We would like to think that multiplying every value by a constant should have no effect on our general interpretation of the relationships in our data as the overall relationship in our data remain the same. To help make this apparent, let’s imagine that I weigh 200 lbs (yea… imagine) and my wife weighs 100 lbs. So I weigh twice as much as my wife. Over the next year we both go on a binge fest and both double our respective weights—I’m now 400 lbs and my wife is 200 lbs. I still weigh twice as much as my wife. Coincidentally the fact that relationships remain unchanged in spite of these sorts of mathematical transformations is why we could perform the natural logarithmic transform earlier and not feel too guilty.</p>
+<p><strong>Question 4: Well what happens when I get the covariance of my new <code>_by2</code> data?:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># use cov() to calculate the covariance between stress_data$Stress_by2 and stress_data$lnSymptoms_by2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>The covariance changes!!</strong> This is a problem, and is why, in order to usefully convey this data we report the <strong>correlation</strong>. The correlation is a <em>standardized</em> covariance.</p>
+<p>The unit of measurement we’ll use for standardization is the standard deviation. We can standardize the covariance in one of two ways:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Standardize our variables (into z-scores) and then calculate the covariance: <span class="math display">\[r_{xy}=\frac{\sum z_{x}z_{y}}{n-1}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>zX <span class="ot">&lt;-</span> <span class="fu">scale</span>(stress_data<span class="sc">$</span>Stress)</span>
+<span id="cb43-2"><a href="#cb43-2"></a>zY <span class="ot">&lt;-</span> <span class="fu">scale</span>(stress_data<span class="sc">$</span>lnSymptoms)</span>
+<span id="cb43-3"><a href="#cb43-3"></a></span>
+<span id="cb43-4"><a href="#cb43-4"></a>corXY <span class="ot">&lt;-</span> (<span class="fu">sum</span>(zX<span class="sc">*</span>zY) <span class="sc">/</span> (N<span class="dv">-1</span>))</span>
+<span id="cb43-5"><a href="#cb43-5"></a></span>
+<span id="cb43-6"><a href="#cb43-6"></a>corXY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5286565</code></pre>
+</div>
+</div>
+<p>or</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Calculate the covariance and standardize it (by dividing by the product of the standard deviation): <span class="math display">\[r_{xy}=\frac{\sum \left ( x_{i}-\bar{X} \right )\left ( y_{i}-\bar{Y} \right )}{(n-1)s_{x}s_{y}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># get SD of X and Y:</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>sdX <span class="ot">&lt;-</span> <span class="fu">sd</span>(stress_data<span class="sc">$</span>Stress)</span>
+<span id="cb45-3"><a href="#cb45-3"></a>sdY <span class="ot">&lt;-</span> <span class="fu">sd</span>(stress_data<span class="sc">$</span>lnSymptoms)</span>
+<span id="cb45-4"><a href="#cb45-4"></a></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="co"># using the covXY calculated above:</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a>covXY <span class="sc">/</span> (sdX<span class="sc">*</span>sdY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5286565</code></pre>
+</div>
+</div>
+<p>Again, in <code>R</code> we don’t need to do this by hand, there are in fact several functions. A more comprehensive look can be found in <strong>Field 6.5.3</strong>. The simplest function is <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>, with outputs the correlation as a single value. However, I prefer to use <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code> as it tends to provide the most immediately useful data. You can input your data into this function in two ways:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">cor.test</span>(stress_data<span class="sc">$</span>Stress,stress_data<span class="sc">$</span>lnSymptoms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  Stress and lnSymptoms
+t = 6.3818, df = 105, p-value = 4.827e-09
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.3765970 0.6529758
+sample estimates:
+      cor 
+0.5286565 </code></pre>
+</div>
+</div>
+<p>I prefer the latter as it uses formula notation which is the sort of notation we used for t-tests and will continue to use for regression and <code>ANOVA</code>. Finally, if you don’t want all the additional gobble-dee-gook from <code>cor.test</code> you can simply attach <code>$estimate</code> to the end of either the function or object like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data)<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      cor 
+0.5286565 </code></pre>
+</div>
+</div>
+<p>How did I know that I could do this you ask? To get a quick list of things that you can pull from the attributes, try the <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> function. It gives you a list of names that you can call using the <code>$</code> operator.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data) <span class="sc">%&gt;%</span> <span class="fu">attributes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$names
+[1] "statistic"   "parameter"   "p.value"     "estimate"    "null.value" 
+[6] "alternative" "method"      "data.name"   "conf.int"   
+
+$class
+[1] "htest"</code></pre>
+</div>
+</div>
+<p><strong>Question 5</strong> save the <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code> output of the correlation between <code>Stress</code> and <code>lnSymptoms</code> as an object <code>corOut</code>. Submit <code>corOut</code> to the <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> function. Grab the <code>p.value</code> and <code>estimate</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># using $ grab the p.value and estimate from corOut</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Our correlation is expressed in terms of the <strong>Pearson’s product-moment correlation coefficient</strong> (or <span class="math inline">\(r\)</span>, for short). Here <span class="math inline">\(r\)</span> = .529.</p>
+<p><strong>Question 6</strong> Rerun the <code>cor.test</code> (no need to get the attributes this time) using the problematic <code>by_2</code> columns. What do you find relative to the last test?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># calculate the correlation of the "_by2" data:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="adjusting-pearsonss-r-by-hand" class="level2"><h2 class="anchored" data-anchor-id="adjusting-pearsonss-r-by-hand">adjusting Pearsons’s <span class="math inline">\(r\)</span> by hand</h2>
+<p>Note that when our sample size is small (N&lt;30) we may need to adjust <span class="math inline">\(r\)</span>. This is because the sampling distribution of <span class="math inline">\(r\)</span> is not normally distributed, most especially when you have strong correlations. Don’t believe me? Let’s run a simulation, this time assuming a sample size of only 20 people.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Symptoms <span class="sc">+</span> Stress, <span class="at">data =</span> stress_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  Symptoms and Stress
+t = 6.3165, df = 105, p-value = 6.559e-09
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.3719397 0.6498580
+sample estimates:
+      cor 
+0.5247429 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>r_distribution <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a>  <span class="fu">mutate</span>(<span class="at">r_value =</span> <span class="fu">cor.test</span>(<span class="sc">~</span>Symptoms<span class="sc">+</span>Stress, <span class="at">data =</span> <span class="fu">sample_n</span>(stress_data,<span class="at">size =</span> <span class="dv">20</span>, <span class="at">replace =</span> T))<span class="sc">$</span>estimate   )</span>
+<span id="cb58-4"><a href="#cb58-4"></a><span class="fu">hist</span>(r_distribution<span class="sc">$</span>r_value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_2_correlations_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Question 7</strong> Try re-running the above code, this time with sample sizes of 100 instead of 20. What do you see?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="co"># rerun the simulation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The formula for this adjustment is: &nbsp;&nbsp;&nbsp; <span class="math inline">\(r_{adj}=\sqrt{1-\frac{\sum \left (1-r^2 \right )\left ( n-1 \right )}{n-2}}\)</span></p>
+<p>For now, we can calculate this by hand, but later we will see that it will be provided by another function (or at least its squared value will be).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="co"># Pearson's r:</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a>rXY <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data)<span class="sc">$</span>estimate</span>
+<span id="cb60-3"><a href="#cb60-3"></a></span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="co"># adjusted r:</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a>rXYadj <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>((<span class="dv">1</span><span class="sc">-</span>rXY<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(N<span class="dv">-1</span>)<span class="sc">/</span>(N<span class="dv">-2</span>))) <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     cor 
+0.522126 </code></pre>
+</div>
+</div>
+</section><section id="significance-testing-r" class="level2"><h2 class="anchored" data-anchor-id="significance-testing-r">Significance testing <span class="math inline">\(r\)</span>
+</h2>
+<p>It may be useful to perform tests of significance on <span class="math inline">\(r\)</span>. Typically, there are two types of tests that we perform:</p>
+<ol type="1">
+<li>a test of the observed <span class="math inline">\(r\)</span> to <span class="math inline">\(r=0\)</span>, and</li>
+<li>a test of the difference between two <span class="math inline">\(r\)</span> values.</li>
+</ol>
+<p>Regarding the first case, to test that the observed correlation is different from 0 we can use the aforementioned <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  Stress and lnSymptoms
+t = 6.3818, df = 105, p-value = 4.827e-09
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.3765970 0.6529758
+sample estimates:
+      cor 
+0.5286565 </code></pre>
+</div>
+</div>
+<p>In the second case, the difference between <span class="math inline">\(r\)</span> values, we may invoke the <code>paired.r()</code> function from the <code>psych</code> package. For example lets assume that we know that the correlation between GRE scores and GPA for one group of 100 students is <code>0.50</code> and for another group of 80 students it’s <code>0.61</code>. We ask is the correlation for the second group significantly higher than the first. To test the difference between these two independent <span class="math inline">\(r\)</span>s” we</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>psych<span class="sc">::</span><span class="fu">paired.r</span>(<span class="at">xy =</span> .<span class="dv">50</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">xz =</span> .<span class="dv">61</span>, <span class="at">n2 =</span> <span class="dv">80</span>,<span class="at">twotailed =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: psych::paired.r(xy = 0.5, xz = 0.61, n = 100, n2 = 80, twotailed = T)
+[1] "test of difference between two independent correlations"
+z = 1.05  With probability =  0.3</code></pre>
+</div>
+</div>
+<p>where:</p>
+<ul>
+<li>
+<code>xy</code>: the correlation in the first data set</li>
+<li>
+<code>xz</code>: the correlation in the second data set</li>
+<li>
+<code>n</code>: the number of samples in the first data set</li>
+<li>
+<code>n2</code>: the number of samples in the second data set -<code>twotailed</code>: run a two-tailed test, <code>TRUE</code> or <code>FALSE</code>
+</li>
+</ul>
+<p>This output tells us the resulting Fisher <span class="math inline">\(z\)</span> score and corresponding probability.</p>
+<p><strong>Question 8</strong>: For example assume that you sample 35 men and find a correlation of .42 between Symptoms and Stress. In another sample of 42 women you find a correlation of .51. Perform a test to see if those two correlations are different from one another.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co"># use psych::paired.r to answer Question #8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb67" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb67-1"><a href="#cb67-1"></a><span class="co">---</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="an">title:</span><span class="co"> "Correlations"</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="co">---</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a></span>
+<span id="cb67-5"><a href="#cb67-5"></a>In this week's readings and lecture we covered **correlation** and **regression**. In what follows we will revisit the ideas from this week's readings and notes, making explicit callbacks to topics from slides and using an example. The examples from this page involve R. For a tutorial on how to perform similar analyses in SPSS, please look to my youtube channel. .</span>
+<span id="cb67-6"><a href="#cb67-6"></a></span>
+<span id="cb67-7"><a href="#cb67-7"></a>Please note that this walkthrough assumes that you have the following packages installed and loaded in R:</span>
+<span id="cb67-8"><a href="#cb67-8"></a></span>
+<span id="cb67-11"><a href="#cb67-11"></a><span class="in">```{r}</span></span>
+<span id="cb67-12"><a href="#cb67-12"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(car, <span class="co"># qqPlot function</span></span>
+<span id="cb67-13"><a href="#cb67-13"></a>               cowplot, <span class="co"># apa plotting</span></span>
+<span id="cb67-14"><a href="#cb67-14"></a>               tidyverse, <span class="co"># tidyverse goodness</span></span>
+<span id="cb67-15"><a href="#cb67-15"></a>               psych, <span class="co"># descriptive stats</span></span>
+<span id="cb67-16"><a href="#cb67-16"></a>               lm.beta <span class="co"># getting a standard coefficient</span></span>
+<span id="cb67-17"><a href="#cb67-17"></a>               ) </span>
+<span id="cb67-18"><a href="#cb67-18"></a><span class="in">```</span></span>
+<span id="cb67-19"><a href="#cb67-19"></a></span>
+<span id="cb67-20"><a href="#cb67-20"></a><span class="fu">## The Relationship b/tw Stress and Health</span></span>
+<span id="cb67-21"><a href="#cb67-21"></a></span>
+<span id="cb67-22"><a href="#cb67-22"></a><span class="at">&gt; Wagner, Compas, and Howell (1988) investigated the relationship between stress and mental health in first-year college students. Using a scale they developed to measure the frequency, perceived importance, and desirability of recent life events, they created a measure of negative events weighted by the reported frequency and the respondent's subjective estimate of the impact of each event. This served as their measure of the subject's perceived social and environmental stress. They also asked students to complete the Hopkins Symptom Checklist, assessing the presence or absence of 57 psychological symptoms.</span></span>
+<span id="cb67-23"><a href="#cb67-23"></a></span>
+<span id="cb67-24"><a href="#cb67-24"></a>This data can be accessed directly from this <span class="co">[</span><span class="ot">companion website</span><span class="co">](https://www.uvm.edu/~statdhtx/methods8/)</span> for Howell's stats textbook (a book I used a while back).</span>
+<span id="cb67-25"><a href="#cb67-25"></a></span>
+<span id="cb67-28"><a href="#cb67-28"></a><span class="in">```{r}</span></span>
+<span id="cb67-29"><a href="#cb67-29"></a>stress_data <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Tab9-2.dat"</span>)</span>
+<span id="cb67-30"><a href="#cb67-30"></a></span>
+<span id="cb67-31"><a href="#cb67-31"></a>psych<span class="sc">::</span><span class="fu">describe</span>(stress_data)</span>
+<span id="cb67-32"><a href="#cb67-32"></a><span class="in">```</span></span>
+<span id="cb67-33"><a href="#cb67-33"></a></span>
+<span id="cb67-34"><a href="#cb67-34"></a><span class="fu">### Testing our assumptions</span></span>
+<span id="cb67-35"><a href="#cb67-35"></a></span>
+<span id="cb67-36"><a href="#cb67-36"></a>Here we are interested in the relationship between perceived **Stress** (as measured on a scale factors the number and impact of negative life events) and the presence of psychological **Symptoms**. As with any other parametric analysis, we first need to see if our data adheres to the assumptions of **normality** and **homogeniety of varience**. We can use the tools we've been employing for the last few weeks test these assumptions:</span>
+<span id="cb67-37"><a href="#cb67-37"></a></span>
+<span id="cb67-38"><a href="#cb67-38"></a>First **Stress**:</span>
+<span id="cb67-39"><a href="#cb67-39"></a></span>
+<span id="cb67-42"><a href="#cb67-42"></a><span class="in">```{r}</span></span>
+<span id="cb67-43"><a href="#cb67-43"></a><span class="fu">hist</span>(stress_data<span class="sc">$</span>Stress,<span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb67-44"><a href="#cb67-44"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(stress_data<span class="sc">$</span>Stress)</span>
+<span id="cb67-45"><a href="#cb67-45"></a><span class="in">```</span></span>
+<span id="cb67-46"><a href="#cb67-46"></a></span>
+<span id="cb67-47"><a href="#cb67-47"></a>You might notice that the plotting functions that I've used here are NOT ggplots. In truth, for simple histograms and qqplots I just use the functions above. What's nice about the <span class="in">`car::qqplot()`</span> is that it highlights the extreme values, in this case participants 55 and 72. When putting together anything that invoves complex subsetting or presenting and publishing data, <span class="in">`ggplot`</span> is my preferred method.</span>
+<span id="cb67-48"><a href="#cb67-48"></a></span>
+<span id="cb67-49"><a href="#cb67-49"></a>Eyeballing the plots, our **Stress** measures look slightly skewed, but not egregiously so. Let's take a look at the skew and kurtosis values. Remember that this entails dividing our <span class="in">`skew`</span> value (from <span class="in">`psych::describe`</span> of <span class="in">`psych::skew`</span> by the standard error of the skew. Recall, to get the standard error of the skew, the best way is to bootstrap a sampling distribution.</span>
+<span id="cb67-50"><a href="#cb67-50"></a></span>
+<span id="cb67-51"><a href="#cb67-51"></a>Here I'm just going to *bootstrap* the skew using <span class="in">`DescTools::Skew()`</span> and get the 95% CI</span>
+<span id="cb67-52"><a href="#cb67-52"></a></span>
+<span id="cb67-55"><a href="#cb67-55"></a><span class="in">```{r}</span></span>
+<span id="cb67-56"><a href="#cb67-56"></a>boot_skew_data <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Skew</span>(stress_data<span class="sc">$</span>Stress, <span class="at">method =</span> <span class="dv">2</span>, <span class="at">ci.type =</span> <span class="st">"bca"</span>,<span class="at">conf.level =</span> .<span class="dv">95</span>)</span>
+<span id="cb67-57"><a href="#cb67-57"></a><span class="in">```</span></span>
+<span id="cb67-58"><a href="#cb67-58"></a></span>
+<span id="cb67-59"><a href="#cb67-59"></a>Then to get the standard error I can just divide the range of the <span class="in">`ci`</span> by 3.92 (95% of a normal distribution falls withing ±1.96 SD of the mean; the standard error = 1 SD).</span>
+<span id="cb67-60"><a href="#cb67-60"></a></span>
+<span id="cb67-63"><a href="#cb67-63"></a><span class="in">```{r}</span></span>
+<span id="cb67-64"><a href="#cb67-64"></a>standard_error_skew <span class="ot">&lt;-</span> (boot_skew_data[<span class="st">"upr.ci"</span>] <span class="sc">-</span> boot_skew_data[<span class="st">"lwr.ci"</span>])<span class="sc">/</span><span class="fl">3.92</span></span>
+<span id="cb67-65"><a href="#cb67-65"></a>standard_error_skew <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
+<span id="cb67-66"><a href="#cb67-66"></a><span class="in">```</span></span>
+<span id="cb67-67"><a href="#cb67-67"></a></span>
+<span id="cb67-68"><a href="#cb67-68"></a>Alternatively, we can also estimate this value running some simulations (bootstrapping manually):</span>
+<span id="cb67-69"><a href="#cb67-69"></a></span>
+<span id="cb67-72"><a href="#cb67-72"></a><span class="in">```{r}</span></span>
+<span id="cb67-73"><a href="#cb67-73"></a>boot_skew_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-74"><a href="#cb67-74"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span></span>
+<span id="cb67-75"><a href="#cb67-75"></a>  <span class="fu">mutate</span>(<span class="at">skew_vals =</span> <span class="fu">sample</span>(stress_data<span class="sc">$</span>Stress,<span class="at">size =</span> <span class="dv">107</span>,<span class="at">replace =</span> T) <span class="sc">%&gt;%</span> psych<span class="sc">::</span><span class="fu">skew</span>())</span>
+<span id="cb67-76"><a href="#cb67-76"></a>standard_error_skew <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_skew_data<span class="sc">$</span>skew_vals)</span>
+<span id="cb67-77"><a href="#cb67-77"></a><span class="in">```</span></span>
+<span id="cb67-78"><a href="#cb67-78"></a></span>
+<span id="cb67-79"><a href="#cb67-79"></a>At this point I would also like to introduce you to a slightly easier way of bootstrapping (you've earned it), using the <span class="in">`resample`</span> package:</span>
+<span id="cb67-80"><a href="#cb67-80"></a></span>
+<span id="cb67-83"><a href="#cb67-83"></a><span class="in">```{r}</span></span>
+<span id="cb67-84"><a href="#cb67-84"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(resample)</span>
+<span id="cb67-85"><a href="#cb67-85"></a>boot_skew_data <span class="ot">&lt;-</span> resample<span class="sc">::</span><span class="fu">bootstrap</span>(<span class="at">data =</span> stress_data, <span class="at">statistic =</span> <span class="fu">mean</span>(Stress),<span class="at">R =</span> <span class="dv">10000</span>)</span>
+<span id="cb67-86"><a href="#cb67-86"></a>boot_skew_data<span class="sc">$</span>stats</span>
+<span id="cb67-87"><a href="#cb67-87"></a><span class="in">```</span></span>
+<span id="cb67-88"><a href="#cb67-88"></a></span>
+<span id="cb67-89"><a href="#cb67-89"></a>You'll note that the output of this function (<span class="in">`boot_skew_data$stats`</span>) gives us the:</span>
+<span id="cb67-90"><a href="#cb67-90"></a></span>
+<span id="cb67-91"><a href="#cb67-91"></a><span class="ss">-   </span>empirically <span class="in">`Observed`</span> sample statistic, in this case the skew of our original sample (0.618)</span>
+<span id="cb67-92"><a href="#cb67-92"></a><span class="ss">-   </span>the standard error of the sampling distribution <span class="in">`SE`</span> = .179</span>
+<span id="cb67-93"><a href="#cb67-93"></a><span class="ss">-   </span>the <span class="in">`Mean`</span> of the sampling distribution</span>
+<span id="cb67-94"><a href="#cb67-94"></a><span class="ss">-   </span>and the <span class="in">`Bias`</span>, the difference between the original sample statistic and the <span class="in">`Mean`</span> of the sampling distribution.</span>
+<span id="cb67-95"><a href="#cb67-95"></a></span>
+<span id="cb67-96"><a href="#cb67-96"></a>If so inclined I could get the distribution of skews by invoking <span class="in">`$replicates`</span>. (See next section)</span>
+<span id="cb67-97"><a href="#cb67-97"></a></span>
+<span id="cb67-98"><a href="#cb67-98"></a>Recall that we would then divide our the skew of the actual sample by the <span class="in">`SE`</span> and evaluate the result against the criteria mentioned in class. (Again if we are being diligent we would repeat this for kurtosis).</span>
+<span id="cb67-99"><a href="#cb67-99"></a></span>
+<span id="cb67-100"><a href="#cb67-100"></a>Finally, we might invoke the Shapiro-Wilkes test ($W$) of normality by comparing our observed distribution against a theoretical normal. Here the null hypothesis is that the $observed == theoretical$, where $p &lt; .05$ indicates that the observed distribution is *not normal*. Our obtained p-value confirms suggests the possibility that **Stress** measures deviate from normal.</span>
+<span id="cb67-101"><a href="#cb67-101"></a></span>
+<span id="cb67-104"><a href="#cb67-104"></a><span class="in">```{r}</span></span>
+<span id="cb67-105"><a href="#cb67-105"></a><span class="fu">shapiro.test</span>(stress_data<span class="sc">$</span>Stress) <span class="co"># see Field (2014), Sec 5.6.1</span></span>
+<span id="cb67-106"><a href="#cb67-106"></a><span class="in">```</span></span>
+<span id="cb67-107"><a href="#cb67-107"></a></span>
+<span id="cb67-108"><a href="#cb67-108"></a>However, as noted in the Field text (5.6.1) we need to be careful using the Shapiro-Wilkes test on large samples. Ultimately you need to make a judgment on whether or not all of the evidence available leads you to the conclusion of non-normality. In this case I probably would trust the normality of this data due to what I see in the Q-Q plot (very few large deviations from the normal line).</span>
+<span id="cb67-109"><a href="#cb67-109"></a></span>
+<span id="cb67-110"><a href="#cb67-110"></a>**Now Symptoms**</span>
+<span id="cb67-111"><a href="#cb67-111"></a></span>
+<span id="cb67-114"><a href="#cb67-114"></a><span class="in">```{r}</span></span>
+<span id="cb67-115"><a href="#cb67-115"></a><span class="fu">hist</span>(stress_data<span class="sc">$</span>Symptoms,<span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb67-116"><a href="#cb67-116"></a>psych<span class="sc">::</span><span class="fu">describe</span>(stress_data<span class="sc">$</span>Symptoms)</span>
+<span id="cb67-117"><a href="#cb67-117"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(stress_data<span class="sc">$</span>Symptoms)</span>
+<span id="cb67-118"><a href="#cb67-118"></a><span class="fu">shapiro.test</span>(stress_data<span class="sc">$</span>Symptoms) <span class="co"># see Field (2014), Sec 5.6.1</span></span>
+<span id="cb67-119"><a href="#cb67-119"></a></span>
+<span id="cb67-120"><a href="#cb67-120"></a><span class="in">```</span></span>
+<span id="cb67-121"><a href="#cb67-121"></a></span>
+<span id="cb67-122"><a href="#cb67-122"></a>**Symptoms** does not pass either the eyeball or the Shapiro-Wilkes tests. These data are slightly positively skewed. Let's use bootstrapped standard error of the skew to evaluate whether we have a meaningful deviation:</span>
+<span id="cb67-123"><a href="#cb67-123"></a></span>
+<span id="cb67-126"><a href="#cb67-126"></a><span class="in">```{r}</span></span>
+<span id="cb67-127"><a href="#cb67-127"></a>boot_skew_data <span class="ot">&lt;-</span> resample<span class="sc">::</span><span class="fu">bootstrap</span>(<span class="at">data =</span> stress_data, <span class="at">statistic =</span> psych<span class="sc">::</span> <span class="fu">skew</span>(Stress),<span class="at">R =</span> <span class="dv">10000</span>)</span>
+<span id="cb67-128"><a href="#cb67-128"></a></span>
+<span id="cb67-129"><a href="#cb67-129"></a>psych<span class="sc">::</span><span class="fu">skew</span>(stress_data<span class="sc">$</span>Symptoms)<span class="sc">/</span>boot_skew_data<span class="sc">$</span>stats<span class="sc">$</span>SE</span>
+<span id="cb67-130"><a href="#cb67-130"></a><span class="in">```</span></span>
+<span id="cb67-131"><a href="#cb67-131"></a></span>
+<span id="cb67-132"><a href="#cb67-132"></a>Using the criteria set forth in <span class="co">[</span><span class="ot">Kim (2013)</span><span class="co">](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3591587/)</span>, this data is indeed skewed (<span class="sc">\&gt;</span> 3.29).</span>
+<span id="cb67-133"><a href="#cb67-133"></a></span>
+<span id="cb67-134"><a href="#cb67-134"></a>One way of dealing with non-normal data is by performing a logarithmic transformation (see Field, 5.8). Logarithmic transformations reduce the weight of extreme scores. For example, consider the following vector:</span>
+<span id="cb67-135"><a href="#cb67-135"></a></span>
+<span id="cb67-138"><a href="#cb67-138"></a><span class="in">```{r}</span></span>
+<span id="cb67-139"><a href="#cb67-139"></a><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">100</span>)</span>
+<span id="cb67-140"><a href="#cb67-140"></a><span class="in">```</span></span>
+<span id="cb67-141"><a href="#cb67-141"></a></span>
+<span id="cb67-142"><a href="#cb67-142"></a><span class="in">`100`</span> is setting way out to the extreme of the other scores. Now let's get the <span class="in">`log()`</span> of this sequence:</span>
+<span id="cb67-143"><a href="#cb67-143"></a></span>
+<span id="cb67-146"><a href="#cb67-146"></a><span class="in">```{r}</span></span>
+<span id="cb67-147"><a href="#cb67-147"></a><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">log</span>()</span>
+<span id="cb67-148"><a href="#cb67-148"></a><span class="in">```</span></span>
+<span id="cb67-149"><a href="#cb67-149"></a></span>
+<span id="cb67-150"><a href="#cb67-150"></a>The values become more manageable (i.e., closer) at this rescaling.</span>
+<span id="cb67-151"><a href="#cb67-151"></a></span>
+<span id="cb67-152"><a href="#cb67-152"></a>This has already been performed for this data, **lnSymptoms** is a natural logarithmic transform of **Symptoms**. With your own data, this can be accomplished quite simply in R by using the <span class="in">`log()`</span> as above:</span>
+<span id="cb67-153"><a href="#cb67-153"></a></span>
+<span id="cb67-154"><a href="#cb67-154"></a>**Question 1. Perform a natural log transform of `Symptoms` and `mutate()` it to a new column in your data frame `TransformedData`. Assess `TransformedData` using a qqPlot:**</span>
+<span id="cb67-155"><a href="#cb67-155"></a></span>
+<span id="cb67-158"><a href="#cb67-158"></a><span class="in">```{r}</span></span>
+<span id="cb67-159"><a href="#cb67-159"></a><span class="in">```</span></span>
+<span id="cb67-160"><a href="#cb67-160"></a></span>
+<span id="cb67-161"><a href="#cb67-161"></a><span class="fu">## Plotting the data</span></span>
+<span id="cb67-162"><a href="#cb67-162"></a></span>
+<span id="cb67-163"><a href="#cb67-163"></a>One of the first things that you should do is plot your data. Plotting gives you a sense of what is going on with your data. In fact, **YOU SHOULD NEVER TAKE A TEST RESULT AT FACE VALUE WITHOUT FIRST LOOKING AT YOUR DATA!!** Beware of <span class="co">[</span><span class="ot">Anscombe's quartet</span><span class="co">](https://en.wikipedia.org/wiki/Anscombe%27s_quartet)</span>!</span>
+<span id="cb67-164"><a href="#cb67-164"></a></span>
+<span id="cb67-165"><a href="#cb67-165"></a>To really drive this home, let's look at an example from a function that Jan Vanhove developed as a teaching tool. the function <span class="in">`plot_r()`</span> takes an input correlation coefficient <span class="in">`r`</span> and number of observations <span class="in">`n`</span> and plots 16 very distrinct types of patterns that can be produced. For the sake of not slowing down your machine too much, I'd recommend keeping <span class="in">`n`</span> at less than 200.</span>
+<span id="cb67-166"><a href="#cb67-166"></a></span>
+<span id="cb67-169"><a href="#cb67-169"></a><span class="in">```{r}</span></span>
+<span id="cb67-170"><a href="#cb67-170"></a><span class="fu">source</span>(<span class="st">"http://janhove.github.io/RCode/plot_r.R"</span>)</span>
+<span id="cb67-171"><a href="#cb67-171"></a><span class="fu">plot_r</span>(<span class="at">r =</span> <span class="fl">0.5</span>, <span class="at">n =</span> <span class="dv">50</span>)</span>
+<span id="cb67-172"><a href="#cb67-172"></a><span class="in">```</span></span>
+<span id="cb67-173"><a href="#cb67-173"></a></span>
+<span id="cb67-174"><a href="#cb67-174"></a>Let's plot our data using <span class="in">`ggplot`</span>. In this case we will be creating a scatterplot of our data. This can be accomplished by adding <span class="in">`geom_point()`</span> to our base <span class="in">`ggplot()`</span>. For example:</span>
+<span id="cb67-175"><a href="#cb67-175"></a></span>
+<span id="cb67-178"><a href="#cb67-178"></a><span class="in">```{r}</span></span>
+<span id="cb67-179"><a href="#cb67-179"></a><span class="fu">ggplot</span>(stress_data, <span class="fu">aes</span>(<span class="at">x =</span> Stress, <span class="at">y =</span> lnSymptoms)) <span class="sc">+</span> </span>
+<span id="cb67-180"><a href="#cb67-180"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb67-181"><a href="#cb67-181"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> <span class="co"># turns the plot into something close to APA</span></span>
+<span id="cb67-182"><a href="#cb67-182"></a>  <span class="fu">xlab</span>(<span class="st">"Stress"</span>) <span class="sc">+</span> </span>
+<span id="cb67-183"><a href="#cb67-183"></a>  <span class="fu">ylab</span>(<span class="st">"lnSymptoms"</span>)</span>
+<span id="cb67-184"><a href="#cb67-184"></a><span class="in">```</span></span>
+<span id="cb67-185"><a href="#cb67-185"></a></span>
+<span id="cb67-186"><a href="#cb67-186"></a>**Question 2: create a ggplot scatterplot comparing `lnSymptoms` to `Symptoms` What does the result look like. What about this relationship suggests that performing a logarithmic transform may be kosher**</span>
+<span id="cb67-187"><a href="#cb67-187"></a></span>
+<span id="cb67-188"><a href="#cb67-188"></a><span class="fu">## Covariance and Correlation</span></span>
+<span id="cb67-189"><a href="#cb67-189"></a></span>
+<span id="cb67-190"><a href="#cb67-190"></a>This week's readings offer excellent overviews of **covariance** and **correlation** so I won't go into too much depth here. Briefly, let's make a few connections to ideas that we've already encountered.</span>
+<span id="cb67-191"><a href="#cb67-191"></a></span>
+<span id="cb67-192"><a href="#cb67-192"></a><span class="fu">### Covariance</span></span>
+<span id="cb67-193"><a href="#cb67-193"></a></span>
+<span id="cb67-194"><a href="#cb67-194"></a>Recall that **variance** may be calculated as: &nbsp; $s_{x}^{2}=\frac{\sum \left ( x_{i}-\bar{X} \right )^{2}}{n-1}$</span>
+<span id="cb67-195"><a href="#cb67-195"></a></span>
+<span id="cb67-196"><a href="#cb67-196"></a>Where the numerator is the sum of squared differences from each score to the sample mean, and the denominator is our degrees of freedom.</span>
+<span id="cb67-197"><a href="#cb67-197"></a></span>
+<span id="cb67-198"><a href="#cb67-198"></a>Variance tells us to what degree scores in a particular sample variable deviate from its mean. With this in mind, **covarience** is a statement about the degree to which two sampled variables deviate from their respective means. Consider we have sampled two measures, *X* &amp; *Y* from a population. When addressing the degree to which *X* and *Y* co-vary, we are asking the question: "To what degree and in what direction does *Y* move away from its mean as *X* moves from its mean?"</span>
+<span id="cb67-199"><a href="#cb67-199"></a></span>
+<span id="cb67-200"><a href="#cb67-200"></a>As such, the formula for covariance is simply an extension of the formula for variance that we already know: $$s_{xy}=\frac{\sum \left ( x_{i}-\bar{X} \right )\left ( y_{i}-\bar{Y} \right )}{n-1}$$</span>
+<span id="cb67-201"><a href="#cb67-201"></a></span>
+<span id="cb67-202"><a href="#cb67-202"></a>So, in order to calculate the covariance we need the calculate the sum of the cross-product of the sum of squared differences of our two variables (*X* = **Stress**; *Y* = **lnSymptoms**) and divide that number by of degrees of freedom. We could go about the business of calculating this "by hand":</span>
+<span id="cb67-203"><a href="#cb67-203"></a></span>
+<span id="cb67-204"><a href="#cb67-204"></a><span class="in">```{r covariance and correlation by hand}</span></span>
+<span id="cb67-205"><a href="#cb67-205"></a></span>
+<span id="cb67-206"><a href="#cb67-206"></a><span class="co"># N = number of rows in data frame</span></span>
+<span id="cb67-207"><a href="#cb67-207"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(stress_data)</span>
+<span id="cb67-208"><a href="#cb67-208"></a></span>
+<span id="cb67-209"><a href="#cb67-209"></a></span>
+<span id="cb67-210"><a href="#cb67-210"></a><span class="co">#mean Stress:</span></span>
+<span id="cb67-211"><a href="#cb67-211"></a>meanX <span class="ot">&lt;-</span> <span class="fu">mean</span>(stress_data<span class="sc">$</span>Stress)</span>
+<span id="cb67-212"><a href="#cb67-212"></a></span>
+<span id="cb67-213"><a href="#cb67-213"></a><span class="co"># and same for lnSymptoms:</span></span>
+<span id="cb67-214"><a href="#cb67-214"></a>meanY <span class="ot">&lt;-</span> <span class="fu">mean</span>(stress_data<span class="sc">$</span>lnSymptoms)</span>
+<span id="cb67-215"><a href="#cb67-215"></a></span>
+<span id="cb67-216"><a href="#cb67-216"></a><span class="co"># plug these values into our equation:</span></span>
+<span id="cb67-217"><a href="#cb67-217"></a></span>
+<span id="cb67-218"><a href="#cb67-218"></a><span class="co"># sum of cross product</span></span>
+<span id="cb67-219"><a href="#cb67-219"></a>numerator <span class="ot">&lt;-</span> <span class="fu">sum</span>((stress_data<span class="sc">$</span>Stress<span class="sc">-</span>meanX)<span class="sc">*</span>(stress_data<span class="sc">$</span>lnSymptoms<span class="sc">-</span>meanY))</span>
+<span id="cb67-220"><a href="#cb67-220"></a></span>
+<span id="cb67-221"><a href="#cb67-221"></a><span class="co"># degrees of freedom</span></span>
+<span id="cb67-222"><a href="#cb67-222"></a>denominator <span class="ot">&lt;-</span> (N<span class="dv">-1</span>)</span>
+<span id="cb67-223"><a href="#cb67-223"></a></span>
+<span id="cb67-224"><a href="#cb67-224"></a><span class="co"># covariance:</span></span>
+<span id="cb67-225"><a href="#cb67-225"></a>covXY <span class="ot">&lt;-</span> (numerator<span class="sc">/</span>denominator) <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span>
+<span id="cb67-226"><a href="#cb67-226"></a><span class="in">```</span></span>
+<span id="cb67-227"><a href="#cb67-227"></a></span>
+<span id="cb67-228"><a href="#cb67-228"></a>The covariance of Stress and lnSymptoms is **1.336**.</span>
+<span id="cb67-229"><a href="#cb67-229"></a></span>
+<span id="cb67-230"><a href="#cb67-230"></a>**Question 3: Alternatively, covariance may be calculated quickly in `R` using the `cov()` function:** Remember, once you open up a function, you can press the TAB key to get prompts about what to put in each argument.</span>
+<span id="cb67-231"><a href="#cb67-231"></a></span>
+<span id="cb67-234"><a href="#cb67-234"></a><span class="in">```{r}</span></span>
+<span id="cb67-235"><a href="#cb67-235"></a><span class="co"># use cov() to calculate the covariance between stress_data$Stress and stress_data$lnSymptoms</span></span>
+<span id="cb67-236"><a href="#cb67-236"></a><span class="in">```</span></span>
+<span id="cb67-237"><a href="#cb67-237"></a></span>
+<span id="cb67-238"><a href="#cb67-238"></a><span class="fu">### Correlation</span></span>
+<span id="cb67-239"><a href="#cb67-239"></a></span>
+<span id="cb67-240"><a href="#cb67-240"></a>It may be tempting to calculate our **covariance** and stop there, but covariance is a limited measure. What I mean by this is that covarience indexes the degree of relationship between two specific variables, but doesn't allow for more general comparison across situations. For a quick example, lets multiply both **Stress** and **lnSymptoms** by two. Let's use <span class="in">`mutate()`</span> to create a these <span class="in">`by2`</span> columns:</span>
+<span id="cb67-241"><a href="#cb67-241"></a></span>
+<span id="cb67-242"><a href="#cb67-242"></a><span class="in">```{r warning = FALSE}</span></span>
+<span id="cb67-243"><a href="#cb67-243"></a>stress_data <span class="ot">&lt;-</span> stress_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="st">"Stress_by2"</span> <span class="ot">=</span> Stress <span class="sc">*</span> <span class="dv">2</span>,</span>
+<span id="cb67-244"><a href="#cb67-244"></a>                                    <span class="st">"lnSymptoms_by2"</span> <span class="ot">=</span> lnSymptoms <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb67-245"><a href="#cb67-245"></a>                                    )</span>
+<span id="cb67-246"><a href="#cb67-246"></a>stress_data</span>
+<span id="cb67-247"><a href="#cb67-247"></a><span class="in">```</span></span>
+<span id="cb67-248"><a href="#cb67-248"></a></span>
+<span id="cb67-249"><a href="#cb67-249"></a>We would like to think that multiplying every value by a constant should have no effect on our general interpretation of the relationships in our data as the overall relationship in our data remain the same. To help make this apparent, let's imagine that I weigh 200 lbs (yea... imagine) and my wife weighs 100 lbs. So I weigh twice as much as my wife. Over the next year we both go on a binge fest and both double our respective weights---I'm now 400 lbs and my wife is 200 lbs. I still weigh twice as much as my wife. Coincidentally the fact that relationships remain unchanged in spite of these sorts of mathematical transformations is why we could perform the natural logarithmic transform earlier and not feel too guilty.</span>
+<span id="cb67-250"><a href="#cb67-250"></a></span>
+<span id="cb67-251"><a href="#cb67-251"></a>**Question 4: Well what happens when I get the covariance of my new `_by2` data?:**</span>
+<span id="cb67-252"><a href="#cb67-252"></a></span>
+<span id="cb67-253"><a href="#cb67-253"></a><span class="in">```{r warning = FALSE}</span></span>
+<span id="cb67-254"><a href="#cb67-254"></a><span class="co"># use cov() to calculate the covariance between stress_data$Stress_by2 and stress_data$lnSymptoms_by2</span></span>
+<span id="cb67-255"><a href="#cb67-255"></a><span class="in">```</span></span>
+<span id="cb67-256"><a href="#cb67-256"></a></span>
+<span id="cb67-257"><a href="#cb67-257"></a>**The covariance changes!!** This is a problem, and is why, in order to usefully convey this data we report the **correlation**. The correlation is a *standardized* covariance.</span>
+<span id="cb67-258"><a href="#cb67-258"></a></span>
+<span id="cb67-259"><a href="#cb67-259"></a>The unit of measurement we'll use for standardization is the standard deviation. We can standardize the covariance in one of two ways:</span>
+<span id="cb67-260"><a href="#cb67-260"></a></span>
+<span id="cb67-261"><a href="#cb67-261"></a><span class="in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Standardize our variables (into z-scores) and then calculate the covariance: $$r_{xy}=\frac{\sum z_{x}z_{y}}{n-1}$$</span></span>
+<span id="cb67-262"><a href="#cb67-262"></a></span>
+<span id="cb67-263"><a href="#cb67-263"></a><span class="in">```{r warning = FALSE}</span></span>
+<span id="cb67-264"><a href="#cb67-264"></a>zX <span class="ot">&lt;-</span> <span class="fu">scale</span>(stress_data<span class="sc">$</span>Stress)</span>
+<span id="cb67-265"><a href="#cb67-265"></a>zY <span class="ot">&lt;-</span> <span class="fu">scale</span>(stress_data<span class="sc">$</span>lnSymptoms)</span>
+<span id="cb67-266"><a href="#cb67-266"></a></span>
+<span id="cb67-267"><a href="#cb67-267"></a>corXY <span class="ot">&lt;-</span> (<span class="fu">sum</span>(zX<span class="sc">*</span>zY) <span class="sc">/</span> (N<span class="dv">-1</span>))</span>
+<span id="cb67-268"><a href="#cb67-268"></a></span>
+<span id="cb67-269"><a href="#cb67-269"></a>corXY</span>
+<span id="cb67-270"><a href="#cb67-270"></a><span class="in">```</span></span>
+<span id="cb67-271"><a href="#cb67-271"></a></span>
+<span id="cb67-272"><a href="#cb67-272"></a>or</span>
+<span id="cb67-273"><a href="#cb67-273"></a></span>
+<span id="cb67-274"><a href="#cb67-274"></a><span class="in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Calculate the covariance and standardize it (by dividing by the product of the standard deviation): $$r_{xy}=\frac{\sum \left ( x_{i}-\bar{X} \right )\left ( y_{i}-\bar{Y} \right )}{(n-1)s_{x}s_{y}}$$</span></span>
+<span id="cb67-275"><a href="#cb67-275"></a></span>
+<span id="cb67-276"><a href="#cb67-276"></a><span class="in">```{r warning = FALSE}</span></span>
+<span id="cb67-277"><a href="#cb67-277"></a></span>
+<span id="cb67-278"><a href="#cb67-278"></a><span class="co"># get SD of X and Y:</span></span>
+<span id="cb67-279"><a href="#cb67-279"></a>sdX <span class="ot">&lt;-</span> <span class="fu">sd</span>(stress_data<span class="sc">$</span>Stress)</span>
+<span id="cb67-280"><a href="#cb67-280"></a>sdY <span class="ot">&lt;-</span> <span class="fu">sd</span>(stress_data<span class="sc">$</span>lnSymptoms)</span>
+<span id="cb67-281"><a href="#cb67-281"></a></span>
+<span id="cb67-282"><a href="#cb67-282"></a><span class="co"># using the covXY calculated above:</span></span>
+<span id="cb67-283"><a href="#cb67-283"></a>covXY <span class="sc">/</span> (sdX<span class="sc">*</span>sdY)</span>
+<span id="cb67-284"><a href="#cb67-284"></a><span class="in">```</span></span>
+<span id="cb67-285"><a href="#cb67-285"></a></span>
+<span id="cb67-286"><a href="#cb67-286"></a>Again, in <span class="in">`R`</span> we don't need to do this by hand, there are in fact several functions. A more comprehensive look can be found in **Field 6.5.3**. The simplest function is <span class="in">`cor()`</span>, with outputs the correlation as a single value. However, I prefer to use <span class="in">`cor.test()`</span> as it tends to provide the most immediately useful data. You can input your data into this function in two ways:</span>
+<span id="cb67-287"><a href="#cb67-287"></a></span>
+<span id="cb67-288"><a href="#cb67-288"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb67-289"><a href="#cb67-289"></a><span class="fu">cor.test</span>(stress_data<span class="sc">$</span>Stress,stress_data<span class="sc">$</span>lnSymptoms)</span>
+<span id="cb67-290"><a href="#cb67-290"></a><span class="in">```</span></span>
+<span id="cb67-291"><a href="#cb67-291"></a></span>
+<span id="cb67-292"><a href="#cb67-292"></a>or</span>
+<span id="cb67-293"><a href="#cb67-293"></a></span>
+<span id="cb67-294"><a href="#cb67-294"></a><span class="in">```{r warning = FALSE}</span></span>
+<span id="cb67-295"><a href="#cb67-295"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data)</span>
+<span id="cb67-296"><a href="#cb67-296"></a><span class="in">```</span></span>
+<span id="cb67-297"><a href="#cb67-297"></a></span>
+<span id="cb67-298"><a href="#cb67-298"></a>I prefer the latter as it uses formula notation which is the sort of notation we used for t-tests and will continue to use for regression and <span class="in">`ANOVA`</span>. Finally, if you don't want all the additional gobble-dee-gook from <span class="in">`cor.test`</span> you can simply attach <span class="in">`$estimate`</span> to the end of either the function or object like so:</span>
+<span id="cb67-299"><a href="#cb67-299"></a></span>
+<span id="cb67-300"><a href="#cb67-300"></a><span class="in">```{r warning = FALSE}</span></span>
+<span id="cb67-301"><a href="#cb67-301"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data)<span class="sc">$</span>estimate</span>
+<span id="cb67-302"><a href="#cb67-302"></a><span class="in">```</span></span>
+<span id="cb67-303"><a href="#cb67-303"></a></span>
+<span id="cb67-304"><a href="#cb67-304"></a>How did I know that I could do this you ask? To get a quick list of things that you can pull from the attributes, try the <span class="in">`attributes()`</span> function. It gives you a list of names that you can call using the <span class="in">`$`</span> operator.</span>
+<span id="cb67-305"><a href="#cb67-305"></a></span>
+<span id="cb67-308"><a href="#cb67-308"></a><span class="in">```{r}</span></span>
+<span id="cb67-309"><a href="#cb67-309"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data) <span class="sc">%&gt;%</span> <span class="fu">attributes</span>()</span>
+<span id="cb67-310"><a href="#cb67-310"></a><span class="in">```</span></span>
+<span id="cb67-311"><a href="#cb67-311"></a></span>
+<span id="cb67-312"><a href="#cb67-312"></a>**Question 5** save the <span class="in">`cor.test()`</span> output of the correlation between <span class="in">`Stress`</span> and <span class="in">`lnSymptoms`</span> as an object <span class="in">`corOut`</span>. Submit <span class="in">`corOut`</span> to the <span class="in">`attributes()`</span> function. Grab the <span class="in">`p.value`</span> and <span class="in">`estimate`</span>:</span>
+<span id="cb67-313"><a href="#cb67-313"></a></span>
+<span id="cb67-316"><a href="#cb67-316"></a><span class="in">```{r}</span></span>
+<span id="cb67-317"><a href="#cb67-317"></a><span class="co"># using $ grab the p.value and estimate from corOut</span></span>
+<span id="cb67-318"><a href="#cb67-318"></a></span>
+<span id="cb67-319"><a href="#cb67-319"></a><span class="in">```</span></span>
+<span id="cb67-320"><a href="#cb67-320"></a></span>
+<span id="cb67-321"><a href="#cb67-321"></a>Our correlation is expressed in terms of the **Pearson's product-moment correlation coefficient** (or $r$, for short). Here $r$ = .529.</span>
+<span id="cb67-322"><a href="#cb67-322"></a></span>
+<span id="cb67-323"><a href="#cb67-323"></a>**Question 6** Rerun the <span class="in">`cor.test`</span> (no need to get the attributes this time) using the problematic <span class="in">`by_2`</span> columns. What do you find relative to the last test?</span>
+<span id="cb67-324"><a href="#cb67-324"></a></span>
+<span id="cb67-327"><a href="#cb67-327"></a><span class="in">```{r}</span></span>
+<span id="cb67-328"><a href="#cb67-328"></a><span class="co"># calculate the correlation of the "_by2" data:</span></span>
+<span id="cb67-329"><a href="#cb67-329"></a></span>
+<span id="cb67-330"><a href="#cb67-330"></a><span class="in">```</span></span>
+<span id="cb67-331"><a href="#cb67-331"></a></span>
+<span id="cb67-332"><a href="#cb67-332"></a><span class="fu">## adjusting Pearsons's $r$ by hand</span></span>
+<span id="cb67-333"><a href="#cb67-333"></a></span>
+<span id="cb67-334"><a href="#cb67-334"></a>Note that when our sample size is small (N<span class="sc">\&lt;</span>30) we may need to adjust $r$. This is because the sampling distribution of $r$ is not normally distributed, most especially when you have strong correlations. Don't believe me? Let's run a simulation, this time assuming a sample size of only 20 people.</span>
+<span id="cb67-335"><a href="#cb67-335"></a></span>
+<span id="cb67-338"><a href="#cb67-338"></a><span class="in">```{r}</span></span>
+<span id="cb67-339"><a href="#cb67-339"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Symptoms <span class="sc">+</span> Stress, <span class="at">data =</span> stress_data)</span>
+<span id="cb67-340"><a href="#cb67-340"></a><span class="in">```</span></span>
+<span id="cb67-341"><a href="#cb67-341"></a></span>
+<span id="cb67-344"><a href="#cb67-344"></a><span class="in">```{r}</span></span>
+<span id="cb67-345"><a href="#cb67-345"></a>r_distribution <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">simulation =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-346"><a href="#cb67-346"></a>  <span class="fu">group_by</span>(simulation) <span class="sc">%&gt;%</span></span>
+<span id="cb67-347"><a href="#cb67-347"></a>  <span class="fu">mutate</span>(<span class="at">r_value =</span> <span class="fu">cor.test</span>(<span class="sc">~</span>Symptoms<span class="sc">+</span>Stress, <span class="at">data =</span> <span class="fu">sample_n</span>(stress_data,<span class="at">size =</span> <span class="dv">20</span>, <span class="at">replace =</span> T))<span class="sc">$</span>estimate   )</span>
+<span id="cb67-348"><a href="#cb67-348"></a><span class="fu">hist</span>(r_distribution<span class="sc">$</span>r_value)</span>
+<span id="cb67-349"><a href="#cb67-349"></a><span class="in">```</span></span>
+<span id="cb67-350"><a href="#cb67-350"></a></span>
+<span id="cb67-351"><a href="#cb67-351"></a>**Question 7** Try re-running the above code, this time with sample sizes of 100 instead of 20. What do you see?</span>
+<span id="cb67-352"><a href="#cb67-352"></a></span>
+<span id="cb67-355"><a href="#cb67-355"></a><span class="in">```{r}</span></span>
+<span id="cb67-356"><a href="#cb67-356"></a><span class="co"># rerun the simulation</span></span>
+<span id="cb67-357"><a href="#cb67-357"></a><span class="in">```</span></span>
+<span id="cb67-358"><a href="#cb67-358"></a></span>
+<span id="cb67-359"><a href="#cb67-359"></a>The formula for this adjustment is: &nbsp;&nbsp;&nbsp; $r_{adj}=\sqrt{1-\frac{\sum \left (1-r^2 \right )\left ( n-1 \right )}{n-2}}$</span>
+<span id="cb67-360"><a href="#cb67-360"></a></span>
+<span id="cb67-361"><a href="#cb67-361"></a>For now, we can calculate this by hand, but later we will see that it will be provided by another function (or at least its squared value will be).</span>
+<span id="cb67-362"><a href="#cb67-362"></a></span>
+<span id="cb67-363"><a href="#cb67-363"></a><span class="in">```{r warning = FALSE}</span></span>
+<span id="cb67-364"><a href="#cb67-364"></a></span>
+<span id="cb67-365"><a href="#cb67-365"></a><span class="co"># Pearson's r:</span></span>
+<span id="cb67-366"><a href="#cb67-366"></a>rXY <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data)<span class="sc">$</span>estimate</span>
+<span id="cb67-367"><a href="#cb67-367"></a></span>
+<span id="cb67-368"><a href="#cb67-368"></a><span class="co"># adjusted r:</span></span>
+<span id="cb67-369"><a href="#cb67-369"></a>rXYadj <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>((<span class="dv">1</span><span class="sc">-</span>rXY<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(N<span class="dv">-1</span>)<span class="sc">/</span>(N<span class="dv">-2</span>))) <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span>
+<span id="cb67-370"><a href="#cb67-370"></a><span class="in">```</span></span>
+<span id="cb67-371"><a href="#cb67-371"></a></span>
+<span id="cb67-372"><a href="#cb67-372"></a><span class="fu">## Significance testing $r$</span></span>
+<span id="cb67-373"><a href="#cb67-373"></a></span>
+<span id="cb67-374"><a href="#cb67-374"></a>It may be useful to perform tests of significance on $r$. Typically, there are two types of tests that we perform:</span>
+<span id="cb67-375"><a href="#cb67-375"></a></span>
+<span id="cb67-376"><a href="#cb67-376"></a><span class="ss">1.  </span>a test of the observed $r$ to $r=0$, and</span>
+<span id="cb67-377"><a href="#cb67-377"></a><span class="ss">2.  </span>a test of the difference between two $r$ values.</span>
+<span id="cb67-378"><a href="#cb67-378"></a></span>
+<span id="cb67-379"><a href="#cb67-379"></a>Regarding the first case, to test that the observed correlation is different from 0 we can use the aforementioned <span class="in">`cor.test()`</span>:</span>
+<span id="cb67-380"><a href="#cb67-380"></a></span>
+<span id="cb67-383"><a href="#cb67-383"></a><span class="in">```{r}</span></span>
+<span id="cb67-384"><a href="#cb67-384"></a><span class="fu">cor.test</span>(<span class="sc">~</span>Stress<span class="sc">+</span>lnSymptoms,<span class="at">data =</span> stress_data)</span>
+<span id="cb67-385"><a href="#cb67-385"></a><span class="in">```</span></span>
+<span id="cb67-386"><a href="#cb67-386"></a></span>
+<span id="cb67-387"><a href="#cb67-387"></a>In the second case, the difference between $r$ values, we may invoke the <span class="in">`paired.r()`</span> function from the <span class="in">`psych`</span> package. For example lets assume that we know that the correlation between GRE scores and GPA for one group of 100 students is <span class="in">`0.50`</span> and for another group of 80 students it's <span class="in">`0.61`</span>. We ask is the correlation for the second group significantly higher than the first. To test the difference between these two independent $r$s" we</span>
+<span id="cb67-388"><a href="#cb67-388"></a></span>
+<span id="cb67-391"><a href="#cb67-391"></a><span class="in">```{r}</span></span>
+<span id="cb67-392"><a href="#cb67-392"></a>psych<span class="sc">::</span><span class="fu">paired.r</span>(<span class="at">xy =</span> .<span class="dv">50</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">xz =</span> .<span class="dv">61</span>, <span class="at">n2 =</span> <span class="dv">80</span>,<span class="at">twotailed =</span> T)</span>
+<span id="cb67-393"><a href="#cb67-393"></a><span class="in">```</span></span>
+<span id="cb67-394"><a href="#cb67-394"></a></span>
+<span id="cb67-395"><a href="#cb67-395"></a>where:</span>
+<span id="cb67-396"><a href="#cb67-396"></a></span>
+<span id="cb67-397"><a href="#cb67-397"></a><span class="ss">-   </span><span class="in">`xy`</span>: the correlation in the first data set</span>
+<span id="cb67-398"><a href="#cb67-398"></a><span class="ss">-   </span><span class="in">`xz`</span>: the correlation in the second data set</span>
+<span id="cb67-399"><a href="#cb67-399"></a><span class="ss">-   </span><span class="in">`n`</span>: the number of samples in the first data set</span>
+<span id="cb67-400"><a href="#cb67-400"></a><span class="ss">-   </span><span class="in">`n2`</span>: the number of samples in the second data set -<span class="in">`twotailed`</span>: run a two-tailed test, <span class="in">`TRUE`</span> or <span class="in">`FALSE`</span></span>
+<span id="cb67-401"><a href="#cb67-401"></a></span>
+<span id="cb67-402"><a href="#cb67-402"></a>This output tells us the resulting Fisher $z$ score and corresponding probability.</span>
+<span id="cb67-403"><a href="#cb67-403"></a></span>
+<span id="cb67-404"><a href="#cb67-404"></a>**Question 8**: For example assume that you sample 35 men and find a correlation of .42 between Symptoms and Stress. In another sample of 42 women you find a correlation of .51. Perform a test to see if those two correlations are different from one another.</span>
+<span id="cb67-405"><a href="#cb67-405"></a></span>
+<span id="cb67-408"><a href="#cb67-408"></a><span class="in">```{r}</span></span>
+<span id="cb67-409"><a href="#cb67-409"></a><span class="co"># use psych::paired.r to answer Question #8</span></span>
+<span id="cb67-410"><a href="#cb67-410"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

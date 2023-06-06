@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - afex is for ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">afex is for ANOVA</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link active">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#getting-the-data" id="toc-getting-the-data" class="nav-link active" data-scroll-target="#getting-the-data">Getting the data:</a></li>
+  <li><a href="#hey-participant-you-got-any-id" id="toc-hey-participant-you-got-any-id" class="nav-link" data-scroll-target="#hey-participant-you-got-any-id">Hey participant! You got any ID?!?</a></li>
+  <li><a href="#running-an-anova-the-aov_ez-way" id="toc-running-an-anova-the-aov_ez-way" class="nav-link" data-scroll-target="#running-an-anova-the-aov_ez-way">running an ANOVA, the <code>aov_ez</code> way</a></li>
+  <li>
+<a href="#running-your-assumptions-tests-using-performance" id="toc-running-your-assumptions-tests-using-performance" class="nav-link" data-scroll-target="#running-your-assumptions-tests-using-performance">Running your assumptions tests using performance</a>
+  <ul class="collapse">
+<li><a href="#normality-using-the-performance-package" id="toc-normality-using-the-performance-package" class="nav-link" data-scroll-target="#normality-using-the-performance-package">normality using the performance package</a></li>
+  <li><a href="#normality-bootstrapped" id="toc-normality-bootstrapped" class="nav-link" data-scroll-target="#normality-bootstrapped">normality bootstrapped</a></li>
+  <li><a href="#homogeneity-assumption-using-performance" id="toc-homogeneity-assumption-using-performance" class="nav-link" data-scroll-target="#homogeneity-assumption-using-performance">homogeneity assumption using performance</a></li>
+  </ul>
+</li>
+  <li><a href="#doing-more-with-afex" id="toc-doing-more-with-afex" class="nav-link" data-scroll-target="#doing-more-with-afex">doing more with <code>afex</code></a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">afex is for ANOVA</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,afex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So far, we have been running our ANOVA using either <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> or <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code>, which is just a wrapper for <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. This has been done for pedagogical reasons: (1) to re-enforce that ANOVA is just a variant of linear regression and (2) having you write out the formula gives you a better idea of how the model is specified (i.e.&nbsp;Scores as a function of Lecture, Presentation, and their interaction = <code>Scores~Lecture + Presentation + Lecture * Presentation</code>).</p>
+<p>That said, there are cleaner tools for running simple ANOVA in R. For example, <code>afex</code> offers several clean and intuitive alternatives for running ANOVA. In fact, <code>afex</code> might be preferable, as the output gives you most everything you need to report your ANOVA, without using <code><a href="https://strengejacke.github.io/sjstats/reference/anova_stats.html">sjstats::anova_stats()</a></code>, and as we enter into Repeated Measures ANOVA, <code>afex</code> methods make the necessary corrections for you if your data violates certain assumptions needed for ANOVA.</p>
+<p>Indeed, while I have been stressing the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> method to re-enforce that ANOVA and linear regression are two sides of the same coin, when performing a simple ANOVA I hardly ever use this method (<em>you can hate me now / but I won’t stop now</em>). I typically use <code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">afex::aov_ez()</a></code> unless I am planning some very complex comparisons or analyses related to my model. With <code>aov_ez()</code> we can easily specify the ANOVA model by inputting our parameters into the function. In what follows we will take a look at how to run ANOVA using two <code>afex</code> methods as an alternative to <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. This will become critical, as when we get to running Repeated Measures ANOVA, I do not recommend using <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> (not that its wrong, only that it requires extra steps for assumption checks)</p>
+<section id="getting-the-data" class="level2"><h2 class="anchored" data-anchor-id="getting-the-data">Getting the data:</h2>
+<p>To start, let’s grab (and clean) some familiar data (this is from the Factorial ANOVA walkthrough). Note that I am cleaning up the numeric coding to reflect my factor levels</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Sec13-5.dat"</span>, <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 135 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+dbl (4): Task, Smkgrp, score, covar
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dataset<span class="sc">$</span>Task <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Task, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Pattern Recognition"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Cognitive"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Driving Simulation"</span>) </span>
+<span id="cb4-2"><a href="#cb4-2"></a>dataset<span class="sc">$</span>Smkgrp <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Smkgrp, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Nonsmoking"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Delayed"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Active"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="hey-participant-you-got-any-id" class="level2"><h2 class="anchored" data-anchor-id="hey-participant-you-got-any-id">Hey participant! You got any ID?!?</h2>
+<p>When I introduced ANOVA a few weeks back, you may remember that I stressed that it would be a good idea to ensure that your dataset contained a column that assigned each unique <strong>participant</strong> a unique <strong>ID</strong>. For the first few weeks of ANOVA, this was simply good practice, but ultimately not necessary. This is no longer the case. Moving forward, when running ANOVA that has a repeated measures / within-subjects design, you need to have a participant ID column, in order for <code>R</code> to match the appropriate data. That is if Johnny is has four scores in the data set (e.g., Johnny’s score on Monday, Tues, Thurs, and Fri) <code>R</code> uses the participant ID to match each of those scores with one another. This is because, when running a repeated measures design, the ANOVA needs to take into account within-subjects correlations of scores (i.e., Johnny’s scores are more tightly correlated with one another than they are with Jenny’s scores).</p>
+<p>For now, we are just introducing <code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">afex::aov_ez()</a></code> so we’ll simply create a column that assigns each row / score a unique participant ID. This would be consistent with the between-subjects designs we have encountered up to this point. However, note that if <code>R</code> finds instances where <code>PartID</code> are the same it will assume that data comes from the same participant (i.e., we have a within-subjects or repeated measures design). For our purposes now, this is easily solved by simply creating a column that runs from 1 to the number of observations in our data. After that we can proceed with the ANOVA.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># create a PartID column and number, every score comes from a unique person</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>dataset<span class="sc">$</span>PartID <span class="ot">&lt;-</span> <span class="fu">seq_along</span>(dataset<span class="sc">$</span>score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="running-an-anova-the-aov_ez-way" class="level2"><h2 class="anchored" data-anchor-id="running-an-anova-the-aov_ez-way">running an ANOVA, the <code>aov_ez</code> way</h2>
+<p>Below I spell out how to run an ANOVA using <code>aov_ez()</code>. Please note which need to be input as strings (i.e., have quotations around them), and which are input as objects or numbers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>aov_model <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="at">id =</span> <span class="st">"PartID"</span>, <span class="co"># column identifying your participants</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="at">dv =</span> <span class="st">"score"</span>, <span class="co"># column that contains your dv</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="at">data =</span> dataset, <span class="co"># your data frame</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="at">between =</span> <span class="fu">c</span>(<span class="st">"Smkgrp"</span>,<span class="st">"Task"</span>) <span class="co"># column(s) containing your between IV(s)</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="co"># within = NULL, # column(s) containing your within IV(s)</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="co"># covariate = NULL, # column(s) containing your covariate(s)</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="co"># observed = NULL,</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="co"># fun_aggregate = NULL, </span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="co"># type = 3, # type of Sum of Squares</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  <span class="co"># factorize = TRUE, </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="co"># check_contrasts = TRUE,</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>  <span class="co"># return = "afex_aov",</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>  <span class="co"># anova_table = list(es = "pes")</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>  ) <span class="co"># adding partial eta squared effect size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Contrasts set to contr.sum for the following variables: Smkgrp, Task</code></pre>
+</div>
+</div>
+<p>Note that above I specified every argument in the function. This was not necessary (indeed if you use Rstudio to help you fill this in, you’ll notice that many of the defaults are NULL). Briefly running down each of the arguments for <code>aov_ez()</code>:</p>
+<ul>
+<li>
+<code>id</code>: column identifying your participants</li>
+<li>
+<code>dv</code>: column that contains your dv</li>
+<li>
+<code>data</code>: your data frame</li>
+<li>
+<code>between</code>: column(s) containing your between IV(s)</li>
+<li>
+<code>within</code>: column(s) containing your within IV(s)</li>
+<li>
+<code>covariate</code>: column(s) containing your covariate(s) for ANCOVA</li>
+<li>
+<code>observed</code>: column of any variables are observed (i.e, measured) but not experimentally manipulated (typically NULL)</li>
+<li>
+<code>fun_aggregate</code>: function for aggregating the data before running the ANOVA, defaults to mean</li>
+<li>
+<code>type</code>: type of Sum of Squares, see the Field text on when to change this value</li>
+<li>
+<code>factorize</code>: should between subject factors be factorized before running the analysis. This is useful if your data is still numerically coded. This needs to be set to false if you have a covariate</li>
+<li>
+<code>check_contrasts</code>: should between-subject factors be checked and (if necessary) changed to be “contr.sum”, usually leave this as <code>TRUE</code>
+</li>
+<li>
+<code>return</code>: what kind of object do you want to return? e.g., <code>lm</code>, <code>aov</code>. I would recommend using the default <code>afex_aov</code>
+</li>
+<li>
+<code>anova_table</code>: list of further arguments passed to function producing the ANOVA table including what kind of effect size (partial v. general eta squared)? and any corrections (e.g., bonferroni).</li>
+</ul>
+<p>For now I want to comment on a few of the choices I made. For <code>type</code> I selected Type III sum of squares. This is typically the type that we will choose in ANOVA, however see Field, Ch 11, “Jane Superbrain 11.1” for an excellent overview of the different Types of Sum of Squares and when to use different values. Also you’ll notice I made a few adjustments in my <code>anova_table</code> output via <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>. These were to get the table to output partial eta-squared <code>es="pes"</code> for my effect size.</p>
+<p>Let’s take at the <code>aov_model</code> we just created:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>aov_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type 3 tests)
+
+Response: score
+       Effect     df    MSE          F  ges p.value
+1      Smkgrp 2, 126 107.83   8.41 *** .118   &lt;.001
+2        Task 2, 126 107.83 132.90 *** .678   &lt;.001
+3 Smkgrp:Task 4, 126 107.83     2.94 * .085    .023
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>We can also get a more comprehensive look at our ANOVA table by:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>aov_model <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type 3 tests)
+
+Response: score
+            num Df den Df    MSE        F     ges    Pr(&gt;F)    
+Smkgrp           2    126 107.83   8.4098 0.11777  0.000373 ***
+Task             2    126 107.83 132.8954 0.67840 &lt; 2.2e-16 ***
+Smkgrp:Task      4    126 107.83   2.9430 0.08545  0.022972 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>(This second way will factor more in our discussions of repeated measures ANOVA)</p>
+<p>The output contains (from left to right) the effect tested, our degrees of freedom, the mean square error, F-value, partial eta squared (effect size) and p-value.</p>
+<p>Looking at the attributes of our model by typing <code>attributes(aov_model)</code> reveals that there are several <code>$names</code> associated with our <code>aov_model</code>. Each of these names change the format of the output of the model (“anova_table”, “aov”, “Anova”, “lm”) or let us peek back at the “data” in either <code>$long</code> or <code>$wide</code> format. For example, try running each of the following lines separately to see the output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>aov_model<span class="sc">$</span>anova_table</span>
+<span id="cb12-2"><a href="#cb12-2"></a>aov_model<span class="sc">$</span>Anova</span>
+<span id="cb12-3"><a href="#cb12-3"></a>aov_model<span class="sc">$</span>lm</span>
+<span id="cb12-4"><a href="#cb12-4"></a>aov_model<span class="sc">$</span>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From these options:</p>
+<p>I personally prefer <code>$anova_table</code>. As we’ll see when running repeated-measures / within-subjects ANOVA, <code>$anova_table</code> does an extra bit of work that will be useful to us.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>aov_model<span class="sc">$</span>anova_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type 3 tests)
+
+Response: score
+            num Df den Df    MSE        F     ges    Pr(&gt;F)    
+Smkgrp           2    126 107.83   8.4098 0.11777  0.000373 ***
+Task             2    126 107.83 132.8954 0.67840 &lt; 2.2e-16 ***
+Smkgrp:Task      4    126 107.83   2.9430 0.08545  0.022972 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section><section id="running-your-assumptions-tests-using-performance" class="level2"><h2 class="anchored" data-anchor-id="running-your-assumptions-tests-using-performance">Running your assumptions tests using performance</h2>
+<p>In the past I would have spend time showing you how to extract residuals from the <code>afex</code> ANOVA in order to run you assumption checks. That said, since I’ve discovered the <code>performance</code> library earlier this year, I’m loving it more and more for handling these checks.</p>
+<section id="normality-using-the-performance-package" class="level3"><h3 class="anchored" data-anchor-id="normality-using-the-performance-package">normality using the performance package</h3>
+<p>In this case we can run a check of the normality assumption by taking our model performing the following steps</p>
+<section id="visualization-plots" class="level4"><h4 class="anchored" data-anchor-id="visualization-plots">visualization plots</h4>
+<p>Using <code>performance</code> We can produce two visualization plots to help us. First we can produce a desity plot (like a histogram) comparing the distribution of residuals to an ideal normal. This can be accomplished as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12_1-afex_ANOVA_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Second we can produce a QQ plot using a similar call, but specify <code>type="qq"</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="do">## QQ</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">type =</span> <span class="st">"qq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12_1-afex_ANOVA_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="shapiro-wilkes" class="level4"><h4 class="anchored" data-anchor-id="shapiro-wilkes">Shapiro-Wilkes</h4>
+<p>Considering both plots don’t look great, we can follow-up with a Shapiro Wilkes test. Same basic call, but instead of sending to a plot, we just print the output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># run norm check, must send to print</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Non-normality of residuals detected (p &lt; .001).</code></pre>
+</div>
+</div>
+</section></section><section id="normality-bootstrapped" class="level3"><h3 class="anchored" data-anchor-id="normality-bootstrapped">normality bootstrapped</h3>
+<p>If we want to use the bootstrap method from my custom code, we can manually grab the residuals of our <code>aov_model</code> and send it to our function. To get the residuals we would need to type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">resid</span>(aov_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From here we can submit these residuals to the appropriate methods for visual inspection and testing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># skew / kurtosis check:</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/PSYC7014/master/custom_functions/skew_kurtosis_z.R"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="fu">resid</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">skew_kurtosis_z</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       values crit_vals
+skew_z  -0.48      3.29
+kurt_z   2.93      3.29</code></pre>
+</div>
+</div>
+</section><section id="homogeneity-assumption-using-performance" class="level3"><h3 class="anchored" data-anchor-id="homogeneity-assumption-using-performance">homogeneity assumption using performance</h3>
+<p>I’m also loving <code>performance</code> since it doesn’t require us to rewrite the model for homogeneity checks (in years past this was a necessary step if using <code>afex</code> for ANOVA)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(performance)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_homogeneity</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Variances differ between groups (Levene's Test, p = 0.000).</code></pre>
+</div>
+</div>
+</section></section><section id="doing-more-with-afex" class="level2"><h2 class="anchored" data-anchor-id="doing-more-with-afex">doing more with <code>afex</code>
+</h2>
+<p>The <code>afex</code> package can be used for much more that simple running ANOVA. For example it’s got its own plotting functions and can even be used for multi-level modeling (although I typically on use it for quick and dirty modeling). Much of this is outside the scope of this class, but if you have time I certainly recommend you check out <a href="https://github.com/singmann/afex">https://github.com/singmann/afex</a>.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">---</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="an">title:</span><span class="co"> "afex is for ANOVA"</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="co">---</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="in">```{r}</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,afex)</span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="in">```</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a></span>
+<span id="cb24-11"><a href="#cb24-11"></a>So far, we have been running our ANOVA using either <span class="in">`lm()`</span> or <span class="in">`aov()`</span>, which is just a wrapper for <span class="in">`lm()`</span>. This has been done for pedagogical reasons: (1) to re-enforce that ANOVA is just a variant of linear regression and (2) having you write out the formula gives you a better idea of how the model is specified (i.e. Scores as a function of Lecture, Presentation, and their interaction = <span class="in">`Scores~Lecture + Presentation + Lecture * Presentation`</span>).</span>
+<span id="cb24-12"><a href="#cb24-12"></a></span>
+<span id="cb24-13"><a href="#cb24-13"></a>That said, there are cleaner tools for running simple ANOVA in R. For example, <span class="in">`afex`</span> offers several clean and intuitive alternatives for running ANOVA. In fact, <span class="in">`afex`</span> might be preferable, as the output gives you most everything you need to report your ANOVA, without using <span class="in">`sjstats::anova_stats()`</span>, and as we enter into Repeated Measures ANOVA, <span class="in">`afex`</span> methods make the necessary corrections for you if your data violates certain assumptions needed for ANOVA.</span>
+<span id="cb24-14"><a href="#cb24-14"></a></span>
+<span id="cb24-15"><a href="#cb24-15"></a>Indeed, while I have been stressing the <span class="in">`lm()`</span> method to re-enforce that ANOVA and linear regression are two sides of the same coin, when performing a simple ANOVA I hardly ever use this method (*you can hate me now / but I won't stop now*). I typically use <span class="in">`afex::aov_ez()`</span> unless I am planning some very complex comparisons or analyses related to my model. With <span class="in">`aov_ez()`</span> we can easily specify the ANOVA model by inputting our parameters into the function. In what follows we will take a look at how to run ANOVA using two <span class="in">`afex`</span> methods as an alternative to <span class="in">`lm()`</span>. This will become critical, as when we get to running Repeated Measures ANOVA, I do not recommend using <span class="in">`lm()`</span> (not that its wrong, only that it requires extra steps for assumption checks)</span>
+<span id="cb24-16"><a href="#cb24-16"></a></span>
+<span id="cb24-17"><a href="#cb24-17"></a><span class="fu">## Getting the data:</span></span>
+<span id="cb24-18"><a href="#cb24-18"></a></span>
+<span id="cb24-19"><a href="#cb24-19"></a>To start, let's grab (and clean) some familiar data (this is from the Factorial ANOVA walkthrough). Note that I am cleaning up the numeric coding to reflect my factor levels</span>
+<span id="cb24-20"><a href="#cb24-20"></a></span>
+<span id="cb24-23"><a href="#cb24-23"></a><span class="in">```{r}</span></span>
+<span id="cb24-24"><a href="#cb24-24"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Sec13-5.dat"</span>, <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-25"><a href="#cb24-25"></a>dataset<span class="sc">$</span>Task <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Task, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Pattern Recognition"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Cognitive"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Driving Simulation"</span>) </span>
+<span id="cb24-26"><a href="#cb24-26"></a>dataset<span class="sc">$</span>Smkgrp <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Smkgrp, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Nonsmoking"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Delayed"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Active"</span>)</span>
+<span id="cb24-27"><a href="#cb24-27"></a><span class="in">```</span></span>
+<span id="cb24-28"><a href="#cb24-28"></a></span>
+<span id="cb24-29"><a href="#cb24-29"></a><span class="fu">## Hey participant! You got any ID?!?</span></span>
+<span id="cb24-30"><a href="#cb24-30"></a></span>
+<span id="cb24-31"><a href="#cb24-31"></a>When I introduced ANOVA a few weeks back, you may remember that I stressed that it would be a good idea to ensure that your dataset contained a column that assigned each unique **participant** a unique **ID**. For the first few weeks of ANOVA, this was simply good practice, but ultimately not necessary. This is no longer the case. Moving forward, when running ANOVA that has a repeated measures / within-subjects design, you need to have a participant ID column, in order for <span class="in">`R`</span> to match the appropriate data. That is if Johnny is has four scores in the data set (e.g., Johnny's score on Monday, Tues, Thurs, and Fri) <span class="in">`R`</span> uses the participant ID to match each of those scores with one another. This is because, when running a repeated measures design, the ANOVA needs to take into account within-subjects correlations of scores (i.e., Johnny's scores are more tightly correlated with one another than they are with Jenny's scores).</span>
+<span id="cb24-32"><a href="#cb24-32"></a></span>
+<span id="cb24-33"><a href="#cb24-33"></a>For now, we are just introducing <span class="in">`afex::aov_ez()`</span> so we'll simply create a column that assigns each row / score a unique participant ID. This would be consistent with the between-subjects designs we have encountered up to this point. However, note that if <span class="in">`R`</span> finds instances where <span class="in">`PartID`</span> are the same it will assume that data comes from the same participant (i.e., we have a within-subjects or repeated measures design). For our purposes now, this is easily solved by simply creating a column that runs from 1 to the number of observations in our data. After that we can proceed with the ANOVA.</span>
+<span id="cb24-34"><a href="#cb24-34"></a></span>
+<span id="cb24-37"><a href="#cb24-37"></a><span class="in">```{r}</span></span>
+<span id="cb24-38"><a href="#cb24-38"></a><span class="co"># create a PartID column and number, every score comes from a unique person</span></span>
+<span id="cb24-39"><a href="#cb24-39"></a>dataset<span class="sc">$</span>PartID <span class="ot">&lt;-</span> <span class="fu">seq_along</span>(dataset<span class="sc">$</span>score)</span>
+<span id="cb24-40"><a href="#cb24-40"></a><span class="in">```</span></span>
+<span id="cb24-41"><a href="#cb24-41"></a></span>
+<span id="cb24-42"><a href="#cb24-42"></a><span class="fu">## running an ANOVA, the `aov_ez` way</span></span>
+<span id="cb24-43"><a href="#cb24-43"></a></span>
+<span id="cb24-44"><a href="#cb24-44"></a>Below I spell out how to run an ANOVA using <span class="in">`aov_ez()`</span>. Please note which need to be input as strings (i.e., have quotations around them), and which are input as objects or numbers.</span>
+<span id="cb24-45"><a href="#cb24-45"></a></span>
+<span id="cb24-48"><a href="#cb24-48"></a><span class="in">```{r}</span></span>
+<span id="cb24-49"><a href="#cb24-49"></a>aov_model <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(</span>
+<span id="cb24-50"><a href="#cb24-50"></a>  <span class="at">id =</span> <span class="st">"PartID"</span>, <span class="co"># column identifying your participants</span></span>
+<span id="cb24-51"><a href="#cb24-51"></a>  <span class="at">dv =</span> <span class="st">"score"</span>, <span class="co"># column that contains your dv</span></span>
+<span id="cb24-52"><a href="#cb24-52"></a>  <span class="at">data =</span> dataset, <span class="co"># your data frame</span></span>
+<span id="cb24-53"><a href="#cb24-53"></a>  <span class="at">between =</span> <span class="fu">c</span>(<span class="st">"Smkgrp"</span>,<span class="st">"Task"</span>) <span class="co"># column(s) containing your between IV(s)</span></span>
+<span id="cb24-54"><a href="#cb24-54"></a>  <span class="co"># within = NULL, # column(s) containing your within IV(s)</span></span>
+<span id="cb24-55"><a href="#cb24-55"></a>  <span class="co"># covariate = NULL, # column(s) containing your covariate(s)</span></span>
+<span id="cb24-56"><a href="#cb24-56"></a>  <span class="co"># observed = NULL,</span></span>
+<span id="cb24-57"><a href="#cb24-57"></a>  <span class="co"># fun_aggregate = NULL, </span></span>
+<span id="cb24-58"><a href="#cb24-58"></a>  <span class="co"># type = 3, # type of Sum of Squares</span></span>
+<span id="cb24-59"><a href="#cb24-59"></a>  <span class="co"># factorize = TRUE, </span></span>
+<span id="cb24-60"><a href="#cb24-60"></a>  <span class="co"># check_contrasts = TRUE,</span></span>
+<span id="cb24-61"><a href="#cb24-61"></a>  <span class="co"># return = "afex_aov",</span></span>
+<span id="cb24-62"><a href="#cb24-62"></a>  <span class="co"># anova_table = list(es = "pes")</span></span>
+<span id="cb24-63"><a href="#cb24-63"></a>  ) <span class="co"># adding partial eta squared effect size</span></span>
+<span id="cb24-64"><a href="#cb24-64"></a><span class="in">```</span></span>
+<span id="cb24-65"><a href="#cb24-65"></a></span>
+<span id="cb24-66"><a href="#cb24-66"></a>Note that above I specified every argument in the function. This was not necessary (indeed if you use Rstudio to help you fill this in, you'll notice that many of the defaults are NULL). Briefly running down each of the arguments for <span class="in">`aov_ez()`</span>:</span>
+<span id="cb24-67"><a href="#cb24-67"></a></span>
+<span id="cb24-68"><a href="#cb24-68"></a><span class="ss">- </span><span class="in">`id`</span>:  column identifying your participants</span>
+<span id="cb24-69"><a href="#cb24-69"></a><span class="ss">- </span><span class="in">`dv`</span>:  column that contains your dv</span>
+<span id="cb24-70"><a href="#cb24-70"></a><span class="ss">- </span><span class="in">`data`</span>:  your data frame</span>
+<span id="cb24-71"><a href="#cb24-71"></a><span class="ss">- </span><span class="in">`between`</span>:  column(s) containing your between IV(s)</span>
+<span id="cb24-72"><a href="#cb24-72"></a><span class="ss">- </span><span class="in">`within`</span>:  column(s) containing your within IV(s)</span>
+<span id="cb24-73"><a href="#cb24-73"></a><span class="ss">- </span><span class="in">`covariate`</span>:  column(s) containing your covariate(s) for ANCOVA</span>
+<span id="cb24-74"><a href="#cb24-74"></a><span class="ss">- </span><span class="in">`observed`</span>:  column of any variables are observed (i.e, measured) but not experimentally manipulated (typically NULL)</span>
+<span id="cb24-75"><a href="#cb24-75"></a><span class="ss">- </span><span class="in">`fun_aggregate`</span>:  function for aggregating the data before running the ANOVA, defaults to mean</span>
+<span id="cb24-76"><a href="#cb24-76"></a><span class="ss">- </span><span class="in">`type`</span>:  type of Sum of Squares, see the Field text on when to change this value</span>
+<span id="cb24-77"><a href="#cb24-77"></a><span class="ss">- </span><span class="in">`factorize`</span>:  should between subject factors be factorized before running the analysis. This is useful if your data is still numerically coded. This needs to be set to false if you have a covariate</span>
+<span id="cb24-78"><a href="#cb24-78"></a><span class="ss">- </span><span class="in">`check_contrasts`</span>:  should between-subject factors be checked and (if necessary) changed to be "contr.sum", usually leave this as <span class="in">`TRUE`</span></span>
+<span id="cb24-79"><a href="#cb24-79"></a><span class="ss">- </span><span class="in">`return`</span>:  what kind of object do you want to return? e.g., <span class="in">`lm`</span>, <span class="in">`aov`</span>. I would recommend using the default <span class="in">`afex_aov`</span> </span>
+<span id="cb24-80"><a href="#cb24-80"></a><span class="ss">- </span><span class="in">`anova_table`</span>:  list of further arguments passed to function producing the ANOVA table including what kind of effect size (partial v. general eta squared)? and any corrections (e.g., bonferroni).</span>
+<span id="cb24-81"><a href="#cb24-81"></a></span>
+<span id="cb24-82"><a href="#cb24-82"></a>For now I want to comment on a few of the choices I made. For <span class="in">`type`</span> I selected Type III sum of squares. This is typically the type that we will choose in ANOVA, however see Field, Ch 11, "Jane Superbrain 11.1" for an excellent overview of the different Types of Sum of Squares and when to use different values. Also you'll notice I made a few adjustments in my <span class="in">`anova_table`</span> output via <span class="in">`list()`</span>. These were to get the table to output partial eta-squared <span class="in">`es="pes"`</span> for my effect size.</span>
+<span id="cb24-83"><a href="#cb24-83"></a></span>
+<span id="cb24-84"><a href="#cb24-84"></a>Let's take at the <span class="in">`aov_model`</span> we just created:</span>
+<span id="cb24-85"><a href="#cb24-85"></a></span>
+<span id="cb24-88"><a href="#cb24-88"></a><span class="in">```{r}</span></span>
+<span id="cb24-89"><a href="#cb24-89"></a>aov_model</span>
+<span id="cb24-90"><a href="#cb24-90"></a><span class="in">```</span></span>
+<span id="cb24-91"><a href="#cb24-91"></a>We can also get a more comprehensive look at our ANOVA table by:</span>
+<span id="cb24-92"><a href="#cb24-92"></a></span>
+<span id="cb24-95"><a href="#cb24-95"></a><span class="in">```{r}</span></span>
+<span id="cb24-96"><a href="#cb24-96"></a>aov_model <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb24-97"><a href="#cb24-97"></a><span class="in">```</span></span>
+<span id="cb24-98"><a href="#cb24-98"></a>(This second way will factor more in our discussions of repeated measures ANOVA)</span>
+<span id="cb24-99"><a href="#cb24-99"></a></span>
+<span id="cb24-100"><a href="#cb24-100"></a>The output contains (from left to right) the effect tested, our degrees of freedom, the mean square error, F-value, partial eta squared (effect size) and p-value.</span>
+<span id="cb24-101"><a href="#cb24-101"></a></span>
+<span id="cb24-102"><a href="#cb24-102"></a>Looking at the attributes of our model by typing <span class="in">`attributes(aov_model)`</span> reveals that there are several <span class="in">`$names`</span> associated with our <span class="in">`aov_model`</span>. Each of these names change the format of the output of the model ("anova_table", "aov", "Anova", "lm") or let us peek back at the "data" in either <span class="in">`$long`</span> or <span class="in">`$wide`</span> format. For example, try running each of the following lines separately to see the output.</span>
+<span id="cb24-103"><a href="#cb24-103"></a></span>
+<span id="cb24-104"><a href="#cb24-104"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb24-105"><a href="#cb24-105"></a>aov_model<span class="sc">$</span>anova_table</span>
+<span id="cb24-106"><a href="#cb24-106"></a>aov_model<span class="sc">$</span>Anova</span>
+<span id="cb24-107"><a href="#cb24-107"></a>aov_model<span class="sc">$</span>lm</span>
+<span id="cb24-108"><a href="#cb24-108"></a>aov_model<span class="sc">$</span>data</span>
+<span id="cb24-109"><a href="#cb24-109"></a><span class="in">```</span></span>
+<span id="cb24-110"><a href="#cb24-110"></a></span>
+<span id="cb24-111"><a href="#cb24-111"></a>From these options:</span>
+<span id="cb24-112"><a href="#cb24-112"></a></span>
+<span id="cb24-113"><a href="#cb24-113"></a>I personally prefer <span class="in">`$anova_table`</span>. As we'll see when running repeated-measures / within-subjects ANOVA, <span class="in">`$anova_table`</span> does an extra bit of work that will be useful to us. </span>
+<span id="cb24-114"><a href="#cb24-114"></a></span>
+<span id="cb24-117"><a href="#cb24-117"></a><span class="in">```{r}</span></span>
+<span id="cb24-118"><a href="#cb24-118"></a>aov_model<span class="sc">$</span>anova_table</span>
+<span id="cb24-119"><a href="#cb24-119"></a><span class="in">```</span></span>
+<span id="cb24-120"><a href="#cb24-120"></a></span>
+<span id="cb24-121"><a href="#cb24-121"></a><span class="fu">## Running your assumptions tests using performance</span></span>
+<span id="cb24-122"><a href="#cb24-122"></a></span>
+<span id="cb24-123"><a href="#cb24-123"></a>In the past I would have spend time showing you how to extract residuals from the <span class="in">`afex`</span> ANOVA in order to run you assumption checks. That said, since I've discovered the <span class="in">`performance`</span> library earlier this year, I'm loving it more and more for handling these checks.</span>
+<span id="cb24-124"><a href="#cb24-124"></a></span>
+<span id="cb24-125"><a href="#cb24-125"></a><span class="fu">### normality using the performance package</span></span>
+<span id="cb24-126"><a href="#cb24-126"></a></span>
+<span id="cb24-127"><a href="#cb24-127"></a>In this case we can run a check of the normality assumption by taking our model performing the following steps</span>
+<span id="cb24-128"><a href="#cb24-128"></a></span>
+<span id="cb24-129"><a href="#cb24-129"></a><span class="fu">#### visualization plots</span></span>
+<span id="cb24-130"><a href="#cb24-130"></a></span>
+<span id="cb24-131"><a href="#cb24-131"></a>Using <span class="in">`performance`</span> We can produce two visualization plots to help us. First we can produce a desity plot (like a histogram) comparing the distribution of residuals to an ideal normal. This can be accomplished as follows:</span>
+<span id="cb24-132"><a href="#cb24-132"></a></span>
+<span id="cb24-135"><a href="#cb24-135"></a><span class="in">```{r}</span></span>
+<span id="cb24-136"><a href="#cb24-136"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span>
+<span id="cb24-137"><a href="#cb24-137"></a><span class="in">```</span></span>
+<span id="cb24-138"><a href="#cb24-138"></a></span>
+<span id="cb24-139"><a href="#cb24-139"></a>Second we can produce a QQ plot using a similar call, but specify <span class="in">`type="qq"`</span>:</span>
+<span id="cb24-140"><a href="#cb24-140"></a></span>
+<span id="cb24-143"><a href="#cb24-143"></a><span class="in">```{r}</span></span>
+<span id="cb24-144"><a href="#cb24-144"></a><span class="do">## QQ</span></span>
+<span id="cb24-145"><a href="#cb24-145"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">type =</span> <span class="st">"qq"</span>)</span>
+<span id="cb24-146"><a href="#cb24-146"></a><span class="in">```</span></span>
+<span id="cb24-147"><a href="#cb24-147"></a></span>
+<span id="cb24-148"><a href="#cb24-148"></a><span class="fu">#### Shapiro-Wilkes</span></span>
+<span id="cb24-149"><a href="#cb24-149"></a></span>
+<span id="cb24-150"><a href="#cb24-150"></a>Considering both plots don't look great, we can follow-up with a Shapiro Wilkes test. Same basic call, but instead of sending to a plot, we just print the output:</span>
+<span id="cb24-151"><a href="#cb24-151"></a></span>
+<span id="cb24-154"><a href="#cb24-154"></a><span class="in">```{r}</span></span>
+<span id="cb24-155"><a href="#cb24-155"></a><span class="co"># run norm check, must send to print</span></span>
+<span id="cb24-156"><a href="#cb24-156"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span>
+<span id="cb24-157"><a href="#cb24-157"></a><span class="in">```</span></span>
+<span id="cb24-158"><a href="#cb24-158"></a></span>
+<span id="cb24-159"><a href="#cb24-159"></a><span class="fu">### normality bootstrapped</span></span>
+<span id="cb24-160"><a href="#cb24-160"></a></span>
+<span id="cb24-161"><a href="#cb24-161"></a>If we want to use the bootstrap method from my custom code, we can manually grab the residuals of our <span class="in">`aov_model`</span> and send it to our function. To get the residuals we would need to type:</span>
+<span id="cb24-162"><a href="#cb24-162"></a></span>
+<span id="cb24-163"><a href="#cb24-163"></a><span class="in">```{r eval=FALSE, include=TRUE}</span></span>
+<span id="cb24-164"><a href="#cb24-164"></a><span class="fu">resid</span>(aov_model)</span>
+<span id="cb24-165"><a href="#cb24-165"></a><span class="in">```</span></span>
+<span id="cb24-166"><a href="#cb24-166"></a></span>
+<span id="cb24-167"><a href="#cb24-167"></a>From here we can submit these residuals to the appropriate methods for visual inspection and testing:</span>
+<span id="cb24-168"><a href="#cb24-168"></a></span>
+<span id="cb24-171"><a href="#cb24-171"></a><span class="in">```{r}</span></span>
+<span id="cb24-172"><a href="#cb24-172"></a><span class="co"># skew / kurtosis check:</span></span>
+<span id="cb24-173"><a href="#cb24-173"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/PSYC7014/master/custom_functions/skew_kurtosis_z.R"</span>)</span>
+<span id="cb24-174"><a href="#cb24-174"></a></span>
+<span id="cb24-175"><a href="#cb24-175"></a><span class="fu">resid</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">skew_kurtosis_z</span>()</span>
+<span id="cb24-176"><a href="#cb24-176"></a><span class="in">```</span></span>
+<span id="cb24-177"><a href="#cb24-177"></a><span class="fu">### homogeneity assumption using performance</span></span>
+<span id="cb24-178"><a href="#cb24-178"></a></span>
+<span id="cb24-179"><a href="#cb24-179"></a>I'm also loving <span class="in">`performance`</span> since it doesn't require us to rewrite the model for homogeneity checks (in years past this was a necessary step if using <span class="in">`afex`</span> for ANOVA)</span>
+<span id="cb24-180"><a href="#cb24-180"></a></span>
+<span id="cb24-183"><a href="#cb24-183"></a><span class="in">```{r}</span></span>
+<span id="cb24-184"><a href="#cb24-184"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(performance)</span>
+<span id="cb24-185"><a href="#cb24-185"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_homogeneity</span>()</span>
+<span id="cb24-186"><a href="#cb24-186"></a><span class="in">```</span></span>
+<span id="cb24-187"><a href="#cb24-187"></a></span>
+<span id="cb24-188"><a href="#cb24-188"></a></span>
+<span id="cb24-189"><a href="#cb24-189"></a><span class="fu">## doing more with `afex`</span></span>
+<span id="cb24-190"><a href="#cb24-190"></a></span>
+<span id="cb24-191"><a href="#cb24-191"></a>The <span class="in">`afex`</span> package can be used for much more that simple running ANOVA. For example it's got its own plotting functions and can even be used for multi-level modeling (although I typically on use it for quick and dirty modeling). Much of this is outside the scope of this class, but if you have time I certainly recommend you check out <span class="co">[</span><span class="ot">https://github.com/singmann/afex</span><span class="co">](https://github.com/singmann/afex)</span>.</span>
+<span id="cb24-192"><a href="#cb24-192"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -39,7 +39,7 @@ Looking at the above we have a 2 (Grade: 5th, 8th) × 2 (Presentation: Computer,
 Let's load in this data:
 
 ```{r}
-higherEx1 <- read_delim("http://tehrandav.is/psyc7014/practice_datasets/ANOVA5_higherEx1.txt", delim = "\t")
+higherEx1 <- read_delim("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx1.txt", delim = "\t")
 show(higherEx1)
 ```
 
@@ -162,7 +162,7 @@ From here I would deal with the follow-ups as we did in our 2×3 example from th
 Let's load in a data set that is a little more complicated:
 
 ```{r}
-higherEx2 <- read_delim("http://tehrandav.is/psyc7014/practice_datasets/ANOVA5_higherEx2.txt", delim = "\t")
+higherEx2 <- read_delim("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx2.txt", delim = "\t")
 ```
 
 ### plotting the data
@@ -317,7 +317,7 @@ With this in mind, an example write-up:
 Finally let's take a look at some data that is all over the place:
 
 ```{r}
-higherEx3 <- read_delim("http://tehrandav.is/psyc7014/practice_datasets/ANOVA5_higherEx3.txt", delim = "\t")
+higherEx3 <- read_delim("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx3.txt", delim = "\t")
 
 ```
 

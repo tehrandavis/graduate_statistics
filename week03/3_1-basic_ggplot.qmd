@@ -16,7 +16,7 @@ If you recall, `tidyverse` contains a family of over 70 packages. `ggplot2` is o
 
 ```{r}
 library(readr)
-aggression_data <- read_table("https://tehrandav.is/psyc7014/practice_datasets/aggression.dat", col_names = FALSE)
+aggression_data <- read_table("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/aggression.dat", col_names = FALSE)
 ```
 
 Let's also clean up, or wrangle, the data, in this case naming the header and fixing the `gender` variable:

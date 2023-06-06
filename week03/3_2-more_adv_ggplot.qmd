@@ -35,7 +35,7 @@ the dataset `parent_sleep_data` contains the following variables:
 
 ```{r load in libraries and data}
 pacman::p_load(tidyverse, cowplot)
-parent_sleep_data <- read_csv("https://tehrandav.is/psyc7014/practice_datasets/parent_sleep.csv")
+parent_sleep_data <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/parent_sleep.csv")
 ```
 
 * You might imagine, this data hits a little close to the heart ;)

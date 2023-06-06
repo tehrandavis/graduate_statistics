@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Factorial ANOVA - The omnibus ANOVA and Main effects</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Factorial ANOVA - The omnibus ANOVA and Main effects</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link active">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TLDR;</a>
+  <ul class="collapse">
+<li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul>
+</li>
+  <li><a href="#analysis-of-variance-factorial-anova" id="toc-analysis-of-variance-factorial-anova" class="nav-link" data-scroll-target="#analysis-of-variance-factorial-anova">Analysis of Variance: Factorial ANOVA</a></li>
+  <li><a href="#main-effect-main-effect-and-interactions-oh-my" id="toc-main-effect-main-effect-and-interactions-oh-my" class="nav-link" data-scroll-target="#main-effect-main-effect-and-interactions-oh-my">Main effect, main effect, and interactions… oh my!</a></li>
+  <li>
+<a href="#example-1-a-22-anova" id="toc-example-1-a-22-anova" class="nav-link" data-scroll-target="#example-1-a-22-anova">Example 1: a 2×2 ANOVA</a>
+  <ul class="collapse">
+<li><a href="#ninja-up" id="toc-ninja-up" class="nav-link" data-scroll-target="#ninja-up">Ninja-up</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#making-sense-of-plots" id="toc-making-sense-of-plots" class="nav-link" data-scroll-target="#making-sense-of-plots">Making sense of plots</a>
+  <ul class="collapse">
+<li><a href="#interaction-plots" id="toc-interaction-plots" class="nav-link" data-scroll-target="#interaction-plots">Interaction plots</a></li>
+  <li><a href="#plotting-main-effects" id="toc-plotting-main-effects" class="nav-link" data-scroll-target="#plotting-main-effects">Plotting main effects</a></li>
+  </ul>
+</li>
+  <li><a href="#running-the-anova-lm-method" id="toc-running-the-anova-lm-method" class="nav-link" data-scroll-target="#running-the-anova-lm-method">Running the ANOVA <code>lm()</code> method</a></li>
+  <li>
+<a href="#assumption-testing" id="toc-assumption-testing" class="nav-link" data-scroll-target="#assumption-testing">Assumption testing</a>
+  <ul class="collapse">
+<li><a href="#visual-inspection" id="toc-visual-inspection" class="nav-link" data-scroll-target="#visual-inspection">visual inspection</a></li>
+  <li><a href="#test-for-assessing-normality" id="toc-test-for-assessing-normality" class="nav-link" data-scroll-target="#test-for-assessing-normality">test for assessing normality</a></li>
+  <li><a href="#test-for-assessing-homogeneity-of-variance" id="toc-test-for-assessing-homogeneity-of-variance" class="nav-link" data-scroll-target="#test-for-assessing-homogeneity-of-variance">test for assessing homogeneity of variance</a></li>
+  </ul>
+</li>
+  <li><a href="#getting-cell-means-and-sd" id="toc-getting-cell-means-and-sd" class="nav-link" data-scroll-target="#getting-cell-means-and-sd">Getting cell means and sd</a></li>
+  <li><a href="#getting-marginal-means-for-main-effects" id="toc-getting-marginal-means-for-main-effects" class="nav-link" data-scroll-target="#getting-marginal-means-for-main-effects">getting marginal means for main effects</a></li>
+  <li><a href="#testing-the-anova" id="toc-testing-the-anova" class="nav-link" data-scroll-target="#testing-the-anova">Testing the ANOVA</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Factorial ANOVA - The omnibus ANOVA and Main effects</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>Note that this week’s vignette assumes you have the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans,</span>
+<span id="cb1-2"><a href="#cb1-2"></a>               ez, <span class="co"># get info on design of ANOVA, also can run ezANOVA</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>               Rmisc, <span class="co"># getting summary data</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>               cowplot, </span>
+<span id="cb1-5"><a href="#cb1-5"></a>               tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="tldr" class="level2"><h2 class="anchored" data-anchor-id="tldr">TLDR;</h2>
+<p>To run a factorial ANOVA we can use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> method we are familiar with. In this walkthrough we only focus on what can be done with the omnibus ANOVA assuming no interactions:</p>
+<p>The general steps for running a factorial ANOVA:</p>
+<ol type="1">
+<li>construct your ANOVA model using <code>lm</code>
+</li>
+<li>use the residuals of the model to test for normality and heteroscadicity</li>
+<li>test the model, checking for the presence of an interaction, and any main effects.</li>
+<li>If no interaction proceed with any necessary post hoc analyses on the main effects.</li>
+</ol>
+<p>This week we will be focusing on Steps 1, 2, and 4, i.e., we won’t be formally looking at potential interaction effects. However, as we will see next week, analyzing and interpreting interaction effects is a critical part of factorial ANOVA.</p>
+<p>For now, I want you focused on building intuitions about dealing with main effects.</p>
+<section id="example" class="level3"><h3 class="anchored" data-anchor-id="example">Example</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Preliminaries</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="do">## load in data</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/factorial_ANOVA_dataset_no_interactions.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 36 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Lecture, Presentation
+dbl (2): Score, PartID
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="do">## in this case, fixing IV columns...</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>dataset<span class="sc">$</span>Lecture <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Lecture, <span class="st">"1"</span><span class="ot">=</span><span class="st">"Phys"</span>,<span class="st">"2"</span><span class="ot">=</span><span class="st">"Soc"</span>,<span class="st">"3"</span><span class="ot">=</span><span class="st">"Hist"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>dataset<span class="sc">$</span>Presentation <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Presentation, <span class="st">"1"</span><span class="ot">=</span><span class="st">"Comp"</span>,<span class="st">"2"</span><span class="ot">=</span><span class="st">"Stand"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># Step 1: create the additive ANOVA model</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># note that this is not a full factorial model, but what we are focusing on this week:</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture <span class="sc">+</span> Presentation,<span class="at">data =</span> dataset)</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co"># Step 2a: test normalty / heteroscadicity using model visually, best to run from your console:</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(aov_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Step 2b: check normality and homogeneity assumptions using tests:</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># test residuals of model for normality:</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>aov_model <span class="sc">%&gt;%</span> <span class="fu">resid</span>() <span class="sc">%&gt;%</span> <span class="fu">shapiro.test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  .
+W = 0.98464, p-value = 0.8873</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># test homogeneity:</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># note we are using a test from the performance package due to (somewhat) artificial limitations of the instruction method (see below)</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_homogeneity</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Variances differ between groups (Bartlett Test, p = 0.040).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Step 3: check the F-ratio for significance</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># note I'm only slecting columns from the anova table that are relevant to us:</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>aov_model <span class="sc">%&gt;%</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"term"</span>,<span class="st">"df"</span>,<span class="st">"statistic"</span>,<span class="st">"p.value"</span>,<span class="st">"partial.etasq"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term         | df | statistic | p.value | partial.etasq
+-------------------------------------------------------
+Lecture      |  2 |     3.779 |   0.034 |         0.191
+Presentation |  1 |    22.670 |  &lt; .001 |         0.415
+Residuals    | 32 |           |         |              </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Step 4: Post hoc analyses on main effects</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">emmeans</span>(aov_model, <span class="at">specs =</span> pairwise<span class="sc">~</span>Lecture, <span class="at">adjust=</span><span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ Lecture emmean   SE df lower.CL upper.CL
+ Phys      40.0 2.14 32     35.6     44.4
+ Soc       31.8 2.14 32     27.5     36.2
+ Hist      34.5 2.14 32     30.1     38.9
+
+Results are averaged over the levels of: Presentation 
+Confidence level used: 0.95 
+
+$contrasts
+ contrast    estimate   SE df t.ratio p.value
+ Phys - Soc      8.17 3.03 32   2.696  0.0291
+ Phys - Hist     5.50 3.03 32   1.815  0.1807
+ Soc - Hist     -2.67 3.03 32  -0.880  0.6565
+
+Results are averaged over the levels of: Presentation 
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">emmeans</span>(aov_model, <span class="at">specs =</span> pairwise<span class="sc">~</span>Presentation, <span class="at">adjust=</span><span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ Presentation emmean   SE df lower.CL upper.CL
+ Comp           41.3 1.75 32     37.8     44.9
+ Stand          29.6 1.75 32     26.0     33.1
+
+Results are averaged over the levels of: Lecture 
+Confidence level used: 0.95 
+
+$contrasts
+ contrast     estimate   SE df t.ratio p.value
+ Comp - Stand     11.8 2.47 32   4.761  &lt;.0001
+
+Results are averaged over the levels of: Lecture </code></pre>
+</div>
+</div>
+</section></section><section id="analysis-of-variance-factorial-anova" class="level2"><h2 class="anchored" data-anchor-id="analysis-of-variance-factorial-anova">Analysis of Variance: Factorial ANOVA</h2>
+<p>In this week’s vignette we are simply building upon the previous two weeks coverage of One-way ANOVA and multiple comparisons. I’m assuming you’ve taken a look at all of the assigned material related to these topics. This week we up the ante by introducing more complex ANOVA models, aka factorial design. As we discussed in class, a factorial ANOVA design is required (well, for the purposes of this course) when your experimental design has more than one IV. Our examples this week focus on situations involving two IVs, however, what is said here applies for more complex designs involving 3, 4, 5, or however many IV’s you want to consider. Well, maybe not however many… as we we’ll see this week and the next, the more IVs you include in your analysis, the more difficult interpreting your results becomes. This is especially true if you have interaction effects running all over the place. But perhaps I’m getting a little bit ahead of myself. Let’s just way I wouldn’t recommend including more than 3 or 4 IVs in your ANOVA at a single time and for now leave it at that.</p>
+</section><section id="main-effect-main-effect-and-interactions-oh-my" class="level2"><h2 class="anchored" data-anchor-id="main-effect-main-effect-and-interactions-oh-my">Main effect, main effect, and interactions… oh my!</h2>
+<p>When we are performing a factorial ANOVA we are performing a series of independent comparisons of means as a function of our IVs (this assumption of independence is one of the reasons that we don’t typically concern ourselves with adjusting our p-values in the omnibus factorial ANOVA). For any given number of IVs, or <strong>factors</strong>, we test for a <strong>main effect</strong> of that factor on the data—that is “do means grouped by levels within that factor differ from one another <strong>not taking into consideration the influence of any of the other IVs”</strong>. Our tests for interactions <strong>do</strong> consider the possibility that our factors influence one another—that is,”do the differences that are observed in one factor depend on the intersecting level of another?”</p>
+<p>For the sake of simplicity, we will start with a 2 × 2 ANOVA and work our way up by extending the data set. Given our naming conventions, saying that we have a 2 × 2 ANOVA indicates that there are 2 IVs and each has 2 levels. A 2 × 3 ANOVA indicates that there are 2 IVs, and that the first IV has 2 levels and the second has 3 levels; a 2 × 3 × 4 ANOVA indicates that we have 3 IVs, the first has 2 levels, the second has 3 levels, and the third has 4 levels.</p>
+<p>Our example ANOVA comes from a study testing the effects of smoking on performance in different types of <em>putatively</em> (perhaps I’m showing my theoretical biases here) information processing tasks.</p>
+<p>There were 3 types of cognitive tasks:</p>
+<ul>
+<li><p><strong>1</strong> = a pattern recognition task where participants had to locate a target on a screen;</p></li>
+<li><p><strong>2</strong> = a cognitive task where participants had to read a passage and recall bits of information from that passage later;</p></li>
+<li><p><strong>3</strong> = participants performed a driving simulation.</p></li>
+</ul>
+<p>Additionally, 3 groups of smokers were recruited</p>
+<ul>
+<li><p><strong>1</strong> = those that were actively smoking prior to and during the experiment;</p></li>
+<li><p><strong>2 =</strong> those that were smokers, but did not smoke 3 hours prior to the experiment;</p></li>
+<li><p><strong>3 =</strong> non-smokers.</p></li>
+</ul>
+<p>As this is a between design, each participants only completed one of the cognitive tasks.</p>
+</section><section id="example-1-a-22-anova" class="level2"><h2 class="anchored" data-anchor-id="example-1-a-22-anova">Example 1: a 2×2 ANOVA</h2>
+<p>Let’s grab the data from from the web. Note that for now we are going to ignore the <code>covar</code> column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Sec13-5.dat"</span>, <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 135 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+dbl (4): Task, Smkgrp, score, covar
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 135 × 4
+    Task Smkgrp score covar
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     1      1     9   107
+ 2     1      1     8   133
+ 3     1      1    12   123
+ 4     1      1    10    94
+ 5     1      1     7    83
+ 6     1      1    10    86
+ 7     1      1     9   112
+ 8     1      1    11   117
+ 9     1      1     8   130
+10     1      1    10   111
+# ℹ 125 more rows</code></pre>
+</div>
+</div>
+<p>Looking at this data, the first think that we need to do is recode the factors. Recall that we can do this using <code>recode_factor</code>…</p>
+<section id="ninja-up" class="level3"><h3 class="anchored" data-anchor-id="ninja-up">Ninja-up</h3>
+<p>As an alternative to <code>mutate()</code>, you can add a new column to a data frame by invoking <code>dataframe$new_column.</code> This saves us a bit of typing. Also, for weeks I’ve told you not to overwrite existing columns, and I maintain that is best practice for beginners. However, in this example we will overwrite.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>dataset<span class="sc">$</span>Task <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Task, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Pattern Recognition"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Cognitive"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Driving Simulation"</span>) </span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a>dataset<span class="sc">$</span>Smkgrp <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Smkgrp, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Nonsmoking"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Delayed"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Active"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To get a quick view of our data structure we can use two kinds of calls:</p>
+<p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> provides us with info related to each column in the data frame. If a column contains a factor it provides frequency counts of each level. It the column is numeric it provides summary stats:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">summary</span>(dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Task           Smkgrp       score           covar      
+ Pattern Recognition:45   Nonsmoking:45   Min.   : 0.00   Min.   : 64.0  
+ Cognitive          :45   Delayed   :45   1st Qu.: 6.00   1st Qu.: 99.0  
+ Driving Simulation :45   Active    :45   Median :11.00   Median :111.0  
+                                          Mean   :18.26   Mean   :112.5  
+                                          3rd Qu.:26.00   3rd Qu.:128.0  
+                                          Max.   :75.00   Max.   :191.0  </code></pre>
+</div>
+</div>
+<p>In addition, I like to use the <code>ezDesign()</code> function from the <code>ez</code> package to get a feel for counts in each cell. This is useful for identifying conditions that may have missing data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>ez<span class="sc">::</span><span class="fu">ezDesign</span>(<span class="at">data =</span> dataset, </span>
+<span id="cb22-2"><a href="#cb22-2"></a>             <span class="at">x=</span>Task, <span class="co"># what do you want along the x-axis</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>             <span class="at">y=</span>Smkgrp, <span class="co"># what do you want along the y-axis</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>             <span class="at">row =</span> <span class="cn">NULL</span>, <span class="co"># are we doing any sub-divisions by row...</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>             <span class="at">col =</span> <span class="cn">NULL</span>) <span class="co"># or column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This provides us with a graphic representation of cell counts. In this case, every condition (cell) has 15 participants. As you can see right now this is a 3 x 3 ANOVA.</p>
+<p>To start, let’s imagine that we are only comparing the active smokers to the nonsmokers, and that we are only concerned with the pattern recognition v driving simulation. In this circumstance we are running a 2 (smoking group: active v. passive) × 2 (task: pattern recognition v. driving simulation) ANOVA. We can do a quick subsetting of this data using the <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> command. For our sake, let’s create a new object with this data, <code>dataset_2by2</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># subsetting the data. Remember that "!=" means "does not equal"; "&amp;" suggests that both cases must be met, so</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>dataset_2by2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(dataset, Smkgrp<span class="sc">!=</span><span class="st">"Delayed"</span> <span class="sc">&amp;</span> Task<span class="sc">!=</span><span class="st">"Cognitive"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To get a quick impression of what this dataset looks like, we can use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function, or <code>ezDesign()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># getting a summary of dataset_2by2:</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">summary</span>(dataset_2by2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Task           Smkgrp       score           covar       
+ Pattern Recognition:30   Nonsmoking:30   Min.   : 0.00   Min.   : 64.00  
+ Cognitive          : 0   Delayed   : 0   1st Qu.: 2.75   1st Qu.: 98.75  
+ Driving Simulation :30   Active    :30   Median : 8.00   Median :111.00  
+                                          Mean   : 7.90   Mean   :110.73  
+                                          3rd Qu.:11.00   3rd Qu.:123.00  
+                                          Max.   :22.00   Max.   :168.00  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>ez<span class="sc">::</span><span class="fu">ezDesign</span>(<span class="at">data =</span> dataset_2by2, </span>
+<span id="cb26-2"><a href="#cb26-2"></a>             <span class="at">x=</span>Task, <span class="co"># what do you want along the x-axis</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>             <span class="at">y=</span>Smkgrp, <span class="co"># what do you want along the y-axis</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>             <span class="at">row =</span> <span class="cn">NULL</span>, <span class="co"># are we doing any sub-divisions by row...</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>             <span class="at">col =</span> <span class="cn">NULL</span>) <span class="co"># or column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You may notice from the summary above that the groups that were dropped “Delayed” smokers and “Cognitive” task still show up in the <code>summary</code>, albeit now with 0 instances (you’ll also notice that the remaining groups decreased in number, can you figure out why?). In most cases, <code>R</code> notices this an will automatically drop these factors in our subsequent analyses. However, if needed (i.e.&nbsp;it’s causing errors), these factors can be dropped by invoking the <code><a href="https://rdrr.io/r/base/droplevels.html">droplevels()</a></code>function like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>dataset_2by2 <span class="ot">&lt;-</span> dataset_2by2 <span class="sc">%&gt;%</span> <span class="fu">droplevels</span>()</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">summary</span>(dataset_2by2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Task           Smkgrp       score           covar       
+ Pattern Recognition:30   Nonsmoking:30   Min.   : 0.00   Min.   : 64.00  
+ Driving Simulation :30   Active    :30   1st Qu.: 2.75   1st Qu.: 98.75  
+                                          Median : 8.00   Median :111.00  
+                                          Mean   : 7.90   Mean   :110.73  
+                                          3rd Qu.:11.00   3rd Qu.:123.00  
+                                          Max.   :22.00   Max.   :168.00  </code></pre>
+</div>
+</div>
+<p>And to see the cell counts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>ez<span class="sc">::</span><span class="fu">ezDesign</span>(<span class="at">data =</span> dataset_2by2, <span class="at">x=</span>Task,<span class="at">y=</span>Smkgrp,<span class="at">row =</span> <span class="cn">NULL</span>,<span class="at">col =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="making-sense-of-plots" class="level2"><h2 class="anchored" data-anchor-id="making-sense-of-plots">Making sense of plots</h2>
+<p>Let’s go ahead and plot the data using a line plot with 95% CI error bars. Note that these plots (up until the last section) are not APA-complete!!!!</p>
+<section id="interaction-plots" class="level3"><h3 class="anchored" data-anchor-id="interaction-plots">Interaction plots</h3>
+<p>Interaction plots take into consideration the influence of each of the IVs on one another—in this case the mean and CI of each smoking group (Active v. Nonsmoking) as a function of Task (Driving Simulation v. Pattern Recognition). There is an additional consideration when plotting multiple predictors. That said, all we are doing is extending the plotting methods that you have been using for the past few weeks. The important addition here is the addition of <code>group=</code> in the first line the <code>ggplot</code>. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> dataset, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,<span class="at">y=</span>score,<span class="at">group=</span>Task))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>indicates that we are:</p>
+<ul>
+<li><p>using the <code>dataset</code> data set</p></li>
+<li><p>putting first IV, <code>Smkgrp</code>, on the x-axis</p></li>
+<li><p>putting our dv, <code>score</code> on the y-axis</p></li>
+<li><p>and grouping our data by our other IV, <code>Task</code></p></li>
+</ul>
+<p>This last bit is important as it makes clear that the resulting mean plots should be of the cell means related to <code>Smkgrp</code> x <code>Task</code></p>
+<p>For example, a line plot might look like this. Note that I am assigning a different <code>shape</code> and <code>linetype</code> to each level of <code>Task</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># line plot</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,</span>
+<span id="cb31-3"><a href="#cb31-3"></a>                                        <span class="at">y=</span>score,</span>
+<span id="cb31-4"><a href="#cb31-4"></a>                                        <span class="at">group=</span>Task,</span>
+<span id="cb31-5"><a href="#cb31-5"></a>                                        <span class="at">shape =</span> Task)) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb31-7"><a href="#cb31-7"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>) <span class="sc">+</span> </span>
+<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb31-9"><a href="#cb31-9"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb31-10"><a href="#cb31-10"></a>               <span class="fu">aes</span>(<span class="at">linetype =</span> Task)) <span class="sc">+</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a>  <span class="fu">theme_cowplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>One thing you may have noticed is that is very difficult to distinguish between my Task groups at the Non-smoking level, the points and error bars are overlapping one another. One way to fix this is to use the <code>position_dodge()</code> function. This effectively shifts the data points to the left and right to separate them from one another. You need to perform an identical <code>position_dodge()</code> for each element you intend to shift. In this case, we need to include it in both the <code>pointrange</code> and <code>line</code> parts of our both.</p>
+<p>Rewriting the above (while also getting rid of color per APA format)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># line plot with dodging</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, </span>
+<span id="cb32-3"><a href="#cb32-3"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,</span>
+<span id="cb32-4"><a href="#cb32-4"></a>                   <span class="at">y=</span>score,</span>
+<span id="cb32-5"><a href="#cb32-5"></a>                   <span class="at">group=</span>Task,</span>
+<span id="cb32-6"><a href="#cb32-6"></a>                   <span class="at">shape =</span> Task)</span>
+<span id="cb32-7"><a href="#cb32-7"></a>       ) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb32-9"><a href="#cb32-9"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb32-10"><a href="#cb32-10"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.25</span>),</span>
+<span id="cb32-11"><a href="#cb32-11"></a>) <span class="sc">+</span> </span>
+<span id="cb32-12"><a href="#cb32-12"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb32-13"><a href="#cb32-13"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb32-14"><a href="#cb32-14"></a>               <span class="fu">aes</span>(<span class="at">linetype =</span> Task),</span>
+<span id="cb32-15"><a href="#cb32-15"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.25</span>)</span>
+<span id="cb32-16"><a href="#cb32-16"></a>) <span class="sc">+</span></span>
+<span id="cb32-17"><a href="#cb32-17"></a>  <span class="fu">theme_cowplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>A brief inspection of the plot can be quite informative. Let’s start with the interaction, in fact: <strong>you should always start with the interaction</strong>. Since this is an “interaction” plot, often a quick visual inspection will allow us to predict whether our subsequent ANOVA will likely yield an interaction effect (it’s good practice to plot your data <em>before</em> running your ANOVA). A simple rule of thumb is that if you see the lines converging or intersecting then more than likely an interaction is present. However, whether it’s statistically significant is another question. You might think that this rule of thumb is useful if you use a line plot, and well, you’d be right. What about a bar plot, you ask? * <strong>Note that when generating a grouped barplot, you may need to position dodge to ensure your bars don’t overlap. Typically selecting a value of 0.9 ensures they do not overlap, but also that your grouped bars are touching one another with no gap between. For practice try changing the position_dodge values in the plot below to see how that effects the plot.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># barplot</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,<span class="at">y=</span>score,<span class="at">group=</span>Task)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"bar"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5"></a>               <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb33-6"><a href="#cb33-6"></a>               <span class="fu">aes</span>(<span class="at">fill=</span>Task), </span>
+<span id="cb33-7"><a href="#cb33-7"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a>    <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"errorbar"</span>, </span>
+<span id="cb33-9"><a href="#cb33-9"></a>                 <span class="at">width=</span>.<span class="dv">3</span>, </span>
+<span id="cb33-10"><a href="#cb33-10"></a>                 <span class="at">fun.data =</span> <span class="st">"mean_se"</span>, </span>
+<span id="cb33-11"><a href="#cb33-11"></a>                 <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb33-12"><a href="#cb33-12"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb33-13"><a href="#cb33-13"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"light grey"</span>, <span class="st">"white"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note that the grey fills above are the “Driving Simulation” group and the white are the “Pattern Recognition”. Take a look at the means. If the relative difference between grouped means changes as you move from one category on the x-axis to the next, you likely have an interaction. Note that this is a general rule of thumb and applies to the line plots as well (the reason that the lines intersect is because of these sorts of changes). In this case, the bar (cell) means on the “Active” grouping are nearly identical, while the bar means in the “Nonsmoking” grouping are much further apart. So we likely have interaction.</p>
+</section><section id="plotting-main-effects" class="level3"><h3 class="anchored" data-anchor-id="plotting-main-effects">Plotting main effects</h3>
+<p>If we wanted we could also create separate plots related to our mean effects. Remember that a main effect takes a look at the difference in means for one IV <strong>independent</strong> of the other IV(s). For example, consider <code>Smkgrp</code>, we are looking at the means of <code>Nonsmoking</code> and <code>Active</code> indifferent to <code>Task</code>. These plots would look something like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>Smoke_main_effect_plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,<span class="at">y=</span>score, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb34-3"><a href="#cb34-3"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>, </span>
+<span id="cb34-4"><a href="#cb34-4"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb34-5"><a href="#cb34-5"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb34-6"><a href="#cb34-6"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb34-7"><a href="#cb34-7"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb34-8"><a href="#cb34-8"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb34-10"><a href="#cb34-10"></a></span>
+<span id="cb34-11"><a href="#cb34-11"></a><span class="fu">show</span>(Smoke_main_effect_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>Task_main_effect_plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Task,<span class="at">y=</span>score, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb35-3"><a href="#cb35-3"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>, </span>
+<span id="cb35-4"><a href="#cb35-4"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb35-6"><a href="#cb35-6"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb35-7"><a href="#cb35-7"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb35-8"><a href="#cb35-8"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb35-10"><a href="#cb35-10"></a></span>
+<span id="cb35-11"><a href="#cb35-11"></a><span class="fu">show</span>(Task_main_effect_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>and would take a look at changes due to each IV without considering the other. Here we might infer that there is a main effect for both of our IVs.</p>
+<p>That said, the original interaction plot is useful as well in assessing main effects as well. In this case, to infer whether there might be main effects we can imagine where the means would be if we collapsed our grouped plots (this is exactly what the main effects take a look at). To help with your imagination I’m going to plot our main effect means on the interaction plot. Here the grey-filled triangles represent the the collapsed Smoking Group means indifferent to task. To get these, just imagine finding the midpoint of the two circles in each level of Smoking group. The slope suggests the possibility a main effect.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To imagine the collapsed Task means, we can just find the y-values that intersect with the midpoints of each line (note the red line is the mean value of the Driving Simulation group):</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The difference in y-intercepts suggests the possibility of a main effect.</p>
+<p>So in summary, I’m guessing from plot I’ve got 2 main effects and an interaction. For this week, we are only going to focus on the main effects. In the future, you’ll see that we would need to test for the interaction as well, and if it was present we would need to “deal” with that first.</p>
+<p>For now, let’s focus on testing the main effects.</p>
+</section></section><section id="running-the-anova-lm-method" class="level2"><h2 class="anchored" data-anchor-id="running-the-anova-lm-method">Running the ANOVA <code>lm()</code> method</h2>
+<p>Now we can run the using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> method as we have previously done with the One-way ANOVA. The new wrinkle is simply adding our additional IV terms to the the formula equation:</p>
+<p><span class="math display">\[y=IV_1+IV_2+...+IV_n\]</span></p>
+<p>where the first and second terms capture our main effects and the third is our interaction.</p>
+<p>Using our data in <code>R</code> this formula becomes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp<span class="sc">+</span>Task,<span class="at">data =</span> dataset_2by2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="assumption-testing" class="level2"><h2 class="anchored" data-anchor-id="assumption-testing">Assumption testing</h2>
+<section id="visual-inspection" class="level3"><h3 class="anchored" data-anchor-id="visual-inspection">visual inspection</h3>
+<p>Let’s quickly assess whether the prescribed model satisfies the assumptions for general linear models. Visually we may call upon the <code>performance::check_model().</code> to get a series of visual inspection checks in a single plot. <strong>Note that you encounter errors in your <code>.qmd</code>, you may try to run this directly from your Console</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_model</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_1-main_effects_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Alternatively, running the above with <strong><code>panel = FALSE</code></strong> allows you to see each plot individually.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_model</span>(<span class="at">panel =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For our purposes this semester, the <strong>Homogeneity of Variance</strong> and <strong>Normality of Residuals</strong> plots are most important. Visual inspection suggests that while normality may not be and issue, there is potentially something awry with the homogeneity of variance.</p>
+</section><section id="test-for-assessing-normality" class="level3"><h3 class="anchored" data-anchor-id="test-for-assessing-normality">test for assessing normality</h3>
+<p>If we want to check the normality of residuals we may use the <strong>Shapiro-Wilkes Test</strong>. We can call it directly using <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code> or from the <code>performance</code> library. I show both methods below (you only need to choose ONE. In week’s past you’ve been using the <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>aov_model<span class="sc">$</span>residuals <span class="sc">%&gt;%</span> <span class="fu">shapiro.test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  .
+W = 0.98464, p-value = 0.8873</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_normality</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: residuals appear as normally distributed (p = 0.887).</code></pre>
+</div>
+</div>
+<p>Keep in mind that the Shapiro-Wilkes test for normality is notoriously conservative. In week’s past we discussed an alternative based on this method from Kim (2013) “Statistical notes for clinical researchers: assessing normal distribution using skewness and kurtosis”:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># recommendation from Kim (2013)</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/custom_functions/skew_kurtosis_z.R"</span>)</span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a>aov_model<span class="sc">$</span>residuals <span class="sc">%&gt;%</span> <span class="fu">skew_kurtosis_z</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       upr.ci crit_vals
+skew_z   0.75      1.96
+kurt_z  -0.02      1.96</code></pre>
+</div>
+</div>
+<p>Based on what you see what conclusions might you make?</p>
+</section><section id="test-for-assessing-homogeneity-of-variance" class="level3"><h3 class="anchored" data-anchor-id="test-for-assessing-homogeneity-of-variance">test for assessing homogeneity of variance</h3>
+<p>Typically, we can submit our <code>aov_model</code> to <code><a href="https://rdrr.io/pkg/car/man/leveneTest.html">car::leveneTest</a></code> to test for homogeneity. However, for this week only, this will produce an error. This is because the <code><a href="https://rdrr.io/pkg/car/man/leveneTest.html">car::leveneTest()</a></code> demands that the IVs in a factorial ANOVA be crossed. That is, the <strong>Levene’s test</strong> requires that we include the interaction term in our model. This week, we are NOT looking at interactions, nor am I asking you to include the terms in our model. Because of this, we will us an alternate method, <strong>the Bartlet test</strong> while noting that in future weeks, and under most practical circumstances this will not be an issue. FWIW, the <code>performance</code> method works as a reliable alternative to <code><a href="https://rdrr.io/pkg/car/man/leveneTest.html">car::leveneTest</a></code> in most circumstances, so you could elect to just use this instead using <code>method = "levene"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_homogeneity</span>(<span class="at">method =</span> <span class="st">"bartlet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Variances differ between groups (Bartlett Test, p = 0.040).</code></pre>
+</div>
+</div>
+<p>Our test says we have a violation (which is consistent with our visual inspection above. Let’s take a look at the 3x time rule. To do this we need to get a feel for the variance within each cell. While we are at it we might as well get the means too. Which leads to the next section (don’t worry we’ll come back to this)</p>
+</section></section><section id="getting-cell-means-and-sd" class="level2"><h2 class="anchored" data-anchor-id="getting-cell-means-and-sd">Getting cell means and sd</h2>
+<p>Up until this point we’ve used <code><a href="https://rdrr.io/pkg/psych/man/describe.by.html">psych::describeBy()</a></code> to generate summary stats. This becomes a little more difficult as the designs become more complex. Alternatively you might elect to build a data table yourself. You learned how to do this a few weeks ago using the summarise function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>dataset_2by2 <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">group_by</span>(Task, Smkgrp) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(score), <span class="co"># get group means</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>            <span class="at">var =</span> <span class="fu">var</span>(score)) <span class="co"># get group variances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Task'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+# Groups:   Task [2]
+  Task                Smkgrp      mean   var
+  &lt;fct&gt;               &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;
+1 Pattern Recognition Nonsmoking  9.93 42.5 
+2 Pattern Recognition Active      9.4   1.97
+3 Driving Simulation  Nonsmoking  9.93 36.1 
+4 Driving Simulation  Active      2.33  5.24</code></pre>
+</div>
+</div>
+<p>Another alternative, that I would recommend over the <code>psych</code> package is to use <code>summarySE()</code> from the <code>Rmisc</code> package:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(<span class="at">data =</span> dataset_2by2, <span class="co"># your dataset</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>                 <span class="at">measurevar =</span> <span class="st">"score"</span>, <span class="co"># your dv</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a>                 <span class="at">groupvars =</span> <span class="fu">c</span>(<span class="st">"Task"</span>,<span class="st">"Smkgrp"</span>)) <span class="co"># your between-groups IV(s)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 Task     Smkgrp  N    score       sd        se        ci
+1 Pattern Recognition Nonsmoking 15 9.933333 6.518837 1.6831565 3.6100117
+2 Pattern Recognition     Active 15 9.400000 1.404076 0.3625308 0.7775512
+3  Driving Simulation Nonsmoking 15 9.933333 6.005553 1.5506271 3.3257644
+4  Driving Simulation     Active 15 2.333333 2.288689 0.5909368 1.2674335</code></pre>
+</div>
+</div>
+<p>Recalling that we had an issue with heteroscadicity, we can now use the obtained <code>sd</code> values to assess whether our violation is too great. Let’s save our summary table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>cell_summary_table <span class="ot">&lt;-</span> Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(<span class="at">data =</span> dataset_2by2, <span class="co"># your dataset</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>                                       <span class="at">measurevar =</span> <span class="st">"score"</span>, <span class="co"># your dv</span></span>
+<span id="cb53-3"><a href="#cb53-3"></a>                                       <span class="at">groupvars =</span> <span class="fu">c</span>(<span class="st">"Task"</span>,<span class="st">"Smkgrp"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>from this we can call the <code>sd</code> values and square them to get our variance:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># varience is sd-squared:</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>cell_summary_table<span class="sc">$</span>sd<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42.495238  1.971429 36.066667  5.238095</code></pre>
+</div>
+</div>
+<p>Houston we have a problem! The largest variance there is definitely greater than 3x the smallest. What to do? For now nothing, I don’t want you to go down that rabbit hole just yet. But look for info on dealing with this later.</p>
+</section><section id="getting-marginal-means-for-main-effects" class="level2"><h2 class="anchored" data-anchor-id="getting-marginal-means-for-main-effects">getting marginal means for main effects</h2>
+<p>We can also use this function to report the means related to the main effects (irrespective of interaction).</p>
+<p>For example, Smoking effect I can re-write the call above, simply dropping <code>Task</code> from <code>groupvars</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(<span class="at">data =</span> dataset_2by2,<span class="at">measurevar =</span> <span class="st">"score"</span>,<span class="at">groupvars =</span> <span class="st">"Smkgrp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Smkgrp  N    score       sd        se       ci
+1 Nonsmoking 30 9.933333 6.158444 1.1243730 2.299601
+2     Active 30 5.866667 4.049124 0.7392655 1.511968</code></pre>
+</div>
+</div>
+<p>and for the Task effect:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(<span class="at">data =</span> dataset_2by2,<span class="at">measurevar =</span> <span class="st">"score"</span>,<span class="at">groupvars =</span> <span class="st">"Task"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 Task  N    score       sd        se       ci
+1 Pattern Recognition 30 9.666667 4.641145 0.8473533 1.733032
+2  Driving Simulation 30 6.133333 5.905774 1.0782418 2.205252</code></pre>
+</div>
+</div>
+<p>Note that If you are reporting means related to the main effects, you need to report these marginal means!</p>
+<p>HOWEVER… this data has an interaction, and remember what I said above, if the data has an interaction, you need to deal with that first. We’ll show how to work with data that has interactions next week.</p>
+</section><section id="testing-the-anova" class="level2"><h2 class="anchored" data-anchor-id="testing-the-anova">Testing the ANOVA</h2>
+<p>Ok. Now let’s look at our ANOVA table. Note that instead of the full print out, I’m asking <code>sjstats</code> to only give me the values I’m interested in: the <strong>term</strong> (effect), <strong>df</strong>, (F) <strong>statistic</strong>, p-<strong>value</strong>, and effect size, in this case <strong>partial.eta</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>sjstats<span class="sc">::</span><span class="fu">anova_stats</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">"term"</span>,<span class="st">"df"</span>,<span class="st">"statistic"</span>,<span class="st">"p.value"</span>,<span class="st">"partial.etasq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term         | df | statistic | p.value | partial.etasq
+-------------------------------------------------------
+Lecture      |  2 |     3.779 |   0.034 |         0.191
+Presentation |  1 |    22.670 |  &lt; .001 |         0.415
+Residuals    | 32 |           |         |              </code></pre>
+</div>
+</div>
+<p>You’ll note that both main effects are significant, meaning that we would need to perform pairwise, post-hoc comparisions for each effect. <strong>BUT</strong> <strong>you’ll also note that each of our factors ONLY HAD TWO LEVELS, meaning that the F-test in the ANOVA table <em>IS</em> a pairwise comparison.</strong> In cases like this, when the effect only has 2 levels, we are done (any post hoc analysis would be redundant).</p>
+<p>Assuming you feel comfortable with everything in this walkthrough, let’s proceed to the next, which includes cases where our factors have three (or more) levels.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb62" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb62-1"><a href="#cb62-1"></a><span class="co">---</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="an">title:</span><span class="co"> 'Factorial ANOVA - The omnibus ANOVA and Main effects'</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="co">---</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a></span>
+<span id="cb62-5"><a href="#cb62-5"></a>Note that this week's vignette assumes you have the following packages:</span>
+<span id="cb62-6"><a href="#cb62-6"></a></span>
+<span id="cb62-9"><a href="#cb62-9"></a><span class="in">```{r}</span></span>
+<span id="cb62-10"><a href="#cb62-10"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans,</span>
+<span id="cb62-11"><a href="#cb62-11"></a>               ez, <span class="co"># get info on design of ANOVA, also can run ezANOVA</span></span>
+<span id="cb62-12"><a href="#cb62-12"></a>               Rmisc, <span class="co"># getting summary data</span></span>
+<span id="cb62-13"><a href="#cb62-13"></a>               cowplot, </span>
+<span id="cb62-14"><a href="#cb62-14"></a>               tidyverse)</span>
+<span id="cb62-15"><a href="#cb62-15"></a><span class="in">```</span></span>
+<span id="cb62-16"><a href="#cb62-16"></a></span>
+<span id="cb62-17"><a href="#cb62-17"></a><span class="fu">## TLDR;</span></span>
+<span id="cb62-18"><a href="#cb62-18"></a></span>
+<span id="cb62-19"><a href="#cb62-19"></a>To run a factorial ANOVA we can use the <span class="in">`lm()`</span> method we are familiar with. In this walkthrough we only focus on what can be done with the omnibus ANOVA assuming no interactions:</span>
+<span id="cb62-20"><a href="#cb62-20"></a></span>
+<span id="cb62-21"><a href="#cb62-21"></a>The general steps for running a factorial ANOVA:</span>
+<span id="cb62-22"><a href="#cb62-22"></a></span>
+<span id="cb62-23"><a href="#cb62-23"></a><span class="ss">1.  </span>construct your ANOVA model using <span class="in">`lm`</span></span>
+<span id="cb62-24"><a href="#cb62-24"></a><span class="ss">2.  </span>use the residuals of the model to test for normality and heteroscadicity</span>
+<span id="cb62-25"><a href="#cb62-25"></a><span class="ss">3.  </span>test the model, checking for the presence of an interaction, and any main effects.</span>
+<span id="cb62-26"><a href="#cb62-26"></a><span class="ss">4.  </span>If no interaction proceed with any necessary post hoc analyses on the main effects.</span>
+<span id="cb62-27"><a href="#cb62-27"></a></span>
+<span id="cb62-28"><a href="#cb62-28"></a>This week we will be focusing on Steps 1, 2, and 4, i.e., we won't be formally looking at potential interaction effects. However, as we will see next week, analyzing and interpreting interaction effects is a critical part of factorial ANOVA.</span>
+<span id="cb62-29"><a href="#cb62-29"></a></span>
+<span id="cb62-30"><a href="#cb62-30"></a>For now, I want you focused on building intuitions about dealing with main effects.</span>
+<span id="cb62-31"><a href="#cb62-31"></a></span>
+<span id="cb62-32"><a href="#cb62-32"></a><span class="fu">### Example</span></span>
+<span id="cb62-33"><a href="#cb62-33"></a></span>
+<span id="cb62-36"><a href="#cb62-36"></a><span class="in">```{r}</span></span>
+<span id="cb62-37"><a href="#cb62-37"></a><span class="co"># Preliminaries</span></span>
+<span id="cb62-38"><a href="#cb62-38"></a><span class="do">## load in data</span></span>
+<span id="cb62-39"><a href="#cb62-39"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/factorial_ANOVA_dataset_no_interactions.csv"</span>)</span>
+<span id="cb62-40"><a href="#cb62-40"></a></span>
+<span id="cb62-41"><a href="#cb62-41"></a></span>
+<span id="cb62-42"><a href="#cb62-42"></a><span class="do">## in this case, fixing IV columns...</span></span>
+<span id="cb62-43"><a href="#cb62-43"></a>dataset<span class="sc">$</span>Lecture <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Lecture, <span class="st">"1"</span><span class="ot">=</span><span class="st">"Phys"</span>,<span class="st">"2"</span><span class="ot">=</span><span class="st">"Soc"</span>,<span class="st">"3"</span><span class="ot">=</span><span class="st">"Hist"</span>)</span>
+<span id="cb62-44"><a href="#cb62-44"></a></span>
+<span id="cb62-45"><a href="#cb62-45"></a>dataset<span class="sc">$</span>Presentation <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Presentation, <span class="st">"1"</span><span class="ot">=</span><span class="st">"Comp"</span>,<span class="st">"2"</span><span class="ot">=</span><span class="st">"Stand"</span>)</span>
+<span id="cb62-46"><a href="#cb62-46"></a></span>
+<span id="cb62-47"><a href="#cb62-47"></a></span>
+<span id="cb62-48"><a href="#cb62-48"></a><span class="co"># Step 1: create the additive ANOVA model</span></span>
+<span id="cb62-49"><a href="#cb62-49"></a><span class="co"># note that this is not a full factorial model, but what we are focusing on this week:</span></span>
+<span id="cb62-50"><a href="#cb62-50"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture <span class="sc">+</span> Presentation,<span class="at">data =</span> dataset)</span>
+<span id="cb62-51"><a href="#cb62-51"></a></span>
+<span id="cb62-52"><a href="#cb62-52"></a><span class="co"># Step 2a: test normalty / heteroscadicity using model visually, best to run from your console:</span></span>
+<span id="cb62-53"><a href="#cb62-53"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(aov_model)</span>
+<span id="cb62-54"><a href="#cb62-54"></a></span>
+<span id="cb62-55"><a href="#cb62-55"></a><span class="co"># Step 2b: check normality and homogeneity assumptions using tests:</span></span>
+<span id="cb62-56"><a href="#cb62-56"></a></span>
+<span id="cb62-57"><a href="#cb62-57"></a><span class="co"># test residuals of model for normality:</span></span>
+<span id="cb62-58"><a href="#cb62-58"></a>aov_model <span class="sc">%&gt;%</span> <span class="fu">resid</span>() <span class="sc">%&gt;%</span> <span class="fu">shapiro.test</span>()</span>
+<span id="cb62-59"><a href="#cb62-59"></a></span>
+<span id="cb62-60"><a href="#cb62-60"></a><span class="co"># test homogeneity:</span></span>
+<span id="cb62-61"><a href="#cb62-61"></a><span class="co"># note we are using a test from the performance package due to (somewhat) artificial limitations of the instruction method (see below)</span></span>
+<span id="cb62-62"><a href="#cb62-62"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_homogeneity</span>()</span>
+<span id="cb62-63"><a href="#cb62-63"></a></span>
+<span id="cb62-64"><a href="#cb62-64"></a></span>
+<span id="cb62-65"><a href="#cb62-65"></a><span class="co"># Step 3: check the F-ratio for significance</span></span>
+<span id="cb62-66"><a href="#cb62-66"></a><span class="co"># note I'm only slecting columns from the anova table that are relevant to us:</span></span>
+<span id="cb62-67"><a href="#cb62-67"></a></span>
+<span id="cb62-68"><a href="#cb62-68"></a>aov_model <span class="sc">%&gt;%</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb62-69"><a href="#cb62-69"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"term"</span>,<span class="st">"df"</span>,<span class="st">"statistic"</span>,<span class="st">"p.value"</span>,<span class="st">"partial.etasq"</span>))</span>
+<span id="cb62-70"><a href="#cb62-70"></a></span>
+<span id="cb62-71"><a href="#cb62-71"></a><span class="co"># Step 4: Post hoc analyses on main effects</span></span>
+<span id="cb62-72"><a href="#cb62-72"></a><span class="fu">emmeans</span>(aov_model, <span class="at">specs =</span> pairwise<span class="sc">~</span>Lecture, <span class="at">adjust=</span><span class="st">"tukey"</span>)</span>
+<span id="cb62-73"><a href="#cb62-73"></a></span>
+<span id="cb62-74"><a href="#cb62-74"></a><span class="fu">emmeans</span>(aov_model, <span class="at">specs =</span> pairwise<span class="sc">~</span>Presentation, <span class="at">adjust=</span><span class="st">"tukey"</span>)</span>
+<span id="cb62-75"><a href="#cb62-75"></a><span class="in">```</span></span>
+<span id="cb62-76"><a href="#cb62-76"></a></span>
+<span id="cb62-77"><a href="#cb62-77"></a><span class="fu">## Analysis of Variance: Factorial ANOVA</span></span>
+<span id="cb62-78"><a href="#cb62-78"></a></span>
+<span id="cb62-79"><a href="#cb62-79"></a>In this week's vignette we are simply building upon the previous two weeks coverage of One-way ANOVA and multiple comparisons. I'm assuming you've taken a look at all of the assigned material related to these topics. This week we up the ante by introducing more complex ANOVA models, aka factorial design. As we discussed in class, a factorial ANOVA design is required (well, for the purposes of this course) when your experimental design has more than one IV. Our examples this week focus on situations involving two IVs, however, what is said here applies for more complex designs involving 3, 4, 5, or however many IV's you want to consider. Well, maybe not however many... as we we'll see this week and the next, the more IVs you include in your analysis, the more difficult interpreting your results becomes. This is especially true if you have interaction effects running all over the place. But perhaps I'm getting a little bit ahead of myself. Let's just way I wouldn't recommend including more than 3 or 4 IVs in your ANOVA at a single time and for now leave it at that.</span>
+<span id="cb62-80"><a href="#cb62-80"></a></span>
+<span id="cb62-81"><a href="#cb62-81"></a><span class="fu">## Main effect, main effect, and interactions... oh my!</span></span>
+<span id="cb62-82"><a href="#cb62-82"></a></span>
+<span id="cb62-83"><a href="#cb62-83"></a>When we are performing a factorial ANOVA we are performing a series of independent comparisons of means as a function of our IVs (this assumption of independence is one of the reasons that we don't typically concern ourselves with adjusting our p-values in the omnibus factorial ANOVA). For any given number of IVs, or **factors**, we test for a **main effect** of that factor on the data---that is "do means grouped by levels within that factor differ from one another **not taking into consideration the influence of any of the other IVs"**. Our tests for interactions **do** consider the possibility that our factors influence one another---that is, "do the differences that are observed in one factor depend on the intersecting level of another?"</span>
+<span id="cb62-84"><a href="#cb62-84"></a></span>
+<span id="cb62-85"><a href="#cb62-85"></a>For the sake of simplicity, we will start with a 2 × 2 ANOVA and work our way up by extending the data set. Given our naming conventions, saying that we have a 2 × 2 ANOVA indicates that there are 2 IVs and each has 2 levels. A 2 × 3 ANOVA indicates that there are 2 IVs, and that the first IV has 2 levels and the second has 3 levels; a 2 × 3 × 4 ANOVA indicates that we have 3 IVs, the first has 2 levels, the second has 3 levels, and the third has 4 levels.</span>
+<span id="cb62-86"><a href="#cb62-86"></a></span>
+<span id="cb62-87"><a href="#cb62-87"></a>Our example ANOVA comes from a study testing the effects of smoking on performance in different types of *putatively* (perhaps I'm showing my theoretical biases here) information processing tasks.</span>
+<span id="cb62-88"><a href="#cb62-88"></a></span>
+<span id="cb62-89"><a href="#cb62-89"></a>There were 3 types of cognitive tasks:</span>
+<span id="cb62-90"><a href="#cb62-90"></a></span>
+<span id="cb62-91"><a href="#cb62-91"></a><span class="ss">-   </span>**1** = a pattern recognition task where participants had to locate a target on a screen;</span>
+<span id="cb62-92"><a href="#cb62-92"></a></span>
+<span id="cb62-93"><a href="#cb62-93"></a><span class="ss">-   </span>**2** = a cognitive task where participants had to read a passage and recall bits of information from that passage later;</span>
+<span id="cb62-94"><a href="#cb62-94"></a></span>
+<span id="cb62-95"><a href="#cb62-95"></a><span class="ss">-   </span>**3** = participants performed a driving simulation.</span>
+<span id="cb62-96"><a href="#cb62-96"></a></span>
+<span id="cb62-97"><a href="#cb62-97"></a>Additionally, 3 groups of smokers were recruited</span>
+<span id="cb62-98"><a href="#cb62-98"></a></span>
+<span id="cb62-99"><a href="#cb62-99"></a><span class="ss">-   </span>**1** = those that were actively smoking prior to and during the experiment;</span>
+<span id="cb62-100"><a href="#cb62-100"></a></span>
+<span id="cb62-101"><a href="#cb62-101"></a><span class="ss">-   </span>**2 =** those that were smokers, but did not smoke 3 hours prior to the experiment;</span>
+<span id="cb62-102"><a href="#cb62-102"></a></span>
+<span id="cb62-103"><a href="#cb62-103"></a><span class="ss">-   </span>**3 =** non-smokers.</span>
+<span id="cb62-104"><a href="#cb62-104"></a></span>
+<span id="cb62-105"><a href="#cb62-105"></a>As this is a between design, each participants only completed one of the cognitive tasks.</span>
+<span id="cb62-106"><a href="#cb62-106"></a></span>
+<span id="cb62-107"><a href="#cb62-107"></a><span class="fu">## Example 1: a 2×2 ANOVA</span></span>
+<span id="cb62-108"><a href="#cb62-108"></a></span>
+<span id="cb62-109"><a href="#cb62-109"></a>Let's grab the data from from the web. Note that for now we are going to ignore the <span class="in">`covar`</span> column.</span>
+<span id="cb62-110"><a href="#cb62-110"></a></span>
+<span id="cb62-113"><a href="#cb62-113"></a><span class="in">```{r}</span></span>
+<span id="cb62-114"><a href="#cb62-114"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://www.uvm.edu/~statdhtx/methods8/DataFiles/Sec13-5.dat"</span>, <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb62-115"><a href="#cb62-115"></a></span>
+<span id="cb62-116"><a href="#cb62-116"></a>dataset</span>
+<span id="cb62-117"><a href="#cb62-117"></a><span class="in">```</span></span>
+<span id="cb62-118"><a href="#cb62-118"></a></span>
+<span id="cb62-119"><a href="#cb62-119"></a>Looking at this data, the first think that we need to do is recode the factors. Recall that we can do this using <span class="in">`recode_factor`</span>...</span>
+<span id="cb62-120"><a href="#cb62-120"></a></span>
+<span id="cb62-121"><a href="#cb62-121"></a><span class="fu">### Ninja-up</span></span>
+<span id="cb62-122"><a href="#cb62-122"></a></span>
+<span id="cb62-123"><a href="#cb62-123"></a>As an alternative to <span class="in">`mutate()`</span>, you can add a new column to a data frame by invoking <span class="in">`dataframe$new_column.`</span> This saves us a bit of typing. Also, for weeks I've told you not to overwrite existing columns, and I maintain that is best practice for beginners. However, in this example we will overwrite.</span>
+<span id="cb62-124"><a href="#cb62-124"></a></span>
+<span id="cb62-127"><a href="#cb62-127"></a><span class="in">```{r}</span></span>
+<span id="cb62-128"><a href="#cb62-128"></a>dataset<span class="sc">$</span>Task <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Task, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Pattern Recognition"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Cognitive"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Driving Simulation"</span>) </span>
+<span id="cb62-129"><a href="#cb62-129"></a></span>
+<span id="cb62-130"><a href="#cb62-130"></a>dataset<span class="sc">$</span>Smkgrp <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(dataset<span class="sc">$</span>Smkgrp, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Nonsmoking"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Delayed"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Active"</span>)</span>
+<span id="cb62-131"><a href="#cb62-131"></a><span class="in">```</span></span>
+<span id="cb62-132"><a href="#cb62-132"></a></span>
+<span id="cb62-133"><a href="#cb62-133"></a>To get a quick view of our data structure we can use two kinds of calls:</span>
+<span id="cb62-134"><a href="#cb62-134"></a></span>
+<span id="cb62-135"><a href="#cb62-135"></a><span class="in">`summary()`</span> provides us with info related to each column in the data frame. If a column contains a factor it provides frequency counts of each level. It the column is numeric it provides summary stats:</span>
+<span id="cb62-136"><a href="#cb62-136"></a></span>
+<span id="cb62-139"><a href="#cb62-139"></a><span class="in">```{r}</span></span>
+<span id="cb62-140"><a href="#cb62-140"></a><span class="fu">summary</span>(dataset)</span>
+<span id="cb62-141"><a href="#cb62-141"></a><span class="in">```</span></span>
+<span id="cb62-142"><a href="#cb62-142"></a></span>
+<span id="cb62-143"><a href="#cb62-143"></a>In addition, I like to use the <span class="in">`ezDesign()`</span> function from the <span class="in">`ez`</span> package to get a feel for counts in each cell. This is useful for identifying conditions that may have missing data.</span>
+<span id="cb62-144"><a href="#cb62-144"></a></span>
+<span id="cb62-147"><a href="#cb62-147"></a><span class="in">```{r}</span></span>
+<span id="cb62-148"><a href="#cb62-148"></a>ez<span class="sc">::</span><span class="fu">ezDesign</span>(<span class="at">data =</span> dataset, </span>
+<span id="cb62-149"><a href="#cb62-149"></a>             <span class="at">x=</span>Task, <span class="co"># what do you want along the x-axis</span></span>
+<span id="cb62-150"><a href="#cb62-150"></a>             <span class="at">y=</span>Smkgrp, <span class="co"># what do you want along the y-axis</span></span>
+<span id="cb62-151"><a href="#cb62-151"></a>             <span class="at">row =</span> <span class="cn">NULL</span>, <span class="co"># are we doing any sub-divisions by row...</span></span>
+<span id="cb62-152"><a href="#cb62-152"></a>             <span class="at">col =</span> <span class="cn">NULL</span>) <span class="co"># or column</span></span>
+<span id="cb62-153"><a href="#cb62-153"></a><span class="in">```</span></span>
+<span id="cb62-154"><a href="#cb62-154"></a></span>
+<span id="cb62-155"><a href="#cb62-155"></a>This provides us with a graphic representation of cell counts. In this case, every condition (cell) has 15 participants. As you can see right now this is a 3 x 3 ANOVA.</span>
+<span id="cb62-156"><a href="#cb62-156"></a></span>
+<span id="cb62-157"><a href="#cb62-157"></a>To start, let's imagine that we are only comparing the active smokers to the nonsmokers, and that we are only concerned with the pattern recognition v driving simulation. In this circumstance we are running a 2 (smoking group: active v. passive) × 2 (task: pattern recognition v. driving simulation) ANOVA. We can do a quick subsetting of this data using the <span class="in">`filter()`</span> command. For our sake, let's create a new object with this data, <span class="in">`dataset_2by2`</span>:</span>
+<span id="cb62-158"><a href="#cb62-158"></a></span>
+<span id="cb62-161"><a href="#cb62-161"></a><span class="in">```{r}</span></span>
+<span id="cb62-162"><a href="#cb62-162"></a><span class="co"># subsetting the data. Remember that "!=" means "does not equal"; "&amp;" suggests that both cases must be met, so</span></span>
+<span id="cb62-163"><a href="#cb62-163"></a>dataset_2by2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(dataset, Smkgrp<span class="sc">!=</span><span class="st">"Delayed"</span> <span class="sc">&amp;</span> Task<span class="sc">!=</span><span class="st">"Cognitive"</span>)</span>
+<span id="cb62-164"><a href="#cb62-164"></a><span class="in">```</span></span>
+<span id="cb62-165"><a href="#cb62-165"></a></span>
+<span id="cb62-166"><a href="#cb62-166"></a>To get a quick impression of what this dataset looks like, we can use the <span class="in">`summary()`</span> function, or <span class="in">`ezDesign()`</span>:</span>
+<span id="cb62-167"><a href="#cb62-167"></a></span>
+<span id="cb62-170"><a href="#cb62-170"></a><span class="in">```{r}</span></span>
+<span id="cb62-171"><a href="#cb62-171"></a><span class="co"># getting a summary of dataset_2by2:</span></span>
+<span id="cb62-172"><a href="#cb62-172"></a><span class="fu">summary</span>(dataset_2by2)</span>
+<span id="cb62-173"><a href="#cb62-173"></a></span>
+<span id="cb62-174"><a href="#cb62-174"></a>ez<span class="sc">::</span><span class="fu">ezDesign</span>(<span class="at">data =</span> dataset_2by2, </span>
+<span id="cb62-175"><a href="#cb62-175"></a>             <span class="at">x=</span>Task, <span class="co"># what do you want along the x-axis</span></span>
+<span id="cb62-176"><a href="#cb62-176"></a>             <span class="at">y=</span>Smkgrp, <span class="co"># what do you want along the y-axis</span></span>
+<span id="cb62-177"><a href="#cb62-177"></a>             <span class="at">row =</span> <span class="cn">NULL</span>, <span class="co"># are we doing any sub-divisions by row...</span></span>
+<span id="cb62-178"><a href="#cb62-178"></a>             <span class="at">col =</span> <span class="cn">NULL</span>) <span class="co"># or column</span></span>
+<span id="cb62-179"><a href="#cb62-179"></a><span class="in">```</span></span>
+<span id="cb62-180"><a href="#cb62-180"></a></span>
+<span id="cb62-181"><a href="#cb62-181"></a>You may notice from the summary above that the groups that were dropped "Delayed" smokers and "Cognitive" task still show up in the <span class="in">`summary`</span>, albeit now with 0 instances (you'll also notice that the remaining groups decreased in number, can you figure out why?). In most cases, <span class="in">`R`</span> notices this an will automatically drop these factors in our subsequent analyses. However, if needed (i.e. it's causing errors), these factors can be dropped by invoking the <span class="in">`droplevels()`</span>function like so:</span>
+<span id="cb62-182"><a href="#cb62-182"></a></span>
+<span id="cb62-185"><a href="#cb62-185"></a><span class="in">```{r}</span></span>
+<span id="cb62-186"><a href="#cb62-186"></a>dataset_2by2 <span class="ot">&lt;-</span> dataset_2by2 <span class="sc">%&gt;%</span> <span class="fu">droplevels</span>()</span>
+<span id="cb62-187"><a href="#cb62-187"></a><span class="fu">summary</span>(dataset_2by2)</span>
+<span id="cb62-188"><a href="#cb62-188"></a><span class="in">```</span></span>
+<span id="cb62-189"><a href="#cb62-189"></a></span>
+<span id="cb62-190"><a href="#cb62-190"></a>And to see the cell counts:</span>
+<span id="cb62-191"><a href="#cb62-191"></a></span>
+<span id="cb62-194"><a href="#cb62-194"></a><span class="in">```{r}</span></span>
+<span id="cb62-195"><a href="#cb62-195"></a>ez<span class="sc">::</span><span class="fu">ezDesign</span>(<span class="at">data =</span> dataset_2by2, <span class="at">x=</span>Task,<span class="at">y=</span>Smkgrp,<span class="at">row =</span> <span class="cn">NULL</span>,<span class="at">col =</span> <span class="cn">NULL</span>)</span>
+<span id="cb62-196"><a href="#cb62-196"></a><span class="in">```</span></span>
+<span id="cb62-197"><a href="#cb62-197"></a></span>
+<span id="cb62-198"><a href="#cb62-198"></a><span class="fu">## Making sense of plots</span></span>
+<span id="cb62-199"><a href="#cb62-199"></a></span>
+<span id="cb62-200"><a href="#cb62-200"></a>Let's go ahead and plot the data using a line plot with 95% CI error bars. Note that these plots (up until the last section) are not APA-complete!!!!</span>
+<span id="cb62-201"><a href="#cb62-201"></a></span>
+<span id="cb62-202"><a href="#cb62-202"></a><span class="fu">### Interaction plots</span></span>
+<span id="cb62-203"><a href="#cb62-203"></a></span>
+<span id="cb62-204"><a href="#cb62-204"></a>Interaction plots take into consideration the influence of each of the IVs on one another---in this case the mean and CI of each smoking group (Active v. Nonsmoking) as a function of Task (Driving Simulation v. Pattern Recognition). There is an additional consideration when plotting multiple predictors. That said, all we are doing is extending the plotting methods that you have been using for the past few weeks. The important addition here is the addition of <span class="in">`group=`</span> in the first line the <span class="in">`ggplot`</span>. For example:</span>
+<span id="cb62-205"><a href="#cb62-205"></a></span>
+<span id="cb62-206"><a href="#cb62-206"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb62-207"><a href="#cb62-207"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> dataset, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,<span class="at">y=</span>score,<span class="at">group=</span>Task))</span>
+<span id="cb62-208"><a href="#cb62-208"></a><span class="in">```</span></span>
+<span id="cb62-209"><a href="#cb62-209"></a></span>
+<span id="cb62-210"><a href="#cb62-210"></a>indicates that we are:</span>
+<span id="cb62-211"><a href="#cb62-211"></a></span>
+<span id="cb62-212"><a href="#cb62-212"></a><span class="ss">-   </span>using the <span class="in">`dataset`</span> data set</span>
+<span id="cb62-213"><a href="#cb62-213"></a></span>
+<span id="cb62-214"><a href="#cb62-214"></a><span class="ss">-   </span>putting first IV, <span class="in">`Smkgrp`</span>, on the x-axis</span>
+<span id="cb62-215"><a href="#cb62-215"></a></span>
+<span id="cb62-216"><a href="#cb62-216"></a><span class="ss">-   </span>putting our dv, <span class="in">`score`</span> on the y-axis</span>
+<span id="cb62-217"><a href="#cb62-217"></a></span>
+<span id="cb62-218"><a href="#cb62-218"></a><span class="ss">-   </span>and grouping our data by our other IV, <span class="in">`Task`</span></span>
+<span id="cb62-219"><a href="#cb62-219"></a></span>
+<span id="cb62-220"><a href="#cb62-220"></a>This last bit is important as it makes clear that the resulting mean plots should be of the cell means related to <span class="in">`Smkgrp`</span> x <span class="in">`Task`</span></span>
+<span id="cb62-221"><a href="#cb62-221"></a></span>
+<span id="cb62-222"><a href="#cb62-222"></a>For example, a line plot might look like this. Note that I am assigning a different <span class="in">`shape`</span> and <span class="in">`linetype`</span> to each level of <span class="in">`Task`</span>:</span>
+<span id="cb62-223"><a href="#cb62-223"></a></span>
+<span id="cb62-226"><a href="#cb62-226"></a><span class="in">```{r}</span></span>
+<span id="cb62-227"><a href="#cb62-227"></a><span class="co"># line plot</span></span>
+<span id="cb62-228"><a href="#cb62-228"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,</span>
+<span id="cb62-229"><a href="#cb62-229"></a>                                        <span class="at">y=</span>score,</span>
+<span id="cb62-230"><a href="#cb62-230"></a>                                        <span class="at">group=</span>Task,</span>
+<span id="cb62-231"><a href="#cb62-231"></a>                                        <span class="at">shape =</span> Task)) <span class="sc">+</span></span>
+<span id="cb62-232"><a href="#cb62-232"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb62-233"><a href="#cb62-233"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>) <span class="sc">+</span> </span>
+<span id="cb62-234"><a href="#cb62-234"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb62-235"><a href="#cb62-235"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb62-236"><a href="#cb62-236"></a>               <span class="fu">aes</span>(<span class="at">linetype =</span> Task)) <span class="sc">+</span></span>
+<span id="cb62-237"><a href="#cb62-237"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb62-238"><a href="#cb62-238"></a><span class="in">```</span></span>
+<span id="cb62-239"><a href="#cb62-239"></a></span>
+<span id="cb62-240"><a href="#cb62-240"></a>One thing you may have noticed is that is very difficult to distinguish between my Task groups at the Non-smoking level, the points and error bars are overlapping one another. One way to fix this is to use the <span class="in">`position_dodge()`</span> function. This effectively shifts the data points to the left and right to separate them from one another. You need to perform an identical <span class="in">`position_dodge()`</span> for each element you intend to shift. In this case, we need to include it in both the <span class="in">`pointrange`</span> and <span class="in">`line`</span> parts of our both.</span>
+<span id="cb62-241"><a href="#cb62-241"></a></span>
+<span id="cb62-242"><a href="#cb62-242"></a>Rewriting the above (while also getting rid of color per APA format)</span>
+<span id="cb62-243"><a href="#cb62-243"></a></span>
+<span id="cb62-246"><a href="#cb62-246"></a><span class="in">```{r}</span></span>
+<span id="cb62-247"><a href="#cb62-247"></a><span class="co"># line plot with dodging</span></span>
+<span id="cb62-248"><a href="#cb62-248"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, </span>
+<span id="cb62-249"><a href="#cb62-249"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,</span>
+<span id="cb62-250"><a href="#cb62-250"></a>                   <span class="at">y=</span>score,</span>
+<span id="cb62-251"><a href="#cb62-251"></a>                   <span class="at">group=</span>Task,</span>
+<span id="cb62-252"><a href="#cb62-252"></a>                   <span class="at">shape =</span> Task)</span>
+<span id="cb62-253"><a href="#cb62-253"></a>       ) <span class="sc">+</span></span>
+<span id="cb62-254"><a href="#cb62-254"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb62-255"><a href="#cb62-255"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>,</span>
+<span id="cb62-256"><a href="#cb62-256"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.25</span>),</span>
+<span id="cb62-257"><a href="#cb62-257"></a>) <span class="sc">+</span> </span>
+<span id="cb62-258"><a href="#cb62-258"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb62-259"><a href="#cb62-259"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb62-260"><a href="#cb62-260"></a>               <span class="fu">aes</span>(<span class="at">linetype =</span> Task),</span>
+<span id="cb62-261"><a href="#cb62-261"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.25</span>)</span>
+<span id="cb62-262"><a href="#cb62-262"></a>) <span class="sc">+</span></span>
+<span id="cb62-263"><a href="#cb62-263"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb62-264"><a href="#cb62-264"></a><span class="in">```</span></span>
+<span id="cb62-265"><a href="#cb62-265"></a></span>
+<span id="cb62-266"><a href="#cb62-266"></a>A brief inspection of the plot can be quite informative. Let's start with the interaction, in fact: **you should always start with the interaction**. Since this is an "interaction" plot, often a quick visual inspection will allow us to predict whether our subsequent ANOVA will likely yield an interaction effect (it's good practice to plot your data *before* running your ANOVA). A simple rule of thumb is that if you see the lines converging or intersecting then more than likely an interaction is present. However, whether it's statistically significant is another question. You might think that this rule of thumb is useful if you use a line plot, and well, you'd be right. What about a bar plot, you ask? \* **Note that when generating a grouped barplot, you may need to position dodge to ensure your bars don't overlap. Typically selecting a value of 0.9 ensures they do not overlap, but also that your grouped bars are touching one another with no gap between. For practice try changing the position_dodge values in the plot below to see how that effects the plot.**</span>
+<span id="cb62-267"><a href="#cb62-267"></a></span>
+<span id="cb62-270"><a href="#cb62-270"></a><span class="in">```{r}</span></span>
+<span id="cb62-271"><a href="#cb62-271"></a><span class="co"># barplot</span></span>
+<span id="cb62-272"><a href="#cb62-272"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,<span class="at">y=</span>score,<span class="at">group=</span>Task)) <span class="sc">+</span></span>
+<span id="cb62-273"><a href="#cb62-273"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"bar"</span>,</span>
+<span id="cb62-274"><a href="#cb62-274"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
+<span id="cb62-275"><a href="#cb62-275"></a>               <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb62-276"><a href="#cb62-276"></a>               <span class="fu">aes</span>(<span class="at">fill=</span>Task), </span>
+<span id="cb62-277"><a href="#cb62-277"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb62-278"><a href="#cb62-278"></a>    <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"errorbar"</span>, </span>
+<span id="cb62-279"><a href="#cb62-279"></a>                 <span class="at">width=</span>.<span class="dv">3</span>, </span>
+<span id="cb62-280"><a href="#cb62-280"></a>                 <span class="at">fun.data =</span> <span class="st">"mean_se"</span>, </span>
+<span id="cb62-281"><a href="#cb62-281"></a>                 <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb62-282"><a href="#cb62-282"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb62-283"><a href="#cb62-283"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"light grey"</span>, <span class="st">"white"</span>))</span>
+<span id="cb62-284"><a href="#cb62-284"></a><span class="in">```</span></span>
+<span id="cb62-285"><a href="#cb62-285"></a></span>
+<span id="cb62-286"><a href="#cb62-286"></a>Note that the grey fills above are the "Driving Simulation" group and the white are the "Pattern Recognition". Take a look at the means. If the relative difference between grouped means changes as you move from one category on the x-axis to the next, you likely have an interaction. Note that this is a general rule of thumb and applies to the line plots as well (the reason that the lines intersect is because of these sorts of changes). In this case, the bar (cell) means on the "Active" grouping are nearly identical, while the bar means in the "Nonsmoking" grouping are much further apart. So we likely have interaction.</span>
+<span id="cb62-287"><a href="#cb62-287"></a></span>
+<span id="cb62-288"><a href="#cb62-288"></a><span class="fu">### Plotting main effects</span></span>
+<span id="cb62-289"><a href="#cb62-289"></a></span>
+<span id="cb62-290"><a href="#cb62-290"></a>If we wanted we could also create separate plots related to our mean effects. Remember that a main effect takes a look at the difference in means for one IV **independent** of the other IV(s). For example, consider <span class="in">`Smkgrp`</span>, we are looking at the means of <span class="in">`Nonsmoking`</span> and <span class="in">`Active`</span> indifferent to <span class="in">`Task`</span>. These plots would look something like this:</span>
+<span id="cb62-291"><a href="#cb62-291"></a></span>
+<span id="cb62-294"><a href="#cb62-294"></a><span class="in">```{r}</span></span>
+<span id="cb62-295"><a href="#cb62-295"></a>Smoke_main_effect_plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,<span class="at">y=</span>score, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb62-296"><a href="#cb62-296"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb62-297"><a href="#cb62-297"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>, </span>
+<span id="cb62-298"><a href="#cb62-298"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb62-299"><a href="#cb62-299"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb62-300"><a href="#cb62-300"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb62-301"><a href="#cb62-301"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb62-302"><a href="#cb62-302"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb62-303"><a href="#cb62-303"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb62-304"><a href="#cb62-304"></a></span>
+<span id="cb62-305"><a href="#cb62-305"></a><span class="fu">show</span>(Smoke_main_effect_plot)</span>
+<span id="cb62-306"><a href="#cb62-306"></a></span>
+<span id="cb62-307"><a href="#cb62-307"></a><span class="in">```</span></span>
+<span id="cb62-308"><a href="#cb62-308"></a></span>
+<span id="cb62-311"><a href="#cb62-311"></a><span class="in">```{r}</span></span>
+<span id="cb62-312"><a href="#cb62-312"></a>Task_main_effect_plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Task,<span class="at">y=</span>score, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb62-313"><a href="#cb62-313"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,</span>
+<span id="cb62-314"><a href="#cb62-314"></a>               <span class="at">fun.data =</span> <span class="st">"mean_se"</span>, </span>
+<span id="cb62-315"><a href="#cb62-315"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb62-316"><a href="#cb62-316"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, </span>
+<span id="cb62-317"><a href="#cb62-317"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb62-318"><a href="#cb62-318"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb62-319"><a href="#cb62-319"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb62-320"><a href="#cb62-320"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb62-321"><a href="#cb62-321"></a></span>
+<span id="cb62-322"><a href="#cb62-322"></a><span class="fu">show</span>(Task_main_effect_plot)</span>
+<span id="cb62-323"><a href="#cb62-323"></a><span class="in">```</span></span>
+<span id="cb62-324"><a href="#cb62-324"></a></span>
+<span id="cb62-325"><a href="#cb62-325"></a>and would take a look at changes due to each IV without considering the other. Here we might infer that there is a main effect for both of our IVs.</span>
+<span id="cb62-326"><a href="#cb62-326"></a></span>
+<span id="cb62-327"><a href="#cb62-327"></a>That said, the original interaction plot is useful as well in assessing main effects as well. In this case, to infer whether there might be main effects we can imagine where the means would be if we collapsed our grouped plots (this is exactly what the main effects take a look at). To help with your imagination I'm going to plot our main effect means on the interaction plot. Here the grey-filled triangles represent the the collapsed Smoking Group means indifferent to task. To get these, just imagine finding the midpoint of the two circles in each level of Smoking group. The slope suggests the possibility a main effect.</span>
+<span id="cb62-328"><a href="#cb62-328"></a></span>
+<span id="cb62-329"><a href="#cb62-329"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb62-330"><a href="#cb62-330"></a><span class="co"># line plot</span></span>
+<span id="cb62-331"><a href="#cb62-331"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,<span class="at">y=</span>score,<span class="at">group=</span>Task, <span class="at">shape =</span> Task)) <span class="sc">+</span></span>
+<span id="cb62-332"><a href="#cb62-332"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">5</span>)) <span class="sc">+</span> </span>
+<span id="cb62-333"><a href="#cb62-333"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">5</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Task)) <span class="sc">+</span></span>
+<span id="cb62-334"><a href="#cb62-334"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x=</span>Smkgrp, <span class="at">y=</span>score, <span class="at">group=</span><span class="dv">1</span>), <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">color=</span><span class="st">"dark grey"</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">shape=</span><span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb62-335"><a href="#cb62-335"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">x=</span>Smkgrp, <span class="at">y=</span>score, <span class="at">group=</span><span class="dv">1</span>), <span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">color=</span><span class="st">"dark grey"</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb62-336"><a href="#cb62-336"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb62-337"><a href="#cb62-337"></a><span class="in">```</span></span>
+<span id="cb62-338"><a href="#cb62-338"></a></span>
+<span id="cb62-339"><a href="#cb62-339"></a>To imagine the collapsed Task means, we can just find the y-values that intersect with the midpoints of each line (note the red line is the mean value of the Driving Simulation group):</span>
+<span id="cb62-340"><a href="#cb62-340"></a></span>
+<span id="cb62-341"><a href="#cb62-341"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb62-342"><a href="#cb62-342"></a><span class="co"># to pull this plot off I first need to get the means for each level of Task. I'm going to use a function that we will discuss later on.</span></span>
+<span id="cb62-343"><a href="#cb62-343"></a></span>
+<span id="cb62-344"><a href="#cb62-344"></a><span class="co"># it might be useful to take a quick look at what task_main_effect_means look like</span></span>
+<span id="cb62-345"><a href="#cb62-345"></a>task_main_effect_means <span class="ot">&lt;-</span> Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(dataset_2by2,<span class="at">measurevar =</span> <span class="st">"score"</span>, <span class="at">groupvars =</span> <span class="st">"Task"</span>)</span>
+<span id="cb62-346"><a href="#cb62-346"></a></span>
+<span id="cb62-347"><a href="#cb62-347"></a><span class="co"># taking individual means</span></span>
+<span id="cb62-348"><a href="#cb62-348"></a>pattern_scores_mean <span class="ot">&lt;-</span> task_main_effect_means<span class="sc">$</span>score[<span class="dv">1</span>]</span>
+<span id="cb62-349"><a href="#cb62-349"></a>driving_scores_mean <span class="ot">&lt;-</span> task_main_effect_means<span class="sc">$</span>score[<span class="dv">2</span>]</span>
+<span id="cb62-350"><a href="#cb62-350"></a></span>
+<span id="cb62-351"><a href="#cb62-351"></a><span class="co"># finaly, plot</span></span>
+<span id="cb62-352"><a href="#cb62-352"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dataset_2by2, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Smkgrp,<span class="at">y=</span>score,<span class="at">group=</span>Task, <span class="at">shape =</span> Task)) <span class="sc">+</span></span>
+<span id="cb62-353"><a href="#cb62-353"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">5</span>)) <span class="sc">+</span> </span>
+<span id="cb62-354"><a href="#cb62-354"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">5</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Task)) <span class="sc">+</span></span>
+<span id="cb62-355"><a href="#cb62-355"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> pattern_scores_mean, <span class="at">color=</span><span class="st">"red"</span>, <span class="at">lty=</span><span class="st">"dashed"</span>) <span class="sc">+</span> </span>
+<span id="cb62-356"><a href="#cb62-356"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> driving_scores_mean, <span class="at">color=</span><span class="st">"blue"</span>, <span class="at">lty=</span><span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb62-357"><a href="#cb62-357"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb62-358"><a href="#cb62-358"></a><span class="in">```</span></span>
+<span id="cb62-359"><a href="#cb62-359"></a></span>
+<span id="cb62-360"><a href="#cb62-360"></a>The difference in y-intercepts suggests the possibility of a main effect.</span>
+<span id="cb62-361"><a href="#cb62-361"></a></span>
+<span id="cb62-362"><a href="#cb62-362"></a>So in summary, I'm guessing from plot I've got 2 main effects and an interaction. For this week, we are only going to focus on the main effects. In the future, you'll see that we would need to test for the interaction as well, and if it was present we would need to "deal" with that first.</span>
+<span id="cb62-363"><a href="#cb62-363"></a></span>
+<span id="cb62-364"><a href="#cb62-364"></a>For now, let's focus on testing the main effects.</span>
+<span id="cb62-365"><a href="#cb62-365"></a></span>
+<span id="cb62-366"><a href="#cb62-366"></a><span class="fu">## Running the ANOVA `lm()` method</span></span>
+<span id="cb62-367"><a href="#cb62-367"></a></span>
+<span id="cb62-368"><a href="#cb62-368"></a>Now we can run the using the <span class="in">`lm()`</span> method as we have previously done with the One-way ANOVA. The new wrinkle is simply adding our additional IV terms to the the formula equation:</span>
+<span id="cb62-369"><a href="#cb62-369"></a></span>
+<span id="cb62-370"><a href="#cb62-370"></a>$$y=IV_1+IV_2+...+IV_n$$</span>
+<span id="cb62-371"><a href="#cb62-371"></a></span>
+<span id="cb62-372"><a href="#cb62-372"></a>where the first and second terms capture our main effects and the third is our interaction.</span>
+<span id="cb62-373"><a href="#cb62-373"></a></span>
+<span id="cb62-374"><a href="#cb62-374"></a>Using our data in <span class="in">`R`</span> this formula becomes:</span>
+<span id="cb62-375"><a href="#cb62-375"></a></span>
+<span id="cb62-376"><a href="#cb62-376"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb62-377"><a href="#cb62-377"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(score<span class="sc">~</span>Smkgrp<span class="sc">+</span>Task,<span class="at">data =</span> dataset_2by2)</span>
+<span id="cb62-378"><a href="#cb62-378"></a><span class="in">```</span></span>
+<span id="cb62-379"><a href="#cb62-379"></a></span>
+<span id="cb62-380"><a href="#cb62-380"></a><span class="fu">## Assumption testing</span></span>
+<span id="cb62-381"><a href="#cb62-381"></a></span>
+<span id="cb62-382"><a href="#cb62-382"></a><span class="fu">### visual inspection</span></span>
+<span id="cb62-383"><a href="#cb62-383"></a></span>
+<span id="cb62-384"><a href="#cb62-384"></a>Let's quickly assess whether the prescribed model satisfies the assumptions for general linear models. Visually we may call upon the <span class="in">`performance::check_model().`</span> to get a series of visual inspection checks in a single plot. **Note that you encounter errors in your `.qmd`, you may try to run this directly from your Console**</span>
+<span id="cb62-385"><a href="#cb62-385"></a></span>
+<span id="cb62-388"><a href="#cb62-388"></a><span class="in">```{r}</span></span>
+<span id="cb62-389"><a href="#cb62-389"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_model</span>()</span>
+<span id="cb62-390"><a href="#cb62-390"></a><span class="in">```</span></span>
+<span id="cb62-391"><a href="#cb62-391"></a></span>
+<span id="cb62-392"><a href="#cb62-392"></a>Alternatively, running the above with **`panel = FALSE`** allows you to see each plot individually.</span>
+<span id="cb62-393"><a href="#cb62-393"></a></span>
+<span id="cb62-396"><a href="#cb62-396"></a><span class="in">```{r}</span></span>
+<span id="cb62-397"><a href="#cb62-397"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_model</span>(<span class="at">panel =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb62-398"><a href="#cb62-398"></a><span class="in">```</span></span>
+<span id="cb62-399"><a href="#cb62-399"></a></span>
+<span id="cb62-400"><a href="#cb62-400"></a>For our purposes this semester, the **Homogeneity of Variance** and **Normality of Residuals** plots are most important. Visual inspection suggests that while normality may not be and issue, there is potentially something awry with the homogeneity of variance.</span>
+<span id="cb62-401"><a href="#cb62-401"></a></span>
+<span id="cb62-402"><a href="#cb62-402"></a><span class="fu">### test for assessing normality</span></span>
+<span id="cb62-403"><a href="#cb62-403"></a></span>
+<span id="cb62-404"><a href="#cb62-404"></a>If we want to check the normality of residuals we may use the **Shapiro-Wilkes Test**. We can call it directly using <span class="in">`shapiro.test()`</span> or from the <span class="in">`performance`</span> library. I show both methods below (you only need to choose ONE. In week's past you've been using the <span class="in">`shapiro.test()`</span>:</span>
+<span id="cb62-405"><a href="#cb62-405"></a></span>
+<span id="cb62-408"><a href="#cb62-408"></a><span class="in">```{r}</span></span>
+<span id="cb62-409"><a href="#cb62-409"></a>aov_model<span class="sc">$</span>residuals <span class="sc">%&gt;%</span> <span class="fu">shapiro.test</span>()</span>
+<span id="cb62-410"><a href="#cb62-410"></a></span>
+<span id="cb62-411"><a href="#cb62-411"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_normality</span>()</span>
+<span id="cb62-412"><a href="#cb62-412"></a><span class="in">```</span></span>
+<span id="cb62-413"><a href="#cb62-413"></a></span>
+<span id="cb62-414"><a href="#cb62-414"></a>Keep in mind that the Shapiro-Wilkes test for normality is notoriously conservative. In week's past we discussed an alternative based on this method from Kim (2013) "Statistical notes for clinical researchers: assessing normal distribution using skewness and kurtosis":</span>
+<span id="cb62-415"><a href="#cb62-415"></a></span>
+<span id="cb62-418"><a href="#cb62-418"></a><span class="in">```{r}</span></span>
+<span id="cb62-419"><a href="#cb62-419"></a><span class="co"># recommendation from Kim (2013)</span></span>
+<span id="cb62-420"><a href="#cb62-420"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/custom_functions/skew_kurtosis_z.R"</span>)</span>
+<span id="cb62-421"><a href="#cb62-421"></a></span>
+<span id="cb62-422"><a href="#cb62-422"></a>aov_model<span class="sc">$</span>residuals <span class="sc">%&gt;%</span> <span class="fu">skew_kurtosis_z</span>()</span>
+<span id="cb62-423"><a href="#cb62-423"></a><span class="in">```</span></span>
+<span id="cb62-424"><a href="#cb62-424"></a></span>
+<span id="cb62-425"><a href="#cb62-425"></a>Based on what you see what conclusions might you make?</span>
+<span id="cb62-426"><a href="#cb62-426"></a></span>
+<span id="cb62-427"><a href="#cb62-427"></a><span class="fu">### test for assessing homogeneity of variance</span></span>
+<span id="cb62-428"><a href="#cb62-428"></a></span>
+<span id="cb62-429"><a href="#cb62-429"></a>Typically, we can submit our <span class="in">`aov_model`</span> to <span class="in">`car::leveneTest`</span> to test for homogeneity. However, for this week only, this will produce an error. This is because the <span class="in">`car::leveneTest()`</span> demands that the IVs in a factorial ANOVA be crossed. That is, the **Levene's test** requires that we include the interaction term in our model. This week, we are NOT looking at interactions, nor am I asking you to include the terms in our model. Because of this, we will us an alternate method, **the Bartlet test** while noting that in future weeks, and under most practical circumstances this will not be an issue. FWIW, the <span class="in">`performance`</span> method works as a reliable alternative to <span class="in">`car::leveneTest`</span> in most circumstances, so you could elect to just use this instead using <span class="in">`method = "levene"`</span>.</span>
+<span id="cb62-430"><a href="#cb62-430"></a></span>
+<span id="cb62-433"><a href="#cb62-433"></a><span class="in">```{r}</span></span>
+<span id="cb62-434"><a href="#cb62-434"></a>aov_model <span class="sc">%&gt;%</span> performance<span class="sc">::</span><span class="fu">check_homogeneity</span>(<span class="at">method =</span> <span class="st">"bartlet"</span>)</span>
+<span id="cb62-435"><a href="#cb62-435"></a><span class="in">```</span></span>
+<span id="cb62-436"><a href="#cb62-436"></a></span>
+<span id="cb62-437"><a href="#cb62-437"></a>Our test says we have a violation (which is consistent with our visual inspection above. Let's take a look at the 3x time rule. To do this we need to get a feel for the variance within each cell. While we are at it we might as well get the means too. Which leads to the next section (don't worry we'll come back to this)</span>
+<span id="cb62-438"><a href="#cb62-438"></a></span>
+<span id="cb62-439"><a href="#cb62-439"></a><span class="fu">## Getting cell means and sd</span></span>
+<span id="cb62-440"><a href="#cb62-440"></a></span>
+<span id="cb62-441"><a href="#cb62-441"></a>Up until this point we've used <span class="in">`psych::describeBy()`</span> to generate summary stats. This becomes a little more difficult as the designs become more complex. Alternatively you might elect to build a data table yourself. You learned how to do this a few weeks ago using the summarise function:</span>
+<span id="cb62-442"><a href="#cb62-442"></a></span>
+<span id="cb62-445"><a href="#cb62-445"></a><span class="in">```{r}</span></span>
+<span id="cb62-446"><a href="#cb62-446"></a>dataset_2by2 <span class="sc">%&gt;%</span> </span>
+<span id="cb62-447"><a href="#cb62-447"></a>  <span class="fu">group_by</span>(Task, Smkgrp) <span class="sc">%&gt;%</span></span>
+<span id="cb62-448"><a href="#cb62-448"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(score), <span class="co"># get group means</span></span>
+<span id="cb62-449"><a href="#cb62-449"></a>            <span class="at">var =</span> <span class="fu">var</span>(score)) <span class="co"># get group variances</span></span>
+<span id="cb62-450"><a href="#cb62-450"></a><span class="in">```</span></span>
+<span id="cb62-451"><a href="#cb62-451"></a></span>
+<span id="cb62-452"><a href="#cb62-452"></a>Another alternative, that I would recommend over the <span class="in">`psych`</span> package is to use <span class="in">`summarySE()`</span> from the <span class="in">`Rmisc`</span> package:</span>
+<span id="cb62-453"><a href="#cb62-453"></a></span>
+<span id="cb62-456"><a href="#cb62-456"></a><span class="in">```{r}</span></span>
+<span id="cb62-457"><a href="#cb62-457"></a>Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(<span class="at">data =</span> dataset_2by2, <span class="co"># your dataset</span></span>
+<span id="cb62-458"><a href="#cb62-458"></a>                 <span class="at">measurevar =</span> <span class="st">"score"</span>, <span class="co"># your dv</span></span>
+<span id="cb62-459"><a href="#cb62-459"></a>                 <span class="at">groupvars =</span> <span class="fu">c</span>(<span class="st">"Task"</span>,<span class="st">"Smkgrp"</span>)) <span class="co"># your between-groups IV(s)</span></span>
+<span id="cb62-460"><a href="#cb62-460"></a><span class="in">```</span></span>
+<span id="cb62-461"><a href="#cb62-461"></a></span>
+<span id="cb62-462"><a href="#cb62-462"></a>Recalling that we had an issue with heteroscadicity, we can now use the obtained <span class="in">`sd`</span> values to assess whether our violation is too great. Let's save our summary table:</span>
+<span id="cb62-463"><a href="#cb62-463"></a></span>
+<span id="cb62-466"><a href="#cb62-466"></a><span class="in">```{r}</span></span>
+<span id="cb62-467"><a href="#cb62-467"></a>cell_summary_table <span class="ot">&lt;-</span> Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(<span class="at">data =</span> dataset_2by2, <span class="co"># your dataset</span></span>
+<span id="cb62-468"><a href="#cb62-468"></a>                                       <span class="at">measurevar =</span> <span class="st">"score"</span>, <span class="co"># your dv</span></span>
+<span id="cb62-469"><a href="#cb62-469"></a>                                       <span class="at">groupvars =</span> <span class="fu">c</span>(<span class="st">"Task"</span>,<span class="st">"Smkgrp"</span>))</span>
+<span id="cb62-470"><a href="#cb62-470"></a><span class="in">```</span></span>
+<span id="cb62-471"><a href="#cb62-471"></a></span>
+<span id="cb62-472"><a href="#cb62-472"></a>from this we can call the <span class="in">`sd`</span> values and square them to get our variance:</span>
+<span id="cb62-473"><a href="#cb62-473"></a></span>
+<span id="cb62-476"><a href="#cb62-476"></a><span class="in">```{r}</span></span>
+<span id="cb62-477"><a href="#cb62-477"></a><span class="co"># varience is sd-squared:</span></span>
+<span id="cb62-478"><a href="#cb62-478"></a>cell_summary_table<span class="sc">$</span>sd<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb62-479"><a href="#cb62-479"></a><span class="in">```</span></span>
+<span id="cb62-480"><a href="#cb62-480"></a></span>
+<span id="cb62-481"><a href="#cb62-481"></a>Houston we have a problem! The largest variance there is definitely greater than 3x the smallest. What to do? For now nothing, I don't want you to go down that rabbit hole just yet. But look for info on dealing with this later.</span>
+<span id="cb62-482"><a href="#cb62-482"></a></span>
+<span id="cb62-483"><a href="#cb62-483"></a><span class="fu">## getting marginal means for main effects</span></span>
+<span id="cb62-484"><a href="#cb62-484"></a></span>
+<span id="cb62-485"><a href="#cb62-485"></a>We can also use this function to report the means related to the main effects (irrespective of interaction).</span>
+<span id="cb62-486"><a href="#cb62-486"></a></span>
+<span id="cb62-487"><a href="#cb62-487"></a>For example, Smoking effect I can re-write the call above, simply dropping <span class="in">`Task`</span> from <span class="in">`groupvars`</span>:</span>
+<span id="cb62-488"><a href="#cb62-488"></a></span>
+<span id="cb62-491"><a href="#cb62-491"></a><span class="in">```{r}</span></span>
+<span id="cb62-492"><a href="#cb62-492"></a>Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(<span class="at">data =</span> dataset_2by2,<span class="at">measurevar =</span> <span class="st">"score"</span>,<span class="at">groupvars =</span> <span class="st">"Smkgrp"</span>)</span>
+<span id="cb62-493"><a href="#cb62-493"></a><span class="in">```</span></span>
+<span id="cb62-494"><a href="#cb62-494"></a></span>
+<span id="cb62-495"><a href="#cb62-495"></a>and for the Task effect:</span>
+<span id="cb62-496"><a href="#cb62-496"></a></span>
+<span id="cb62-499"><a href="#cb62-499"></a><span class="in">```{r}</span></span>
+<span id="cb62-500"><a href="#cb62-500"></a>Rmisc<span class="sc">::</span><span class="fu">summarySE</span>(<span class="at">data =</span> dataset_2by2,<span class="at">measurevar =</span> <span class="st">"score"</span>,<span class="at">groupvars =</span> <span class="st">"Task"</span>)</span>
+<span id="cb62-501"><a href="#cb62-501"></a><span class="in">```</span></span>
+<span id="cb62-502"><a href="#cb62-502"></a></span>
+<span id="cb62-503"><a href="#cb62-503"></a>Note that If you are reporting means related to the main effects, you need to report these marginal means!</span>
+<span id="cb62-504"><a href="#cb62-504"></a></span>
+<span id="cb62-505"><a href="#cb62-505"></a>HOWEVER... this data has an interaction, and remember what I said above, if the data has an interaction, you need to deal with that first. We'll show how to work with data that has interactions next week.</span>
+<span id="cb62-506"><a href="#cb62-506"></a></span>
+<span id="cb62-507"><a href="#cb62-507"></a><span class="fu">## Testing the ANOVA</span></span>
+<span id="cb62-508"><a href="#cb62-508"></a></span>
+<span id="cb62-509"><a href="#cb62-509"></a>Ok. Now let's look at our ANOVA table. Note that instead of the full print out, I'm asking <span class="in">`sjstats`</span> to only give me the values I'm interested in: the **term** (effect), **df**, (F) **statistic**, p-**value**, and effect size, in this case **partial.eta**</span>
+<span id="cb62-510"><a href="#cb62-510"></a></span>
+<span id="cb62-513"><a href="#cb62-513"></a><span class="in">```{r}</span></span>
+<span id="cb62-514"><a href="#cb62-514"></a>sjstats<span class="sc">::</span><span class="fu">anova_stats</span>(aov_model) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">"term"</span>,<span class="st">"df"</span>,<span class="st">"statistic"</span>,<span class="st">"p.value"</span>,<span class="st">"partial.etasq"</span>)</span>
+<span id="cb62-515"><a href="#cb62-515"></a><span class="in">```</span></span>
+<span id="cb62-516"><a href="#cb62-516"></a></span>
+<span id="cb62-517"><a href="#cb62-517"></a>You'll note that both main effects are significant, meaning that we would need to perform pairwise, post-hoc comparisions for each effect. **BUT** **you'll also note that each of our factors ONLY HAD TWO LEVELS, meaning that the F-test in the ANOVA table *IS* a pairwise comparison.** In cases like this, when the effect only has 2 levels, we are done (any post hoc analysis would be redundant).</span>
+<span id="cb62-518"><a href="#cb62-518"></a></span>
+<span id="cb62-519"><a href="#cb62-519"></a>Assuming you feel comfortable with everything in this walkthrough, let's proceed to the next, which includes cases where our factors have three (or more) levels.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

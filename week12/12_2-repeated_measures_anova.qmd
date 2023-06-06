@@ -20,7 +20,7 @@ pacman::p_load(tidyverse,
 Okay, not let's load in some data:
 
 ```{r}
-within_between <- read_csv("http://tehrandav.is/psyc7014/practice_datasets/within_between.csv")
+within_between <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/within_between.csv")
 
 within_between
 ```
@@ -243,7 +243,7 @@ A similar script may be found on [this ggplot tutorial site](http://www.cookbook
 Note that this "alternative" is how I in fact create most of my own ANOVA plots. But, I have my own custom function that is an adaptation of `summarySEwithin2`, I call it `withinSummary`. This is to address the fact that when writing your data up you need to use not only the actual means but also the actual se / sd / ci.
 
 ```{r}
-source("http://tehrandav.is/psyc7014/custom_functions/withinSummary.R")
+source("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/custom_functions/withinSummary.R")
 ```
 
 This gives me both the `$Actual` and `$Corrected` values. I can use the `descriptiveStats$Corrected` data for plotting, for example: First we save the output of `withinSummary` to an object:
@@ -416,7 +416,7 @@ Let's take a look at another example, using a experimental paradigm we are famil
 You note that this data is already in long format so no need to adjust.
 
 ```{r}
-example2_long <- read_csv("http://tehrandav.is/psyc7014/practice_datasets/withinEx2.csv")
+example2_long <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/withinEx2.csv")
 
 example2_long
 ```

@@ -136,7 +136,7 @@ Things become slightly more complex when on of our factors has 3 or more levels.
 Here's the data, where Score represents performance:
 
 ```{r echo=FALSE}
-dataset <- read_csv("http://tehrandav.is/psyc7014/practice_dataSets/factorial_AOV_data.csv")
+dataset <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/factorial_AOV_data.csv")
 ```
 
 ### Plotting the data and descriptive stats

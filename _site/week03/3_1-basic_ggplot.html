@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>tehrandav.is - Basic ggplotting</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Basic ggplotting</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link active">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#the-basics" id="toc-the-basics" class="nav-link active" data-scroll-target="#the-basics">The Basics</a>
+  <ul class="collapse">
+<li><a href="#step-1-building-the-canvas" id="toc-step-1-building-the-canvas" class="nav-link" data-scroll-target="#step-1-building-the-canvas">Step 1: Building the canvas</a></li>
+  <li><a href="#step-2-tell-ggplot-what-kind-of-plot-to-make." id="toc-step-2-tell-ggplot-what-kind-of-plot-to-make." class="nav-link" data-scroll-target="#step-2-tell-ggplot-what-kind-of-plot-to-make.">Step 2: Tell <code>ggplot</code> what kind of plot to make.</a></li>
+  <li><a href="#step-3-adjust-the-axes-and-labels" id="toc-step-3-adjust-the-axes-and-labels" class="nav-link" data-scroll-target="#step-3-adjust-the-axes-and-labels">Step 3: Adjust the axes and labels</a></li>
+  <li><a href="#step-4-adjusting-for-apa" id="toc-step-4-adjusting-for-apa" class="nav-link" data-scroll-target="#step-4-adjusting-for-apa">Step 4: Adjusting for APA</a></li>
+  <li><a href="#step-5-add-and-adjust-the-legend" id="toc-step-5-add-and-adjust-the-legend" class="nav-link" data-scroll-target="#step-5-add-and-adjust-the-legend">Step 5: Add and adjust the legend</a></li>
+  <li><a href="#condensing-the-code" id="toc-condensing-the-code" class="nav-link" data-scroll-target="#condensing-the-code">Condensing the code</a></li>
+  </ul>
+</li>
+  <li><a href="#saving-the-ggplot." id="toc-saving-the-ggplot." class="nav-link" data-scroll-target="#saving-the-ggplot.">Saving the <code>ggplot</code>.</a></li>
+  <li>
+<a href="#advanced-stuff" id="toc-advanced-stuff" class="nav-link" data-scroll-target="#advanced-stuff">Advanced stuff</a>
+  <ul class="collapse">
+<li><a href="#customizing-your-plot" id="toc-customizing-your-plot" class="nav-link" data-scroll-target="#customizing-your-plot">Customizing your plot</a></li>
+  <li><a href="#plotting-your-data-in-a-boxplot" id="toc-plotting-your-data-in-a-boxplot" class="nav-link" data-scroll-target="#plotting-your-data-in-a-boxplot">Plotting your data in a boxplot:</a></li>
+  <li><a href="#cowplot" id="toc-cowplot" class="nav-link" data-scroll-target="#cowplot">Cowplot</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Basic ggplotting</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>As I mentioned, I’m a firm believer that given the choice of creating a table or producing a plot, I would choose to make the plot unless there are other important factors that make the table more desirable. There are any number of plots that you make use in your analyses: scatterplots, bar plots (although there’s a bit of a backlash on barplots right now), histograms, boxplots, violin plots, heatmaps, rug plots, and the list goes on and on. What type of plot you choose to make should depend on what info you are attempting to stress and convey to your audience (including you). We’ll encounter most of these plots throughout the semester.</p>
+<p>There are a number of ways to plot in <code>R</code>, including plotting functions installed in <code>baseR</code> and several custom packages. I think the most powerful way (and hence best for students to learn) to plot is using the <code>ggplot</code> package. <code>ggplot</code> is a bit tricky at first, but once it clicks it really clicks. Here I’m going to walk you through the construction of a histogram plot and lay out the logic of getting those plots in appropriate APA format. For the purposes of keeping things simple I’m going to focus on the types of data that we have encountered in class so far, namely frequency data and data related to central tendency. As our designs and analyses become more complex, I will have sections at the end of each week that build upon what we do here (scatterplots, regression plots, interaction plots, oh my!)</p>
+<p>There are a few packages that we will introduce in this walkthrough, including: <code>cowplot</code>. I’ll go into further detail what they can do for us as we move along, but for now let’s just load in the one we are most familiar with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you recall, <code>tidyverse</code> contains a family of over 70 packages. <code>ggplot2</code> is one of these packages. For the purposes of this walk-through I will be using the <code>aggression_data</code> dataset from Flora (and our previous walkthrough). If you want to follow along, you’ll need to import that data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>aggression_data <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/aggression.dat"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+── Column specification ────────────────────────────────────────────────────────
+cols(
+  X1 = col_double(),
+  X2 = col_double(),
+  X3 = col_double(),
+  X4 = col_double(),
+  X5 = col_double(),
+  X6 = col_double(),
+  X7 = col_double(),
+  X8 = col_double()
+)</code></pre>
+</div>
+</div>
+<p>Let’s also clean up, or wrangle, the data, in this case naming the header and fixing the <code>gender</code> variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">names</span>(aggression_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'age'</span>, <span class="st">'BPAQ'</span>, <span class="st">'AISS'</span>, <span class="st">'alcohol'</span>, <span class="st">'BIS'</span>, <span class="st">'NEOc'</span>, <span class="st">'gender'</span>, <span class="st">'NEOo'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>aggression_data <span class="ot">&lt;-</span> aggression_data <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">mutate</span>(<span class="at">fctr_Gender =</span> <span class="fu">factor</span>(gender))</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>aggression_data<span class="sc">$</span>fctr_Gender <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">recode_factor</span>(aggression_data<span class="sc">$</span>fctr_Gender, <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"Man"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Woman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="the-basics" class="level2"><h2 class="anchored" data-anchor-id="the-basics">The Basics</h2>
+<p>In general, the basic procedure for constructing a plot goes through the following steps:</p>
+<ol type="1">
+<li>link to the data and tell <code>ggplot</code> how to structure its output</li>
+<li>tell <code>ggplot</code> what kind of plot to make</li>
+<li>adjust the axes and labels if necessary</li>
+<li>adjust the appearance of the plot for APA (or other appropriate format)</li>
+<li>add a legend if necessary</li>
+<li>save or export the plot</li>
+</ol>
+<p>Perhaps most critically, building plot (much like running an analysis) is something that should be carefully considered and well-thought out. In order words it’s probably in your best interest early on to “sketch out” mentally of with a pen an paper, what your plot should look like—what’s on the x-axis? what’s on the y-axis, what kind of plot?, any coloring or other stylizing? is the data going to be grouped? etc.</p>
+<section id="step-1-building-the-canvas" class="level3"><h3 class="anchored" data-anchor-id="step-1-building-the-canvas">Step 1: Building the canvas</h3>
+<p>Here you need to be thinking about what form you want the plot to take. Key points:</p>
+<ol type="1">
+<li>
+<code>data =</code>: what data set you will be pulling from. This needs to be in the form of a <code>data_frame()</code>, with <code>names</code> in the headers. For most data that we will be working with from here on out, that will be the case. However, for constructed / simulation data you may have to do this manually.</li>
+</ol>
+<p>If you are unsure of the header names you can see them by:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">names</span>(aggression_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "age"         "BPAQ"        "AISS"        "alcohol"     "BIS"        
+[6] "NEOc"        "gender"      "NEOo"        "fctr_Gender"</code></pre>
+</div>
+</div>
+<p>Note that depending on what guide you follow you may also include <code>mapping=aes()</code> here as well. This would include telling <code>R</code> eventually what info goes on each axis, how data is grouped, etc. BUT this info can also be relayed in Step 2, and I think that conceptually it make more sense to put it there.</p>
+<p>So for Step 1, just tell <code>ggplot</code> what data we are using and save our Step 1 to an object called <code>p</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you can see we’ve created a blank canvas—nothing else to see here.</p>
+</section><section id="step-2-tell-ggplot-what-kind-of-plot-to-make." class="level3"><h3 class="anchored" data-anchor-id="step-2-tell-ggplot-what-kind-of-plot-to-make.">Step 2: Tell <code>ggplot</code> what kind of plot to make.</h3>
+<p>Plots can take several forms, or geoms (geometries), most common include: + histogram: <code>geom_histogram</code> + boxplot: <code>geom_boxplot</code> + scatter: <code>geom_point</code> + bar: <code>geom_bar</code> + line: <code>geom_line</code></p>
+<p>Here we are creating a histogram, so in Step 2 we add <code>geom_histogram()</code> to our original plot <code>p</code>. We also need to tell <code>ggplot</code> how to go about constructing our histogram. This info would be including in the <code>mapping = aes()</code> argument. This tells <code>ggplot</code> about the general layout of the plot, including: + <code>x</code>: what is on the x-axis + <code>y</code>: what’s on the y-axis (usually your dependent variable, although for histograms this ends up being frequency and <code>x</code> is your dependent variable) + <code>group</code>: how should the data be grouped? This will become important for more complex designs.</p>
+<p>What <code>aes()</code> options you choose in large part is determined by what kind of plot you intend to make. For our histogram we want bins of <code>BPAQ</code> on the x-axis and frequency <code>..count..</code> on the y-axis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Repeating previous step for clarity:</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># new step, take our original "p", add a geom, save the new plot to "p"</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..)) </span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co"># show the result</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The dot-dot notation (`..count..`) was deprecated in ggplot2 3.4.0.
+ℹ Please use `after_stat(count)` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The default <code>geom_histogram()</code> produces the above plot. However, we can tweak several arguments in <code>geom_histogram()</code> to change the presentation of data, including:</p>
+<ul>
+<li>
+<code>binwidth</code>: the width of each bin, or…</li>
+<li>
+<code>bins</code>: the number of bins</li>
+<li>
+<code>color</code>: the color of the perimeter of each bin/bar (note <code>color</code> refers to lines)</li>
+<li>
+<code>fill</code>: the color of the bin/bar itself (note <code>fill</code> refers to spaces)</li>
+<li>
+<code>mapping = aes()</code>: change the mapping (see below)</li>
+</ul>
+<p>For example, to get this in APA format we would like light gray bars with black lines. Rather than the default 30 bins, we elect to use the rule of thumb number of bins should equal the <span class="math inline">\(\sqrt{N}\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># step 1</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># before plotting get the get the number of observations</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#step 2:</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb11-9"><a href="#cb11-9"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb11-11"><a href="#cb11-11"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co"># show the result</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="step-3-adjust-the-axes-and-labels" class="level3"><h3 class="anchored" data-anchor-id="step-3-adjust-the-axes-and-labels">Step 3: Adjust the axes and labels</h3>
+<p>The plot at the end of Step 2 is almost there, but there are a few issues that remain. First, our axis labels could be more descriptive than “count” and “BPAQ”. This is solved by adding the arguments <code>xlab()</code> and <code>ylab()</code> to our plot. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#STEP 1</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#STEP 2</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co"># get the number of observations</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co"># number of bins is sqrt of N</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb13-10"><a href="#cb13-10"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb13-12"><a href="#cb13-12"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co"># STEP 3:</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"BPAQ score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Another issue may be that gap that sits between the x-axis (x=0) and the axis scale. This can be remedied by adding the following to our plot <code>p</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The <code>coord_cartesian()</code> command allows us to zoom in or zoom out of our axes. There are several arguments that this command takes including:</p>
+<ul>
+<li>
+<code>xlim=</code>: takes a pair of values <code>c(lower,upper)</code> for limits of x-axis (note that I didn’t modify this, but you can try it just to see what happens)</li>
+<li>
+<code>ylim=</code>: same as above, but for y-axis</li>
+<li>
+<code>expand=</code>: do you want to create additional whitespace between your data and axes?</li>
+</ul>
+<p>For example if I wanted to only show Stat quiz scores with Number of Scores between <code>15</code> and <code>40</code> I can just zoom into my plot (with needing to go back and filter my original data)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Coordinate system already present. Adding new coordinate system, which will
+replace the existing one.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Or if I instead wanted to only focus on those Students that scored between 4 and 8:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Coordinate system already present. Adding new coordinate system, which will
+replace the existing one.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Not something I would in this case, but just an example. OK, let’s get back to our working plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">#STEP 1</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="co">#STEP 2</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="co"># get the number of observations</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb25-7"><a href="#cb25-7"></a></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="co"># number of bins is sqrt of N</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb25-10"><a href="#cb25-10"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb25-11"><a href="#cb25-11"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb25-12"><a href="#cb25-12"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="co"># STEP 3:</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a></span>
+<span id="cb25-15"><a href="#cb25-15"></a><span class="co"># adjust axes labels</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Stats quiz score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>)</span>
+<span id="cb25-17"><a href="#cb25-17"></a><span class="co"># adjust scale of x,y axes if needed:</span></span>
+<span id="cb25-18"><a href="#cb25-18"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-19"><a href="#cb25-19"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>One last thing to consider regarding our axes are the location of labels on the scale. For example the y-axis has labels at every 10 and the x-axis at every 1. What if we want to change the labels on the x-axis? Here we can add <code>scale_y_continuous</code> to our plot <code>p</code>. We need to tell <code>scale_y_continuous</code> what our desired sequence is. You’ve done sequences before, like the sequence from 0 to 10:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p>However, if we want to say count by 2’s the command is a little more involved</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0  2  4  6  8 10</code></pre>
+</div>
+</div>
+<p>where <code>seq(start, stop, by)</code>. So to start at 0 and stop at 4 (along the x-axis) going by .5 in our plot we add <code>breaks= seq(0, 4, .5)</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co">#STEP 1</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb31-3"><a href="#cb31-3"></a></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="co">#STEP 2</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="co"># get the number of observations</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb31-7"><a href="#cb31-7"></a></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="co"># number of bins is sqrt of N</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb31-10"><a href="#cb31-10"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb31-11"><a href="#cb31-11"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb31-12"><a href="#cb31-12"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb31-13"><a href="#cb31-13"></a><span class="co"># STEP 3:</span></span>
+<span id="cb31-14"><a href="#cb31-14"></a></span>
+<span id="cb31-15"><a href="#cb31-15"></a><span class="co"># adjust axes labels</span></span>
+<span id="cb31-16"><a href="#cb31-16"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Stats quiz score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>)</span>
+<span id="cb31-17"><a href="#cb31-17"></a><span class="co"># adjust scale of x,y axes if needed:</span></span>
+<span id="cb31-18"><a href="#cb31-18"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb31-19"><a href="#cb31-19"></a><span class="co"># change x axis ticks:</span></span>
+<span id="cb31-20"><a href="#cb31-20"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">4</span>,.<span class="dv">5</span>))</span>
+<span id="cb31-21"><a href="#cb31-21"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Can you figure out how we make transform the Y-axis labels to count by 5’s instead of 10’s??</p>
+</section><section id="step-4-adjusting-for-apa" class="level3"><h3 class="anchored" data-anchor-id="step-4-adjusting-for-apa">Step 4: Adjusting for APA</h3>
+<p>While the plot at the end of Step 4 is almost there, there are a few issues remaining, Including that gray grid in the background and the lack of axis lines. In the past these changes would need to be done line by line. But fortunately for us we are in the glorious present, and there is a library that does a lot of this cleaning for you.</p>
+<p>Introducing <code>cowplot</code>!!!!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(cowplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>OK, we’ve loaded cowplot. Now what? Simply re-run the previous chunk, but this time adding <code>theme_cowplot()</code> to the end. Note that running <code>? theme_cowplot</code> shows that it includes arguments for font size, font family (type), and line size. Below I’m just going to ask for size “15” font. I typically leave the font type alone, but if I do change it I may occasionally use <code>font_family="Times"</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="co">#STEP 2</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="co"># get the number of observations</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb34-6"><a href="#cb34-6"></a></span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="co"># number of bins is sqrt of N</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb34-9"><a href="#cb34-9"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb34-10"><a href="#cb34-10"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb34-11"><a href="#cb34-11"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb34-12"><a href="#cb34-12"></a><span class="co"># STEP 3:</span></span>
+<span id="cb34-13"><a href="#cb34-13"></a></span>
+<span id="cb34-14"><a href="#cb34-14"></a><span class="co"># adjust axes labels</span></span>
+<span id="cb34-15"><a href="#cb34-15"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Stats quiz score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>)</span>
+<span id="cb34-16"><a href="#cb34-16"></a><span class="co"># adjust scale of x,y axes if needed:</span></span>
+<span id="cb34-17"><a href="#cb34-17"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb34-18"><a href="#cb34-18"></a><span class="co"># change x axis ticks:</span></span>
+<span id="cb34-19"><a href="#cb34-19"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb34-20"><a href="#cb34-20"></a></span>
+<span id="cb34-21"><a href="#cb34-21"></a><span class="co"># STEP 4:</span></span>
+<span id="cb34-22"><a href="#cb34-22"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb34-23"><a href="#cb34-23"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Easy-peasy! You’ll note that <code>cowplot</code> adjusted your fonts, fixed your axes, and removed that nasty background. Even more, once <code>cowplot</code> is loaded it doesn’t need to be called to do this. It just sits in the background and automatically adjusts the format of any plot you make using <code>ggplot</code>. If you ever wanted to return to the default plot style you can run the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_gray</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>But for now <code>cowplot</code> FTW!!! (other cool <code>cowplot</code> things will show up in the advanced section).</p>
+</section><section id="step-5-add-and-adjust-the-legend" class="level3"><h3 class="anchored" data-anchor-id="step-5-add-and-adjust-the-legend">Step 5: Add and adjust the legend</h3>
+<p>Doesn’t make sense in this context so not going to spend a lot of time here, but more on this when it’s relevant.</p>
+</section><section id="condensing-the-code" class="level3"><h3 class="anchored" data-anchor-id="condensing-the-code">Condensing the code</h3>
+<p>For the purposes of making the steps clear, we separated the steps out, adding to and overwriting <code>p</code> (previous iterations of the plot). But, this could all be accomplished in a single call, separating each step with the “+” sign</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># get N for a frequency plot</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb37-3"><a href="#cb37-3"></a></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="co"># create plot</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb37-6"><a href="#cb37-6"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb37-7"><a href="#cb37-7"></a>                 <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb37-8"><a href="#cb37-8"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb37-9"><a href="#cb37-9"></a>                 <span class="at">bins =</span> <span class="fu">sqrt</span>(N)) <span class="sc">+</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a>  <span class="fu">xlab</span>(<span class="st">"Stats quiz score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>) <span class="sc">+</span> </span>
+<span id="cb37-11"><a href="#cb37-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb37-12"><a href="#cb37-12"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb37-13"><a href="#cb37-13"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb37-14"><a href="#cb37-14"></a><span class="fu">show</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="saving-the-ggplot." class="level2"><h2 class="anchored" data-anchor-id="saving-the-ggplot.">Saving the <code>ggplot</code>.</h2>
+<p>In many cases it may make sense to save your resulting plot. For example if you want to move your plot to a Word document or save a folder of plots for easy visualization.</p>
+<p>Within command-line, plots can be saved using the <code>ggsave()</code> function. Note that both <code>cowplot</code> and <code>ggplot</code> libraries have a <code>ggsave()</code> function. They for the most part do the same thing. Lets get some help on <code>ggsave()</code> to see exactly what the parameters are:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>? <span class="fu">ggsave</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>from the result the important arguments are:</p>
+<blockquote class="blockquote">
+<p>filename = Filename of plot plot = Plot to save, defaults to last plot displayed. device = what kind of file, depending on extension. path = Path to save plot to (defaults to project folder). scale = Scaling factor. width = Width (defaults to the width of current plotting window). height = Height (defaults to the height of current plotting window). units = Units for width and height (in, cm, or mm). dpi = DPI to use for raster graphics.</p>
+</blockquote>
+<p>So to save the previous plot to my project folder, <code>p</code> as a .pdf to a file names “histogram.pdf” with the dimensions 8-in by 6-in, and a DPI of 300 (300 is usually the min you want for print)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"histogram.pdf"</span>, </span>
+<span id="cb40-2"><a href="#cb40-2"></a>       <span class="at">plot =</span> p,</span>
+<span id="cb40-3"><a href="#cb40-3"></a>       <span class="at">width =</span> <span class="dv">8</span>,</span>
+<span id="cb40-4"><a href="#cb40-4"></a>       <span class="at">height =</span> <span class="dv">6</span>,</span>
+<span id="cb40-5"><a href="#cb40-5"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb40-6"><a href="#cb40-6"></a>       <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+</div>
+<p>if I wanted an image file like a .png, I just change the filename extension:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"histogram.png"</span>, </span>
+<span id="cb42-2"><a href="#cb42-2"></a>       <span class="at">plot =</span> p,</span>
+<span id="cb42-3"><a href="#cb42-3"></a>       <span class="at">width =</span> <span class="dv">8</span>,</span>
+<span id="cb42-4"><a href="#cb42-4"></a>       <span class="at">height =</span> <span class="dv">6</span>,</span>
+<span id="cb42-5"><a href="#cb42-5"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb42-6"><a href="#cb42-6"></a>       <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_bin()`
+Caused by error in `bin_breaks_bins()`:
+! `bins` must be a whole number, not the number 16.58.</code></pre>
+</div>
+</div>
+<p>Note that you can also copy and save plots that are printed in your Notebook and Plots tab. In the notebook, simply right click on top of the plot for a quick Copy or Download. For plots printed to the Plots tab, click the Export button (this gives you all the options as <code>ggsave</code>).</p>
+</section><section id="advanced-stuff" class="level2"><h2 class="anchored" data-anchor-id="advanced-stuff">Advanced stuff</h2>
+<section id="customizing-your-plot" class="level3"><h3 class="anchored" data-anchor-id="customizing-your-plot">Customizing your plot</h3>
+<p>Let’s rerun the example one more time for practice, but this time lets make things a little more concrete in terms of customization. Again I’m going to go through step-by-step for clarity. This time we’ll create a histogram, with an overlay of the normal distribution (more on that next week)</p>
+<p>First let’s use <code>ggplot()</code> to create a histogram. To get a feel for each step, <strong>run through this code line by line in RStudio</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># load in tidyverse if you haven't already</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="co"># Step 1: identify data and grouping parameters</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a>histPlot1 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">x=</span>BPAQ))</span>
+<span id="cb44-6"><a href="#cb44-6"></a>histPlot1 <span class="co"># note that this produces a blank slate but the parameters are locked in.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># take histPlot 1 (blank plot) and paint a layer on top of it</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="co"># tell ggplot what to do (this is where you actually build the graphics):</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="co"># take histPlot 1's parameters and...</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a>histPlot2 <span class="ot">&lt;-</span> histPlot1 <span class="sc">+</span> </span>
+<span id="cb45-6"><a href="#cb45-6"></a>  <span class="co"># build a histogram </span></span>
+<span id="cb45-7"><a href="#cb45-7"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, <span class="co"># bins are 5 units wide</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a>                <span class="at">color =</span> <span class="st">"orange"</span>, <span class="co"># what color is the outline of bars</span></span>
+<span id="cb45-9"><a href="#cb45-9"></a>                <span class="at">fill =</span> <span class="st">"green"</span>) <span class="co"># what color to fill the bars with</span></span>
+<span id="cb45-10"><a href="#cb45-10"></a>histPlot2 <span class="co"># show the frequency plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>I intentionally made a hideous looking plot above to show you what the additional arguments do. Let’s turn this into something a little more pleasing to the eyes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>histPlot2 <span class="ot">&lt;-</span> histPlot1 <span class="sc">+</span> </span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb46-3"><a href="#cb46-3"></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="co"># what color is the outline of bars</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a>                <span class="at">fill =</span> <span class="st">"white"</span>) <span class="co"># what color to fill the bars with</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a>histPlot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Okay, now to add a curve representing the normal distribution. One important thing to note is that the histogram that is ultimately produced here has probability density (think like % of scores) on the y-axis instead of frequency (# of scores). So we’ll need to convert our frequency plot to a probability density plot. Fortunately this is just one line of code. Instead of <code>..count..</code> we use <code>..density..</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># take histPlot 1 (blank plot) and paint a layer on top of it</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="co"># tell ggplot what to do (this is where you actually build the graphics):</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>histPlot3 <span class="ot">&lt;-</span> histPlot1 <span class="sc">+</span> </span>
+<span id="cb47-4"><a href="#cb47-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb47-5"><a href="#cb47-5"></a>                 <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb47-6"><a href="#cb47-6"></a>                 <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb47-7"><a href="#cb47-7"></a>                 <span class="fu">aes</span>(<span class="at">y=</span>..density..)<span class="co"># convert to a prob density plot</span></span>
+<span id="cb47-8"><a href="#cb47-8"></a>  )</span>
+<span id="cb47-9"><a href="#cb47-9"></a>histPlot3 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>notice that <code>histPlot3</code> is a density plot rather frequency plot from above. Now to add the normal curve:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># add a normal curve to density plot:</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>histPlot4 <span class="ot">&lt;-</span> histPlot3 <span class="sc">+</span> </span>
+<span id="cb48-3"><a href="#cb48-3"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>                <span class="at">color =</span> <span class="st">"red"</span>, <span class="co"># color the line red</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>                <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb48-6"><a href="#cb48-6"></a>                  <span class="at">mean =</span> <span class="fu">mean</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T), <span class="co"># build around mean</span></span>
+<span id="cb48-7"><a href="#cb48-7"></a>                  <span class="at">sd =</span> <span class="fu">sd</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T) <span class="co"># st dev parameter</span></span>
+<span id="cb48-8"><a href="#cb48-8"></a>                )</span>
+<span id="cb48-9"><a href="#cb48-9"></a>  )</span>
+<span id="cb48-10"><a href="#cb48-10"></a></span>
+<span id="cb48-11"><a href="#cb48-11"></a>histPlot4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Some suggest that a better alternative to the normal curve is a kernel density plot. To fit a kernel density plot to our histogram (histPlot3) we can invoke:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># hisPlot 3 was the base histogram without curve</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>histPlot3 <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>and let’s make the x-axis label a little more transparent with <code>xlab()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>histPlot3 <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"BPAQ scores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Keep in mind, that although we walked-through making <code>histPlot1</code>, then <code>histPlot2</code>, <code>histPlot3</code>, <code>histPlot4</code>, we could have accomplished all of this with a single assign:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>histPlot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">x=</span>BPAQ)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb51-3"><a href="#cb51-3"></a>                <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb51-4"><a href="#cb51-4"></a>                <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb51-5"><a href="#cb51-5"></a>                <span class="fu">aes</span>(<span class="at">y=</span>..density..))  <span class="sc">+</span></span>
+<span id="cb51-6"><a href="#cb51-6"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span></span>
+<span id="cb51-7"><a href="#cb51-7"></a>                <span class="at">color =</span> <span class="st">"red"</span>, <span class="co"># color the line red</span></span>
+<span id="cb51-8"><a href="#cb51-8"></a>                <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb51-9"><a href="#cb51-9"></a>                  <span class="at">mean =</span> <span class="fu">mean</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T), <span class="co"># build around mean</span></span>
+<span id="cb51-10"><a href="#cb51-10"></a>                  <span class="at">sd =</span> <span class="fu">sd</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T) <span class="co"># st dev parameter</span></span>
+<span id="cb51-11"><a href="#cb51-11"></a>                )</span>
+<span id="cb51-12"><a href="#cb51-12"></a>  )</span>
+<span id="cb51-13"><a href="#cb51-13"></a></span>
+<span id="cb51-14"><a href="#cb51-14"></a>histPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Moreover, we could facet the plot by some categorical variable, for example <code>fctr_Gender</code>. Conceptually, faceting is the equivalent of performing <code><a href="https://rdrr.io/pkg/psych/man/describe.by.html">psych::describeBy()</a></code>, separating the data by some grouping variable. For example, to get the summary stats of <code>BPAQ</code> scores by gender:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># specifying $BPAQ because I don't want a print out of the entire dataframe</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(<span class="at">x =</span> aggression_data<span class="sc">$</span>BPAQ, <span class="at">group =</span> aggression_data<span class="sc">$</span>fctr_Gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Descriptive statistics by group 
+group: Man
+   vars  n mean   sd median trimmed  mad  min  max range skew kurtosis   se
+X1    1 57 2.66 0.51   2.69    2.67 0.66 1.62 3.69  2.07    0    -0.96 0.07
+------------------------------------------------------------ 
+group: Woman
+   vars   n mean   sd median trimmed  mad  min  max range skew kurtosis   se
+X1    1 218  2.6 0.53   2.62     2.6 0.56 1.34 4.03  2.69 0.02    -0.31 0.04</code></pre>
+</div>
+</div>
+<p>To separate the two histogram distributions I can simply add <code>facet_wrap(~fctr_Gender)</code> to my <code>ggplot</code> call; <code>~</code> means “by”, as in facet wrap by Gender (remember that <code>fctr_Gender</code> is a column we created to rid ourselves of the numeric coding):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>histPlot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">x=</span>BPAQ)) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb54-3"><a href="#cb54-3"></a>                <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb54-4"><a href="#cb54-4"></a>                <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb54-5"><a href="#cb54-5"></a>                <span class="fu">aes</span>(<span class="at">y=</span>..density..))  <span class="sc">+</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a>                <span class="at">color =</span> <span class="st">"red"</span>, <span class="co"># color the line red</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a>                <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb54-9"><a href="#cb54-9"></a>                  <span class="at">mean =</span> <span class="fu">mean</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T), <span class="co"># build around mean</span></span>
+<span id="cb54-10"><a href="#cb54-10"></a>                  <span class="at">sd =</span> <span class="fu">sd</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T) <span class="co"># st dev parameter</span></span>
+<span id="cb54-11"><a href="#cb54-11"></a>                )</span>
+<span id="cb54-12"><a href="#cb54-12"></a>  ) <span class="sc">+</span></span>
+<span id="cb54-13"><a href="#cb54-13"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>fctr_Gender)</span>
+<span id="cb54-14"><a href="#cb54-14"></a>histPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="plotting-your-data-in-a-boxplot" class="level3"><h3 class="anchored" data-anchor-id="plotting-your-data-in-a-boxplot">Plotting your data in a boxplot:</h3>
+<p>Now let’s create a few boxplots of <code>BPAQ</code>. First the entire dataset, indifferent to the 2 different categories of <code>fctr_Gender</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># Set the parameters (data and axes)</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb55-3"><a href="#cb55-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y=</span>BPAQ)) <span class="co"># tell R to make it a boxplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note that the <code>x-axis</code> in this plot is meaningless. We can remove it if we want:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># Set the parameters (data and axes)</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb56-3"><a href="#cb56-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y=</span>BPAQ)) <span class="sc">+</span>    <span class="co"># tell R to make it a boxplot</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(), <span class="co"># element_blank removes item, in this case x-axis text</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>() <span class="co"># and ticks</span></span>
+<span id="cb56-6"><a href="#cb56-6"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now let’s take a look at the data that will be boxplotted as a function of <code>fctr_Gender</code> groups. Here I want to note that <code><a href="https://rdrr.io/pkg/psych/man/describe.by.html">psych::describeBy</a></code> has an additional argument to display the quantiles:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(aggression_data,<span class="at">group =</span> aggression_data<span class="sc">$</span>fctr_Gender,<span class="at">quant=</span><span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Descriptive statistics by group 
+group: Man
+             vars  n  mean    sd median trimmed   mad   min   max range  skew
+age             1 57 20.60  5.87  18.00   19.21  0.00 17.00 50.00 33.00  3.09
+BPAQ            2 57  2.66  0.51   2.69    2.67  0.66  1.62  3.69  2.07  0.00
+AISS            3 57  2.74  0.34   2.75    2.73  0.30  1.80  3.70  1.90  0.28
+alcohol         4 55 17.95 18.22  12.00   15.42 17.79  0.00 73.00 73.00  1.06
+BIS             5 57  2.23  0.33   2.19    2.21  0.29  1.69  3.12  1.42  0.64
+NEOc            6 57  3.64  0.56   3.67    3.64  0.62  2.33  4.75  2.42 -0.13
+gender          7 57  0.00  0.00   0.00    0.00  0.00  0.00  0.00  0.00   NaN
+NEOo            8 57  3.27  0.59   3.33    3.30  0.62  1.67  4.33  2.67 -0.41
+fctr_Gender*    9 57  1.00  0.00   1.00    1.00  0.00  1.00  1.00  0.00   NaN
+             kurtosis   se Q0.25 Q0.75
+age             10.46 0.78 18.00 19.00
+BPAQ            -0.96 0.07  2.28  3.17
+AISS             0.95 0.05  2.55  2.95
+alcohol          0.44 2.46  2.50 29.50
+BIS              0.03 0.04  2.04  2.42
+NEOc            -0.65 0.07  3.25  4.08
+gender            NaN 0.00  0.00  0.00
+NEOo            -0.10 0.08  2.83  3.75
+fctr_Gender*      NaN 0.00  1.00  1.00
+------------------------------------------------------------ 
+group: Woman
+             vars   n  mean    sd median trimmed   mad   min   max range  skew
+age             1 218 20.11  4.70  19.00   19.03  1.48 17.00 50.00 33.00  3.86
+BPAQ            2 218  2.60  0.53   2.62    2.60  0.56  1.34  4.03  2.69  0.02
+AISS            3 218  2.51  0.37   2.52    2.51  0.37  1.45  3.70  2.25 -0.01
+alcohol         4 215 15.50 15.22  12.00   13.36 13.34  0.00 96.00 96.00  1.63
+BIS             5 218  2.30  0.36   2.27    2.28  0.40  1.42  3.15  1.73  0.29
+NEOc            6 218  3.52  0.60   3.50    3.53  0.49  1.83  4.92  3.08 -0.15
+gender          7 218  1.00  0.00   1.00    1.00  0.00  1.00  1.00  0.00   NaN
+NEOo            8 218  3.38  0.50   3.42    3.39  0.49  1.83  4.67  2.83 -0.14
+fctr_Gender*    9 218  2.00  0.00   2.00    2.00  0.00  2.00  2.00  0.00   NaN
+             kurtosis   se Q0.25 Q0.75
+age             17.01 0.32 18.00 20.00
+BPAQ            -0.31 0.04  2.21  2.97
+AISS             0.01 0.02  2.25  2.75
+alcohol          4.16 1.04  3.50 23.00
+BIS             -0.27 0.02  2.04  2.54
+NEOc            -0.04 0.04  3.17  3.90
+gender            NaN 0.00  1.00  1.00
+NEOo            -0.30 0.03  3.00  3.73
+fctr_Gender*      NaN 0.00  2.00  2.00</code></pre>
+</div>
+</div>
+<p>To plot this we need to tell <code>R</code> to put different distributions at different points along the <code>x-axis</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb59-2"><a href="#cb59-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y=</span>BPAQ, <span class="at">x =</span> fctr_Gender))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Before leaving I want to show what would’ve happened in the latter case if we didn’t correct <code>fctr_Gender</code> and left it as a numeric variable (as <code>gender</code> in our data frame) rather than converting to a categorical:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="co"># creating the boxplot using exact code from chunk above:</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">y=</span>BPAQ, <span class="at">x =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb60-3"><a href="#cb60-3"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Continuous x aesthetic
+ℹ did you forget `aes(group = ...)`?</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Since <code>R</code> treats the categorical variable as a numeric, all of the data gets lumped together at the mean value of <code>Gender</code> even though we explicitly tried to group our data by this variable. <strong>Remember, you need to be careful with having categorical data coded as numbers!</strong></p>
+</section><section id="cowplot" class="level3"><h3 class="anchored" data-anchor-id="cowplot">Cowplot</h3>
+<p>Finally, we can combine multiple plots using the <code>cowplot</code> package and its two commands <code>plot_grid()</code> and <code>plot_wrap</code>. For example, we can recreate a plot in the style of Winter, Figure 3.4 (p.&nbsp;59) by creating a histogram of our data, then a boxplot of out data, and then aligning them:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>histPlot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">x=</span>BPAQ)) <span class="sc">+</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb62-3"><a href="#cb62-3"></a>                <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb62-4"><a href="#cb62-4"></a>                <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb62-5"><a href="#cb62-5"></a>                <span class="fu">aes</span>(<span class="at">y=</span>..density..))  <span class="sc">+</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span></span>
+<span id="cb62-7"><a href="#cb62-7"></a>                <span class="at">color =</span> <span class="st">"red"</span>, <span class="co"># color the line red</span></span>
+<span id="cb62-8"><a href="#cb62-8"></a>                <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb62-9"><a href="#cb62-9"></a>                  <span class="at">mean =</span> <span class="fu">mean</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T), <span class="co"># build around mean</span></span>
+<span id="cb62-10"><a href="#cb62-10"></a>                  <span class="at">sd =</span> <span class="fu">sd</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T) <span class="co"># st dev parameter</span></span>
+<span id="cb62-11"><a href="#cb62-11"></a>                )</span>
+<span id="cb62-12"><a href="#cb62-12"></a>  ) <span class="sc">+</span></span>
+<span id="cb62-13"><a href="#cb62-13"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb62-14"><a href="#cb62-14"></a></span>
+<span id="cb62-15"><a href="#cb62-15"></a>boxPlot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb62-16"><a href="#cb62-16"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y=</span>BPAQ),<span class="at">outlier.color =</span> <span class="st">"red"</span>) <span class="sc">+</span>  <span class="co"># tell R to make it a boxplot</span></span>
+<span id="cb62-17"><a href="#cb62-17"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co">#make horizontal</span></span>
+<span id="cb62-18"><a href="#cb62-18"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(), <span class="co"># element_blank removes item, in this case x-axis text</span></span>
+<span id="cb62-19"><a href="#cb62-19"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>() <span class="co"># and ticks</span></span>
+<span id="cb62-20"><a href="#cb62-20"></a>        ) <span class="sc">+</span></span>
+<span id="cb62-21"><a href="#cb62-21"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb62-22"><a href="#cb62-22"></a>  </span>
+<span id="cb62-23"><a href="#cb62-23"></a>  </span>
+<span id="cb62-24"><a href="#cb62-24"></a></span>
+<span id="cb62-25"><a href="#cb62-25"></a>combined_plot <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(histPlot,boxPlot, <span class="at">align =</span> <span class="st">"hv"</span>,<span class="at">ncol =</span> <span class="dv">1</span>,<span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span>
+<span id="cb62-26"><a href="#cb62-26"></a>combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_1-basic_ggplot_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>For other cool stuff that can be done with <code>cowplot()</code> including placing multiple plots side by side, check out the vignette links below written by its author, <a href="http://wilkelab.org/">Claus O. Wilke</a>:</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html">Introduction to cowplot</a></li>
+<li><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/axis_position.html">Changing the axis positions</a></li>
+<li><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/plot_annotations.html">Plot annotations</a></li>
+<li><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/plot_grid.html">Arranging plots in a grid</a></li>
+<li><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/shared_legends.html">Shared legends</a></li>
+</ul>
+
+
+<!-- -->
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb63" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb63-1"><a href="#cb63-1"></a><span class="co">---</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a><span class="an">title:</span><span class="co"> "Basic ggplotting"</span></span>
+<span id="cb63-3"><a href="#cb63-3"></a><span class="co">---</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a></span>
+<span id="cb63-5"><a href="#cb63-5"></a>As I mentioned, I'm a firm believer that given the choice of creating a table or producing a plot, I would choose to make the plot unless there are other important factors that make the table more desirable. There are any number of plots that you make use in your analyses: scatterplots, bar plots (although there's a bit of a backlash on barplots right now), histograms, boxplots, violin plots, heatmaps, rug plots, and the list goes on and on. What type of plot you choose to make should depend on what info you are attempting to stress and convey to your audience (including you). We'll encounter most of these plots throughout the semester.</span>
+<span id="cb63-6"><a href="#cb63-6"></a></span>
+<span id="cb63-7"><a href="#cb63-7"></a>There are a number of ways to plot in <span class="in">`R`</span>, including plotting functions installed in <span class="in">`baseR`</span> and several custom packages. I think the most powerful way (and hence best for students to learn) to plot is using the <span class="in">`ggplot`</span> package. <span class="in">`ggplot`</span> is a bit tricky at first, but once it clicks it really clicks. Here I'm going to walk you through the construction of a histogram plot and lay out the logic of getting those plots in appropriate APA format. For the purposes of keeping things simple I'm going to focus on the types of data that we have encountered in class so far, namely frequency data and data related to central tendency. As our designs and analyses become more complex, I will have sections at the end of each week that build upon what we do here (scatterplots, regression plots, interaction plots, oh my!)</span>
+<span id="cb63-8"><a href="#cb63-8"></a></span>
+<span id="cb63-9"><a href="#cb63-9"></a>There are a few packages that we will introduce in this walkthrough, including: <span class="in">`cowplot`</span>. I'll go into further detail what they can do for us as we move along, but for now let's just load in the one we are most familiar with:</span>
+<span id="cb63-10"><a href="#cb63-10"></a></span>
+<span id="cb63-13"><a href="#cb63-13"></a><span class="in">```{r}</span></span>
+<span id="cb63-14"><a href="#cb63-14"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb63-15"><a href="#cb63-15"></a><span class="in">```</span></span>
+<span id="cb63-16"><a href="#cb63-16"></a></span>
+<span id="cb63-17"><a href="#cb63-17"></a>If you recall, <span class="in">`tidyverse`</span> contains a family of over 70 packages. <span class="in">`ggplot2`</span> is one of these packages. For the purposes of this walk-through I will be using the <span class="in">`aggression_data`</span> dataset from Flora (and our previous walkthrough). If you want to follow along, you'll need to import that data:</span>
+<span id="cb63-18"><a href="#cb63-18"></a></span>
+<span id="cb63-21"><a href="#cb63-21"></a><span class="in">```{r}</span></span>
+<span id="cb63-22"><a href="#cb63-22"></a><span class="fu">library</span>(readr)</span>
+<span id="cb63-23"><a href="#cb63-23"></a>aggression_data <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/aggression.dat"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-24"><a href="#cb63-24"></a><span class="in">```</span></span>
+<span id="cb63-25"><a href="#cb63-25"></a></span>
+<span id="cb63-26"><a href="#cb63-26"></a>Let's also clean up, or wrangle, the data, in this case naming the header and fixing the <span class="in">`gender`</span> variable:</span>
+<span id="cb63-27"><a href="#cb63-27"></a></span>
+<span id="cb63-30"><a href="#cb63-30"></a><span class="in">```{r}</span></span>
+<span id="cb63-31"><a href="#cb63-31"></a><span class="fu">names</span>(aggression_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'age'</span>, <span class="st">'BPAQ'</span>, <span class="st">'AISS'</span>, <span class="st">'alcohol'</span>, <span class="st">'BIS'</span>, <span class="st">'NEOc'</span>, <span class="st">'gender'</span>, <span class="st">'NEOo'</span>)</span>
+<span id="cb63-32"><a href="#cb63-32"></a></span>
+<span id="cb63-33"><a href="#cb63-33"></a>aggression_data <span class="ot">&lt;-</span> aggression_data <span class="sc">%&gt;%</span> </span>
+<span id="cb63-34"><a href="#cb63-34"></a>  <span class="fu">mutate</span>(<span class="at">fctr_Gender =</span> <span class="fu">factor</span>(gender))</span>
+<span id="cb63-35"><a href="#cb63-35"></a></span>
+<span id="cb63-36"><a href="#cb63-36"></a>aggression_data<span class="sc">$</span>fctr_Gender <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">recode_factor</span>(aggression_data<span class="sc">$</span>fctr_Gender, <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"Man"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Woman"</span>)</span>
+<span id="cb63-37"><a href="#cb63-37"></a><span class="in">```</span></span>
+<span id="cb63-38"><a href="#cb63-38"></a></span>
+<span id="cb63-39"><a href="#cb63-39"></a><span class="fu">## The Basics</span></span>
+<span id="cb63-40"><a href="#cb63-40"></a></span>
+<span id="cb63-41"><a href="#cb63-41"></a>In general, the basic procedure for constructing a plot goes through the following steps:</span>
+<span id="cb63-42"><a href="#cb63-42"></a></span>
+<span id="cb63-43"><a href="#cb63-43"></a><span class="ss">1.  </span>link to the data and tell <span class="in">`ggplot`</span> how to structure its output</span>
+<span id="cb63-44"><a href="#cb63-44"></a><span class="ss">2.  </span>tell <span class="in">`ggplot`</span> what kind of plot to make</span>
+<span id="cb63-45"><a href="#cb63-45"></a><span class="ss">3.  </span>adjust the axes and labels if necessary</span>
+<span id="cb63-46"><a href="#cb63-46"></a><span class="ss">4.  </span>adjust the appearance of the plot for APA (or other appropriate format)</span>
+<span id="cb63-47"><a href="#cb63-47"></a><span class="ss">5.  </span>add a legend if necessary</span>
+<span id="cb63-48"><a href="#cb63-48"></a><span class="ss">6.  </span>save or export the plot</span>
+<span id="cb63-49"><a href="#cb63-49"></a></span>
+<span id="cb63-50"><a href="#cb63-50"></a>Perhaps most critically, building plot (much like running an analysis) is something that should be carefully considered and well-thought out. In order words it's probably in your best interest early on to "sketch out" mentally of with a pen an paper, what your plot should look like---what's on the x-axis? what's on the y-axis, what kind of plot?, any coloring or other stylizing? is the data going to be grouped? etc.</span>
+<span id="cb63-51"><a href="#cb63-51"></a></span>
+<span id="cb63-52"><a href="#cb63-52"></a><span class="fu">### Step 1: Building the canvas</span></span>
+<span id="cb63-53"><a href="#cb63-53"></a></span>
+<span id="cb63-54"><a href="#cb63-54"></a>Here you need to be thinking about what form you want the plot to take. Key points:</span>
+<span id="cb63-55"><a href="#cb63-55"></a></span>
+<span id="cb63-56"><a href="#cb63-56"></a><span class="ss">1.  </span><span class="in">`data =`</span>: what data set you will be pulling from. This needs to be in the form of a <span class="in">`data_frame()`</span>, with <span class="in">`names`</span> in the headers. For most data that we will be working with from here on out, that will be the case. However, for constructed / simulation data you may have to do this manually.</span>
+<span id="cb63-57"><a href="#cb63-57"></a></span>
+<span id="cb63-58"><a href="#cb63-58"></a>If you are unsure of the header names you can see them by:</span>
+<span id="cb63-59"><a href="#cb63-59"></a></span>
+<span id="cb63-62"><a href="#cb63-62"></a><span class="in">```{r}</span></span>
+<span id="cb63-63"><a href="#cb63-63"></a><span class="fu">names</span>(aggression_data)</span>
+<span id="cb63-64"><a href="#cb63-64"></a><span class="in">```</span></span>
+<span id="cb63-65"><a href="#cb63-65"></a></span>
+<span id="cb63-66"><a href="#cb63-66"></a>Note that depending on what guide you follow you may also include <span class="in">`mapping=aes()`</span> here as well. This would include telling <span class="in">`R`</span> eventually what info goes on each axis, how data is grouped, etc. BUT this info can also be relayed in Step 2, and I think that conceptually it make more sense to put it there.</span>
+<span id="cb63-67"><a href="#cb63-67"></a></span>
+<span id="cb63-68"><a href="#cb63-68"></a>So for Step 1, just tell <span class="in">`ggplot`</span> what data we are using and save our Step 1 to an object called <span class="in">`p`</span></span>
+<span id="cb63-69"><a href="#cb63-69"></a></span>
+<span id="cb63-72"><a href="#cb63-72"></a><span class="in">```{r}</span></span>
+<span id="cb63-73"><a href="#cb63-73"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data)</span>
+<span id="cb63-74"><a href="#cb63-74"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-75"><a href="#cb63-75"></a><span class="in">```</span></span>
+<span id="cb63-76"><a href="#cb63-76"></a></span>
+<span id="cb63-77"><a href="#cb63-77"></a>As you can see we've created a blank canvas---nothing else to see here.</span>
+<span id="cb63-78"><a href="#cb63-78"></a></span>
+<span id="cb63-79"><a href="#cb63-79"></a><span class="fu">### Step 2: Tell `ggplot` what kind of plot to make.</span></span>
+<span id="cb63-80"><a href="#cb63-80"></a></span>
+<span id="cb63-81"><a href="#cb63-81"></a>Plots can take several forms, or geoms (geometries), most common include: + histogram: <span class="in">`geom_histogram`</span> + boxplot: <span class="in">`geom_boxplot`</span> + scatter: <span class="in">`geom_point`</span> + bar: <span class="in">`geom_bar`</span> + line: <span class="in">`geom_line`</span></span>
+<span id="cb63-82"><a href="#cb63-82"></a></span>
+<span id="cb63-83"><a href="#cb63-83"></a>Here we are creating a histogram, so in Step 2 we add <span class="in">`geom_histogram()`</span> to our original plot <span class="in">`p`</span>. We also need to tell <span class="in">`ggplot`</span> how to go about constructing our histogram. This info would be including in the <span class="in">`mapping = aes()`</span> argument. This tells <span class="in">`ggplot`</span> about the general layout of the plot, including: + <span class="in">`x`</span>: what is on the x-axis + <span class="in">`y`</span>: what's on the y-axis (usually your dependent variable, although for histograms this ends up being frequency and <span class="in">`x`</span> is your dependent variable) + <span class="in">`group`</span>: how should the data be grouped? This will become important for more complex designs.</span>
+<span id="cb63-84"><a href="#cb63-84"></a></span>
+<span id="cb63-85"><a href="#cb63-85"></a>What <span class="in">`aes()`</span> options you choose in large part is determined by what kind of plot you intend to make. For our histogram we want bins of <span class="in">`BPAQ`</span> on the x-axis and frequency <span class="in">`..count..`</span> on the y-axis.</span>
+<span id="cb63-86"><a href="#cb63-86"></a></span>
+<span id="cb63-89"><a href="#cb63-89"></a><span class="in">```{r}</span></span>
+<span id="cb63-90"><a href="#cb63-90"></a><span class="co"># Repeating previous step for clarity:</span></span>
+<span id="cb63-91"><a href="#cb63-91"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data)</span>
+<span id="cb63-92"><a href="#cb63-92"></a><span class="co"># new step, take our original "p", add a geom, save the new plot to "p"</span></span>
+<span id="cb63-93"><a href="#cb63-93"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..)) </span>
+<span id="cb63-94"><a href="#cb63-94"></a><span class="co"># show the result</span></span>
+<span id="cb63-95"><a href="#cb63-95"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-96"><a href="#cb63-96"></a><span class="in">```</span></span>
+<span id="cb63-97"><a href="#cb63-97"></a></span>
+<span id="cb63-98"><a href="#cb63-98"></a>The default <span class="in">`geom_histogram()`</span> produces the above plot. However, we can tweak several arguments in <span class="in">`geom_histogram()`</span> to change the presentation of data, including:</span>
+<span id="cb63-99"><a href="#cb63-99"></a></span>
+<span id="cb63-100"><a href="#cb63-100"></a><span class="ss">-   </span><span class="in">`binwidth`</span>: the width of each bin, or...</span>
+<span id="cb63-101"><a href="#cb63-101"></a><span class="ss">-   </span><span class="in">`bins`</span>: the number of bins</span>
+<span id="cb63-102"><a href="#cb63-102"></a><span class="ss">-   </span><span class="in">`color`</span>: the color of the perimeter of each bin/bar (note <span class="in">`color`</span> refers to lines)</span>
+<span id="cb63-103"><a href="#cb63-103"></a><span class="ss">-   </span><span class="in">`fill`</span>: the color of the bin/bar itself (note <span class="in">`fill`</span> refers to spaces)</span>
+<span id="cb63-104"><a href="#cb63-104"></a><span class="ss">-   </span><span class="in">`mapping = aes()`</span>: change the mapping (see below)</span>
+<span id="cb63-105"><a href="#cb63-105"></a></span>
+<span id="cb63-106"><a href="#cb63-106"></a>For example, to get this in APA format we would like light gray bars with black lines. Rather than the default 30 bins, we elect to use the rule of thumb number of bins should equal the $\sqrt{N}$.</span>
+<span id="cb63-107"><a href="#cb63-107"></a></span>
+<span id="cb63-110"><a href="#cb63-110"></a><span class="in">```{r}</span></span>
+<span id="cb63-111"><a href="#cb63-111"></a><span class="co"># step 1</span></span>
+<span id="cb63-112"><a href="#cb63-112"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb63-113"><a href="#cb63-113"></a></span>
+<span id="cb63-114"><a href="#cb63-114"></a><span class="co"># before plotting get the get the number of observations</span></span>
+<span id="cb63-115"><a href="#cb63-115"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb63-116"><a href="#cb63-116"></a></span>
+<span id="cb63-117"><a href="#cb63-117"></a><span class="co">#step 2:</span></span>
+<span id="cb63-118"><a href="#cb63-118"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb63-119"><a href="#cb63-119"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb63-120"><a href="#cb63-120"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb63-121"><a href="#cb63-121"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb63-122"><a href="#cb63-122"></a><span class="co"># show the result</span></span>
+<span id="cb63-123"><a href="#cb63-123"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-124"><a href="#cb63-124"></a></span>
+<span id="cb63-125"><a href="#cb63-125"></a><span class="in">```</span></span>
+<span id="cb63-126"><a href="#cb63-126"></a></span>
+<span id="cb63-127"><a href="#cb63-127"></a><span class="fu">### Step 3: Adjust the axes and labels</span></span>
+<span id="cb63-128"><a href="#cb63-128"></a></span>
+<span id="cb63-129"><a href="#cb63-129"></a>The plot at the end of Step 2 is almost there, but there are a few issues that remain. First, our axis labels could be more descriptive than "count" and "BPAQ". This is solved by adding the arguments <span class="in">`xlab()`</span> and <span class="in">`ylab()`</span> to our plot. For example:</span>
+<span id="cb63-130"><a href="#cb63-130"></a></span>
+<span id="cb63-133"><a href="#cb63-133"></a><span class="in">```{r}</span></span>
+<span id="cb63-134"><a href="#cb63-134"></a><span class="co">#STEP 1</span></span>
+<span id="cb63-135"><a href="#cb63-135"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb63-136"><a href="#cb63-136"></a></span>
+<span id="cb63-137"><a href="#cb63-137"></a><span class="co">#STEP 2</span></span>
+<span id="cb63-138"><a href="#cb63-138"></a><span class="co"># get the number of observations</span></span>
+<span id="cb63-139"><a href="#cb63-139"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb63-140"><a href="#cb63-140"></a></span>
+<span id="cb63-141"><a href="#cb63-141"></a><span class="co"># number of bins is sqrt of N</span></span>
+<span id="cb63-142"><a href="#cb63-142"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb63-143"><a href="#cb63-143"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb63-144"><a href="#cb63-144"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb63-145"><a href="#cb63-145"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb63-146"><a href="#cb63-146"></a><span class="co"># STEP 3:</span></span>
+<span id="cb63-147"><a href="#cb63-147"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"BPAQ score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>)</span>
+<span id="cb63-148"><a href="#cb63-148"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-149"><a href="#cb63-149"></a></span>
+<span id="cb63-150"><a href="#cb63-150"></a><span class="in">```</span></span>
+<span id="cb63-151"><a href="#cb63-151"></a></span>
+<span id="cb63-152"><a href="#cb63-152"></a>Another issue may be that gap that sits between the x-axis (x=0) and the axis scale. This can be remedied by adding the following to our plot <span class="in">`p`</span>:</span>
+<span id="cb63-153"><a href="#cb63-153"></a></span>
+<span id="cb63-156"><a href="#cb63-156"></a><span class="in">```{r}</span></span>
+<span id="cb63-157"><a href="#cb63-157"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-158"><a href="#cb63-158"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-159"><a href="#cb63-159"></a><span class="in">```</span></span>
+<span id="cb63-160"><a href="#cb63-160"></a></span>
+<span id="cb63-161"><a href="#cb63-161"></a>The <span class="in">`coord_cartesian()`</span> command allows us to zoom in or zoom out of our axes. There are several arguments that this command takes including:</span>
+<span id="cb63-162"><a href="#cb63-162"></a></span>
+<span id="cb63-163"><a href="#cb63-163"></a><span class="ss">-   </span><span class="in">`xlim=`</span>: takes a pair of values <span class="in">`c(lower,upper)`</span> for limits of x-axis (note that I didn't modify this, but you can try it just to see what happens)</span>
+<span id="cb63-164"><a href="#cb63-164"></a><span class="ss">-   </span><span class="in">`ylim=`</span>: same as above, but for y-axis</span>
+<span id="cb63-165"><a href="#cb63-165"></a><span class="ss">-   </span><span class="in">`expand=`</span>: do you want to create additional whitespace between your data and axes?</span>
+<span id="cb63-166"><a href="#cb63-166"></a></span>
+<span id="cb63-167"><a href="#cb63-167"></a>For example if I wanted to only show Stat quiz scores with Number of Scores between <span class="in">`15`</span> and <span class="in">`40`</span> I can just zoom into my plot (with needing to go back and filter my original data)</span>
+<span id="cb63-168"><a href="#cb63-168"></a></span>
+<span id="cb63-171"><a href="#cb63-171"></a><span class="in">```{r}</span></span>
+<span id="cb63-172"><a href="#cb63-172"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-173"><a href="#cb63-173"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-174"><a href="#cb63-174"></a><span class="in">```</span></span>
+<span id="cb63-175"><a href="#cb63-175"></a></span>
+<span id="cb63-176"><a href="#cb63-176"></a>Or if I instead wanted to only focus on those Students that scored between 4 and 8:</span>
+<span id="cb63-177"><a href="#cb63-177"></a></span>
+<span id="cb63-180"><a href="#cb63-180"></a><span class="in">```{r}</span></span>
+<span id="cb63-181"><a href="#cb63-181"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-182"><a href="#cb63-182"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-183"><a href="#cb63-183"></a><span class="in">```</span></span>
+<span id="cb63-184"><a href="#cb63-184"></a></span>
+<span id="cb63-185"><a href="#cb63-185"></a>Not something I would in this case, but just an example. OK, let's get back to our working plot:</span>
+<span id="cb63-186"><a href="#cb63-186"></a></span>
+<span id="cb63-189"><a href="#cb63-189"></a><span class="in">```{r}</span></span>
+<span id="cb63-190"><a href="#cb63-190"></a><span class="co">#STEP 1</span></span>
+<span id="cb63-191"><a href="#cb63-191"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb63-192"><a href="#cb63-192"></a></span>
+<span id="cb63-193"><a href="#cb63-193"></a><span class="co">#STEP 2</span></span>
+<span id="cb63-194"><a href="#cb63-194"></a><span class="co"># get the number of observations</span></span>
+<span id="cb63-195"><a href="#cb63-195"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb63-196"><a href="#cb63-196"></a></span>
+<span id="cb63-197"><a href="#cb63-197"></a><span class="co"># number of bins is sqrt of N</span></span>
+<span id="cb63-198"><a href="#cb63-198"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb63-199"><a href="#cb63-199"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb63-200"><a href="#cb63-200"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb63-201"><a href="#cb63-201"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb63-202"><a href="#cb63-202"></a><span class="co"># STEP 3:</span></span>
+<span id="cb63-203"><a href="#cb63-203"></a></span>
+<span id="cb63-204"><a href="#cb63-204"></a><span class="co"># adjust axes labels</span></span>
+<span id="cb63-205"><a href="#cb63-205"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Stats quiz score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>)</span>
+<span id="cb63-206"><a href="#cb63-206"></a><span class="co"># adjust scale of x,y axes if needed:</span></span>
+<span id="cb63-207"><a href="#cb63-207"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-208"><a href="#cb63-208"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-209"><a href="#cb63-209"></a><span class="in">```</span></span>
+<span id="cb63-210"><a href="#cb63-210"></a></span>
+<span id="cb63-211"><a href="#cb63-211"></a>One last thing to consider regarding our axes are the location of labels on the scale. For example the y-axis has labels at every 10 and the x-axis at every 1. What if we want to change the labels on the x-axis? Here we can add <span class="in">`scale_y_continuous`</span> to our plot <span class="in">`p`</span>. We need to tell <span class="in">`scale_y_continuous`</span> what our desired sequence is. You've done sequences before, like the sequence from 0 to 10:</span>
+<span id="cb63-212"><a href="#cb63-212"></a></span>
+<span id="cb63-215"><a href="#cb63-215"></a><span class="in">```{r}</span></span>
+<span id="cb63-216"><a href="#cb63-216"></a><span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb63-217"><a href="#cb63-217"></a><span class="in">```</span></span>
+<span id="cb63-218"><a href="#cb63-218"></a></span>
+<span id="cb63-219"><a href="#cb63-219"></a>However, if we want to say count by 2's the command is a little more involved</span>
+<span id="cb63-220"><a href="#cb63-220"></a></span>
+<span id="cb63-223"><a href="#cb63-223"></a><span class="in">```{r}</span></span>
+<span id="cb63-224"><a href="#cb63-224"></a><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>)</span>
+<span id="cb63-225"><a href="#cb63-225"></a><span class="in">```</span></span>
+<span id="cb63-226"><a href="#cb63-226"></a></span>
+<span id="cb63-227"><a href="#cb63-227"></a>where <span class="in">`seq(start, stop, by)`</span>. So to start at 0 and stop at 4 (along the x-axis) going by .5 in our plot we add <span class="in">`breaks= seq(0, 4, .5)`</span>:</span>
+<span id="cb63-228"><a href="#cb63-228"></a></span>
+<span id="cb63-231"><a href="#cb63-231"></a><span class="in">```{r}</span></span>
+<span id="cb63-232"><a href="#cb63-232"></a><span class="co">#STEP 1</span></span>
+<span id="cb63-233"><a href="#cb63-233"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb63-234"><a href="#cb63-234"></a></span>
+<span id="cb63-235"><a href="#cb63-235"></a><span class="co">#STEP 2</span></span>
+<span id="cb63-236"><a href="#cb63-236"></a><span class="co"># get the number of observations</span></span>
+<span id="cb63-237"><a href="#cb63-237"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb63-238"><a href="#cb63-238"></a></span>
+<span id="cb63-239"><a href="#cb63-239"></a><span class="co"># number of bins is sqrt of N</span></span>
+<span id="cb63-240"><a href="#cb63-240"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb63-241"><a href="#cb63-241"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb63-242"><a href="#cb63-242"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb63-243"><a href="#cb63-243"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb63-244"><a href="#cb63-244"></a><span class="co"># STEP 3:</span></span>
+<span id="cb63-245"><a href="#cb63-245"></a></span>
+<span id="cb63-246"><a href="#cb63-246"></a><span class="co"># adjust axes labels</span></span>
+<span id="cb63-247"><a href="#cb63-247"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Stats quiz score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>)</span>
+<span id="cb63-248"><a href="#cb63-248"></a><span class="co"># adjust scale of x,y axes if needed:</span></span>
+<span id="cb63-249"><a href="#cb63-249"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-250"><a href="#cb63-250"></a><span class="co"># change x axis ticks:</span></span>
+<span id="cb63-251"><a href="#cb63-251"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">4</span>,.<span class="dv">5</span>))</span>
+<span id="cb63-252"><a href="#cb63-252"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-253"><a href="#cb63-253"></a><span class="in">```</span></span>
+<span id="cb63-254"><a href="#cb63-254"></a></span>
+<span id="cb63-255"><a href="#cb63-255"></a>Can you figure out how we make transform the Y-axis labels to count by 5's instead of 10's??</span>
+<span id="cb63-256"><a href="#cb63-256"></a></span>
+<span id="cb63-257"><a href="#cb63-257"></a><span class="fu">### Step 4: Adjusting for APA</span></span>
+<span id="cb63-258"><a href="#cb63-258"></a></span>
+<span id="cb63-259"><a href="#cb63-259"></a>While the plot at the end of Step 4 is almost there, there are a few issues remaining, Including that gray grid in the background and the lack of axis lines. In the past these changes would need to be done line by line. But fortunately for us we are in the glorious present, and there is a library that does a lot of this cleaning for you.</span>
+<span id="cb63-260"><a href="#cb63-260"></a></span>
+<span id="cb63-261"><a href="#cb63-261"></a>Introducing <span class="in">`cowplot`</span>!!!!</span>
+<span id="cb63-262"><a href="#cb63-262"></a></span>
+<span id="cb63-265"><a href="#cb63-265"></a><span class="in">```{r}</span></span>
+<span id="cb63-266"><a href="#cb63-266"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(cowplot)</span>
+<span id="cb63-267"><a href="#cb63-267"></a><span class="in">```</span></span>
+<span id="cb63-268"><a href="#cb63-268"></a></span>
+<span id="cb63-269"><a href="#cb63-269"></a>OK, we've loaded cowplot. Now what? Simply re-run the previous chunk, but this time adding <span class="in">`theme_cowplot()`</span> to the end. Note that running <span class="in">`? theme_cowplot`</span> shows that it includes arguments for font size, font family (type), and line size. Below I'm just going to ask for size "15" font. I typically leave the font type alone, but if I do change it I may occasionally use <span class="in">`font_family="Times"`</span>:</span>
+<span id="cb63-270"><a href="#cb63-270"></a></span>
+<span id="cb63-273"><a href="#cb63-273"></a><span class="in">```{r}</span></span>
+<span id="cb63-274"><a href="#cb63-274"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) </span>
+<span id="cb63-275"><a href="#cb63-275"></a></span>
+<span id="cb63-276"><a href="#cb63-276"></a><span class="co">#STEP 2</span></span>
+<span id="cb63-277"><a href="#cb63-277"></a><span class="co"># get the number of observations</span></span>
+<span id="cb63-278"><a href="#cb63-278"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb63-279"><a href="#cb63-279"></a></span>
+<span id="cb63-280"><a href="#cb63-280"></a><span class="co"># number of bins is sqrt of N</span></span>
+<span id="cb63-281"><a href="#cb63-281"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb63-282"><a href="#cb63-282"></a>                        <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb63-283"><a href="#cb63-283"></a>                        <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb63-284"><a href="#cb63-284"></a>                        <span class="at">bins =</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb63-285"><a href="#cb63-285"></a><span class="co"># STEP 3:</span></span>
+<span id="cb63-286"><a href="#cb63-286"></a></span>
+<span id="cb63-287"><a href="#cb63-287"></a><span class="co"># adjust axes labels</span></span>
+<span id="cb63-288"><a href="#cb63-288"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Stats quiz score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>)</span>
+<span id="cb63-289"><a href="#cb63-289"></a><span class="co"># adjust scale of x,y axes if needed:</span></span>
+<span id="cb63-290"><a href="#cb63-290"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-291"><a href="#cb63-291"></a><span class="co"># change x axis ticks:</span></span>
+<span id="cb63-292"><a href="#cb63-292"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb63-293"><a href="#cb63-293"></a></span>
+<span id="cb63-294"><a href="#cb63-294"></a><span class="co"># STEP 4:</span></span>
+<span id="cb63-295"><a href="#cb63-295"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_cowplot</span>()</span>
+<span id="cb63-296"><a href="#cb63-296"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-297"><a href="#cb63-297"></a><span class="in">```</span></span>
+<span id="cb63-298"><a href="#cb63-298"></a></span>
+<span id="cb63-299"><a href="#cb63-299"></a>Easy-peasy! You'll note that <span class="in">`cowplot`</span> adjusted your fonts, fixed your axes, and removed that nasty background. Even more, once <span class="in">`cowplot`</span> is loaded it doesn't need to be called to do this. It just sits in the background and automatically adjusts the format of any plot you make using <span class="in">`ggplot`</span>. If you ever wanted to return to the default plot style you can run the following:</span>
+<span id="cb63-300"><a href="#cb63-300"></a></span>
+<span id="cb63-303"><a href="#cb63-303"></a><span class="in">```{r}</span></span>
+<span id="cb63-304"><a href="#cb63-304"></a><span class="fu">theme_set</span>(<span class="fu">theme_gray</span>())</span>
+<span id="cb63-305"><a href="#cb63-305"></a><span class="in">```</span></span>
+<span id="cb63-306"><a href="#cb63-306"></a></span>
+<span id="cb63-307"><a href="#cb63-307"></a>But for now <span class="in">`cowplot`</span> FTW!!! (other cool <span class="in">`cowplot`</span> things will show up in the advanced section).</span>
+<span id="cb63-308"><a href="#cb63-308"></a></span>
+<span id="cb63-309"><a href="#cb63-309"></a><span class="fu">### Step 5: Add and adjust the legend</span></span>
+<span id="cb63-310"><a href="#cb63-310"></a></span>
+<span id="cb63-311"><a href="#cb63-311"></a>Doesn't make sense in this context so not going to spend a lot of time here, but more on this when it's relevant.</span>
+<span id="cb63-312"><a href="#cb63-312"></a></span>
+<span id="cb63-313"><a href="#cb63-313"></a><span class="fu">### Condensing the code</span></span>
+<span id="cb63-314"><a href="#cb63-314"></a></span>
+<span id="cb63-315"><a href="#cb63-315"></a>For the purposes of making the steps clear, we separated the steps out, adding to and overwriting <span class="in">`p`</span> (previous iterations of the plot). But, this could all be accomplished in a single call, separating each step with the "+" sign</span>
+<span id="cb63-316"><a href="#cb63-316"></a></span>
+<span id="cb63-319"><a href="#cb63-319"></a><span class="in">```{r}</span></span>
+<span id="cb63-320"><a href="#cb63-320"></a><span class="co"># get N for a frequency plot</span></span>
+<span id="cb63-321"><a href="#cb63-321"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(aggression_data) </span>
+<span id="cb63-322"><a href="#cb63-322"></a></span>
+<span id="cb63-323"><a href="#cb63-323"></a><span class="co"># create plot</span></span>
+<span id="cb63-324"><a href="#cb63-324"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb63-325"><a href="#cb63-325"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>BPAQ,<span class="at">y=</span>..count..), </span>
+<span id="cb63-326"><a href="#cb63-326"></a>                 <span class="at">fill=</span><span class="st">"light gray"</span>,</span>
+<span id="cb63-327"><a href="#cb63-327"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb63-328"><a href="#cb63-328"></a>                 <span class="at">bins =</span> <span class="fu">sqrt</span>(N)) <span class="sc">+</span></span>
+<span id="cb63-329"><a href="#cb63-329"></a>  <span class="fu">xlab</span>(<span class="st">"Stats quiz score"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Number of Scores"</span>) <span class="sc">+</span> </span>
+<span id="cb63-330"><a href="#cb63-330"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb63-331"><a href="#cb63-331"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb63-332"><a href="#cb63-332"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb63-333"><a href="#cb63-333"></a><span class="fu">show</span>(p)</span>
+<span id="cb63-334"><a href="#cb63-334"></a><span class="in">```</span></span>
+<span id="cb63-335"><a href="#cb63-335"></a></span>
+<span id="cb63-336"><a href="#cb63-336"></a><span class="fu">## Saving the `ggplot`.</span></span>
+<span id="cb63-337"><a href="#cb63-337"></a></span>
+<span id="cb63-338"><a href="#cb63-338"></a>In many cases it may make sense to save your resulting plot. For example if you want to move your plot to a Word document or save a folder of plots for easy visualization.</span>
+<span id="cb63-339"><a href="#cb63-339"></a></span>
+<span id="cb63-340"><a href="#cb63-340"></a>Within command-line, plots can be saved using the <span class="in">`ggsave()`</span> function. Note that both <span class="in">`cowplot`</span> and <span class="in">`ggplot`</span> libraries have a <span class="in">`ggsave()`</span> function. They for the most part do the same thing. Lets get some help on <span class="in">`ggsave()`</span> to see exactly what the parameters are:</span>
+<span id="cb63-341"><a href="#cb63-341"></a></span>
+<span id="cb63-344"><a href="#cb63-344"></a><span class="in">```{r}</span></span>
+<span id="cb63-345"><a href="#cb63-345"></a>? <span class="fu">ggsave</span>()</span>
+<span id="cb63-346"><a href="#cb63-346"></a><span class="in">```</span></span>
+<span id="cb63-347"><a href="#cb63-347"></a></span>
+<span id="cb63-348"><a href="#cb63-348"></a>from the result the important arguments are:</span>
+<span id="cb63-349"><a href="#cb63-349"></a></span>
+<span id="cb63-350"><a href="#cb63-350"></a><span class="at">&gt; filename = Filename of plot plot = Plot to save, defaults to last plot displayed. device = what kind of file, depending on extension. path = Path to save plot to (defaults to project folder). scale = Scaling factor. width = Width (defaults to the width of current plotting window). height = Height (defaults to the height of current plotting window). units = Units for width and height (in, cm, or mm). dpi = DPI to use for raster graphics.</span></span>
+<span id="cb63-351"><a href="#cb63-351"></a></span>
+<span id="cb63-352"><a href="#cb63-352"></a>So to save the previous plot to my project folder, <span class="in">`p`</span> as a .pdf to a file names "histogram.pdf" with the dimensions 8-in by 6-in, and a DPI of 300 (300 is usually the min you want for print)</span>
+<span id="cb63-353"><a href="#cb63-353"></a></span>
+<span id="cb63-356"><a href="#cb63-356"></a><span class="in">```{r}</span></span>
+<span id="cb63-357"><a href="#cb63-357"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"histogram.pdf"</span>, </span>
+<span id="cb63-358"><a href="#cb63-358"></a>       <span class="at">plot =</span> p,</span>
+<span id="cb63-359"><a href="#cb63-359"></a>       <span class="at">width =</span> <span class="dv">8</span>,</span>
+<span id="cb63-360"><a href="#cb63-360"></a>       <span class="at">height =</span> <span class="dv">6</span>,</span>
+<span id="cb63-361"><a href="#cb63-361"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb63-362"><a href="#cb63-362"></a>       <span class="at">dpi =</span> <span class="dv">300</span>)</span>
+<span id="cb63-363"><a href="#cb63-363"></a><span class="in">```</span></span>
+<span id="cb63-364"><a href="#cb63-364"></a></span>
+<span id="cb63-365"><a href="#cb63-365"></a>if I wanted an image file like a .png, I just change the filename extension:</span>
+<span id="cb63-366"><a href="#cb63-366"></a></span>
+<span id="cb63-369"><a href="#cb63-369"></a><span class="in">```{r}</span></span>
+<span id="cb63-370"><a href="#cb63-370"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"histogram.png"</span>, </span>
+<span id="cb63-371"><a href="#cb63-371"></a>       <span class="at">plot =</span> p,</span>
+<span id="cb63-372"><a href="#cb63-372"></a>       <span class="at">width =</span> <span class="dv">8</span>,</span>
+<span id="cb63-373"><a href="#cb63-373"></a>       <span class="at">height =</span> <span class="dv">6</span>,</span>
+<span id="cb63-374"><a href="#cb63-374"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb63-375"><a href="#cb63-375"></a>       <span class="at">dpi =</span> <span class="dv">300</span>)</span>
+<span id="cb63-376"><a href="#cb63-376"></a><span class="in">```</span></span>
+<span id="cb63-377"><a href="#cb63-377"></a></span>
+<span id="cb63-378"><a href="#cb63-378"></a>Note that you can also copy and save plots that are printed in your Notebook and Plots tab. In the notebook, simply right click on top of the plot for a quick Copy or Download. For plots printed to the Plots tab, click the Export button (this gives you all the options as <span class="in">`ggsave`</span>).</span>
+<span id="cb63-379"><a href="#cb63-379"></a></span>
+<span id="cb63-380"><a href="#cb63-380"></a><span class="fu">## Advanced stuff</span></span>
+<span id="cb63-381"><a href="#cb63-381"></a></span>
+<span id="cb63-382"><a href="#cb63-382"></a><span class="fu">### Customizing your plot</span></span>
+<span id="cb63-383"><a href="#cb63-383"></a></span>
+<span id="cb63-384"><a href="#cb63-384"></a>Let's rerun the example one more time for practice, but this time lets make things a little more concrete in terms of customization. Again I'm going to go through step-by-step for clarity. This time we'll create a histogram, with an overlay of the normal distribution (more on that next week)</span>
+<span id="cb63-385"><a href="#cb63-385"></a></span>
+<span id="cb63-386"><a href="#cb63-386"></a>First let's use <span class="in">`ggplot()`</span> to create a histogram. To get a feel for each step, **run through this code line by line in RStudio**:</span>
+<span id="cb63-387"><a href="#cb63-387"></a></span>
+<span id="cb63-390"><a href="#cb63-390"></a><span class="in">```{r}</span></span>
+<span id="cb63-391"><a href="#cb63-391"></a><span class="co"># load in tidyverse if you haven't already</span></span>
+<span id="cb63-392"><a href="#cb63-392"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb63-393"><a href="#cb63-393"></a></span>
+<span id="cb63-394"><a href="#cb63-394"></a><span class="co"># Step 1: identify data and grouping parameters</span></span>
+<span id="cb63-395"><a href="#cb63-395"></a>histPlot1 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">x=</span>BPAQ))</span>
+<span id="cb63-396"><a href="#cb63-396"></a>histPlot1 <span class="co"># note that this produces a blank slate but the parameters are locked in.</span></span>
+<span id="cb63-397"><a href="#cb63-397"></a></span>
+<span id="cb63-398"><a href="#cb63-398"></a><span class="co"># take histPlot 1 (blank plot) and paint a layer on top of it</span></span>
+<span id="cb63-399"><a href="#cb63-399"></a><span class="co"># tell ggplot what to do (this is where you actually build the graphics):</span></span>
+<span id="cb63-400"><a href="#cb63-400"></a></span>
+<span id="cb63-401"><a href="#cb63-401"></a><span class="co"># take histPlot 1's parameters and...</span></span>
+<span id="cb63-402"><a href="#cb63-402"></a>histPlot2 <span class="ot">&lt;-</span> histPlot1 <span class="sc">+</span> </span>
+<span id="cb63-403"><a href="#cb63-403"></a>  <span class="co"># build a histogram </span></span>
+<span id="cb63-404"><a href="#cb63-404"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, <span class="co"># bins are 5 units wide</span></span>
+<span id="cb63-405"><a href="#cb63-405"></a>                <span class="at">color =</span> <span class="st">"orange"</span>, <span class="co"># what color is the outline of bars</span></span>
+<span id="cb63-406"><a href="#cb63-406"></a>                <span class="at">fill =</span> <span class="st">"green"</span>) <span class="co"># what color to fill the bars with</span></span>
+<span id="cb63-407"><a href="#cb63-407"></a>histPlot2 <span class="co"># show the frequency plot</span></span>
+<span id="cb63-408"><a href="#cb63-408"></a><span class="in">```</span></span>
+<span id="cb63-409"><a href="#cb63-409"></a></span>
+<span id="cb63-410"><a href="#cb63-410"></a>I intentionally made a hideous looking plot above to show you what the additional arguments do. Let's turn this into something a little more pleasing to the eyes:</span>
+<span id="cb63-411"><a href="#cb63-411"></a></span>
+<span id="cb63-414"><a href="#cb63-414"></a><span class="in">```{r}</span></span>
+<span id="cb63-415"><a href="#cb63-415"></a>histPlot2 <span class="ot">&lt;-</span> histPlot1 <span class="sc">+</span> </span>
+<span id="cb63-416"><a href="#cb63-416"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb63-417"><a href="#cb63-417"></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="co"># what color is the outline of bars</span></span>
+<span id="cb63-418"><a href="#cb63-418"></a>                <span class="at">fill =</span> <span class="st">"white"</span>) <span class="co"># what color to fill the bars with</span></span>
+<span id="cb63-419"><a href="#cb63-419"></a>histPlot2</span>
+<span id="cb63-420"><a href="#cb63-420"></a><span class="in">```</span></span>
+<span id="cb63-421"><a href="#cb63-421"></a></span>
+<span id="cb63-422"><a href="#cb63-422"></a>Okay, now to add a curve representing the normal distribution. One important thing to note is that the histogram that is ultimately produced here has probability density (think like % of scores) on the y-axis instead of frequency (# of scores). So we'll need to convert our frequency plot to a probability density plot. Fortunately this is just one line of code. Instead of <span class="in">`..count..`</span> we use <span class="in">`..density..`</span>.</span>
+<span id="cb63-423"><a href="#cb63-423"></a></span>
+<span id="cb63-426"><a href="#cb63-426"></a><span class="in">```{r}</span></span>
+<span id="cb63-427"><a href="#cb63-427"></a><span class="co"># take histPlot 1 (blank plot) and paint a layer on top of it</span></span>
+<span id="cb63-428"><a href="#cb63-428"></a><span class="co"># tell ggplot what to do (this is where you actually build the graphics):</span></span>
+<span id="cb63-429"><a href="#cb63-429"></a>histPlot3 <span class="ot">&lt;-</span> histPlot1 <span class="sc">+</span> </span>
+<span id="cb63-430"><a href="#cb63-430"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb63-431"><a href="#cb63-431"></a>                 <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb63-432"><a href="#cb63-432"></a>                 <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb63-433"><a href="#cb63-433"></a>                 <span class="fu">aes</span>(<span class="at">y=</span>..density..)<span class="co"># convert to a prob density plot</span></span>
+<span id="cb63-434"><a href="#cb63-434"></a>  )</span>
+<span id="cb63-435"><a href="#cb63-435"></a>histPlot3 </span>
+<span id="cb63-436"><a href="#cb63-436"></a><span class="in">```</span></span>
+<span id="cb63-437"><a href="#cb63-437"></a></span>
+<span id="cb63-438"><a href="#cb63-438"></a>notice that <span class="in">`histPlot3`</span> is a density plot rather frequency plot from above. Now to add the normal curve:</span>
+<span id="cb63-439"><a href="#cb63-439"></a></span>
+<span id="cb63-442"><a href="#cb63-442"></a><span class="in">```{r}</span></span>
+<span id="cb63-443"><a href="#cb63-443"></a><span class="co"># add a normal curve to density plot:</span></span>
+<span id="cb63-444"><a href="#cb63-444"></a>histPlot4 <span class="ot">&lt;-</span> histPlot3 <span class="sc">+</span> </span>
+<span id="cb63-445"><a href="#cb63-445"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span></span>
+<span id="cb63-446"><a href="#cb63-446"></a>                <span class="at">color =</span> <span class="st">"red"</span>, <span class="co"># color the line red</span></span>
+<span id="cb63-447"><a href="#cb63-447"></a>                <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb63-448"><a href="#cb63-448"></a>                  <span class="at">mean =</span> <span class="fu">mean</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T), <span class="co"># build around mean</span></span>
+<span id="cb63-449"><a href="#cb63-449"></a>                  <span class="at">sd =</span> <span class="fu">sd</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T) <span class="co"># st dev parameter</span></span>
+<span id="cb63-450"><a href="#cb63-450"></a>                )</span>
+<span id="cb63-451"><a href="#cb63-451"></a>  )</span>
+<span id="cb63-452"><a href="#cb63-452"></a></span>
+<span id="cb63-453"><a href="#cb63-453"></a>histPlot4</span>
+<span id="cb63-454"><a href="#cb63-454"></a><span class="in">```</span></span>
+<span id="cb63-455"><a href="#cb63-455"></a></span>
+<span id="cb63-456"><a href="#cb63-456"></a>Some suggest that a better alternative to the normal curve is a kernel density plot. To fit a kernel density plot to our histogram (histPlot3) we can invoke:</span>
+<span id="cb63-457"><a href="#cb63-457"></a></span>
+<span id="cb63-460"><a href="#cb63-460"></a><span class="in">```{r}</span></span>
+<span id="cb63-461"><a href="#cb63-461"></a><span class="co"># hisPlot 3 was the base histogram without curve</span></span>
+<span id="cb63-462"><a href="#cb63-462"></a>histPlot3 <span class="sc">+</span> <span class="fu">geom_density</span>()</span>
+<span id="cb63-463"><a href="#cb63-463"></a><span class="in">```</span></span>
+<span id="cb63-464"><a href="#cb63-464"></a></span>
+<span id="cb63-465"><a href="#cb63-465"></a>and let's make the x-axis label a little more transparent with <span class="in">`xlab()`</span></span>
+<span id="cb63-466"><a href="#cb63-466"></a></span>
+<span id="cb63-469"><a href="#cb63-469"></a><span class="in">```{r}</span></span>
+<span id="cb63-470"><a href="#cb63-470"></a>histPlot3 <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"BPAQ scores"</span>)</span>
+<span id="cb63-471"><a href="#cb63-471"></a><span class="in">```</span></span>
+<span id="cb63-472"><a href="#cb63-472"></a></span>
+<span id="cb63-473"><a href="#cb63-473"></a>Keep in mind, that although we walked-through making <span class="in">`histPlot1`</span>, then <span class="in">`histPlot2`</span>, <span class="in">`histPlot3`</span>, <span class="in">`histPlot4`</span>, we could have accomplished all of this with a single assign:</span>
+<span id="cb63-474"><a href="#cb63-474"></a></span>
+<span id="cb63-477"><a href="#cb63-477"></a><span class="in">```{r}</span></span>
+<span id="cb63-478"><a href="#cb63-478"></a>histPlot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">x=</span>BPAQ)) <span class="sc">+</span></span>
+<span id="cb63-479"><a href="#cb63-479"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb63-480"><a href="#cb63-480"></a>                <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb63-481"><a href="#cb63-481"></a>                <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb63-482"><a href="#cb63-482"></a>                <span class="fu">aes</span>(<span class="at">y=</span>..density..))  <span class="sc">+</span></span>
+<span id="cb63-483"><a href="#cb63-483"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span></span>
+<span id="cb63-484"><a href="#cb63-484"></a>                <span class="at">color =</span> <span class="st">"red"</span>, <span class="co"># color the line red</span></span>
+<span id="cb63-485"><a href="#cb63-485"></a>                <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb63-486"><a href="#cb63-486"></a>                  <span class="at">mean =</span> <span class="fu">mean</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T), <span class="co"># build around mean</span></span>
+<span id="cb63-487"><a href="#cb63-487"></a>                  <span class="at">sd =</span> <span class="fu">sd</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T) <span class="co"># st dev parameter</span></span>
+<span id="cb63-488"><a href="#cb63-488"></a>                )</span>
+<span id="cb63-489"><a href="#cb63-489"></a>  )</span>
+<span id="cb63-490"><a href="#cb63-490"></a></span>
+<span id="cb63-491"><a href="#cb63-491"></a>histPlot</span>
+<span id="cb63-492"><a href="#cb63-492"></a><span class="in">```</span></span>
+<span id="cb63-493"><a href="#cb63-493"></a></span>
+<span id="cb63-494"><a href="#cb63-494"></a>Moreover, we could facet the plot by some categorical variable, for example <span class="in">`fctr_Gender`</span>. Conceptually, faceting is the equivalent of performing <span class="in">`psych::describeBy()`</span>, separating the data by some grouping variable. For example, to get the summary stats of <span class="in">`BPAQ`</span> scores by gender:</span>
+<span id="cb63-495"><a href="#cb63-495"></a></span>
+<span id="cb63-498"><a href="#cb63-498"></a><span class="in">```{r}</span></span>
+<span id="cb63-499"><a href="#cb63-499"></a><span class="co"># specifying $BPAQ because I don't want a print out of the entire dataframe</span></span>
+<span id="cb63-500"><a href="#cb63-500"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(<span class="at">x =</span> aggression_data<span class="sc">$</span>BPAQ, <span class="at">group =</span> aggression_data<span class="sc">$</span>fctr_Gender)</span>
+<span id="cb63-501"><a href="#cb63-501"></a><span class="in">```</span></span>
+<span id="cb63-502"><a href="#cb63-502"></a></span>
+<span id="cb63-503"><a href="#cb63-503"></a>To separate the two histogram distributions I can simply add <span class="in">`facet_wrap(~fctr_Gender)`</span> to my <span class="in">`ggplot`</span> call; <span class="in">`~`</span> means "by", as in facet wrap by Gender (remember that <span class="in">`fctr_Gender`</span> is a column we created to rid ourselves of the numeric coding):</span>
+<span id="cb63-504"><a href="#cb63-504"></a></span>
+<span id="cb63-507"><a href="#cb63-507"></a><span class="in">```{r}</span></span>
+<span id="cb63-508"><a href="#cb63-508"></a>histPlot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">x=</span>BPAQ)) <span class="sc">+</span></span>
+<span id="cb63-509"><a href="#cb63-509"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb63-510"><a href="#cb63-510"></a>                <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb63-511"><a href="#cb63-511"></a>                <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb63-512"><a href="#cb63-512"></a>                <span class="fu">aes</span>(<span class="at">y=</span>..density..))  <span class="sc">+</span></span>
+<span id="cb63-513"><a href="#cb63-513"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span></span>
+<span id="cb63-514"><a href="#cb63-514"></a>                <span class="at">color =</span> <span class="st">"red"</span>, <span class="co"># color the line red</span></span>
+<span id="cb63-515"><a href="#cb63-515"></a>                <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb63-516"><a href="#cb63-516"></a>                  <span class="at">mean =</span> <span class="fu">mean</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T), <span class="co"># build around mean</span></span>
+<span id="cb63-517"><a href="#cb63-517"></a>                  <span class="at">sd =</span> <span class="fu">sd</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T) <span class="co"># st dev parameter</span></span>
+<span id="cb63-518"><a href="#cb63-518"></a>                )</span>
+<span id="cb63-519"><a href="#cb63-519"></a>  ) <span class="sc">+</span></span>
+<span id="cb63-520"><a href="#cb63-520"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>fctr_Gender)</span>
+<span id="cb63-521"><a href="#cb63-521"></a>histPlot</span>
+<span id="cb63-522"><a href="#cb63-522"></a><span class="in">```</span></span>
+<span id="cb63-523"><a href="#cb63-523"></a></span>
+<span id="cb63-524"><a href="#cb63-524"></a><span class="fu">### Plotting your data in a boxplot:</span></span>
+<span id="cb63-525"><a href="#cb63-525"></a></span>
+<span id="cb63-526"><a href="#cb63-526"></a>Now let's create a few boxplots of <span class="in">`BPAQ`</span>. First the entire dataset, indifferent to the 2 different categories of <span class="in">`fctr_Gender`</span>:</span>
+<span id="cb63-527"><a href="#cb63-527"></a></span>
+<span id="cb63-530"><a href="#cb63-530"></a><span class="in">```{r}</span></span>
+<span id="cb63-531"><a href="#cb63-531"></a><span class="co"># Set the parameters (data and axes)</span></span>
+<span id="cb63-532"><a href="#cb63-532"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb63-533"><a href="#cb63-533"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y=</span>BPAQ)) <span class="co"># tell R to make it a boxplot</span></span>
+<span id="cb63-534"><a href="#cb63-534"></a><span class="in">```</span></span>
+<span id="cb63-535"><a href="#cb63-535"></a></span>
+<span id="cb63-536"><a href="#cb63-536"></a>Note that the <span class="in">`x-axis`</span> in this plot is meaningless. We can remove it if we want:</span>
+<span id="cb63-537"><a href="#cb63-537"></a></span>
+<span id="cb63-540"><a href="#cb63-540"></a><span class="in">```{r}</span></span>
+<span id="cb63-541"><a href="#cb63-541"></a><span class="co"># Set the parameters (data and axes)</span></span>
+<span id="cb63-542"><a href="#cb63-542"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb63-543"><a href="#cb63-543"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y=</span>BPAQ)) <span class="sc">+</span>    <span class="co"># tell R to make it a boxplot</span></span>
+<span id="cb63-544"><a href="#cb63-544"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(), <span class="co"># element_blank removes item, in this case x-axis text</span></span>
+<span id="cb63-545"><a href="#cb63-545"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>() <span class="co"># and ticks</span></span>
+<span id="cb63-546"><a href="#cb63-546"></a>        )</span>
+<span id="cb63-547"><a href="#cb63-547"></a><span class="in">```</span></span>
+<span id="cb63-548"><a href="#cb63-548"></a></span>
+<span id="cb63-549"><a href="#cb63-549"></a>Now let's take a look at the data that will be boxplotted as a function of <span class="in">`fctr_Gender`</span> groups. Here I want to note that <span class="in">`psych::describeBy`</span> has an additional argument to display the quantiles:</span>
+<span id="cb63-550"><a href="#cb63-550"></a></span>
+<span id="cb63-553"><a href="#cb63-553"></a><span class="in">```{r}</span></span>
+<span id="cb63-554"><a href="#cb63-554"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(aggression_data,<span class="at">group =</span> aggression_data<span class="sc">$</span>fctr_Gender,<span class="at">quant=</span><span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">75</span>))</span>
+<span id="cb63-555"><a href="#cb63-555"></a><span class="in">```</span></span>
+<span id="cb63-556"><a href="#cb63-556"></a></span>
+<span id="cb63-557"><a href="#cb63-557"></a>To plot this we need to tell <span class="in">`R`</span> to put different distributions at different points along the <span class="in">`x-axis`</span></span>
+<span id="cb63-558"><a href="#cb63-558"></a></span>
+<span id="cb63-561"><a href="#cb63-561"></a><span class="in">```{r}</span></span>
+<span id="cb63-562"><a href="#cb63-562"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb63-563"><a href="#cb63-563"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y=</span>BPAQ, <span class="at">x =</span> fctr_Gender))</span>
+<span id="cb63-564"><a href="#cb63-564"></a><span class="in">```</span></span>
+<span id="cb63-565"><a href="#cb63-565"></a></span>
+<span id="cb63-566"><a href="#cb63-566"></a>Before leaving I want to show what would've happened in the latter case if we didn't correct <span class="in">`fctr_Gender`</span> and left it as a numeric variable (as <span class="in">`gender`</span> in our data frame) rather than converting to a categorical:</span>
+<span id="cb63-567"><a href="#cb63-567"></a></span>
+<span id="cb63-570"><a href="#cb63-570"></a><span class="in">```{r}</span></span>
+<span id="cb63-571"><a href="#cb63-571"></a><span class="co"># creating the boxplot using exact code from chunk above:</span></span>
+<span id="cb63-572"><a href="#cb63-572"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">y=</span>BPAQ, <span class="at">x =</span> gender)) <span class="sc">+</span> </span>
+<span id="cb63-573"><a href="#cb63-573"></a>  <span class="fu">geom_boxplot</span>()</span>
+<span id="cb63-574"><a href="#cb63-574"></a><span class="in">```</span></span>
+<span id="cb63-575"><a href="#cb63-575"></a></span>
+<span id="cb63-576"><a href="#cb63-576"></a>Since <span class="in">`R`</span> treats the categorical variable as a numeric, all of the data gets lumped together at the mean value of <span class="in">`Gender`</span> even though we explicitly tried to group our data by this variable. **Remember, you need to be careful with having categorical data coded as numbers!**</span>
+<span id="cb63-577"><a href="#cb63-577"></a></span>
+<span id="cb63-578"><a href="#cb63-578"></a><span class="fu">### Cowplot</span></span>
+<span id="cb63-579"><a href="#cb63-579"></a></span>
+<span id="cb63-580"><a href="#cb63-580"></a>Finally, we can combine multiple plots using the <span class="in">`cowplot`</span> package and its two commands <span class="in">`plot_grid()`</span> and <span class="in">`plot_wrap`</span>. For example, we can recreate a plot in the style of Winter, Figure 3.4 (p. 59) by creating a histogram of our data, then a boxplot of out data, and then aligning them:</span>
+<span id="cb63-581"><a href="#cb63-581"></a></span>
+<span id="cb63-584"><a href="#cb63-584"></a><span class="in">```{r}</span></span>
+<span id="cb63-585"><a href="#cb63-585"></a>histPlot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data, <span class="fu">aes</span>(<span class="at">x=</span>BPAQ)) <span class="sc">+</span></span>
+<span id="cb63-586"><a href="#cb63-586"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>, </span>
+<span id="cb63-587"><a href="#cb63-587"></a>                <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb63-588"><a href="#cb63-588"></a>                <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb63-589"><a href="#cb63-589"></a>                <span class="fu">aes</span>(<span class="at">y=</span>..density..))  <span class="sc">+</span></span>
+<span id="cb63-590"><a href="#cb63-590"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span></span>
+<span id="cb63-591"><a href="#cb63-591"></a>                <span class="at">color =</span> <span class="st">"red"</span>, <span class="co"># color the line red</span></span>
+<span id="cb63-592"><a href="#cb63-592"></a>                <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb63-593"><a href="#cb63-593"></a>                  <span class="at">mean =</span> <span class="fu">mean</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T), <span class="co"># build around mean</span></span>
+<span id="cb63-594"><a href="#cb63-594"></a>                  <span class="at">sd =</span> <span class="fu">sd</span>(aggression_data<span class="sc">$</span>BPAQ,<span class="at">na.rm =</span> T) <span class="co"># st dev parameter</span></span>
+<span id="cb63-595"><a href="#cb63-595"></a>                )</span>
+<span id="cb63-596"><a href="#cb63-596"></a>  ) <span class="sc">+</span></span>
+<span id="cb63-597"><a href="#cb63-597"></a>  <span class="fu">theme_cowplot</span>()</span>
+<span id="cb63-598"><a href="#cb63-598"></a></span>
+<span id="cb63-599"><a href="#cb63-599"></a>boxPlot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> aggression_data) <span class="sc">+</span> </span>
+<span id="cb63-600"><a href="#cb63-600"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y=</span>BPAQ),<span class="at">outlier.color =</span> <span class="st">"red"</span>) <span class="sc">+</span>  <span class="co"># tell R to make it a boxplot</span></span>
+<span id="cb63-601"><a href="#cb63-601"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co">#make horizontal</span></span>
+<span id="cb63-602"><a href="#cb63-602"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(), <span class="co"># element_blank removes item, in this case x-axis text</span></span>
+<span id="cb63-603"><a href="#cb63-603"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>() <span class="co"># and ticks</span></span>
+<span id="cb63-604"><a href="#cb63-604"></a>        ) <span class="sc">+</span></span>
+<span id="cb63-605"><a href="#cb63-605"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb63-606"><a href="#cb63-606"></a>  </span>
+<span id="cb63-607"><a href="#cb63-607"></a>  </span>
+<span id="cb63-608"><a href="#cb63-608"></a></span>
+<span id="cb63-609"><a href="#cb63-609"></a>combined_plot <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(histPlot,boxPlot, <span class="at">align =</span> <span class="st">"hv"</span>,<span class="at">ncol =</span> <span class="dv">1</span>,<span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span>
+<span id="cb63-610"><a href="#cb63-610"></a>combined_plot</span>
+<span id="cb63-611"><a href="#cb63-611"></a><span class="in">```</span></span>
+<span id="cb63-612"><a href="#cb63-612"></a></span>
+<span id="cb63-613"><a href="#cb63-613"></a>For other cool stuff that can be done with <span class="in">`cowplot()`</span> including placing multiple plots side by side, check out the vignette links below written by its author, <span class="co">[</span><span class="ot">Claus O. Wilke</span><span class="co">](http://wilkelab.org/)</span>:</span>
+<span id="cb63-614"><a href="#cb63-614"></a></span>
+<span id="cb63-615"><a href="#cb63-615"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Introduction to cowplot</span><span class="co">](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)</span></span>
+<span id="cb63-616"><a href="#cb63-616"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Changing the axis positions</span><span class="co">](https://cran.r-project.org/web/packages/cowplot/vignettes/axis_position.html)</span></span>
+<span id="cb63-617"><a href="#cb63-617"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Plot annotations</span><span class="co">](https://cran.r-project.org/web/packages/cowplot/vignettes/plot_annotations.html)</span></span>
+<span id="cb63-618"><a href="#cb63-618"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Arranging plots in a grid</span><span class="co">](https://cran.r-project.org/web/packages/cowplot/vignettes/plot_grid.html)</span></span>
+<span id="cb63-619"><a href="#cb63-619"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Shared legends</span><span class="co">](https://cran.r-project.org/web/packages/cowplot/vignettes/shared_legends.html)</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

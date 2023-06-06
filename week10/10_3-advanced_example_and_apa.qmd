@@ -24,7 +24,7 @@ pacman::p_load(psych, tidyverse, cowplot, emmeans, ez)
 
 ```{r step 0 code}
 library(readr)
-dataset <- read_csv("https://tehrandav.is/psyc7014/practice_datasets/factorial_ANOVA_dataset_no_interactions.csv")
+dataset <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/factorial_ANOVA_dataset_no_interactions.csv")
 
 # unnecessary here, but if performing planned contrasts you need to factorize predictors (IVs)
 dataset$Presentation <- as.factor(dataset$Presentation)
@@ -115,7 +115,7 @@ psych::skew(aov_model$residuals) / standard_error_of_skews %>%
 
 # ----- OR ------- use my custom function that handles all of the above
 
-source("https://tehrandav.is/psyc7014/custom_functions/skew_kurtosis_z.R")
+source("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/custom_functions/skew_kurtosis_z.R")
 
 aov_model$residuals %>% skew_kurtosis_z()
 ```

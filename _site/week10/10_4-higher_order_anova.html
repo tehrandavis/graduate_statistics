@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.262">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Tehran Davis">
+<meta name="dcterms.date" content="2023-06-06">
+<title>tehrandav.is - Dealing with Higher Order Factorial ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+</head>
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">tehrandav.is</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://tehrandav.is">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Dealing with Higher Order Factorial ANOVA</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../walkthroughs.html" class="sidebar-item-text sidebar-link">PSYC 7014</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">TOPIC 1 INTRO to R</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_1-Rmarkdown_basics.html" class="sidebar-item-text sidebar-link">Rmarkdown Basics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_2-objects_assignment_functions.html" class="sidebar-item-text sidebar-link">Objects, assignment, and functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_3-install_packages.html" class="sidebar-item-text sidebar-link">Installing and loading an <code>R</code> package</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_4-loading_data.html" class="sidebar-item-text sidebar-link">Loading in Data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week01/1_5-leveling-up.html" class="sidebar-item-text sidebar-link">Leveling-up</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_1-structure_data.html" class="sidebar-item-text sidebar-link">The structure of your data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_2-central_tendency.html" class="sidebar-item-text sidebar-link">Measures of central tendency</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_3-summary_tables.html" class="sidebar-item-text sidebar-link">Creating summary tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week02/2_4-means_other_models.html" class="sidebar-item-text sidebar-link">Means and other models</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">TOPIC 3: DATA VISUALIZATION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_1-basic_ggplot.html" class="sidebar-item-text sidebar-link">Basic ggplotting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week03/3_2-more_adv_ggplot.html" class="sidebar-item-text sidebar-link">More advanced ggPlots</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">TOPIC 4: DISTRIBUTIONS and NHST</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_2-building_intuitions_about_probability_and_nhst.html" class="sidebar-item-text sidebar-link">Building intuitions about probability and NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.html" class="sidebar-item-text sidebar-link">Sampling distributions and seeing the logic of NHST</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_4-more_examples.html" class="sidebar-item-text sidebar-link">More examples of distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week04/4_5-bias_variance.html" class="sidebar-item-text sidebar-link">Bias in sample variance estimates</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">TOPIC 5: CORRELATION AND REGRESSION</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_1-the_normal_distribution.html" class="sidebar-item-text sidebar-link">The normal distribution</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_2_correlations.html" class="sidebar-item-text sidebar-link">Correlations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_3_regressions.html" class="sidebar-item-text sidebar-link">Regression, pt.&nbsp;1: Running the model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_4_plotting.html" class="sidebar-item-text sidebar-link">Plotting regression data</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_5_diagnostics.html" class="sidebar-item-text sidebar-link">Regression model diagnostics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week05/5_6_example_report.html" class="sidebar-item-text sidebar-link">Example Report</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">TOPIC 6: T-TESTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_1_t-test.html" class="sidebar-item-text sidebar-link">Testing differences in means / t-test</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_2_t-test-null-model.html" class="sidebar-item-text sidebar-link">Thinking about nothing (aka the null)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week06/6_3_t-test-lm.html" class="sidebar-item-text sidebar-link">t-test? It’s just a linear model</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">TOPIC 7: POWER &amp; EFFECT SIZES</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_1-effect_size.html" class="sidebar-item-text sidebar-link">Effect Size</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_2-power.html" class="sidebar-item-text sidebar-link">Power</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_3-power_es_sig_tests.html" class="sidebar-item-text sidebar-link">Power, Effect sizes, and Significance testing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week07/7_4-simulating_power.html" class="sidebar-item-text sidebar-link">Simulating Power!!!</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">TOPIC 8: INTRO to ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_1-one-way-anova.html" class="sidebar-item-text sidebar-link">The One-way ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week08/8_2-anova-regression.html" class="sidebar-item-text sidebar-link">ANOVA and Regression</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">TOPIC 9: ANOVA: CONTRASTS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_1-posthocs.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;1: post hoc tests</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week09/9_2-planned_contrasts.html" class="sidebar-item-text sidebar-link">Multiple comparisons in One-way ANOVA, pt.&nbsp;2: planned contrasts</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">TOPIC 10: ANOVA: FACTORIAL ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_1-main_effects.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - The omnibus ANOVA and Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_2-factorial_w_post_hocs.html" class="sidebar-item-text sidebar-link">Factorial ANOVA - Post hoc analysis of Main effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week10/10_3-advanced_example_and_apa.html" class="sidebar-item-text sidebar-link">Template for Analysis &amp; APA Style</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">TOPIC 11: ANOVA + INTERACTIONS</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_1-interactions.html" class="sidebar-item-text sidebar-link">Analysis of Variance: the Factorial ANOVA - Interactions &amp; Simple Effects ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week11/11_2-higher_order_anova.html" class="sidebar-item-text sidebar-link">Dealing with Higher Order Factorial ANOVA</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_1-afex_ANOVA.html" class="sidebar-item-text sidebar-link">afex is for ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_2-repeated_measures_anova.html" class="sidebar-item-text sidebar-link">Within Subjects / Repeated Measures ANOVA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_3-factorial_rma.html" class="sidebar-item-text sidebar-link">Factorial RM-ANOVA and simple effects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_4-sphericity.html" class="sidebar-item-text sidebar-link">Sphericity: Variances and Co-Variances</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week12/12_5-spss_rma.html" class="sidebar-item-text sidebar-link">Running a RM-ANOVA in SPSS</a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">TOPIC 13: MIXED ANOVA (BS + WS)</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week13/13_1-mixed_effects_anova.html" class="sidebar-item-text sidebar-link">Mixed-effects ANOVA (BS + WS)</a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#packages-and-data" id="toc-packages-and-data" class="nav-link active" data-scroll-target="#packages-and-data">Packages and data</a></li>
+  <li>
+<a href="#example-1-no-three-way-interaction-single-two-way-interaction" id="toc-example-1-no-three-way-interaction-single-two-way-interaction" class="nav-link" data-scroll-target="#example-1-no-three-way-interaction-single-two-way-interaction">EXAMPLE 1: no three-way interaction, single two way interaction</a>
+  <ul class="collapse">
+<li><a href="#first-plot-3-way-interaction-plot" id="toc-first-plot-3-way-interaction-plot" class="nav-link" data-scroll-target="#first-plot-3-way-interaction-plot">First plot: 3 way interaction plot</a></li>
+  <li><a href="#running-the-anova" id="toc-running-the-anova" class="nav-link" data-scroll-target="#running-the-anova">running the ANOVA:</a></li>
+  <li><a href="#replotting-the-2-way-interaction" id="toc-replotting-the-2-way-interaction" class="nav-link" data-scroll-target="#replotting-the-2-way-interaction">Replotting the 2-way interaction</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#example-2-no-three-way-interaction-multiple-main-effects-multiple-2-way-interactions" id="toc-example-2-no-three-way-interaction-multiple-main-effects-multiple-2-way-interactions" class="nav-link" data-scroll-target="#example-2-no-three-way-interaction-multiple-main-effects-multiple-2-way-interactions">EXAMPLE 2: No three-way interaction, multiple main effects, multiple 2 way interactions:</a>
+  <ul class="collapse">
+<li><a href="#plotting-the-data" id="toc-plotting-the-data" class="nav-link" data-scroll-target="#plotting-the-data">plotting the data</a></li>
+  <li><a href="#running-the-omnibus-anova" id="toc-running-the-omnibus-anova" class="nav-link" data-scroll-target="#running-the-omnibus-anova">running the omnibus ANOVA:</a></li>
+  <li><a href="#testing-the-lecturepresentation-interaction" id="toc-testing-the-lecturepresentation-interaction" class="nav-link" data-scroll-target="#testing-the-lecturepresentation-interaction">testing the <code>Lecture:Presentation</code> interaction:</a></li>
+  <li><a href="#testing-the-lecturegrade-interaction" id="toc-testing-the-lecturegrade-interaction" class="nav-link" data-scroll-target="#testing-the-lecturegrade-interaction">testing the <code>Lecture:Grade</code> interaction:</a></li>
+  <li><a href="#simple-effect-anovas-1" id="toc-simple-effect-anovas-1" class="nav-link" data-scroll-target="#simple-effect-anovas-1">simple effect ANOVAs:</a></li>
+  <li><a href="#main-takeaways-write-up" id="toc-main-takeaways-write-up" class="nav-link" data-scroll-target="#main-takeaways-write-up">Main takeaways / write-up</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#example-3-omg-multiple-two-way-interactions-and-a-nasty-three-way" id="toc-example-3-omg-multiple-two-way-interactions-and-a-nasty-three-way" class="nav-link" data-scroll-target="#example-3-omg-multiple-two-way-interactions-and-a-nasty-three-way">EXAMPLE 3: OMG, multiple two way interactions and a nasty three-way!!!</a>
+  <ul class="collapse">
+<li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting:</a></li>
+  <li><a href="#running-the-anova-1" id="toc-running-the-anova-1" class="nav-link" data-scroll-target="#running-the-anova-1">running the ANOVA:</a></li>
+  <li><a href="#fifth-graders-lecturepresentation-interaction." id="toc-fifth-graders-lecturepresentation-interaction." class="nav-link" data-scroll-target="#fifth-graders-lecturepresentation-interaction.">Fifth Graders, Lecture:Presentation interaction.</a></li>
+  <li><a href="#constructing-a-narrative" id="toc-constructing-a-narrative" class="nav-link" data-scroll-target="#constructing-a-narrative">Constructing a narrative:</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Dealing with Higher Order Factorial ANOVA</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tehran Davis </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 6, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header><p>This walk-through is a continuation of our previous work with factorial ANOVA. If you haven’t already, please check the factorial ANOVA and Interaction vignettes. In truth, nothing terribly new is being introduced here; we are just ramping up the complexity of our ANOVA models. Whereas before we considered a scenario with just 2 factors, here we will consider a 3 factor ANOVA. For all practical purposes you typically do not want to go higher than a 3 or 4 factor ANOVA, simply because of the exponential increase in complexity. For example, consider below where each letter is an IV and the resulting tests in the full factorial omnibus ANOVA:</p>
+<ul>
+<li>2 factor: a, b, a×b</li>
+<li>3 factor: a, b, c, a×b, a×c, b×c, a×b×c</li>
+<li>4 factor: a, b, c, d, a×b, a×c, a×d, b×c, b×d, c×d, a×b×c, a×b×d, a×c×d, b×c×d, a×b×c×d</li>
+<li>5 factor: ummm, no… just don’t (unless you really want to)</li>
+</ul>
+<p>Increasing the number of factors not only increases the practical difficulty of analysis, but more importantly, makes it more difficult to interpret your results. The primary culprit here is the potential presence of multiple interactions.</p>
+<p>When dealing with interactions in a higher order factorial design you always start off with the highest order interaction. For example in the 3 factor case, if you have a 3-way interaction, that supersedes any other effects and interactions, and must be dealt with first. If there is no three-way interaction, then you can co about the business of addressing any two way interactions that are present.</p>
+<section id="packages-and-data" class="level2"><h2 class="anchored" data-anchor-id="packages-and-data">Packages and data</h2>
+<p>Let’s load in our necessary packages, scripts and some data and try some examples. This write-up requires the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># required packages:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, </span>
+<span id="cb1-3"><a href="#cb1-3"></a>               cowplot, </span>
+<span id="cb1-4"><a href="#cb1-4"></a>               emmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And now let’s re-acquaint ourselves with our familar example dataset, but with one new twist…</p>
+<blockquote class="blockquote">
+<p>Background: Given the ease of access for new technologies and increasing enrollment demands, many grade schools are advocating that teachers switch over to E-courses, where students view an online, pre-recorded lecture on the course topic in lieu of sitting in a classroom in a live lecture. Given this push, a critical question remains regarding the impact of E-courses on primary school student outcomes. More it may be the case that certain subject content more readily lends itself to E-course presentations than other subjects. To address this question we tested students performance on a test one week after listening to the related lecture. Lectures were either experienced via online (Computer) or in a live classroom (Standard). In addition, the lecture content varied in topic (Physical science, Social science, History). Finally, to assess whether age had an impact on expected outcomes we assessed students in 5th and 8th grades.</p>
+</blockquote>
+<p>Looking at the above we have a 2 (Grade: 5th, 8th) × 2 (Presentation: Computer, Standard) × 3 (Lecture: Physical, Social, History) design. Our omnibus ANOVA therefore will test for the following effects:</p>
+<ul>
+<li>Main Effects: Grade, Presentation, Lecture</li>
+<li>2-way interactions: Grade × Presentation, Grade × Lecture, Lecture × Presentation</li>
+<li>3-way interaction: Grade × Presentation × Lecture</li>
+</ul></section><section id="example-1-no-three-way-interaction-single-two-way-interaction" class="level2"><h2 class="anchored" data-anchor-id="example-1-no-three-way-interaction-single-two-way-interaction">EXAMPLE 1: no three-way interaction, single two way interaction</h2>
+<p>Let’s load in this data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>higherEx1 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx1.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 72 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (3): Grade, Lecture, Presentation
+dbl (2): Subject, Score
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">show</span>(higherEx1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 72 × 5
+   Subject Grade Lecture  Presentation Score
+     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;
+ 1       1 5th   Physical Computer        53
+ 2       2 5th   Physical Computer        49
+ 3       3 5th   Physical Computer        47
+ 4       4 5th   Physical Computer        42
+ 5       5 5th   Physical Computer        51
+ 6       6 5th   Physical Computer        34
+ 7       7 5th   Physical Standard        44
+ 8       8 5th   Physical Standard        48
+ 9       9 5th   Physical Standard        35
+10      10 5th   Physical Standard        18
+# ℹ 62 more rows</code></pre>
+</div>
+</div>
+<p>It’s already in long format, but I should tell <code>R</code> that <code>Grade</code>, <code>Lecture</code>, and <code>Presentation</code> are factors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>higherEx1<span class="sc">$</span>Grade <span class="ot">&lt;-</span> <span class="fu">factor</span>(higherEx1<span class="sc">$</span>Grade)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>higherEx1<span class="sc">$</span>Lecture <span class="ot">&lt;-</span> <span class="fu">factor</span>(higherEx1<span class="sc">$</span>Lecture)</span>
+<span id="cb6-3"><a href="#cb6-3"></a>higherEx1<span class="sc">$</span>Presentation <span class="ot">&lt;-</span> <span class="fu">factor</span>(higherEx1<span class="sc">$</span>Presentation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="first-plot-3-way-interaction-plot" class="level3"><h3 class="anchored" data-anchor-id="first-plot-3-way-interaction-plot">First plot: 3 way interaction plot</h3>
+<p>One thing you may notice is since we have a more complex ANOVA, we have a more complex design with three factors we also have to construct a more complex plot. Whereas in the 2 factor case we could place one factor on the x-axis and group the other factor by line or shape or color; in the three factor case things become slightly more tricky.</p>
+<p>One thing to consider is the logic of what we are doing with our plots. When we have two factors, say A &amp; B, we are distinguishing between each level of B (by lines, shapes, colors) at each level of A (on the x-axis). In the 3 factor case where we have A,B, &amp; C, we are distinguishing the B×C interaction (through the combination of shapes, lines, colors) on each level of A.</p>
+<p>In the following plot, let’s place Lecture type along the x-axis. From here, we can create 2 groups of lines (each with 2 levels) representing the Grade × Presentation interaction. We note this by specifying the <code>interaction</code> in <code>group</code> of our baseline <code>ggplot</code> call:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From here, we can proceed as before. Note, however, depending on the complexity of your plot you may also need to specify the interaction in each <code>stat_summary::aes()</code> as necessary.</p>
+<p>Below I am changing the <code>shape</code> by <code>Presentation</code> and the <code>linetype</code> by <code>Grade</code>. The entire call, including the line above is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span>  </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> </span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="co"># renaming axies</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="co"># adding whitespace around plot (optional)</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="co"># adjusting the legend</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_4-higher_order_anova_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>OK, not exactly the best plot. Let’s see if we can create some more space to work with by forcing the y-axis to go to 0, instead of cutting off at 10. There’s also a trick that we can use to stack our legend keys horizontally, rather than vertically</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span>  </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> </span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="co"># renaming axies</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="co"># adding whitespace around plot (optional)</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11"></a>  <span class="co"># new additions / changes</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb9-13"><a href="#cb9-13"></a>  </span>
+<span id="cb9-14"><a href="#cb9-14"></a>  <span class="co"># direction to stack legend keys</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>  <span class="fu">theme</span>(<span class="at">legend.direction =</span> <span class="st">"horizontal"</span>, </span>
+<span id="cb9-16"><a href="#cb9-16"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_4-higher_order_anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>alternatively, we could also just stack the legend boxes side by side:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span>  </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="co"># renaming axies</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="co"># adding whitespace around plot (optional)</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>  </span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="co"># new additions / changes</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb10-13"><a href="#cb10-13"></a>  </span>
+<span id="cb10-14"><a href="#cb10-14"></a>  <span class="co"># direction to stack legend boxes instead of keys</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>, </span>
+<span id="cb10-16"><a href="#cb10-16"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_4-higher_order_anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>NOTE: For what its work, we could also obviate the need for this complex of a plot, and just <code>facet_wrap()</code> by our third factor. For practice try taking the code above and faceting by ~Grade.</strong></p>
+</section><section id="running-the-anova" class="level3"><h3 class="anchored" data-anchor-id="running-the-anova">running the ANOVA:</h3>
+<p>From here we run the omnibus as usual:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation<span class="sc">*</span>Grade, <span class="at">data =</span> higherEx1)</span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>omnibus_aov <span class="sc">%&gt;%</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term                       | df |    sumsq |   meansq | statistic | p.value | etasq | partial.etasq | omegasq | partial.omegasq | epsilonsq | cohens.f | power
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Lecture                    |  2 | 2330.361 | 1165.181 |    21.333 |  &lt; .001 | 0.204 |         0.416 |   0.193 |           0.361 |     0.194 |    0.843 | 1.000
+Presentation               |  1 | 4371.125 | 4371.125 |    80.029 |  &lt; .001 | 0.382 |         0.572 |   0.376 |           0.523 |     0.377 |    1.155 | 1.000
+Grade                      |  1 |    0.347 |    0.347 |     0.006 |   0.937 | 0.000 |         0.000 |  -0.005 |          -0.014 |    -0.005 |    0.010 | 0.051
+Lecture:Presentation       |  2 | 1460.083 |  730.042 |    13.366 |  &lt; .001 | 0.128 |         0.308 |   0.118 |           0.256 |     0.118 |    0.667 | 0.998
+Lecture:Grade              |  2 |    0.361 |    0.181 |     0.003 |   0.997 | 0.000 |         0.000 |  -0.009 |          -0.028 |    -0.010 |    0.010 | 0.050
+Presentation:Grade         |  1 |    0.125 |    0.125 |     0.002 |   0.962 | 0.000 |         0.000 |  -0.005 |          -0.014 |    -0.005 |    0.006 | 0.050
+Lecture:Presentation:Grade |  2 |    0.083 |    0.042 |     0.001 |   0.999 | 0.000 |         0.000 |  -0.009 |          -0.029 |    -0.010 |    0.005 | 0.050
+Residuals                  | 60 | 3277.167 |   54.619 |           |         |       |               |         |                 |           |          |      </code></pre>
+</div>
+</div>
+<p>In this case we only have Main effects for Lecture and Presentation, and a Lecture × Presentation interaction. Given this we can disregard Grade as its not contributing to any effects.</p>
+</section><section id="replotting-the-2-way-interaction" class="level3"><h3 class="anchored" data-anchor-id="replotting-the-2-way-interaction">Replotting the 2-way interaction</h3>
+<p>In some cases it is advisable to re-plot the data factoring out Grade by removing Grade from baseline <code>group=</code> as well as any <code>summary_stat::aes()</code>, (essentially treating this if it was a 2 factorial design like last week). For the sake of your sanity, and your readers’ sanity) I would also suggest being consistent with how you present your conditions. For example, in the original plot, Presentation was differentiated by <code>shape</code>. To be consistent, we need to do the same here).</p>
+<p>(You’ll note in the example below I’m also customing font size and weight ourely for personal aesthetics):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Presentation)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> <span class="fu">theme_cowplot</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb13-11"><a href="#cb13-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb13-12"><a href="#cb13-12"></a>  </span>
+<span id="cb13-13"><a href="#cb13-13"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in stat_summary(geom = "line", fun = "mean", position =
+position_dodge(0.15), : Ignoring unknown aesthetics: shape</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="10_4-higher_order_anova_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From here I would deal with the follow-ups as we did in our 2×3 example from the last write-up: Run the simple effects and any necessary posthocs, being sure to correct using the error terms from the omnibus ANOVA.</p>
+</section></section><section id="example-2-no-three-way-interaction-multiple-main-effects-multiple-2-way-interactions" class="level2"><h2 class="anchored" data-anchor-id="example-2-no-three-way-interaction-multiple-main-effects-multiple-2-way-interactions">EXAMPLE 2: No three-way interaction, multiple main effects, multiple 2 way interactions:</h2>
+<p>Let’s load in a data set that is a little more complicated:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>higherEx2 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx2.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 72 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (3): Grade, Lecture, Presentation
+dbl (2): Subject, Score
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<section id="plotting-the-data" class="level3"><h3 class="anchored" data-anchor-id="plotting-the-data">plotting the data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(higherEx2,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb17-5"><a href="#cb17-5"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb17-7"><a href="#cb17-7"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a></span>
+<span id="cb17-9"><a href="#cb17-9"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb17-10"><a href="#cb17-10"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb17-12"><a href="#cb17-12"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>)) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>  </span>
+<span id="cb17-14"><a href="#cb17-14"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_4-higher_order_anova_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Looking at this plot its quite apparent that the pattern of results is different from Example 1. Perhaps most simply, there is a general shared pattern of effects for each of the shapes (Presentation) with the exception of the 8th Grade-Computer condition. For the remainder there is a dip for Social lectures, but in this one condition Social actually increases. Let’s run our ANOVA.</p>
+</section><section id="running-the-omnibus-anova" class="level3"><h3 class="anchored" data-anchor-id="running-the-omnibus-anova">running the omnibus ANOVA:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation<span class="sc">*</span>Grade, <span class="at">data =</span> higherEx2)</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a>omnibus_aov <span class="sc">%&gt;%</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term                       | df |    sumsq |   meansq | statistic | p.value | etasq | partial.etasq | omegasq | partial.omegasq | epsilonsq | cohens.f | power
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Lecture                    |  2 |  774.361 |  387.181 |     7.089 |   0.002 | 0.072 |         0.191 |   0.061 |           0.145 |     0.062 |    0.486 | 0.931
+Presentation               |  1 | 4371.125 | 4371.125 |    80.029 |  &lt; .001 | 0.405 |         0.572 |   0.398 |           0.523 |     0.400 |    1.155 | 1.000
+Grade                      |  1 |  308.347 |  308.347 |     5.645 |   0.021 | 0.029 |         0.086 |   0.023 |           0.061 |     0.024 |    0.307 | 0.661
+Lecture:Presentation       |  2 | 1460.083 |  730.042 |    13.366 |  &lt; .001 | 0.135 |         0.308 |   0.124 |           0.256 |     0.125 |    0.667 | 0.998
+Lecture:Grade              |  2 |  604.361 |  302.181 |     5.532 |   0.006 | 0.056 |         0.156 |   0.046 |           0.112 |     0.046 |    0.429 | 0.854
+Presentation:Grade         |  1 |    0.125 |    0.125 |     0.002 |   0.962 | 0.000 |         0.000 |  -0.005 |          -0.014 |    -0.005 |    0.006 | 0.050
+Lecture:Presentation:Grade |  2 |    0.083 |    0.042 |     0.001 |   0.999 | 0.000 |         0.000 |  -0.010 |          -0.029 |    -0.010 |    0.005 | 0.050
+Residuals                  | 60 | 3277.167 |   54.619 |           |         |       |               |         |                 |           |          |      </code></pre>
+</div>
+</div>
+<p>Our ANOVA reveals an abundance of results. There are main effects for each of our IVs. In addition there are <strong>two</strong> interaction effects: <code>Lecture:Presentation</code> and <code>Lecture:Grade</code>. Unless there is a strong theoretical reason not to (which I see none) we will need to examine each of these interactions in further detail.</p>
+</section><section id="testing-the-lecturepresentation-interaction" class="level3"><h3 class="anchored" data-anchor-id="testing-the-lecturepresentation-interaction">testing the <code>Lecture:Presentation</code> interaction:</h3>
+<section id="way-interaction-plot" class="level4"><h4 class="anchored" data-anchor-id="way-interaction-plot">2-way interaction plot</h4>
+<p>We can begin by recreating our interaction plot, this time only focusing on the IVs that are of interest (those that are interacting). In this first case, they are <code>Lecture</code> and <code>Presentation</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(higherEx2,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Presentation)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_cl_normal"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> <span class="fu">theme_cowplot</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a></span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb20-10"><a href="#cb20-10"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb20-12"><a href="#cb20-12"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>)) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>  </span>
+<span id="cb20-14"><a href="#cb20-14"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in stat_summary(geom = "line", fun = "mean", position =
+position_dodge(0.15), : Ignoring unknown aesthetics: shape</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="10_4-higher_order_anova_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="simple-effect-anovas" class="level4"><h4 class="anchored" data-anchor-id="simple-effect-anovas">simple effect ANOVAs:</h4>
+<p>Provided what we see on this plot, it may make sense to first run a simple effects ANOVA for each Presentation and then run the appropriate follow-ups. I say this because the more obvious, and potentially easily interpret-able effects occur moving across the line series (i.e., lines trend up or down).</p>
+<p>When testing for simple effects of Lecture on each Presentation type, we still need to include Grade in our analysis—this is to account for Grade’s contribution to our original model. Essentially we conduct a test for Lecture, Grade, and the Lecture by Grade interaction on each level of Presentation type. Using the template from the previous walkthroughs, this can be accomplished by simply telling <code>R</code> to run <code>joint_tests</code> separating the original model <code>by</code> Presentation.</p>
+<p>Using <code><a href="https://rdrr.io/pkg/emmeans/man/joint_tests.html">emmeans::joint_tests()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"Presentation"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Presentation = Computer:
+ model term    df1 df2 F.ratio p.value
+ Lecture         2  60   4.739  0.0123
+ Grade           1  60   2.710  0.1049
+ Lecture:Grade   2  60   2.823  0.0673
+
+Presentation = Standard:
+ model term    df1 df2 F.ratio p.value
+ Lecture         2  60  15.715  &lt;.0001
+ Grade           1  60   2.937  0.0917
+ Lecture:Grade   2  60   2.710  0.0747</code></pre>
+</div>
+</div>
+<p>Both simple effects ANOVA of Lecture within Presentation were significant, suggesting that we should perform a post-hoc analyses of each:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">emmeans</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"Presentation"</span>, <span class="at">specs=</span><span class="st">"Lecture"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">pairs</span>(<span class="at">adjust=</span><span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: Results may be misleading due to involvement in interactions</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Presentation = Computer:
+ contrast           estimate   SE df t.ratio p.value
+ History - Physical    -7.92 3.02 60  -2.624  0.0292
+ History - Social      -8.17 3.02 60  -2.707  0.0237
+ Physical - Social     -0.25 3.02 60  -0.083  0.9962
+
+Presentation = Standard:
+ contrast           estimate   SE df t.ratio p.value
+ History - Physical    -3.00 3.02 60  -0.994  0.5833
+ History - Social      12.92 3.02 60   4.281  0.0002
+ Physical - Social     15.92 3.02 60   5.275  &lt;.0001
+
+Results are averaged over the levels of: Grade 
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+<p>The results of the Tukey post-hoc suggests that History scores are significantly less than the other two groups when considering only the Computer presentation. For the standard presentation, scores in the History and Physical lecture were greater than the Social lecture.</p>
+</section></section><section id="testing-the-lecturegrade-interaction" class="level3"><h3 class="anchored" data-anchor-id="testing-the-lecturegrade-interaction">testing the <code>Lecture:Grade</code> interaction:</h3>
+<p>Now we do the same for the <code>Lecture:Grade</code> interaction. This time removing <code>Presentation</code> from our consideration.</p>
+<section id="way-interaction-plot-1" class="level4"><h4 class="anchored" data-anchor-id="way-interaction-plot-1">2-way interaction plot</h4>
+<p>You’ll notice that in this interaction plot, and the plot above, I am using the shape/linetype conventions that I established in my original plot. This will make things much easier if I wind up comparing these plots to my 3-way plot. I know I’ve said this before, but ONE MORE TIME WITH FEELING!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(higherEx2,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Grade)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb27-4"><a href="#cb27-4"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb27-5"><a href="#cb27-5"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb27-6"><a href="#cb27-6"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb27-7"><a href="#cb27-7"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a></span>
+<span id="cb27-9"><a href="#cb27-9"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb27-10"><a href="#cb27-10"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb27-12"><a href="#cb27-12"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>)) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13"></a>  </span>
+<span id="cb27-14"><a href="#cb27-14"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb27-15"><a href="#cb27-15"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_4-higher_order_anova_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="simple-effect-anovas-1" class="level3"><h3 class="anchored" data-anchor-id="simple-effect-anovas-1">simple effect ANOVAs:</h3>
+<p>Provided what we see on this plot, it may make the best sense to examine the pairwise differences in each Grade group by Lecture. Whereas in the previous interaction, the compelling changes occurred across lines, here what is more compelling is the presence/absence of gaps between the lines. In particular, while there are practically no differences due to Grade in the History or Physical Lectures, there is a larger gap in the Social condition.</p>
+<p>Running these simple effects ANOVAs using <code>emmeans:joint_tests()</code>. Keep in mind, since we are parsing the <code>Lecture:Grade</code> interaction, be should only take a look at the effects of <code>Grade</code> on each of our <code>Presentation</code> levels. We can ignore the other output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(omnibus_aov,<span class="at">by =</span> <span class="st">"Lecture"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lecture = History:
+ model term         df1 df2 F.ratio p.value
+ Presentation         1  60   5.255  0.0254
+ Grade                1  60   0.001  0.9781
+ Presentation:Grade   1  60   0.001  0.9781
+
+Lecture = Physical:
+ model term         df1 df2 F.ratio p.value
+ Presentation         1  60  15.382  0.0002
+ Grade                1  60   0.000  1.0000
+ Presentation:Grade   1  60   0.003  0.9561
+
+Lecture = Social:
+ model term         df1 df2 F.ratio p.value
+ Presentation         1  60  86.123  &lt;.0001
+ Grade                1  60  16.710  0.0001
+ Presentation:Grade   1  60   0.000  1.0000</code></pre>
+</div>
+</div>
+<p>As anticipated from looking at the plot, there was a significant difference between our <code>Grades</code> in the Social group, but not the other two. Since there are only two levels of <code>Grade</code> we don’t deen to run any other post hocs (the <span class="math inline">\(F\)</span> test is our comparison between means).</p>
+</section><section id="main-takeaways-write-up" class="level3"><h3 class="anchored" data-anchor-id="main-takeaways-write-up">Main takeaways / write-up</h3>
+<p>It’s typically best to go back and look at all of your plots.</p>
+<ol type="1">
+<li><p>the main effect for <code>Presentation</code> is meaningful: Regardless of what plays out on the other factors, students tended to perform better in the computer presentation. Best to report that.</p></li>
+<li>
+<p>the <code>Lecture:Presentation</code> interaction resulted from the following:</p>
+<ol type="a">
+<li>in the <strong>Computer presentations</strong> scores were lowest in the History lecture (indifferent in other two)</li>
+<li>in the <strong>Standard presentations</strong> scores were lowest in the Social lecture (indifferent in the other two)</li>
+</ol>
+</li>
+<li><p>the <code>Lecture:Grade</code> interaction resulted from the 5th graders performing worse than the eight graders in Social lectures; while performance was not different in the other two lectures.</p></li>
+</ol>
+<p>With this in mind, an example write-up:</p>
+<blockquote class="blockquote">
+<p>Our results revealed main effects for each of our factors, in addition to Lecture × Presentation <span class="math inline">\([F(2,60)=13.37, p&lt;.001, \eta_p^2=.31]\)</span> and Lecture × Grade interactions <span class="math inline">\([F(2,60)=5.53, p=.006, \eta_p^2=.16]\)</span>.</p>
+<p>
+</p>
+<p>Considering the former interaction, students presented material via computer format tended to perform poorest from the History Lecture, compared to Physical and Social (Tukey HSD, <em>p</em>&lt;.05). However, when material was presented in the standard format, students performed poorest in the Social condition (<em>p</em>&lt;.05), while the other two were not different.</p>
+<p>
+</p>
+<p>Considering the latter interaction, a detailed analysis of performance as a function of lecture revaled that 8th Graders performed better than their 5th grade counterparts only in the Social lecture, <span class="math inline">\(F(1,60) = 16.71, p &lt; .001, \eta_p^2=0.21\)</span>.</p>
+<p>
+</p>
+<p>In all conditions, students performed better when presented the material via computer compared to the standard presentation, <span class="math inline">\([F(2,60)=7.09, p=.002, \eta_p^2=.19]\)</span> (see Figure 1).</p>
+</blockquote>
+</section></section><section id="example-3-omg-multiple-two-way-interactions-and-a-nasty-three-way" class="level2"><h2 class="anchored" data-anchor-id="example-3-omg-multiple-two-way-interactions-and-a-nasty-three-way">EXAMPLE 3: OMG, multiple two way interactions and a nasty three-way!!!</h2>
+<p>Finally let’s take a look at some data that is all over the place:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>higherEx3 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx3.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 72 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (3): Grade, Lecture, Presentation
+dbl (2): Subject, Score
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<section id="plotting" class="level3"><h3 class="anchored" data-anchor-id="plotting">Plotting:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(higherEx3,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">5</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">5</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> </span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb32-5"><a href="#cb32-5"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb32-6"><a href="#cb32-6"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb32-7"><a href="#cb32-7"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb32-8"><a href="#cb32-8"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a></span>
+<span id="cb32-10"><a href="#cb32-10"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb32-11"><a href="#cb32-11"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb32-12"><a href="#cb32-12"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb32-13"><a href="#cb32-13"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb32-14"><a href="#cb32-14"></a>  </span>
+<span id="cb32-15"><a href="#cb32-15"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb32-16"><a href="#cb32-16"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="10_4-higher_order_anova_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="running-the-anova-1" class="level3"><h3 class="anchored" data-anchor-id="running-the-anova-1">running the ANOVA:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation<span class="sc">*</span>Grade, <span class="at">data =</span> higherEx1)</span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a>omnibus_aov <span class="sc">%&gt;%</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>term                       | df |    sumsq |   meansq | statistic | p.value | etasq | partial.etasq | omegasq | partial.omegasq | epsilonsq | cohens.f | power
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Lecture                    |  2 | 2330.361 | 1165.181 |    21.333 |  &lt; .001 | 0.204 |         0.416 |   0.193 |           0.361 |     0.194 |    0.843 | 1.000
+Presentation               |  1 | 4371.125 | 4371.125 |    80.029 |  &lt; .001 | 0.382 |         0.572 |   0.376 |           0.523 |     0.377 |    1.155 | 1.000
+Grade                      |  1 |    0.347 |    0.347 |     0.006 |   0.937 | 0.000 |         0.000 |  -0.005 |          -0.014 |    -0.005 |    0.010 | 0.051
+Lecture:Presentation       |  2 | 1460.083 |  730.042 |    13.366 |  &lt; .001 | 0.128 |         0.308 |   0.118 |           0.256 |     0.118 |    0.667 | 0.998
+Lecture:Grade              |  2 |    0.361 |    0.181 |     0.003 |   0.997 | 0.000 |         0.000 |  -0.009 |          -0.028 |    -0.010 |    0.010 | 0.050
+Presentation:Grade         |  1 |    0.125 |    0.125 |     0.002 |   0.962 | 0.000 |         0.000 |  -0.005 |          -0.014 |    -0.005 |    0.006 | 0.050
+Lecture:Presentation:Grade |  2 |    0.083 |    0.042 |     0.001 |   0.999 | 0.000 |         0.000 |  -0.009 |          -0.029 |    -0.010 |    0.005 | 0.050
+Residuals                  | 60 | 3277.167 |   54.619 |           |         |       |               |         |                 |           |          |      </code></pre>
+</div>
+</div>
+<p><strong>O.M.F.G., everything is significant!!! What to do!!!</strong></p>
+<p>Remember, the first thing that we do is tackle the highest-order interaction. In this case we should tease-out the three-way. Again, we should look to our plot to help guide us in what to do. Looking at the plot it appears that different things are happening by Grade. The <code>Presentation:Lecture</code> lines tend to stay parallel for the 5th graders, but not as much for the 8th graders. At the same time the gaps between the two lines are different by grade. So, my advice would be to attack the 3-way interaction by looking at the individual <code>Lecture:Presentation</code> interactions on each <code>Grade</code>.</p>
+</section><section id="fifth-graders-lecturepresentation-interaction." class="level3"><h3 class="anchored" data-anchor-id="fifth-graders-lecturepresentation-interaction.">Fifth Graders, Lecture:Presentation interaction.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by=</span><span class="st">"Grade"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Grade = 5th:
+ model term           df1 df2 F.ratio p.value
+ Lecture                2  60  10.930  0.0001
+ Presentation           1  60  40.443  &lt;.0001
+ Lecture:Presentation   2  60   6.609  0.0025
+
+Grade = 8th:
+ model term           df1 df2 F.ratio p.value
+ Lecture                2  60  10.406  0.0001
+ Presentation           1  60  39.588  &lt;.0001
+ Lecture:Presentation   2  60   6.757  0.0023</code></pre>
+</div>
+</div>
+<p>You’ll note that our results include simple effects for <code>Lecture</code> and <code>Presentation</code> at each <code>Grade</code> for as their interaction. That said, there are no effects when looking at the <code>5th</code> graders. However, the detailed <code>Lecture:Presentation</code> analysis for the 8th graders revealed both main effects and their interaction. We need to follow-up on this interaction in the 8th-grade data. In this case we would look at the effect of Lecture on each level of Presentation for the eighth graders.</p>
+<p>To do this we first subset the data further, by both <code>Grade</code> and <code>Presentation</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"Grade"</span>, <span class="st">"Presentation"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Grade = 5th, Presentation = Computer:
+ model term df1 df2 F.ratio p.value
+ Lecture      2  60   1.904  0.1579
+
+Grade = 8th, Presentation = Computer:
+ model term df1 df2 F.ratio p.value
+ Lecture      2  60   1.777  0.1779
+
+Grade = 5th, Presentation = Standard:
+ model term df1 df2 F.ratio p.value
+ Lecture      2  60  15.635  &lt;.0001
+
+Grade = 8th, Presentation = Standard:
+ model term df1 df2 F.ratio p.value
+ Lecture      2  60  15.386  &lt;.0001</code></pre>
+</div>
+</div>
+<p>Because there were no effects for <code>5th</code> graders in the previous analysis, we can ignore that output. Focusing on the <code>8th</code> grade output, we see that there is no effect for lecture type for <code>8th</code> graders using the <code>Computer</code> presentation. However, the <code>Standard</code> presentation was significant. Following up on that:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">emmeans</span>(omnibus_aov, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"Grade"</span>, <span class="st">"Presentation"</span>), <span class="at">specs =</span> <span class="st">"Lecture"</span>)  <span class="sc">%&gt;%</span> <span class="fu">pairs</span>(<span class="at">adjust=</span><span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Grade = 5th, Presentation = Computer:
+ contrast           estimate   SE df t.ratio p.value
+ History - Physical    -8.00 4.27 60  -1.875  0.1548
+ History - Social      -2.00 4.27 60  -0.469  0.8862
+ Physical - Social      6.00 4.27 60   1.406  0.3442
+
+Grade = 8th, Presentation = Computer:
+ contrast           estimate   SE df t.ratio p.value
+ History - Physical    -7.83 4.27 60  -1.836  0.1668
+ History - Social      -2.33 4.27 60  -0.547  0.8485
+ Physical - Social      5.50 4.27 60   1.289  0.4069
+
+Grade = 5th, Presentation = Standard:
+ contrast           estimate   SE df t.ratio p.value
+ History - Physical    -3.00 4.27 60  -0.703  0.7626
+ History - Social      19.00 4.27 60   4.453  0.0001
+ Physical - Social     22.00 4.27 60   5.156  &lt;.0001
+
+Grade = 8th, Presentation = Standard:
+ contrast           estimate   SE df t.ratio p.value
+ History - Physical    -3.00 4.27 60  -0.703  0.7626
+ History - Social      18.83 4.27 60   4.414  0.0001
+ Physical - Social     21.83 4.27 60   5.117  &lt;.0001
+
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+<p>Again, this output give us a lot of info, <strong>BUT all we should focus on is the section of interect, in this case <code>8th Grade, Standard Presentation</code></strong> or the last section. Here, scores for the <code>Social</code> test were less than the <code>Physical</code> and <code>History.</code></p>
+</section><section id="constructing-a-narrative" class="level3"><h3 class="anchored" data-anchor-id="constructing-a-narrative">Constructing a narrative:</h3>
+<p>Given these results, what narrative do you think you can tell? Remember use the plots to unpack what the results are telling you. Our results focused on differences in the <code>Lecture:Presentation</code> analysis for each grade. I would recommend that your story start there. Something to the effect of Lecture and Presentation interact for 8th graders but not 5th graders.</p>
+<p>To remind ourselves:</p>
+<ul>
+<li><p>Main effects for Lecture, Presentation, and Grade</p></li>
+<li><p>Two way interactions</p></li>
+<li><p>Three-way interaction that we focus on</p></li>
+<li>
+<p>The results of the 3-way interaction, by Grade:</p>
+<ul>
+<li>5th graders = no effects</li>
+<li>8th graders = Lecture × Presentation interaction, where there was a null effect for Lecture on the Computer presentation, but an effect for Lecture on the Standard Presentation.</li>
+</ul>
+</li>
+</ul>
+<p>Now the narrative:</p>
+<p>… to answer this question we conducted a 2 (Grade) × 2 (Presentation) × 3 (Lecture) between effects ANOVA. Our ANOVA revealed a three-way, Grade × Presentation × Lecture type interaction, <span class="math inline">\(F\)</span>(2, 60) = 3.87, <span class="math inline">\(p\)</span> = .03, <span class="math inline">\(\eta_p^2\)</span> = .11. To address this interaction we conducted separate Presentation × Lecture ANOVA for each Grade. Our results for 5th graders showed no effects nor an interaction (<span class="math inline">\(p\)</span> &gt; .05). For 8th graders, we found an Presentation × Lecture interaction, <span class="math inline">\(F\)</span>(2, 60) = 8.61, <span class="math inline">\(p\)</span> &lt; .001. While there were no differences due to Lecture type for 8th graders presented information via computer (<span class="math inline">\(p\)</span> &gt; .05), 8th graders in the Standard presentation, <span class="math inline">\(F\)</span>(2, 60) = 19.61, <span class="math inline">\(p\)</span> &lt; .001 tended to perform worse for the Social lecture (<span class="math inline">\(M\)</span> ± <span class="math inline">\(SD\)</span> = 12.33 ± 3.72) than for the History (31.17 ± 9.87) and Physical (34.17 ± 10.98) lectures (Tukey HSD, <span class="math inline">\(p\)</span> &lt; .05).</p>
+<p>Now imagine trying to deal with a FOUR-WAY INTERACTION!!!! SHEESH!!!</p>
+<p>On to the next one!</p>
+
+
+<!-- -->
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb41" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1"></a><span class="co">---</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="an">title:</span><span class="co"> "Dealing with Higher Order Factorial ANOVA"</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="an">author:</span><span class="co"> "Tehran Davis"</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="an">date:</span><span class="co"> "`r Sys.Date()`"</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a><span class="co">---</span></span>
+<span id="cb41-6"><a href="#cb41-6"></a></span>
+<span id="cb41-7"><a href="#cb41-7"></a>This walk-through is a continuation of our previous work with factorial ANOVA. If you haven't already, please check the factorial ANOVA and Interaction vignettes. In truth, nothing terribly new is being introduced here; we are just ramping up the complexity of our ANOVA models. Whereas before we considered a scenario with just 2 factors, here we will consider a 3 factor ANOVA. For all practical purposes you typically do not want to go higher than a 3 or 4 factor ANOVA, simply because of the exponential increase in complexity. For example, consider below where each letter is an IV and the resulting tests in the full factorial omnibus ANOVA:</span>
+<span id="cb41-8"><a href="#cb41-8"></a></span>
+<span id="cb41-9"><a href="#cb41-9"></a><span class="ss">-   </span>2 factor: a, b, a×b</span>
+<span id="cb41-10"><a href="#cb41-10"></a><span class="ss">-   </span>3 factor: a, b, c, a×b, a×c, b×c, a×b×c</span>
+<span id="cb41-11"><a href="#cb41-11"></a><span class="ss">-   </span>4 factor: a, b, c, d, a×b, a×c, a×d, b×c, b×d, c×d, a×b×c, a×b×d, a×c×d, b×c×d, a×b×c×d</span>
+<span id="cb41-12"><a href="#cb41-12"></a><span class="ss">-   </span>5 factor: ummm, no... just don't (unless you really want to)</span>
+<span id="cb41-13"><a href="#cb41-13"></a></span>
+<span id="cb41-14"><a href="#cb41-14"></a>Increasing the number of factors not only increases the practical difficulty of analysis, but more importantly, makes it more difficult to interpret your results. The primary culprit here is the potential presence of multiple interactions.</span>
+<span id="cb41-15"><a href="#cb41-15"></a></span>
+<span id="cb41-16"><a href="#cb41-16"></a>When dealing with interactions in a higher order factorial design you always start off with the highest order interaction. For example in the 3 factor case, if you have a 3-way interaction, that supersedes any other effects and interactions, and must be dealt with first. If there is no three-way interaction, then you can co about the business of addressing any two way interactions that are present.</span>
+<span id="cb41-17"><a href="#cb41-17"></a></span>
+<span id="cb41-18"><a href="#cb41-18"></a><span class="fu">## Packages and data</span></span>
+<span id="cb41-19"><a href="#cb41-19"></a></span>
+<span id="cb41-20"><a href="#cb41-20"></a>Let's load in our necessary packages, scripts and some data and try some examples. This write-up requires the following packages:</span>
+<span id="cb41-21"><a href="#cb41-21"></a></span>
+<span id="cb41-24"><a href="#cb41-24"></a><span class="in">```{r}</span></span>
+<span id="cb41-25"><a href="#cb41-25"></a><span class="co"># required packages:</span></span>
+<span id="cb41-26"><a href="#cb41-26"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, </span>
+<span id="cb41-27"><a href="#cb41-27"></a>               cowplot, </span>
+<span id="cb41-28"><a href="#cb41-28"></a>               emmeans)</span>
+<span id="cb41-29"><a href="#cb41-29"></a><span class="in">```</span></span>
+<span id="cb41-30"><a href="#cb41-30"></a></span>
+<span id="cb41-31"><a href="#cb41-31"></a>And now let's re-acquaint ourselves with our familar example dataset, but with one new twist...</span>
+<span id="cb41-32"><a href="#cb41-32"></a></span>
+<span id="cb41-33"><a href="#cb41-33"></a><span class="at">&gt; Background: Given the ease of access for new technologies and increasing enrollment demands, many grade schools are advocating that teachers switch over to E-courses, where students view an online, pre-recorded lecture on the course topic in lieu of sitting in a classroom in a live lecture. Given this push, a critical question remains regarding the impact of E-courses on primary school student outcomes. More it may be the case that certain subject content more readily lends itself to E-course presentations than other subjects. To address this question we tested students performance on a test one week after listening to the related lecture. Lectures were either experienced via online (Computer) or in a live classroom (Standard). In addition, the lecture content varied in topic (Physical science, Social science, History). Finally, to assess whether age had an impact on expected outcomes we assessed students in 5th and 8th grades.</span></span>
+<span id="cb41-34"><a href="#cb41-34"></a></span>
+<span id="cb41-35"><a href="#cb41-35"></a>Looking at the above we have a 2 (Grade: 5th, 8th) × 2 (Presentation: Computer, Standard) × 3 (Lecture: Physical, Social, History) design. Our omnibus ANOVA therefore will test for the following effects:</span>
+<span id="cb41-36"><a href="#cb41-36"></a></span>
+<span id="cb41-37"><a href="#cb41-37"></a><span class="ss">-   </span>Main Effects: Grade, Presentation, Lecture</span>
+<span id="cb41-38"><a href="#cb41-38"></a><span class="ss">-   </span>2-way interactions: Grade × Presentation, Grade × Lecture, Lecture × Presentation</span>
+<span id="cb41-39"><a href="#cb41-39"></a><span class="ss">-   </span>3-way interaction: Grade × Presentation × Lecture</span>
+<span id="cb41-40"><a href="#cb41-40"></a></span>
+<span id="cb41-41"><a href="#cb41-41"></a><span class="fu">## EXAMPLE 1: no three-way interaction, single two way interaction</span></span>
+<span id="cb41-42"><a href="#cb41-42"></a></span>
+<span id="cb41-43"><a href="#cb41-43"></a>Let's load in this data:</span>
+<span id="cb41-44"><a href="#cb41-44"></a></span>
+<span id="cb41-47"><a href="#cb41-47"></a><span class="in">```{r}</span></span>
+<span id="cb41-48"><a href="#cb41-48"></a>higherEx1 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx1.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb41-49"><a href="#cb41-49"></a><span class="fu">show</span>(higherEx1)</span>
+<span id="cb41-50"><a href="#cb41-50"></a><span class="in">```</span></span>
+<span id="cb41-51"><a href="#cb41-51"></a></span>
+<span id="cb41-52"><a href="#cb41-52"></a>It's already in long format, but I should tell <span class="in">`R`</span> that <span class="in">`Grade`</span>, <span class="in">`Lecture`</span>, and <span class="in">`Presentation`</span> are factors:</span>
+<span id="cb41-53"><a href="#cb41-53"></a></span>
+<span id="cb41-56"><a href="#cb41-56"></a><span class="in">```{r}</span></span>
+<span id="cb41-57"><a href="#cb41-57"></a>higherEx1<span class="sc">$</span>Grade <span class="ot">&lt;-</span> <span class="fu">factor</span>(higherEx1<span class="sc">$</span>Grade)</span>
+<span id="cb41-58"><a href="#cb41-58"></a>higherEx1<span class="sc">$</span>Lecture <span class="ot">&lt;-</span> <span class="fu">factor</span>(higherEx1<span class="sc">$</span>Lecture)</span>
+<span id="cb41-59"><a href="#cb41-59"></a>higherEx1<span class="sc">$</span>Presentation <span class="ot">&lt;-</span> <span class="fu">factor</span>(higherEx1<span class="sc">$</span>Presentation)</span>
+<span id="cb41-60"><a href="#cb41-60"></a><span class="in">```</span></span>
+<span id="cb41-61"><a href="#cb41-61"></a></span>
+<span id="cb41-62"><a href="#cb41-62"></a><span class="fu">### First plot: 3 way interaction plot</span></span>
+<span id="cb41-63"><a href="#cb41-63"></a></span>
+<span id="cb41-64"><a href="#cb41-64"></a>One thing you may notice is since we have a more complex ANOVA, we have a more complex design with three factors we also have to construct a more complex plot. Whereas in the 2 factor case we could place one factor on the x-axis and group the other factor by line or shape or color; in the three factor case things become slightly more tricky.</span>
+<span id="cb41-65"><a href="#cb41-65"></a></span>
+<span id="cb41-66"><a href="#cb41-66"></a>One thing to consider is the logic of what we are doing with our plots. When we have two factors, say A &amp; B, we are distinguishing between each level of B (by lines, shapes, colors) at each level of A (on the x-axis). In the 3 factor case where we have A,B, &amp; C, we are distinguishing the B×C interaction (through the combination of shapes, lines, colors) on each level of A.</span>
+<span id="cb41-67"><a href="#cb41-67"></a></span>
+<span id="cb41-68"><a href="#cb41-68"></a>In the following plot, let's place Lecture type along the x-axis. From here, we can create 2 groups of lines (each with 2 levels) representing the Grade × Presentation interaction. We note this by specifying the <span class="in">`interaction`</span> in <span class="in">`group`</span> of our baseline <span class="in">`ggplot`</span> call:</span>
+<span id="cb41-69"><a href="#cb41-69"></a></span>
+<span id="cb41-70"><a href="#cb41-70"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb41-71"><a href="#cb41-71"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade)))</span>
+<span id="cb41-72"><a href="#cb41-72"></a><span class="in">```</span></span>
+<span id="cb41-73"><a href="#cb41-73"></a></span>
+<span id="cb41-74"><a href="#cb41-74"></a>From here, we can proceed as before. Note, however, depending on the complexity of your plot you may also need to specify the interaction in each <span class="in">`stat_summary::aes()`</span> as necessary.</span>
+<span id="cb41-75"><a href="#cb41-75"></a></span>
+<span id="cb41-76"><a href="#cb41-76"></a>Below I am changing the <span class="in">`shape`</span> by <span class="in">`Presentation`</span> and the <span class="in">`linetype`</span> by <span class="in">`Grade`</span>. The entire call, including the line above is:</span>
+<span id="cb41-77"><a href="#cb41-77"></a></span>
+<span id="cb41-80"><a href="#cb41-80"></a><span class="in">```{r}</span></span>
+<span id="cb41-81"><a href="#cb41-81"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span>  </span>
+<span id="cb41-82"><a href="#cb41-82"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb41-83"><a href="#cb41-83"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> </span>
+<span id="cb41-84"><a href="#cb41-84"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> </span>
+<span id="cb41-85"><a href="#cb41-85"></a>  <span class="co"># renaming axies</span></span>
+<span id="cb41-86"><a href="#cb41-86"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb41-87"><a href="#cb41-87"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb41-88"><a href="#cb41-88"></a>  <span class="co"># adding whitespace around plot (optional)</span></span>
+<span id="cb41-89"><a href="#cb41-89"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span></span>
+<span id="cb41-90"><a href="#cb41-90"></a>  <span class="co"># adjusting the legend</span></span>
+<span id="cb41-91"><a href="#cb41-91"></a>  <span class="fu">theme</span>(</span>
+<span id="cb41-92"><a href="#cb41-92"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb41-93"><a href="#cb41-93"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">25</span>))</span>
+<span id="cb41-94"><a href="#cb41-94"></a><span class="in">```</span></span>
+<span id="cb41-95"><a href="#cb41-95"></a></span>
+<span id="cb41-96"><a href="#cb41-96"></a>OK, not exactly the best plot. Let's see if we can create some more space to work with by forcing the y-axis to go to 0, instead of cutting off at 10. There's also a trick that we can use to stack our legend keys horizontally, rather than vertically</span>
+<span id="cb41-97"><a href="#cb41-97"></a></span>
+<span id="cb41-100"><a href="#cb41-100"></a><span class="in">```{r}</span></span>
+<span id="cb41-101"><a href="#cb41-101"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span>  </span>
+<span id="cb41-102"><a href="#cb41-102"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb41-103"><a href="#cb41-103"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> </span>
+<span id="cb41-104"><a href="#cb41-104"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> </span>
+<span id="cb41-105"><a href="#cb41-105"></a>  <span class="co"># renaming axies</span></span>
+<span id="cb41-106"><a href="#cb41-106"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb41-107"><a href="#cb41-107"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb41-108"><a href="#cb41-108"></a>  <span class="co"># adding whitespace around plot (optional)</span></span>
+<span id="cb41-109"><a href="#cb41-109"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span></span>
+<span id="cb41-110"><a href="#cb41-110"></a>  </span>
+<span id="cb41-111"><a href="#cb41-111"></a>  <span class="co"># new additions / changes</span></span>
+<span id="cb41-112"><a href="#cb41-112"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb41-113"><a href="#cb41-113"></a>  </span>
+<span id="cb41-114"><a href="#cb41-114"></a>  <span class="co"># direction to stack legend keys</span></span>
+<span id="cb41-115"><a href="#cb41-115"></a>  <span class="fu">theme</span>(<span class="at">legend.direction =</span> <span class="st">"horizontal"</span>, </span>
+<span id="cb41-116"><a href="#cb41-116"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">25</span>))</span>
+<span id="cb41-117"><a href="#cb41-117"></a><span class="in">```</span></span>
+<span id="cb41-118"><a href="#cb41-118"></a></span>
+<span id="cb41-119"><a href="#cb41-119"></a>alternatively, we could also just stack the legend boxes side by side:</span>
+<span id="cb41-120"><a href="#cb41-120"></a></span>
+<span id="cb41-123"><a href="#cb41-123"></a><span class="in">```{r}</span></span>
+<span id="cb41-124"><a href="#cb41-124"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span>  </span>
+<span id="cb41-125"><a href="#cb41-125"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb41-126"><a href="#cb41-126"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> </span>
+<span id="cb41-127"><a href="#cb41-127"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> </span>
+<span id="cb41-128"><a href="#cb41-128"></a>  <span class="co"># renaming axies</span></span>
+<span id="cb41-129"><a href="#cb41-129"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb41-130"><a href="#cb41-130"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb41-131"><a href="#cb41-131"></a>  <span class="co"># adding whitespace around plot (optional)</span></span>
+<span id="cb41-132"><a href="#cb41-132"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span></span>
+<span id="cb41-133"><a href="#cb41-133"></a>  </span>
+<span id="cb41-134"><a href="#cb41-134"></a>  <span class="co"># new additions / changes</span></span>
+<span id="cb41-135"><a href="#cb41-135"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb41-136"><a href="#cb41-136"></a>  </span>
+<span id="cb41-137"><a href="#cb41-137"></a>  <span class="co"># direction to stack legend boxes instead of keys</span></span>
+<span id="cb41-138"><a href="#cb41-138"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>, </span>
+<span id="cb41-139"><a href="#cb41-139"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">25</span>))</span>
+<span id="cb41-140"><a href="#cb41-140"></a><span class="in">```</span></span>
+<span id="cb41-141"><a href="#cb41-141"></a></span>
+<span id="cb41-142"><a href="#cb41-142"></a>**NOTE: For what its work, we could also obviate the need for this complex of a plot, and just `facet_wrap()` by our third factor. For practice try taking the code above and faceting by \~Grade.**</span>
+<span id="cb41-143"><a href="#cb41-143"></a></span>
+<span id="cb41-144"><a href="#cb41-144"></a><span class="fu">### running the ANOVA:</span></span>
+<span id="cb41-145"><a href="#cb41-145"></a></span>
+<span id="cb41-146"><a href="#cb41-146"></a>From here we run the omnibus as usual:</span>
+<span id="cb41-147"><a href="#cb41-147"></a></span>
+<span id="cb41-150"><a href="#cb41-150"></a><span class="in">```{r}</span></span>
+<span id="cb41-151"><a href="#cb41-151"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation<span class="sc">*</span>Grade, <span class="at">data =</span> higherEx1)</span>
+<span id="cb41-152"><a href="#cb41-152"></a></span>
+<span id="cb41-153"><a href="#cb41-153"></a>omnibus_aov <span class="sc">%&gt;%</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>()</span>
+<span id="cb41-154"><a href="#cb41-154"></a><span class="in">```</span></span>
+<span id="cb41-155"><a href="#cb41-155"></a></span>
+<span id="cb41-156"><a href="#cb41-156"></a>In this case we only have Main effects for Lecture and Presentation, and a Lecture × Presentation interaction. Given this we can disregard Grade as its not contributing to any effects.</span>
+<span id="cb41-157"><a href="#cb41-157"></a></span>
+<span id="cb41-158"><a href="#cb41-158"></a><span class="fu">### Replotting the 2-way interaction</span></span>
+<span id="cb41-159"><a href="#cb41-159"></a></span>
+<span id="cb41-160"><a href="#cb41-160"></a>In some cases it is advisable to re-plot the data factoring out Grade by removing Grade from baseline <span class="in">`group=`</span> as well as any <span class="in">`summary_stat::aes()`</span>, (essentially treating this if it was a 2 factorial design like last week). For the sake of your sanity, and your readers' sanity) I would also suggest being consistent with how you present your conditions. For example, in the original plot, Presentation was differentiated by <span class="in">`shape`</span>. To be consistent, we need to do the same here).</span>
+<span id="cb41-161"><a href="#cb41-161"></a></span>
+<span id="cb41-162"><a href="#cb41-162"></a>(You'll note in the example below I'm also customing font size and weight ourely for personal aesthetics):</span>
+<span id="cb41-163"><a href="#cb41-163"></a></span>
+<span id="cb41-166"><a href="#cb41-166"></a><span class="in">```{r}</span></span>
+<span id="cb41-167"><a href="#cb41-167"></a><span class="fu">ggplot</span>(higherEx1,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Presentation)) <span class="sc">+</span></span>
+<span id="cb41-168"><a href="#cb41-168"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb41-169"><a href="#cb41-169"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> <span class="fu">theme_cowplot</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb41-170"><a href="#cb41-170"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb41-171"><a href="#cb41-171"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb41-172"><a href="#cb41-172"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb41-173"><a href="#cb41-173"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb41-174"><a href="#cb41-174"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb41-175"><a href="#cb41-175"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb41-176"><a href="#cb41-176"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb41-177"><a href="#cb41-177"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb41-178"><a href="#cb41-178"></a>  </span>
+<span id="cb41-179"><a href="#cb41-179"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb41-180"><a href="#cb41-180"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span>
+<span id="cb41-181"><a href="#cb41-181"></a><span class="in">```</span></span>
+<span id="cb41-182"><a href="#cb41-182"></a></span>
+<span id="cb41-183"><a href="#cb41-183"></a>From here I would deal with the follow-ups as we did in our 2×3 example from the last write-up: Run the simple effects and any necessary posthocs, being sure to correct using the error terms from the omnibus ANOVA.</span>
+<span id="cb41-184"><a href="#cb41-184"></a></span>
+<span id="cb41-185"><a href="#cb41-185"></a><span class="fu">## EXAMPLE 2: No three-way interaction, multiple main effects, multiple 2 way interactions:</span></span>
+<span id="cb41-186"><a href="#cb41-186"></a></span>
+<span id="cb41-187"><a href="#cb41-187"></a>Let's load in a data set that is a little more complicated:</span>
+<span id="cb41-188"><a href="#cb41-188"></a></span>
+<span id="cb41-191"><a href="#cb41-191"></a><span class="in">```{r}</span></span>
+<span id="cb41-192"><a href="#cb41-192"></a>higherEx2 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx2.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb41-193"><a href="#cb41-193"></a><span class="in">```</span></span>
+<span id="cb41-194"><a href="#cb41-194"></a></span>
+<span id="cb41-195"><a href="#cb41-195"></a><span class="fu">### plotting the data</span></span>
+<span id="cb41-196"><a href="#cb41-196"></a></span>
+<span id="cb41-199"><a href="#cb41-199"></a><span class="in">```{r}</span></span>
+<span id="cb41-200"><a href="#cb41-200"></a><span class="fu">ggplot</span>(higherEx2,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span></span>
+<span id="cb41-201"><a href="#cb41-201"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb41-202"><a href="#cb41-202"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb41-203"><a href="#cb41-203"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb41-204"><a href="#cb41-204"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb41-205"><a href="#cb41-205"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb41-206"><a href="#cb41-206"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb41-207"><a href="#cb41-207"></a></span>
+<span id="cb41-208"><a href="#cb41-208"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb41-209"><a href="#cb41-209"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb41-210"><a href="#cb41-210"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb41-211"><a href="#cb41-211"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>)) <span class="sc">+</span></span>
+<span id="cb41-212"><a href="#cb41-212"></a>  </span>
+<span id="cb41-213"><a href="#cb41-213"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb41-214"><a href="#cb41-214"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span>
+<span id="cb41-215"><a href="#cb41-215"></a><span class="in">```</span></span>
+<span id="cb41-216"><a href="#cb41-216"></a></span>
+<span id="cb41-217"><a href="#cb41-217"></a>Looking at this plot its quite apparent that the pattern of results is different from Example 1. Perhaps most simply, there is a general shared pattern of effects for each of the shapes (Presentation) with the exception of the 8th Grade-Computer condition. For the remainder there is a dip for Social lectures, but in this one condition Social actually increases. Let's run our ANOVA.</span>
+<span id="cb41-218"><a href="#cb41-218"></a></span>
+<span id="cb41-219"><a href="#cb41-219"></a><span class="fu">### running the omnibus ANOVA:</span></span>
+<span id="cb41-220"><a href="#cb41-220"></a></span>
+<span id="cb41-223"><a href="#cb41-223"></a><span class="in">```{r}</span></span>
+<span id="cb41-224"><a href="#cb41-224"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation<span class="sc">*</span>Grade, <span class="at">data =</span> higherEx2)</span>
+<span id="cb41-225"><a href="#cb41-225"></a></span>
+<span id="cb41-226"><a href="#cb41-226"></a>omnibus_aov <span class="sc">%&gt;%</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>()</span>
+<span id="cb41-227"><a href="#cb41-227"></a><span class="in">```</span></span>
+<span id="cb41-228"><a href="#cb41-228"></a></span>
+<span id="cb41-229"><a href="#cb41-229"></a>Our ANOVA reveals an abundance of results. There are main effects for each of our IVs. In addition there are **two** interaction effects: <span class="in">`Lecture:Presentation`</span> and <span class="in">`Lecture:Grade`</span>. Unless there is a strong theoretical reason not to (which I see none) we will need to examine each of these interactions in further detail.</span>
+<span id="cb41-230"><a href="#cb41-230"></a></span>
+<span id="cb41-231"><a href="#cb41-231"></a><span class="fu">### testing the `Lecture:Presentation` interaction:</span></span>
+<span id="cb41-232"><a href="#cb41-232"></a></span>
+<span id="cb41-233"><a href="#cb41-233"></a><span class="fu">#### 2-way interaction plot</span></span>
+<span id="cb41-234"><a href="#cb41-234"></a></span>
+<span id="cb41-235"><a href="#cb41-235"></a>We can begin by recreating our interaction plot, this time only focusing on the IVs that are of interest (those that are interacting). In this first case, they are <span class="in">`Lecture`</span> and <span class="in">`Presentation`</span>.</span>
+<span id="cb41-236"><a href="#cb41-236"></a></span>
+<span id="cb41-239"><a href="#cb41-239"></a><span class="in">```{r}</span></span>
+<span id="cb41-240"><a href="#cb41-240"></a><span class="fu">ggplot</span>(higherEx2,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Presentation)) <span class="sc">+</span></span>
+<span id="cb41-241"><a href="#cb41-241"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_cl_normal"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb41-242"><a href="#cb41-242"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> <span class="fu">theme_cowplot</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb41-243"><a href="#cb41-243"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb41-244"><a href="#cb41-244"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb41-245"><a href="#cb41-245"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb41-246"><a href="#cb41-246"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb41-247"><a href="#cb41-247"></a></span>
+<span id="cb41-248"><a href="#cb41-248"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb41-249"><a href="#cb41-249"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb41-250"><a href="#cb41-250"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb41-251"><a href="#cb41-251"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>)) <span class="sc">+</span></span>
+<span id="cb41-252"><a href="#cb41-252"></a>  </span>
+<span id="cb41-253"><a href="#cb41-253"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb41-254"><a href="#cb41-254"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span>
+<span id="cb41-255"><a href="#cb41-255"></a><span class="in">```</span></span>
+<span id="cb41-256"><a href="#cb41-256"></a></span>
+<span id="cb41-257"><a href="#cb41-257"></a><span class="fu">#### simple effect ANOVAs:</span></span>
+<span id="cb41-258"><a href="#cb41-258"></a></span>
+<span id="cb41-259"><a href="#cb41-259"></a>Provided what we see on this plot, it may make sense to first run a simple effects ANOVA for each Presentation and then run the appropriate follow-ups. I say this because the more obvious, and potentially easily interpret-able effects occur moving across the line series (i.e., lines trend up or down).</span>
+<span id="cb41-260"><a href="#cb41-260"></a></span>
+<span id="cb41-261"><a href="#cb41-261"></a>When testing for simple effects of Lecture on each Presentation type, we still need to include Grade in our analysis---this is to account for Grade's contribution to our original model. Essentially we conduct a test for Lecture, Grade, and the Lecture by Grade interaction on each level of Presentation type. Using the template from the previous walkthroughs, this can be accomplished by simply telling <span class="in">`R`</span> to run <span class="in">`joint_tests`</span> separating the original model <span class="in">`by`</span> Presentation.</span>
+<span id="cb41-262"><a href="#cb41-262"></a></span>
+<span id="cb41-263"><a href="#cb41-263"></a>Using <span class="in">`emmeans::joint_tests()`</span>:</span>
+<span id="cb41-264"><a href="#cb41-264"></a></span>
+<span id="cb41-267"><a href="#cb41-267"></a><span class="in">```{r}</span></span>
+<span id="cb41-268"><a href="#cb41-268"></a>emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"Presentation"</span>)</span>
+<span id="cb41-269"><a href="#cb41-269"></a><span class="in">```</span></span>
+<span id="cb41-270"><a href="#cb41-270"></a></span>
+<span id="cb41-271"><a href="#cb41-271"></a>Both simple effects ANOVA of Lecture within Presentation were significant, suggesting that we should perform a post-hoc analyses of each:</span>
+<span id="cb41-272"><a href="#cb41-272"></a></span>
+<span id="cb41-275"><a href="#cb41-275"></a><span class="in">```{r}</span></span>
+<span id="cb41-276"><a href="#cb41-276"></a><span class="fu">emmeans</span>(omnibus_aov, <span class="at">by =</span> <span class="st">"Presentation"</span>, <span class="at">specs=</span><span class="st">"Lecture"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-277"><a href="#cb41-277"></a>  <span class="fu">pairs</span>(<span class="at">adjust=</span><span class="st">"tukey"</span>)</span>
+<span id="cb41-278"><a href="#cb41-278"></a><span class="in">```</span></span>
+<span id="cb41-279"><a href="#cb41-279"></a></span>
+<span id="cb41-280"><a href="#cb41-280"></a>The results of the Tukey post-hoc suggests that History scores are significantly less than the other two groups when considering only the Computer presentation. For the standard presentation, scores in the History and Physical lecture were greater than the Social lecture.</span>
+<span id="cb41-281"><a href="#cb41-281"></a></span>
+<span id="cb41-282"><a href="#cb41-282"></a><span class="fu">### testing the `Lecture:Grade` interaction:</span></span>
+<span id="cb41-283"><a href="#cb41-283"></a></span>
+<span id="cb41-284"><a href="#cb41-284"></a>Now we do the same for the <span class="in">`Lecture:Grade`</span> interaction. This time removing <span class="in">`Presentation`</span> from our consideration.</span>
+<span id="cb41-285"><a href="#cb41-285"></a></span>
+<span id="cb41-286"><a href="#cb41-286"></a><span class="fu">#### 2-way interaction plot</span></span>
+<span id="cb41-287"><a href="#cb41-287"></a></span>
+<span id="cb41-288"><a href="#cb41-288"></a>You'll notice that in this interaction plot, and the plot above, I am using the shape/linetype conventions that I established in my original plot. This will make things much easier if I wind up comparing these plots to my 3-way plot. I know I've said this before, but ONE MORE TIME WITH FEELING!</span>
+<span id="cb41-289"><a href="#cb41-289"></a></span>
+<span id="cb41-292"><a href="#cb41-292"></a><span class="in">```{r}</span></span>
+<span id="cb41-293"><a href="#cb41-293"></a><span class="fu">ggplot</span>(higherEx2,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span>Grade)) <span class="sc">+</span></span>
+<span id="cb41-294"><a href="#cb41-294"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb41-295"><a href="#cb41-295"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">15</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb41-296"><a href="#cb41-296"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb41-297"><a href="#cb41-297"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb41-298"><a href="#cb41-298"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb41-299"><a href="#cb41-299"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb41-300"><a href="#cb41-300"></a></span>
+<span id="cb41-301"><a href="#cb41-301"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb41-302"><a href="#cb41-302"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb41-303"><a href="#cb41-303"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb41-304"><a href="#cb41-304"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>)) <span class="sc">+</span></span>
+<span id="cb41-305"><a href="#cb41-305"></a>  </span>
+<span id="cb41-306"><a href="#cb41-306"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb41-307"><a href="#cb41-307"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span>
+<span id="cb41-308"><a href="#cb41-308"></a><span class="in">```</span></span>
+<span id="cb41-309"><a href="#cb41-309"></a></span>
+<span id="cb41-310"><a href="#cb41-310"></a><span class="fu">### simple effect ANOVAs:</span></span>
+<span id="cb41-311"><a href="#cb41-311"></a></span>
+<span id="cb41-312"><a href="#cb41-312"></a>Provided what we see on this plot, it may make the best sense to examine the pairwise differences in each Grade group by Lecture. Whereas in the previous interaction, the compelling changes occurred across lines, here what is more compelling is the presence/absence of gaps between the lines. In particular, while there are practically no differences due to Grade in the History or Physical Lectures, there is a larger gap in the Social condition.</span>
+<span id="cb41-313"><a href="#cb41-313"></a></span>
+<span id="cb41-314"><a href="#cb41-314"></a>Running these simple effects ANOVAs using <span class="in">`emmeans:joint_tests()`</span>. Keep in mind, since we are parsing the <span class="in">`Lecture:Grade`</span> interaction, be should only take a look at the effects of <span class="in">`Grade`</span> on each of our <span class="in">`Presentation`</span> levels. We can ignore the other output.</span>
+<span id="cb41-315"><a href="#cb41-315"></a></span>
+<span id="cb41-318"><a href="#cb41-318"></a><span class="in">```{r}</span></span>
+<span id="cb41-319"><a href="#cb41-319"></a>emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(omnibus_aov,<span class="at">by =</span> <span class="st">"Lecture"</span>) </span>
+<span id="cb41-320"><a href="#cb41-320"></a><span class="in">```</span></span>
+<span id="cb41-321"><a href="#cb41-321"></a></span>
+<span id="cb41-322"><a href="#cb41-322"></a>As anticipated from looking at the plot, there was a significant difference between our <span class="in">`Grades`</span> in the Social group, but not the other two. Since there are only two levels of <span class="in">`Grade`</span> we don't deen to run any other post hocs (the $F$ test is our comparison between means).</span>
+<span id="cb41-323"><a href="#cb41-323"></a></span>
+<span id="cb41-324"><a href="#cb41-324"></a><span class="fu">### Main takeaways / write-up</span></span>
+<span id="cb41-325"><a href="#cb41-325"></a></span>
+<span id="cb41-326"><a href="#cb41-326"></a>It's typically best to go back and look at all of your plots.</span>
+<span id="cb41-327"><a href="#cb41-327"></a></span>
+<span id="cb41-328"><a href="#cb41-328"></a><span class="ss">1.  </span>the main effect for <span class="in">`Presentation`</span> is meaningful: Regardless of what plays out on the other factors, students tended to perform better in the computer presentation. Best to report that.</span>
+<span id="cb41-329"><a href="#cb41-329"></a></span>
+<span id="cb41-330"><a href="#cb41-330"></a><span class="ss">2.  </span>the <span class="in">`Lecture:Presentation`</span> interaction resulted from the following:</span>
+<span id="cb41-331"><a href="#cb41-331"></a></span>
+<span id="cb41-332"><a href="#cb41-332"></a>    a.  in the **Computer presentations** scores were lowest in the History lecture (indifferent in other two)</span>
+<span id="cb41-333"><a href="#cb41-333"></a>    b.  in the **Standard presentations** scores were lowest in the Social lecture (indifferent in the other two)</span>
+<span id="cb41-334"><a href="#cb41-334"></a></span>
+<span id="cb41-335"><a href="#cb41-335"></a><span class="ss">3.  </span>the <span class="in">`Lecture:Grade`</span> interaction resulted from the 5th graders performing worse than the eight graders in Social lectures; while performance was not different in the other two lectures.</span>
+<span id="cb41-336"><a href="#cb41-336"></a></span>
+<span id="cb41-337"><a href="#cb41-337"></a>With this in mind, an example write-up:</span>
+<span id="cb41-338"><a href="#cb41-338"></a></span>
+<span id="cb41-339"><a href="#cb41-339"></a><span class="at">&gt; Our results revealed main effects for each of our factors, in addition to Lecture × Presentation $</span><span class="co">[</span><span class="ot">F(2,60)=13.37, p&lt;.001, \eta_p^2=.31</span><span class="co">]</span><span class="at">$ and Lecture × Grade interactions $</span><span class="co">[</span><span class="ot">F(2,60)=5.53, p=.006, \eta_p^2=.16</span><span class="co">]</span><span class="at">$.</span></span>
+<span id="cb41-340"><a href="#cb41-340"></a><span class="at">&gt;</span></span>
+<span id="cb41-341"><a href="#cb41-341"></a><span class="at">&gt; </span><span class="kw">&lt;p&gt;</span></span>
+<span id="cb41-342"><a href="#cb41-342"></a><span class="at">&gt;</span></span>
+<span id="cb41-343"><a href="#cb41-343"></a><span class="at">&gt; Considering the former interaction, students presented material via computer format tended to perform poorest from the History Lecture, compared to Physical and Social (Tukey HSD, *p*\&lt;.05). However, when material was presented in the standard format, students performed poorest in the Social condition (*p*</span><span class="sc">\&lt;</span><span class="at">.05), while the other two were not different.</span></span>
+<span id="cb41-344"><a href="#cb41-344"></a><span class="at">&gt;</span></span>
+<span id="cb41-345"><a href="#cb41-345"></a><span class="at">&gt; </span><span class="kw">&lt;p&gt;</span></span>
+<span id="cb41-346"><a href="#cb41-346"></a><span class="at">&gt;</span></span>
+<span id="cb41-347"><a href="#cb41-347"></a><span class="at">&gt; Considering the latter interaction, a detailed analysis of performance as a function of lecture revaled that 8th Graders performed better than their 5th grade counterparts only in the Social lecture, $F(1,60) = 16.71, p &lt; .001, \eta_p^2=0.21$.</span></span>
+<span id="cb41-348"><a href="#cb41-348"></a><span class="at">&gt;</span></span>
+<span id="cb41-349"><a href="#cb41-349"></a><span class="at">&gt; </span><span class="kw">&lt;p&gt;</span></span>
+<span id="cb41-350"><a href="#cb41-350"></a><span class="at">&gt;</span></span>
+<span id="cb41-351"><a href="#cb41-351"></a><span class="at">&gt; In all conditions, students performed better when presented the material via computer compared to the standard presentation, $</span><span class="co">[</span><span class="ot">F(2,60)=7.09, p=.002, \eta_p^2=.19</span><span class="co">]</span><span class="at">$ (see Figure 1).</span></span>
+<span id="cb41-352"><a href="#cb41-352"></a></span>
+<span id="cb41-353"><a href="#cb41-353"></a><span class="fu">## EXAMPLE 3: OMG, multiple two way interactions and a nasty three-way!!!</span></span>
+<span id="cb41-354"><a href="#cb41-354"></a></span>
+<span id="cb41-355"><a href="#cb41-355"></a>Finally let's take a look at some data that is all over the place:</span>
+<span id="cb41-356"><a href="#cb41-356"></a></span>
+<span id="cb41-359"><a href="#cb41-359"></a><span class="in">```{r}</span></span>
+<span id="cb41-360"><a href="#cb41-360"></a>higherEx3 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/ANOVA5_higherEx3.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb41-361"><a href="#cb41-361"></a></span>
+<span id="cb41-362"><a href="#cb41-362"></a><span class="in">```</span></span>
+<span id="cb41-363"><a href="#cb41-363"></a></span>
+<span id="cb41-364"><a href="#cb41-364"></a><span class="fu">### Plotting:</span></span>
+<span id="cb41-365"><a href="#cb41-365"></a></span>
+<span id="cb41-368"><a href="#cb41-368"></a><span class="in">```{r}</span></span>
+<span id="cb41-369"><a href="#cb41-369"></a><span class="fu">ggplot</span>(higherEx3,<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Lecture,<span class="at">y =</span> Score, <span class="at">group=</span><span class="fu">interaction</span>(Presentation,Grade))) <span class="sc">+</span></span>
+<span id="cb41-370"><a href="#cb41-370"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">fun.data =</span> <span class="st">"mean_se"</span>,<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">5</span>), <span class="fu">aes</span>(<span class="at">shape=</span>Presentation)) <span class="sc">+</span> </span>
+<span id="cb41-371"><a href="#cb41-371"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">fun=</span><span class="st">"mean"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">5</span>), <span class="fu">aes</span>(<span class="at">linetype=</span>Grade)) <span class="sc">+</span> </span>
+<span id="cb41-372"><a href="#cb41-372"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb41-373"><a href="#cb41-373"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">lineheight =</span> .<span class="dv">55</span>),</span>
+<span id="cb41-374"><a href="#cb41-374"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb41-375"><a href="#cb41-375"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb41-376"><a href="#cb41-376"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb41-377"><a href="#cb41-377"></a></span>
+<span id="cb41-378"><a href="#cb41-378"></a>  <span class="fu">xlab</span>(<span class="st">"Lecture"</span>) <span class="sc">+</span> </span>
+<span id="cb41-379"><a href="#cb41-379"></a>  <span class="fu">ylab</span> (<span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb41-380"><a href="#cb41-380"></a>  <span class="fu">theme</span>(<span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">"in"</span>)) <span class="sc">+</span> </span>
+<span id="cb41-381"><a href="#cb41-381"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb41-382"><a href="#cb41-382"></a>  </span>
+<span id="cb41-383"><a href="#cb41-383"></a>  <span class="co"># stack legend boxes horizontally:</span></span>
+<span id="cb41-384"><a href="#cb41-384"></a>  <span class="fu">theme</span>(<span class="at">legend.box =</span> <span class="st">"horizontal"</span>)</span>
+<span id="cb41-385"><a href="#cb41-385"></a><span class="in">```</span></span>
+<span id="cb41-386"><a href="#cb41-386"></a></span>
+<span id="cb41-387"><a href="#cb41-387"></a><span class="fu">### running the ANOVA:</span></span>
+<span id="cb41-388"><a href="#cb41-388"></a></span>
+<span id="cb41-391"><a href="#cb41-391"></a><span class="in">```{r}</span></span>
+<span id="cb41-392"><a href="#cb41-392"></a>omnibus_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(Score<span class="sc">~</span>Lecture<span class="sc">*</span>Presentation<span class="sc">*</span>Grade, <span class="at">data =</span> higherEx1)</span>
+<span id="cb41-393"><a href="#cb41-393"></a></span>
+<span id="cb41-394"><a href="#cb41-394"></a>omnibus_aov <span class="sc">%&gt;%</span> sjstats<span class="sc">::</span><span class="fu">anova_stats</span>()</span>
+<span id="cb41-395"><a href="#cb41-395"></a><span class="in">```</span></span>
+<span id="cb41-396"><a href="#cb41-396"></a></span>
+<span id="cb41-397"><a href="#cb41-397"></a>**O.M.F.G., everything is significant!!! What to do!!!**</span>
+<span id="cb41-398"><a href="#cb41-398"></a></span>
+<span id="cb41-399"><a href="#cb41-399"></a>Remember, the first thing that we do is tackle the highest-order interaction. In this case we should tease-out the three-way. Again, we should look to our plot to help guide us in what to do. Looking at the plot it appears that different things are happening by Grade. The <span class="in">`Presentation:Lecture`</span> lines tend to stay parallel for the 5th graders, but not as much for the 8th graders. At the same time the gaps between the two lines are different by grade. So, my advice would be to attack the 3-way interaction by looking at the individual <span class="in">`Lecture:Presentation`</span> interactions on each <span class="in">`Grade`</span>.</span>
+<span id="cb41-400"><a href="#cb41-400"></a></span>
+<span id="cb41-401"><a href="#cb41-401"></a><span class="fu">### Fifth Graders, Lecture:Presentation interaction.</span></span>
+<span id="cb41-402"><a href="#cb41-402"></a></span>
+<span id="cb41-405"><a href="#cb41-405"></a><span class="in">```{r}</span></span>
+<span id="cb41-406"><a href="#cb41-406"></a>emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by=</span><span class="st">"Grade"</span>) </span>
+<span id="cb41-407"><a href="#cb41-407"></a><span class="in">```</span></span>
+<span id="cb41-408"><a href="#cb41-408"></a></span>
+<span id="cb41-409"><a href="#cb41-409"></a>You'll note that our results include simple effects for <span class="in">`Lecture`</span> and <span class="in">`Presentation`</span> at each <span class="in">`Grade`</span> for as their interaction. That said, there are no effects when looking at the <span class="in">`5th`</span> graders. However, the detailed <span class="in">`Lecture:Presentation`</span> analysis for the 8th graders revealed both main effects and their interaction. We need to follow-up on this interaction in the 8th-grade data. In this case we would look at the effect of Lecture on each level of Presentation for the eighth graders.</span>
+<span id="cb41-410"><a href="#cb41-410"></a></span>
+<span id="cb41-411"><a href="#cb41-411"></a>To do this we first subset the data further, by both <span class="in">`Grade`</span> and <span class="in">`Presentation`</span>:</span>
+<span id="cb41-412"><a href="#cb41-412"></a></span>
+<span id="cb41-415"><a href="#cb41-415"></a><span class="in">```{r}</span></span>
+<span id="cb41-416"><a href="#cb41-416"></a>emmeans<span class="sc">::</span><span class="fu">joint_tests</span>(omnibus_aov, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"Grade"</span>, <span class="st">"Presentation"</span>)) </span>
+<span id="cb41-417"><a href="#cb41-417"></a><span class="in">```</span></span>
+<span id="cb41-418"><a href="#cb41-418"></a></span>
+<span id="cb41-419"><a href="#cb41-419"></a>Because there were no effects for <span class="in">`5th`</span> graders in the previous analysis, we can ignore that output. Focusing on the <span class="in">`8th`</span> grade output, we see that there is no effect for lecture type for <span class="in">`8th`</span> graders using the <span class="in">`Computer`</span> presentation. However, the <span class="in">`Standard`</span> presentation was significant. Following up on that:</span>
+<span id="cb41-420"><a href="#cb41-420"></a></span>
+<span id="cb41-423"><a href="#cb41-423"></a><span class="in">```{r}</span></span>
+<span id="cb41-424"><a href="#cb41-424"></a><span class="fu">emmeans</span>(omnibus_aov, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"Grade"</span>, <span class="st">"Presentation"</span>), <span class="at">specs =</span> <span class="st">"Lecture"</span>)  <span class="sc">%&gt;%</span> <span class="fu">pairs</span>(<span class="at">adjust=</span><span class="st">"tukey"</span>)</span>
+<span id="cb41-425"><a href="#cb41-425"></a><span class="in">```</span></span>
+<span id="cb41-426"><a href="#cb41-426"></a></span>
+<span id="cb41-427"><a href="#cb41-427"></a>Again, this output give us a lot of info, **BUT all we should focus on is the section of interect, in this case `8th Grade, Standard Presentation`** or the last section. Here, scores for the <span class="in">`Social`</span> test were less than the <span class="in">`Physical`</span> and <span class="in">`History.`</span></span>
+<span id="cb41-428"><a href="#cb41-428"></a></span>
+<span id="cb41-429"><a href="#cb41-429"></a><span class="fu">### Constructing a narrative:</span></span>
+<span id="cb41-430"><a href="#cb41-430"></a></span>
+<span id="cb41-431"><a href="#cb41-431"></a>Given these results, what narrative do you think you can tell? Remember use the plots to unpack what the results are telling you. Our results focused on differences in the <span class="in">`Lecture:Presentation`</span> analysis for each grade. I would recommend that your story start there. Something to the effect of Lecture and Presentation interact for 8th graders but not 5th graders.</span>
+<span id="cb41-432"><a href="#cb41-432"></a></span>
+<span id="cb41-433"><a href="#cb41-433"></a>To remind ourselves:</span>
+<span id="cb41-434"><a href="#cb41-434"></a></span>
+<span id="cb41-435"><a href="#cb41-435"></a><span class="ss">-   </span>Main effects for Lecture, Presentation, and Grade</span>
+<span id="cb41-436"><a href="#cb41-436"></a></span>
+<span id="cb41-437"><a href="#cb41-437"></a><span class="ss">-   </span>Two way interactions</span>
+<span id="cb41-438"><a href="#cb41-438"></a></span>
+<span id="cb41-439"><a href="#cb41-439"></a><span class="ss">-   </span>Three-way interaction that we focus on</span>
+<span id="cb41-440"><a href="#cb41-440"></a></span>
+<span id="cb41-441"><a href="#cb41-441"></a><span class="ss">-   </span>The results of the 3-way interaction, by Grade:</span>
+<span id="cb41-442"><a href="#cb41-442"></a></span>
+<span id="cb41-443"><a href="#cb41-443"></a><span class="ss">    -   </span>5th graders = no effects</span>
+<span id="cb41-444"><a href="#cb41-444"></a><span class="ss">    -   </span>8th graders = Lecture × Presentation interaction, where there was a null effect for Lecture on the Computer presentation, but an effect for Lecture on the Standard Presentation.</span>
+<span id="cb41-445"><a href="#cb41-445"></a></span>
+<span id="cb41-446"><a href="#cb41-446"></a>Now the narrative:</span>
+<span id="cb41-447"><a href="#cb41-447"></a></span>
+<span id="cb41-448"><a href="#cb41-448"></a>... to answer this question we conducted a 2 (Grade) × 2 (Presentation) × 3 (Lecture) between effects ANOVA. Our ANOVA revealed a three-way, Grade × Presentation × Lecture type interaction, $F$(2, 60) = 3.87, $p$ = .03, $\eta_p^2$ = .11. To address this interaction we conducted separate Presentation × Lecture ANOVA for each Grade. Our results for 5th graders showed no effects nor an interaction ($p$ <span class="sc">\&gt;</span> .05). For 8th graders, we found an Presentation × Lecture interaction, $F$(2, 60) = 8.61, $p$ <span class="sc">\&lt;</span> .001. While there were no differences due to Lecture type for 8th graders presented information via computer ($p$ <span class="sc">\&gt;</span> .05), 8th graders in the Standard presentation, $F$(2, 60) = 19.61, $p$ <span class="sc">\&lt;</span> .001 tended to perform worse for the Social lecture ($M$ ± $SD$ = 12.33 ± 3.72) than for the History (31.17 ± 9.87) and Physical (34.17 ± 10.98) lectures (Tukey HSD, $p$ <span class="sc">\&lt;</span> .05).</span>
+<span id="cb41-449"><a href="#cb41-449"></a></span>
+<span id="cb41-450"><a href="#cb41-450"></a>Now imagine trying to deal with a FOUR-WAY INTERACTION!!!! SHEESH!!!</span>
+<span id="cb41-451"><a href="#cb41-451"></a></span>
+<span id="cb41-452"><a href="#cb41-452"></a>On to the next one!</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

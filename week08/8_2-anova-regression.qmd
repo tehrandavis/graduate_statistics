@@ -39,7 +39,7 @@ For those of you interested in reading further on the mathematics, pay close att
 
 ### Comparing two models
 
-To conceptualize lets take another look at our data again. But first it might help to take another look at my earlier spiel on [means and other models here](https://tehrandav.is/psyc7014/week02/2_4-means_other_models.html) and our related discussion on [t-tests as linear models here](https://tehrandav.is/psyc7014/week06/6_3_t-test-lm.html).
+To conceptualize lets take another look at our data again. But first it might help to take another look at my earlier spiel on [means and other models here](https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/week02/2_4-means_other_models.html) and our related discussion on [t-tests as linear models here](https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/week06/6_3_t-test-lm.html).
 
 Go ahead, I'll wait...
 

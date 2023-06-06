@@ -18,7 +18,7 @@ and then recreate the aggression data summary table from the previous walkthroug
 
 ```{r importing agression data}
 library(readr)
-aggression_data <- read_table("https://tehrandav.is/psyc7014/practice_datasets/aggression.dat", col_names = FALSE)
+aggression_data <- read_table("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/aggression.dat", col_names = FALSE)
 ```
 
 ```{r}
