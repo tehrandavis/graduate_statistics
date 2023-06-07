@@ -1,7 +1,5 @@
 ---
-title: "graduate_statistics"
+title: "Graduate Statistics Walkthroughs"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This is a landing page for the PSYC 7014 Walkthroughs. Individual weeks and sections can be found on the left sidebar.

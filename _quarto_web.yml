@@ -1,0 +1,140 @@
+project:
+  type: website
+  resources: 
+    - "images/"
+    - "practice_datasets/"
+    - "custom_functions/"
+
+website:
+  title: "tehrandav.is"
+  navbar:
+    background: dark
+    reader-mode: true
+    search: true
+    left:
+      - text: "Home"
+        file: https://tehrandav.is
+          
+  sidebar: 
+        
+    - title: "Graduate Statistics 1"
+      contents: 
+        - walkthroughs.qmd
+
+        - section: "TOPIC 0 SET UP YOUR ENVIRONMENT"
+          contents:
+          - week00/0_1-getting_started.qmd
+          - week00/0_2-resources.qmd
+          
+          text: "---"
+        - section: "TOPIC 1 INTRO to R"
+          contents:
+          - week01/1_1-Rmarkdown_basics.qmd
+          - week01/1_2-objects_assignment_functions.qmd
+          - week01/1_3-install_packages.qmd
+          - week01/1_4-loading_data.qmd
+          - week01/1_5-leveling-up.qmd
+          
+          text: "---"
+          
+        - section: "TOPIC 2: DESCRIPTIVE STATS and CENTRAL TENDENCY"
+          contents: 
+          - week02/2_1-structure_data.qmd
+          - week02/2_2-central_tendency.qmd
+          - week02/2_3-summary_tables.qmd
+          - week02/2_4-means_other_models.qmd          
+          text: "---"
+
+        - section: "TOPIC 3: DATA VISUALIZATION"
+          contents: 
+          - week03/3_1-basic_ggplot.qmd
+          - week03/3_2-more_adv_ggplot.qmd
+          text: "---"
+        
+        - section: "TOPIC 4: DISTRIBUTIONS and NHST"
+          contents: 
+          - week04/4_1-the_normal_distribution.qmd
+          - week04/4_2-building_intuitions_about_probability_and_nhst.qmd
+          - week04/4_3-sampling_distributions_and_seeing_the_logic_of_nhst.qmd
+          - week04/4_4-more_examples.qmd
+          - week04/4_5-bias_variance.qmd
+          text: "---"
+
+        - section: "TOPIC 5: CORRELATION AND REGRESSION"
+          contents: 
+          - week05/5_1-the_normal_distribution.qmd
+          - week05/5_2_correlations.qmd
+          - week05/5_3_regressions.qmd
+          - week05/5_4_plotting.qmd
+          - week05/5_5_diagnostics.qmd
+          - week05/5_6_example_report.qmd
+          text: "---"
+
+        - section: "TOPIC 6: T-TESTS"
+          contents: 
+          - week06/6_1_t-test.qmd
+          - week06/6_2_t-test-null-model.qmd
+          - week06/6_3_t-test-lm.qmd
+
+          text: "---"
+
+        - section: "TOPIC 7: POWER & EFFECT SIZES"
+          contents: 
+          - week07/7_1-effect_size.qmd
+          - week07/7_2-power.qmd
+          - week07/7_3-power_es_sig_tests.qmd
+          - week07/7_4-simulating_power.qmd
+
+        - section: "TOPIC 8: INTRO to ANOVA"
+          contents: 
+          - week08/8_1-one-way-anova.qmd
+          - week08/8_2-anova-regression.qmd
+
+        - section: "TOPIC 9: ANOVA: CONTRASTS"
+          contents: 
+          - week09/9_1-posthocs.qmd
+          - week09/9_2-planned_contrasts.qmd
+
+        - section: "TOPIC 10: ANOVA: FACTORIAL ANOVA"
+          contents: 
+          - week10/10_1-main_effects.qmd
+          - week10/10_2-factorial_w_post_hocs.qmd
+          - week10/10_3-advanced_example_and_apa.qmd
+          
+        - section: "TOPIC 11: ANOVA + INTERACTIONS"
+          contents: 
+          - week11/11_1-interactions.qmd
+          - week11/11_2-higher_order_anova.qmd
+
+        - section: "TOPIC 12: WITHIN SUBJECTS / REPEATED MEASURES ANOVA"
+          contents: 
+          - week12/12_1-afex_ANOVA.qmd
+          - week12/12_2-repeated_measures_anova.qmd       
+          - week12/12_3-factorial_rma.qmd       
+          - week12/12_4-sphericity.qmd       
+          - week12/12_5-spss_rma.qmd       
+
+        - section: "TOPIC 13: MIXED ANOVA (BS + WS)"
+          contents: 
+          - week13/13_1-mixed_effects_anova.qmd
+   
+
+
+
+
+
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    code-overflow: wrap
+    code-line-numbers: true
+    code-link: true
+    code-tools: 
+      source: true
+      toggle: false
+
+editor: visual
+

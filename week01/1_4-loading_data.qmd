@@ -2,8 +2,6 @@
 title: "Loading in Data"
 ---
 
-
-
 # Loading in data
 
 Typically the file types that are used by beginners in `R` are plain text and delimited. They may have the extension "txt", "csv", or "dat" for example. These may become more sophisticated you progress, for example you can load in proprietary types like SPSS and STATA, but for this course we will mostly use plain text files (although later in the course I will show you how to load in Excel files and SPSS files).
@@ -20,9 +18,9 @@ library(tidyverse)
 LexicalDescisionData <- read_table("path/to/LexicalDescisionData.txt")
 ```
 
-where `path/to/` is the path to the folder containing the file `LexicalDescisionData.txt`. For example, on my computer it might be: 
+where `path/to/` is the path to the folder containing the file `LexicalDescisionData.txt`. For example, on my computer it might be:
 
->"/Users/tehrandav/Documents/psyc7014/LexicalDescisionData.txt"
+> "/Users/tehrandav/Documents/psyc7014/LexicalDescisionData.txt"
 
 I've uploaded this file to OneDrive in the `walkthroughs and examples` folder. Please feel free to download the file and follow along is you wish. Note that *if you do elect to load in via the GUI you need to be sure to copy the output to your Rmd source. Otherwise, I will not be able to run it on my computer*.
 
@@ -34,14 +32,13 @@ Correct, you can't, but you can upload it to the internet and someone can access
 
 If the data is uploaded directly from the web, we can load it in using the `read_delim()` function from above. This is some reaction time data taken from a website. Let's assign it to an object `RxData`
 
-
-
 ```{r}
 #| eval: false
 library(tidyverse) # no need to ask if already loaded
 alcohol_use_data <- read_csv("https://raw.githubusercontent.com/tehrandavis/graduate_statistics/main/practice_datasets/alcuseN6.csv", col_names = T)
 
 ```
+
 ```{r}
 #| echo: false
 
